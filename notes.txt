@@ -1,0 +1,17 @@
+    <nav>
+        <a href="/about"
+        % if get('about_active'):
+        class="active"
+        % end
+        
+        >About us</a>
+        <a href="/contact"
+        % if get('contact_active'):
+        class="active"
+        % end
+        >Contact us</a>
+    </nav>
+
+
+    bottle: 
+    ! = use/display exactly like its writen
