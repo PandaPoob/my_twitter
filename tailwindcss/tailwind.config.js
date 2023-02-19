@@ -16,6 +16,9 @@ module.exports = {
         feed: "600px",
         widget: "350px",
       },
+      minWidth: {
+        widget: "300px",
+      },
     },
   },
   plugins: [],

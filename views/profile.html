@@ -17,42 +17,267 @@
   >
     <div class="flex max-w-layout flex-grow">
       <div
-        class="hidden sm:block top-0 left-0 max-w-feed w-2/12 md:w-1/12 lg:w-3/12 xl:w-4/12 h-screen pt-4"
+        class="hidden sm:block max-w-feed sm:w-2/12 lg:w-3/12 xl:w-4/12 h-screen pt-4 sm:pr-2 lg:pr-8 xxl:pr-14"
       ></div>
-      % include('layout/mobile-header')
+      % include('mobile-header')
 
       <!-- left/nav -->
-      % include('layout/header')
+      % include('header')
 
       <!-- center/content -->
 
       <div
-        class="flex flex-grow w-12/12 sm-10/12 md:w-11/12 lg:w-9/12 xl:w-8/12 md:gap-6 lg:gap-8"
+        class="flex flex-grow w-12/12 sm:w-10/12 lg:w-9/12 xl:w-8/12 md:gap-6 lg:gap-8"
       >
-        <!-- feed -->
         <div
           class="flex flex-col flex-grow max-w-feed sm:border-x sm:border-zinc-700"
         >
           <!--  profile header -->
-          <div>
-            <button>
+          <div class="flex items-center gap-8 px-4 py-1">
+            <button
+              class="flex justify-center items-center rounded-full p-2 hover:bg-zinc-800"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="white"
-                class="w-6 h-6"
+                width="20"
+                height="20"
+                viewBox="0 2.4 22 22"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+                  fill="currentColor"
+                  d="m10.875 21.7l-6.6-6.6q-.15-.15-.213-.325T4 14.4q0-.2.063-.375t.212-.325l6.6-6.6q.275-.275.688-.287t.712.287q.3.275.313.688T12.3 8.5l-4.9 4.9h11.175q.425 0 .713.288t.287.712q0 .425-.287.713t-.713.287H7.4l4.9 4.9q.275.275.288.7t-.288.7q-.275.3-.7.3t-.725-.3Z"
                 />
               </svg>
             </button>
-            <div>navn tweets</div>
+            <div>
+              <div class="flex items-center gap-1">
+                <h1 class="text-xl font-bold">{{user["fullname"]}}</h1>
+                % if user["verified"]:
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  class="text-sky-500"
+                >
+                  <path
+                    fill="currentColor"
+                    d="m8.6 22.5l-1.9-3.2l-3.6-.8l.35-3.7L1 12l2.45-2.8l-.35-3.7l3.6-.8l1.9-3.2L12 2.95l3.4-1.45l1.9 3.2l3.6.8l-.35 3.7L23 12l-2.45 2.8l.35 3.7l-3.6.8l-1.9 3.2l-3.4-1.45Zm2.35-6.95L16.6 9.9l-1.4-1.45l-4.25 4.25l-2.15-2.1L7.4 12Z"
+                  />
+                </svg>
+                % end
+              </div>
+
+              <p class="text-sm text-gray-500 font-medium">
+                {{user["total_tweets"]}} Tweets
+              </p>
+            </div>
           </div>
+
+          <button class="flex">
+            % if user["cover_img"]:
+            <img
+              src="/images/cover_imgs/{{user['cover_img']}}"
+              alt="{{user['username']}} cover image"
+            />
+            % end
+          </button>
+
+          <div class="relative flex justify-end px-4">
+            <button
+              class="absolute z-10 left-4 translate-y-[-50%] flex max-w-[25%] h-auto rounded-full bg-black p-[3px]"
+            >
+              % if user["avatar_img"]:
+              <img
+                src="/images/avatar_imgs/{{user['avatar_img']}}"
+                alt="{{user['username']}} profile image"
+                class="rounded-full"
+              />
+              % end
+            </button>
+
+            <div class="justify-self-end flex items-start gap-3 py-3">
+              <button
+                class="rounded-full border border-gray-500 p-1.5 hover:bg-gray-500 hover:bg-opacity-20"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="white"
+                  class="w-6 h-6 text-white"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+                  />
+                </svg>
+              </button>
+
+              <button
+                class="text-base text-black font-bold bg-white rounded-full hover:bg-opacity-90 py-1.5 px-4"
+              >
+                Follow
+              </button>
+            </div>
+          </div>
+
+          <div class="px-4 pt-5 pb-1">
+            <div class="flex items-center gap-1">
+              <h2 class="text-xl font-bold">{{user["fullname"]}}</h2>
+              % if user["verified"]:
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                class="text-sky-500"
+              >
+                <path
+                  fill="currentColor"
+                  d="m8.6 22.5l-1.9-3.2l-3.6-.8l.35-3.7L1 12l2.45-2.8l-.35-3.7l3.6-.8l1.9-3.2L12 2.95l3.4-1.45l1.9 3.2l3.6.8l-.35 3.7L23 12l-2.45 2.8l.35 3.7l-3.6.8l-1.9 3.2l-3.4-1.45Zm2.35-6.95L16.6 9.9l-1.4-1.45l-4.25 4.25l-2.15-2.1L7.4 12Z"
+                />
+              </svg>
+              % end
+            </div>
+
+            <!--  bio -->
+            <p class="text-base text-gray-500 font-medium pb-4">
+              @{{user["username"]}}
+            </p>
+
+            <!-- bio text -->
+            % if user["bio_text"]:
+            <div class="pb-2">
+              <p class="text-base">{{user["bio_text"]}}</p>
+            </div>
+            % end
+
+            <div class="flex flex-wrap gap-x-3">
+              <!-- bio location -->
+              % if user["bio_location"]:
+              <div class="flex items-center gap-0.5 text-gray-500">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-5 h-5"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
+                  />
+                </svg>
+                <span class="text-base">{{user["bio_location"]}}</span>
+              </div>
+              % end
+
+              <!-- bio link -->
+              % if user["bio_link"]:
+              <a
+                href="/{{user['bio_link']}}"
+                class="flex items-center gap-0.5 text-gray-500 text-base"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 256 256"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M167.6 88.4a8 8 0 0 1 0 11.3l-67.9 67.9a8.1 8.1 0 0 1-11.3 0a8 8 0 0 1 0-11.3l67.9-67.9a8 8 0 0 1 11.3 0Zm-28.3 84.9L111 201.5a39.7 39.7 0 0 1-56.5 0a40 40 0 0 1 0-56.5l28.2-28.3a8 8 0 0 0-11.3-11.3l-28.3 28.3a56 56 0 0 0 79.2 79.2l28.3-28.3a8 8 0 0 0 0-11.3a7.9 7.9 0 0 0-11.3 0Zm73.6-130.2a56.1 56.1 0 0 0-79.2 0l-28.3 28.3a8 8 0 0 0 11.3 11.3L145 54.5a39.7 39.7 0 0 1 56.5 0a40 40 0 0 1 0 56.5l-28.2 28.3a7.9 7.9 0 0 0 0 11.3a7.7 7.7 0 0 0 5.6 2.4a8 8 0 0 0 5.7-2.4l28.3-28.3a56.1 56.1 0 0 0 0-79.2Z"
+                  />
+                </svg>
+                <span class="text-sky-600">{{user["bio_link"]}}</span>
+              </a>
+              % end
+
+              <!-- bio birthday -->
+              % if user["bio_birthday"]:
+              <div class="flex items-center gap-0.5 text-gray-500">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 256 256"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M128 16a88.1 88.1 0 0 0-88 88c0 23.4 9.4 49.4 25.1 69.5c11.9 15.2 26.2 25.7 41.3 30.9L96.6 229a8 8 0 0 0 .8 7.5a7.9 7.9 0 0 0 6.6 3.5h48a7.9 7.9 0 0 0 6.6-3.5a8 8 0 0 0 .8-7.5l-9.8-24.6c15.1-5.2 29.4-15.7 41.3-30.9c15.7-20.1 25.1-46.1 25.1-69.5a88.1 88.1 0 0 0-88-88Zm12.2 208h-24.4l6.5-16.3a54.3 54.3 0 0 0 11.4 0Zm38.1-60.4C163.9 181.9 146.1 192 128 192s-35.9-10.1-50.3-28.4S56 124 56 104a72 72 0 0 1 144 0c0 20-8.1 42.3-21.7 59.6Zm-1.6-59.7h-1.4a8.1 8.1 0 0 1-7.9-6.7a39.7 39.7 0 0 0-32.7-32.7a8.1 8.1 0 0 1-6.6-9.3a7.9 7.9 0 0 1 9.2-6.5a55.9 55.9 0 0 1 45.9 45.9a7.9 7.9 0 0 1-6.5 9.3Z"
+                  />
+                </svg>
+                <span class="text-base">{{user["bio_birthday"]}}</span>
+              </div>
+              % end
+
+              <!-- bio created at -->
+              % if user["bio_created_at"]:
+              <div class="flex items-center gap-0.5 text-gray-500">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 2.4 24 24"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M12 16.4q-.425 0-.713-.287T11 15.4q0-.425.288-.713T12 14.4q.425 0 .713.288T13 15.4q0 .425-.288.713T12 16.4Zm-4 0q-.425 0-.713-.287T7 15.4q0-.425.288-.713T8 14.4q.425 0 .713.288T9 15.4q0 .425-.288.713T8 16.4Zm8 0q-.425 0-.713-.287T15 15.4q0-.425.288-.713T16 14.4q.425 0 .713.288T17 15.4q0 .425-.288.713T16 16.4Zm-4 4q-.425 0-.713-.287T11 19.4q0-.425.288-.712T12 18.4q.425 0 .713.288T13 19.4q0 .425-.288.713T12 20.4Zm-4 0q-.425 0-.713-.287T7 19.4q0-.425.288-.712T8 18.4q.425 0 .713.288T9 19.4q0 .425-.288.713T8 20.4Zm8 0q-.425 0-.713-.287T15 19.4q0-.425.288-.712T16 18.4q.425 0 .713.288T17 19.4q0 .425-.288.713T16 20.4Zm-11 4q-.825 0-1.413-.587T3 22.4v-14q0-.825.588-1.413T5 6.4h1v-1q0-.425.288-.713T7 4.4q.425 0 .713.288T8 5.4v1h8v-1q0-.425.288-.713T17 4.4q.425 0 .713.288T18 5.4v1h1q.825 0 1.413.588T21 8.4v14q0 .825-.588 1.413T19 24.4H5Zm0-2h14v-10H5v10Zm0-12h14v-2H5v2Zm0 0v-2v2Z"
+                  />
+                </svg>
+                <span class="text-base">{{user["bio_created_at"]}}</span>
+              </div>
+              % end
+            </div>
+
+            <div class="flex gap-5 py-2">
+              <a href="/" class="text-base hover:underline">
+                <span class="">{{user["total_following"]}}</span>
+                <span class="text-gray-500">Following</span>
+              </a>
+
+              <a href="/" class="text-base hover:underline">
+                <span class="">{{user["total_followers"]}}</span>
+                <span class="text-gray-500">Followers</span>
+              </a>
+            </div>
+          </div>
+          <!-- end profile header -->
+
+          <!-- feed -->
+          <nav class="flex text-base font-semibold border-b border-zinc-700">
+            <a
+              class="flex flex-grow flex-col items-center pt-3 px-6 hover:bg-gray-500 hover:bg-opacity-20"
+              href=""
+            >
+              <span class="pb-5">Tweets</span>
+              <span
+                class="border-b-4 border-sky-500 rounded-full w-full"
+              ></span>
+            </a>
+            <a
+              class="flex flex-grow justify-center items-center py-3 px-6 hover:bg-gray-500 hover:bg-opacity-20"
+              href=""
+              >Tweets & replies</a
+            >
+            <a
+              class="flex flex-grow justify-center items-center py-3 px-6 hover:bg-gray-500 hover:bg-opacity-20"
+              href=""
+              >Media</a
+            >
+            <a
+              class="flex flex-grow justify-center items-center py-3 px-6 hover:bg-gray-500 hover:bg-opacity-20"
+              href=""
+              >Likes</a
+            >
+          </nav>
 
           <!-- tweet -->
 
