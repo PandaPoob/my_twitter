@@ -11,16 +11,8 @@ module.exports = {
         xl: "1500px",
         xxl: "1800px",
       },
-      gridTemplateColumns: {
-        layout_mobile: "68px 1fr",
-        layout: "300px 1fr",
-      },
-      width: {
-        nav_mobile: "68px",
-        nav: "600px",
-      },
       maxWidth: {
-        layout: "1265px",
+        layout: "1800px",
         feed: "600px",
         widget: "350px",
       },
