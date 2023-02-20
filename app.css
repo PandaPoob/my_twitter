@@ -581,6 +581,14 @@ video {
   top: 1.5rem;
 }
 
+.top-1 {
+  top: 0.25rem;
+}
+
+.-top-1 {
+  top: -0.25rem;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -623,6 +631,10 @@ video {
 
 .mt-auto {
   margin-top: auto;
+}
+
+.-ml-2 {
+  margin-left: -0.5rem;
 }
 
 .block {
@@ -675,6 +687,10 @@ video {
 
 .max-h-96 {
   max-height: 24rem;
+}
+
+.max-h-tweetImg {
+  max-height: 480px;
 }
 
 .min-h-screen {
@@ -960,6 +976,11 @@ video {
 .object-contain {
   -o-object-fit: contain;
      object-fit: contain;
+}
+
+.object-cover {
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .p-1 {
@@ -1465,6 +1486,14 @@ video {
 
   .lg\:gap-8 {
     gap: 2rem;
+  }
+
+  .lg\:gap-12 {
+    gap: 3rem;
+  }
+
+  .lg\:gap-10 {
+    gap: 2.5rem;
   }
 
   .lg\:px-4 {

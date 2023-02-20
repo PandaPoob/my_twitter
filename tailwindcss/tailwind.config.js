@@ -19,6 +19,9 @@ module.exports = {
       minWidth: {
         widget: "300px",
       },
+      maxHeight: {
+        tweetImg: "480px",
+      },
     },
   },
   plugins: [],

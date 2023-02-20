@@ -49,6 +49,7 @@ def _(username):
         #pass tweets to view
         print("#"*30)
         print(tweets)
+        
         return template("profile", user=user, tweets=tweets)
     #except Exception as ex:
         #print(ex)
