@@ -29,7 +29,7 @@ def dict_factory(cursor, row):
 #####
 @get("/")
 def _():
-    return "Home page github"
+    return "Home page github push"
         
 
 @get("/<username>")
