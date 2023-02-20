@@ -29,7 +29,7 @@ def dict_factory(cursor, row):
 #####
 @get("/")
 def _():
-    return "Home page asdas"
+    return "Home page Two"
         
 
 @get("/<username>")
