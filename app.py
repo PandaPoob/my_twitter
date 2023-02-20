@@ -3,7 +3,7 @@ import os
 import sqlite3
 import git
 
-@post('/f1f83b1a-fe32-4291-a552-bf43b219b420')
+@post('/f1f83b1afe324291a552bf43b219b420')
 def git_update():
   repo = git.Repo('./web_dev_mandatory_01')
   origin = repo.remotes.origin
