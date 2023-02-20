@@ -3,7 +3,7 @@ import os
 import sqlite3
 import git
 
-@post('/secret_url_for_git_hook')
+@post('/f1f83b1a-fe32-4291-a552-bf43b219b420')
 def git_update():
   repo = git.Repo('./web_dev_mandatory_01')
   origin = repo.remotes.origin
@@ -29,7 +29,7 @@ def dict_factory(cursor, row):
 #####
 @get("/")
 def _():
-    return "Home page"
+    return "Home page github"
         
 
 @get("/<username>")
