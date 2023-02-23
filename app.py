@@ -44,7 +44,7 @@ def _(username):
         #get users id
         user_id = user["user_id"]
         print(f"user id: {user_id}")
-        tweets = db.execute("SELECT * FROM tweets WHERE tweet_user_fk=? ORDER BY tweets.tweet_created_at DESC", (user_id,)).fetchall()
+        tweets = db.execute("SELECT * FROM tweets WHERE tweet_user_fk=? ORDER BY tweets.tweet_created_at DESC LIMIT 0, 10", (user_id,)).fetchall()
         #with id look up tweets
         #pass tweets to view
         print("#"*30)
