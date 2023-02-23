@@ -39,12 +39,12 @@ def _(username):
         db = sqlite3.connect(os.getcwd()+"/twitter.db")
         #db = sqlite3.connect("/home/pandapoob/mysite/twitter.db")
         db.row_factory = dict_factory
-        user = db.execute("SELECT * FROM users WHERE username=? COLLATE NOCASE", (username,)).fetchall()[0]
+        user = db.execute("SELECT * FROM users WHERE user_name=? COLLATE NOCASE", (username,)).fetchall()[0]
         #print(user)
         #get users id
-        user_id = user["id"]
+        user_id = user["user_id"]
         print(f"user id: {user_id}")
-        tweets = db.execute("SELECT * FROM tweets WHERE user_fk=?", (user_id,)).fetchall()
+        tweets = db.execute("SELECT * FROM tweets WHERE tweet_user_fk=? ORDER BY tweets.tweet_created_at DESC", (user_id,)).fetchall()
         #with id look up tweets
         #pass tweets to view
         print("#"*30)
