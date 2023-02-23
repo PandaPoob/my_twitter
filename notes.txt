@@ -12,6 +12,7 @@
         >Contact us</a>
     </nav>
 
+    if you search always index!
 
     bottle: 
     ! = use/display exactly like its writen

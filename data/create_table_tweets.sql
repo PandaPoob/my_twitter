@@ -6,7 +6,7 @@ CREATE TABLE tweets(
   user_fk           TEXT,
   created_at        TEXT,
   text_field        TEXT,
-  image_field       TEXT,
+  image_field       TEXT UNIQUE,
   updated_at        TEXT,
   total_replies     TEXT,
   total_likes       TEXT,
