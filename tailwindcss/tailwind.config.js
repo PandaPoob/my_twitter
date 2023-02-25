@@ -11,13 +11,31 @@ module.exports = {
         xl: "1500px",
         xxl: "1800px",
       },
+      fontSize: {
+        sm: ["0.813rem", { lineHeight: "normal" }], //13px
+        base: ["0.938rem", { lineHeight: "normal" }], //15px
+        lg: ["1.063rem", { lineHeight: "normal" }], //17px
+        xl: ["1.25rem", { lineHeight: "normal" }], //20px,
+      },
+      colors: {
+        twitterblue: "#1d9bf0",
+        "twittergray-500": "#71767b",
+        "twittergray-800": "#202327",
+        "twittergray-900": "#16181c",
+      },
       maxWidth: {
         layout: "1800px",
         feed: "600px",
-        widget: "350px",
+        widget: "290px",
+        widgetxl: "350px",
       },
       minWidth: {
-        widget: "300px",
+        widget: "290px",
+        widgetxl: "350px",
+      },
+      width: {
+        widget: "290px",
+        widgetxl: "350px",
       },
       maxHeight: {
         tweetImg: "480px",

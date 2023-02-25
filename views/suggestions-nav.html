@@ -1,38 +1,52 @@
-<div class="hidden md:block pb-1 pr-6 max-w-widget min-w-widget flex-grow">
-  <div class="relative top-0 w-full mt-1">
-    <input
-      class="w-full h-12 rounded-full bg-zinc-800 text-base placeholder-zinc-500 pl-12"
-      placeholder="Search Twitter"
-      type="text"
-    />
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke-width="1.5"
-      stroke="currentColor"
-      class="w-5 h-5 absolute text-zinc-500 top-3.5 left-4"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+<div
+  class="hidden md:block pb-1 pr-6 min-w-widget min-[1170px]:w-widgetxl lg:max-w-widget min-[1320px]:min-w-widgetxl"
+>
+  <!-- search -->
+
+  <div
+    class="fixed top-0 z-10 min-w-widget min-[1170px]:w-widgetxl lg:max-w-widget min-[1320px]:min-w-widgetxl bg-black py-1.5 pr-6 mr-4 flex-grow"
+  >
+    <form class="relative">
+      <input
+        class="w-full h-11 rounded-full bg-twittergray-800 text-base placeholder-twittergray-500 pl-12 focus:outline-none peer focus:border-twitterblue focus:border focus:bg-black"
+        placeholder="Search Twitter"
+        type="text"
       />
-    </svg>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-5 h-5 absolute text-twittergray-500 top-3 left-4 peer-focus:text-twitterblue"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+        />
+      </svg>
+    </form>
   </div>
 
-  <div class="w-full bg-zinc-800 pt-3 mt-4 mr-4 rounded-xl">
+  <div class="relative w-full bg-twittergray-900 pt-3 mt-16 mr-4 rounded-xl">
     <h2 class="text-xl font-bold px-4 pb-2">Trends for you</h2>
     <ul>
+      % for trend in trends:
       <li class="relative">
-        <a class="relative flex text-base hover:bg-zinc-700 p-4" href="">
-          <div>
-            <span class="block text-xs text-zinc-500">Trending in Denmark</span>
-            <span class="block font-bold"> Brøndby</span>
-          </div>
+        <a
+          class="relative flex flex-col gap-1 hover:bg-white hover:bg-opacity-[3%] p-4"
+          href="/"
+        >
+          <span class="block font-bold text-base">
+            {{trend["trend_title"]}}</span
+          >
+          <span class="text-sm text-twittergray-500"
+            >{{trend["trend_total_tweets"]}} Tweets</span
+          >
         </a>
         <button
-          class="absolute top-4 right-4 rounded-full p-2 hover:bg-sky-500 hover:bg-opacity-20"
+          class="absolute top-4 right-4 rounded-full p-1 group hover:bg-twitterblue hover:bg-opacity-10"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -40,7 +54,7 @@
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="w-5 h-5 text-zinc-500 hover:text-sky-500"
+            class="w-6 h-6 text-twittergray-500 group-hover:text-twitterblue"
           >
             <path
               stroke-linecap="round"
@@ -50,37 +64,11 @@
           </svg>
         </button>
       </li>
-      <li class="relative">
-        <a class="flex text-base hover:bg-zinc-700 p-4" href="">
-          <div>
-            <span class="block text-xs text-zinc-500">Trending in Denmark</span>
-            <span class="block font-bold">Loki</span>
-          </div>
-        </a>
-
-        <button
-          class="absolute top-4 right-4 rounded-full p-2 hover:bg-sky-500 hover:bg-opacity-20"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-5 h-5 text-zinc-500 hover:text-sky-500"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
-            />
-          </svg>
-        </button>
-      </li>
+      % end
     </ul>
 
     <button
-      class="w-full flex justify-start p-4 text-sky-500 text-base rounded-b-md hover:bg-zinc-700"
+      class="w-full flex justify-start p-4 text-twitterblue text-base rounded-b-md hover:bg-white hover:bg-opacity-[3%]"
     >
       Show more
     </button>

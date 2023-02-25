@@ -13,21 +13,21 @@
     <title>{{user["user_full_name"]}} @({{user["user_name"]}}) / Twitter</title>
   </head>
   <body
-    class="w-full h-full flex justify-center text-gray-200 text-lg bg-black overflow-hidden overflow-y-scroll"
+    class="w-full h-full flex justify-center text-gray-200 bg-black overflow-hidden overflow-y-scroll"
   >
     <div class="flex max-w-layout flex-grow">
       <div
-        class="hidden sm:block max-w-feed sm:w-2/12 lg:w-3/12 xl:w-4/12 h-screen pt-4 sm:pr-2 lg:pr-8 xxl:pr-14"
+        class="hidden sm:block max-w-feed sm:w-2/12 lg:w-3/12 xl:w-[30%] xxl:w-4/12 h-screen pt-4 sm:pr-2 lg:pr-8 xxl:pr-14"
       ></div>
       % include('mobile-header')
 
       <!-- left/nav -->
       % include('header')
 
-      <!-- center/content -->
+      <!-- center-right -->
 
       <div
-        class="flex flex-grow w-12/12 sm:w-10/12 lg:w-9/12 xl:w-8/12 md:gap-6 lg:gap-8"
+        class="flex flex-grow w-12/12 sm:w-10/12 lg:w-9/12 xl:w-[70%] xxl:w-8/12 md:gap-6 lg:gap-8"
       >
         <div
           class="flex flex-col flex-grow max-w-feed sm:border-x sm:border-zinc-700"
@@ -284,7 +284,7 @@
         </div>
 
         <!-- right/widget -->
-        % include('suggestions-nav')
+        % include('suggestions-nav', trends=trends)
       </div>
     </div>
   </body>

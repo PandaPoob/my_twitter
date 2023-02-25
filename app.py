@@ -43,14 +43,15 @@ def _(username):
         #print(user)
         #get users id
         user_id = user["user_id"]
-        print(f"user id: {user_id}")
+        #print(f"user id: {user_id}")
         tweets = db.execute("SELECT * FROM tweets WHERE tweet_user_fk=? ORDER BY tweets.tweet_created_at DESC LIMIT 0, 10", (user_id,)).fetchall()
-        #with id look up tweets
-        #pass tweets to view
+    
+        #get trends
+        trends = db.execute("SELECT * FROM trends").fetchall()
         print("#"*30)
-        print(tweets)
+        print(trends)
         
-        return template("profile", user=user, tweets=tweets)
+        return template("profile", user=user, tweets=tweets, trends=trends)
     #except Exception as ex:
         #print(ex)
     except:
