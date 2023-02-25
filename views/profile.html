@@ -84,20 +84,20 @@
 
           <div class="relative flex justify-end px-4">
             <button
-              class="absolute z-10 left-4 translate-y-[-50%] flex max-w-[25%] h-auto rounded-full bg-black p-[3px]"
+              class="absolute z-10 left-4 translate-y-[-50%] flex max-w-[25%] h-auto rounded-full bg-black p-[3px] group"
             >
               % if user["user_img_avatar"]:
               <img
                 src="/images/avatar_imgs/{{user['user_img_avatar']}}"
                 alt="{{user['user_full_name']}} profile image"
-                class="rounded-full"
+                class="rounded-full hover:opacity-90"
               />
               % end
             </button>
 
             <div class="justify-self-end flex items-start gap-3 py-3">
               <button
-                class="rounded-full border border-gray-500 p-1.5 hover:bg-gray-500 hover:bg-opacity-20"
+                class="rounded-full border border-gray-500 p-1.5 hover:bg-gray-500"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -284,7 +284,7 @@
         </div>
 
         <!-- right/widget -->
-        % include('suggestions-nav', trends=trends)
+        % include('suggestions-nav', trends=trends, fsugg=fsugg)
       </div>
     </div>
   </body>

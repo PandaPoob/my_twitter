@@ -580,3 +580,10 @@ AS
 SELECT * FROM users
 JOIN tweets
 ON users.user_id = tweets.tweet_user_fk;
+
+DROP VIEW IF EXISTS [follower_suggestions];
+CREATE VIEW follower_suggestions
+AS
+SELECT users.user_id, users.user_name, users.user_full_name, users.user_img_avatar, users.user_verified
+FROM users;
+

@@ -48,10 +48,13 @@ def _(username):
     
         #get trends
         trends = db.execute("SELECT * FROM trends").fetchall()
+
+        #get follower suggestions
+        fsugg = db.execute("SELECT * FROM follower_suggestions WHERE NOT user_name=?",(username,)).fetchall()
         print("#"*30)
-        print(trends)
+        print(fsugg)
         
-        return template("profile", user=user, tweets=tweets, trends=trends)
+        return template("profile", user=user, tweets=tweets, trends=trends, fsugg=fsugg)
     #except Exception as ex:
         #print(ex)
     except:

@@ -2,7 +2,6 @@
   class="hidden md:block pb-1 pr-6 min-w-widget min-[1170px]:w-widgetxl lg:max-w-widget min-[1320px]:min-w-widgetxl"
 >
   <!-- search -->
-
   <div
     class="fixed top-0 z-10 min-w-widget min-[1170px]:w-widgetxl lg:max-w-widget min-[1320px]:min-w-widgetxl bg-black py-1.5 pr-6 mr-4 flex-grow"
   >
@@ -28,7 +27,19 @@
       </svg>
     </form>
   </div>
+  <!-- search end -->
 
+  <!-- follow sugggestions -->
+  <div>
+    <!--    <ul>
+      % for fsug in fsugg:
+      <li>{{fsug["user_name"]}}</li>
+      % end
+    </ul> -->
+  </div>
+  <!-- follow sugggestions end -->
+
+  <!--  trends -->
   <div class="relative w-full bg-twittergray-900 pt-3 mt-16 mr-4 rounded-xl">
     <h2 class="text-xl font-bold px-4 pb-2">Trends for you</h2>
     <ul>
@@ -73,4 +84,5 @@
       Show more
     </button>
   </div>
+  <!-- trends end -->
 </div>
