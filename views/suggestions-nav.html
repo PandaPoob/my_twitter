@@ -1,9 +1,9 @@
 <div
-  class="hidden md:block pb-1 pr-6 min-w-widget min-[1170px]:w-widgetxl lg:max-w-widget min-[1320px]:min-w-widgetxl"
+  class="relative hidden md:block pb-1 mr-6 min-w-widget max-w-widget min-[1200px]:w-widgetxl min-[1200px]:max-w-widgetxl lg:max-w-widget min-[1320px]:min-w-widgetxl"
 >
   <!-- search -->
   <div
-    class="fixed top-0 z-10 min-w-widget min-[1170px]:w-widgetxl lg:max-w-widget min-[1320px]:min-w-widgetxl bg-black py-1.5 pr-6 mr-4 flex-grow"
+    class="fixed top-0 z-30 min-w-widget min-[1200px]:w-widgetxl lg:max-w-widget min-[1320px]:min-w-widgetxl bg-black py-1.5 mr-6 flex-grow"
   >
     <form class="relative">
       <input
@@ -29,18 +29,92 @@
   </div>
   <!-- search end -->
 
+  <!-- latest img tweets -->
+  <div
+    class="grid grid-cols-3 grid-rows-[100px_minmax(100px,100px)] gap-0.5 rounded-xl overflow-hidden mt-16"
+  >
+    % for imgtweet in imgtweets:
+
+    <a href="" class="flex col-span-1 row-span-1">
+      <img
+        class="w-full object-cover"
+        src="/images/tweet_imgs/{{imgtweet['tweet_field_img']}}"
+        alt=""
+      />
+    </a>
+
+    % end
+  </div>
+  <!--     latest img tweets end -->
+
   <!-- follow sugggestions -->
-
-  <!--    <ul>
+  <div class="bg-twittergray-900 rounded-xl pt-3 mt-4">
+    <h2 class="text-xl font-bold px-4 pb-2">You might like</h2>
+    <ul>
       % for fsug in fsugg:
-      <li>{{fsug["user_name"]}}</li>
-      % end
-    </ul> -->
+      <li class="relative">
+        <a
+          href="/{{fsug['user_name']}}"
+          class="flex py-3 px-4 hover:bg-white hover:bg-opacity-[3%]"
+        >
+          <span class="grid grid-cols-10 gap-2 items-center">
+            <img
+              src="/images/avatar_imgs/{{fsug['user_img_avatar']}}"
+              alt="{{fsug['user_full_name']}} avatar img"
+              class="rounded-full col-span-2"
+            />
+            <span class="col-span-5">
+              <span class="flex gap-1">
+                <span
+                  class="font-bold text-base text-ellipsis whitespace-nowrap overflow-hidden break-words hover:underline"
+                  >{{fsug["user_full_name"]}}</span
+                >
 
+                % if user["user_verified"]:
+                <span>
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    class="text-twitterblue"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="m8.6 22.5l-1.9-3.2l-3.6-.8l.35-3.7L1 12l2.45-2.8l-.35-3.7l3.6-.8l1.9-3.2L12 2.95l3.4-1.45l1.9 3.2l3.6.8l-.35 3.7L23 12l-2.45 2.8l.35 3.7l-3.6.8l-1.9 3.2l-3.4-1.45Zm2.35-6.95L16.6 9.9l-1.4-1.45l-4.25 4.25l-2.15-2.1L7.4 12Z"
+                    />
+                  </svg>
+                </span>
+                % end
+              </span>
+              <span class="text-twittergray-500 text-base"
+                >@{{fsug["user_name"]}}</span
+              >
+            </span>
+
+            <span class="col-span-3"></span>
+          </span>
+        </a>
+        <button
+          class="absolute top-[50%] translate-y-[-50%] right-0 z-20 bg-white text-twittergray-900 text-base font-medium rounded-full py-1.5 px-4 mr-4 hover:bg-opacity-90"
+        >
+          Follow
+        </button>
+      </li>
+      % end
+    </ul>
+    <a
+      href=""
+      class="w-full flex justify-start p-4 text-twitterblue text-base rounded-b-md hover:bg-white hover:bg-opacity-[3%]"
+    >
+      Show more
+    </a>
+  </div>
   <!-- follow sugggestions end -->
 
   <!--  trends -->
-  <div class="relative w-full bg-twittergray-900 pt-3 mt-16 mr-4 rounded-xl">
+  <div
+    class="sticky top-16 w-full bg-twittergray-900 pt-3 mt-4 mr-4 rounded-xl"
+  >
     <h2 class="text-xl font-bold px-4 pb-2">Trends for you</h2>
     <ul>
       % for trend in trends:
@@ -78,11 +152,12 @@
       % end
     </ul>
 
-    <button
+    <a
+      href=""
       class="w-full flex justify-start p-4 text-twitterblue text-base rounded-b-md hover:bg-white hover:bg-opacity-[3%]"
     >
       Show more
-    </button>
+    </a>
   </div>
   <!-- trends end -->
 </div>

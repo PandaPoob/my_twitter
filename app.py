@@ -45,16 +45,19 @@ def _(username):
         user_id = user["user_id"]
         #print(f"user id: {user_id}")
         tweets = db.execute("SELECT * FROM tweets WHERE tweet_user_fk=? ORDER BY tweets.tweet_created_at DESC LIMIT 0, 10", (user_id,)).fetchall()
-    
+        
         #get trends
         trends = db.execute("SELECT * FROM trends").fetchall()
 
         #get follower suggestions
         fsugg = db.execute("SELECT * FROM follower_suggestions WHERE NOT user_name=?",(username,)).fetchall()
+
+        imgtweets = db.execute("SELECT * FROM tweets WHERE tweet_field_img <> '' AND tweet_user_fk=? ORDER BY tweets.tweet_created_at DESC LIMIT 0, 6", (user_id,)).fetchall()
+
         print("#"*30)
-        print(fsugg)
+        print(imgtweets)
         
-        return template("profile", user=user, tweets=tweets, trends=trends, fsugg=fsugg)
+        return template("profile", user=user, tweets=tweets, trends=trends, fsugg=fsugg, imgtweets=imgtweets)
     #except Exception as ex:
         #print(ex)
     except:

@@ -13,6 +13,7 @@ module.exports = {
       },
       fontSize: {
         sm: ["0.813rem", { lineHeight: "normal" }], //13px
+        md: ["0.875em", { lineHeight: "normal" }], //14px
         base: ["0.938rem", { lineHeight: "normal" }], //15px
         lg: ["1.063rem", { lineHeight: "normal" }], //17px
         xl: ["1.25rem", { lineHeight: "normal" }], //20px,
