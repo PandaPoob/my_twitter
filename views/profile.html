@@ -30,10 +30,12 @@
         class="flex flex-grow w-12/12 sm:w-10/12 lg:w-9/12 xl:w-[70%] xxl:w-8/12 md:gap-6 lg:gap-8"
       >
         <div
-          class="flex flex-col flex-grow max-w-feed sm:border-x sm:border-zinc-700"
+          class="relative flex flex-col flex-grow max-w-feed sm:border-x sm:border-zinc-700"
         >
           <!--  profile header -->
-          <div class="flex items-center gap-8 px-4 py-1">
+          <div
+            class="fixed top-0 z-30 w-full max-w-[calc(600px-2px)] flex items-center gap-8 bg-black bg-opacity-[75%] backdrop-blur px-4 py-1"
+          >
             <button
               class="flex justify-center items-center rounded-full p-2 hover:bg-zinc-800"
             >
@@ -73,7 +75,7 @@
             </div>
           </div>
 
-          <button class="flex">
+          <button class="mt-14 flex">
             % if user["user_img_cover"]:
             <img
               src="/images/cover_imgs/{{user['user_img_cover']}}"
