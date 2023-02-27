@@ -1,7 +1,10 @@
 <div>
   <!-- tweet -->
   % for tweet in tweets:
-  <div class="flex pt-3 border-b border-zinc-700">
+
+  <div
+    class="flex pt-3 bg-black border-b border-zinc-700 hover:bg-white hover:bg-opacity-[3%] hover:cursor-pointer"
+  >
     <!-- left -->
     <div class="pl-4 pr-4">
       <a href="">
@@ -75,7 +78,7 @@
       <div>
         <!-- tweet text field-->
         % if tweet["tweet_field_text"]:
-        <p class="text-base mb-2">{{tweet["tweet_field_text"]}}</p>
+        <p class="text-base mt-1 mb-2">{{tweet["tweet_field_text"]}}</p>
         % end
         <!-- tweet image field-->
         % if tweet["tweet_field_img"]:
@@ -199,6 +202,7 @@
       </div>
     </div>
   </div>
+
   % end
   <!-- end tweet -->
 </div>

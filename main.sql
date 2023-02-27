@@ -550,15 +550,6 @@ INSERT INTO tweets VALUES(
 
 --##############################################################
 
-CREATE TABLE trends(
-  trend_id                TEXT,
-  trend_title             TEXT NOT NULL,
-  trend_total_tweets      TEXT DEFAULT 0,
-
-  PRIMARY KEY(trend_id)
-  ) WITHOUT ROWID;
-
-
 DROP TABLE IF EXISTS trends;
 CREATE TABLE trends(
   trend_id            TEXT,
@@ -573,7 +564,7 @@ INSERT INTO trends VALUES("2a9470bc61314187b19d7190b76cd535", "Slack", "6869");
 INSERT INTO trends VALUES("c9773e2bb68647039a7a40c2ee7d4716", "Twitch", "315000");
 
 --##############################################################
-
+/* 
 DROP VIEW IF EXISTS [users_and_tweets];
 CREATE VIEW users_and_tweets
 AS
@@ -586,4 +577,4 @@ CREATE VIEW follower_suggestions
 AS
 SELECT users.user_id, users.user_name, users.user_full_name, users.user_img_avatar, users.user_verified
 FROM users;
-
+ */
