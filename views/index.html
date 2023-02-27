@@ -8,591 +8,143 @@
     <title>Document</title>
   </head>
   <body
-    class="w-screen h- flex justify-center overflow-x-hidden overflow-y-scroll bg-black text-white text-lg"
+    class="w-full h-full flex justify-center text-gray-200 bg-black overflow-hidden overflow-y-scroll"
   >
-    <div class="relative w-full lg:justify-center max-w-7xl">
-      <!-- mobile nav -->
+    <div class="flex max-w-layout flex-grow">
+      <div
+        class="hidden sm:block max-w-feed sm:w-2/12 lg:w-3/12 xl:w-[30%] xxl:w-4/12 h-screen pt-4 sm:pr-2 lg:pr-8 xxl:pr-14"
+      ></div>
       % include('mobile-header')
 
       <!-- left/nav -->
-      % include('main-nav')
+      % include('header')
 
-      <!-- middle -->
+      <!-- center-right -->
+
       <div
-        class="w-full h-full sm:w-10/12 lg:w-6/12 xl:w-5/12 2xl:w-4/12 lg:mr-28 xl:mr-0 border-x border-zinc-700"
+        class="flex flex-grow w-12/12 sm:w-10/12 lg:w-9/12 xl:w-[70%] xxl:w-8/12 md:gap-6 lg:gap-8"
       >
-        <div>
-          <p class="p-4 font-bold text-2xl">Home</p>
-          <div class="flex">
-            <a
-              href=""
-              class="w-full hover:bg-zinc-800 text-center text-base font-bold p-4"
-            >
-              <span class="border-b-4 border-sky-400 pb-4"> For you </span>
-            </a>
-            <a
-              href=""
-              class="w-full text-zinc-500 hover:bg-zinc-800 text-center text-base p-4"
-            >
-              Following
-            </a>
-          </div>
-        </div>
-
-        <div class="flex border-t border-zinc-700 pb-4">
-          <div class="p-4">
-            <a href="" class="group hover:bg-transparent">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                class="w-12 h-12 rounded-full bg-zinc-200 pt-2 hover:opacity-80"
-              >
-                <path
-                  class="fill-zinc-500"
-                  fill-rule="evenodd"
-                  d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-            </a>
-          </div>
-
-          <div class="w-full pr-4 pt-4">
-            <textarea
-              placeholder="What's happening"
-              class="w-full bg-inherit placeholder-zinc-400 text-white text-xl px-1 outline-none"
-            ></textarea>
-            <div class="flex w-full fill-sky-500 items-center gap-2 pt-4">
-              <button
-                class="rounded-full p-2 hover:bg-sky-500 hover:bg-opacity-20"
-              >
-                <svg
-                  class="text-sky-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 256 256"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M88.7 103.3A15.9 15.9 0 0 1 84 92a16 16 0 0 1 32 0a16 16 0 0 1-16 16a15.9 15.9 0 0 1-11.3-4.7ZM228 48v160a20.1 20.1 0 0 1-20 20H48a20.1 20.1 0 0 1-20-20V48a20.1 20.1 0 0 1 20-20h160a20.1 20.1 0 0 1 20 20Zm-24 117l-36-36l-41.9 41.8a19.9 19.9 0 0 1-28.2 0L80 153l-28 28v23h152Zm0-113H52v95l13.9-13.8a19.9 19.9 0 0 1 28.2 0L112 151l41.9-41.8a19.9 19.9 0 0 1 28.2 0L204 131Z"
-                  />
-                </svg>
-              </button>
-              <button
-                class="rounded-full p-2 hover:bg-sky-500 hover:bg-opacity-20"
-              >
-                <svg
-                  class="text-sky-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="21"
-                  height="21"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M19 19H5V5h14v14zM5 3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5zm6.5 11h1v-4h-1v4zm2 0h1v-1.5H16v-1h-1.5V11h2v-1h-3v4zm-4-2v1h-1v-2h2c0-.55-.45-1-1-1h-1c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h-1z"
-                  />
-                </svg>
-              </button>
-              <button
-                class="rounded-full p-2 hover:bg-sky-500 hover:bg-opacity-20"
-              >
-                <svg
-                  class="text-sky-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z"
-                  />
-                </svg>
-              </button>
-              <button
-                class="rounded-full p-2 hover:bg-sky-500 hover:bg-opacity-20"
-              >
-                <svg
-                  class="text-sky-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                >
-                  <g fill="none">
-                    <path
-                      d="M24 0v24H0V0h24ZM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018Zm.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022Zm-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01l-.184-.092Z"
-                    />
-                    <path
-                      fill="currentColor"
-                      d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2Zm0 2a8 8 0 1 0 0 16a8 8 0 0 0 0-16Zm2.8 9.857a1 1 0 1 1 1.4 1.428A5.984 5.984 0 0 1 12 17a5.984 5.984 0 0 1-4.2-1.715a1 1 0 0 1 1.4-1.428A3.984 3.984 0 0 0 12 15c1.09 0 2.077-.435 2.8-1.143ZM8.5 8a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3Zm7 0a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3Z"
-                    />
-                  </g>
-                </svg>
-              </button>
-
-              <button
-                class="ml-auto bg-sky-500 px-4 py-1.5 rounded-full text-base font-bold items-center"
-              >
-                Tweet
-              </button>
-            </div>
-          </div>
-        </div>
-
         <div
-          class="w-full flex flex-col border-t border-zinc-700 pr-4 py-2 pl-8"
+          class="flex flex-col flex-grow max-w-feed sm:border-x sm:border-zinc-700 px-4"
         >
-          <button
-            class="ml-auto rounded-full p-1.5 group hover:bg-opacity-10 hover:bg-sky-500"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-6 h-6 stroke-zinc-500 group-hover:stroke-sky-500"
+          <!-- % include('tweet-form', min_length=min_length, max_length=min_length) -->
+          <div class="w-full pr-4 pt-4">
+            <form
+              method="POST"
+              class="flex gap-2"
+              onsubmit="validate(handleSubmitTweet); return false"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+              <input
+                class="border"
+                name="tweet_field_text"
+                type="text"
+                data-validate="str"
+                data-min="{{min_length}}"
+                data-max="{{max_length}}"
               />
-            </svg>
-          </button>
-
-          <h2 class="text-2xl font-bold pb-2">Welcome back</h2>
-          <p class="text-zinc-400 text-sm pb-6">
-            Select some topics you're interested in to help personalize your
-            Twitter experience, starting with finding people to follow.
-          </p>
-          <button
-            class="w-36 bg-white rounded-full text-zinc-900 text-base px-4 py-2 font-bold mb-6"
-          >
-            Get started
-          </button>
-        </div>
-
-        <!--  tweets -->
-        <div class="w-full">
-          <!-- top -->
-          <div
-            class="flex items-center w-full pt-1 pr-2 border-t border-zinc-700"
-          >
-            <div class="flex items-center pl-2 ml-16">
-              <p class="text-xs font-bold text-zinc-500">You might like</p>
-              <svg
-                class="mt-1 text-zinc-500"
-                xmlns="http://www.w3.org/2000/svg"
-                width="12"
-                height="12"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  fill="currentColor"
-                  d="M12 14a2 2 0 1 1 0-4a2 2 0 0 1 0 4Z"
-                />
-              </svg>
-              <a href="" class="text-xs font-bold text-sky-500">See more</a>
-            </div>
-
-            <button
-              class="ml-auto p-1.5 rounded-full hover:bg-sky-600 hover:bg-opacity-10"
-            >
-              <svg
-                class="text-zinc-500"
-                width="18"
-                height="18"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="2"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
-
-          <div class="flex">
-            <!-- left -->
-            <div class="pl-4 pr-2">
-              <img src="/images/elon_musk.jpg" class="rounded-full w-14" />
-            </div>
-
-            <!-- right -->
-            <div class="w-full pr-4">
-              <!-- username -->
-              <div class="relative flex items-center text-base">
-                <a href="" class="font-bold group">
-                  <span class="group-hover:underline">Elon Musk</span
-                  ><span class="text-zinc-500 font-normal"> @elonmusk</span></a
-                >
-                <svg
-                  class="mt-1 text-zinc-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M12 14a2 2 0 1 1 0-4a2 2 0 0 1 0 4Z"
-                  />
-                </svg>
-                <a href="" class="text-zinc-500 hover:underline">Jan 29</a>
-
+              <div class="flex w-full fill-sky-500 items-center gap-2 pt-4">
                 <button
-                  class="absolute top-0 -right-2 rounded-full p-1.5 group hover:bg-opacity-10 hover:bg-sky-500"
+                  class="rounded-full p-2 hover:bg-sky-500 hover:bg-opacity-20"
                 >
                   <svg
+                    class="text-sky-500"
                     xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="w-5 h-5 stroke-zinc-500 group-hover:stroke-sky-500"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
-                    />
-                  </svg>
-                </button>
-              </div>
-              <!-- tweet text -->
-              <div class="text-base font-semibold mb-2">
-                This is the cutest dog ever!
-              </div>
-              <img class="rounded-md" src="/images/cleo.JPG" />
-
-              <!-- tweet icons -->
-              <div
-                class="flex justify-between sm:gap-6 sm:justify-start lg:justify-between lg:gap-0 3xl:justify-start 3xl:gap-12 text-zinc-500 text-sm py-2"
-              >
-                <button
-                  class="group flex items-center gap-1 hover:text-sky-500"
-                >
-                  <div
-                    class="rounded-full p-2 group-hover:bg-sky-500 group-hover:bg-opacity-10"
-                  >
-                    <svg
-                      class="group-hover:"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M12 2A10 10 0 0 0 2 12a9.89 9.89 0 0 0 2.26 6.33l-2 2a1 1 0 0 0-.21 1.09A1 1 0 0 0 3 22h9a10 10 0 0 0 0-20Zm0 18H5.41l.93-.93a1 1 0 0 0 0-1.41A8 8 0 1 1 12 20Z"
-                      />
-                    </svg>
-                  </div>
-                  <span>4.276</span>
-                </button>
-
-                <button
-                  class="group flex items-center gap-1 hover:text-green-500"
-                >
-                  <div
-                    class="rounded-full p-2 group-hover:bg-green-500 group-hover:bg-opacity-10"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 1024 1024"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M136 552h63.6c4.4 0 8-3.6 8-8V288.7h528.6v72.6c0 1.9.6 3.7 1.8 5.2a8.3 8.3 0 0 0 11.7 1.4L893 255.4c4.3-5 3.6-10.3 0-13.2L749.7 129.8a8.22 8.22 0 0 0-5.2-1.8c-4.6 0-8.4 3.8-8.4 8.4V209H199.7c-39.5 0-71.7 32.2-71.7 71.8V544c0 4.4 3.6 8 8 8zm752-80h-63.6c-4.4 0-8 3.6-8 8v255.3H287.8v-72.6c0-1.9-.6-3.7-1.8-5.2a8.3 8.3 0 0 0-11.7-1.4L131 768.6c-4.3 5-3.6 10.3 0 13.2l143.3 112.4c1.5 1.2 3.3 1.8 5.2 1.8c4.6 0 8.4-3.8 8.4-8.4V815h536.6c39.5 0 71.7-32.2 71.7-71.8V480c-.2-4.4-3.8-8-8.2-8z"
-                      />
-                    </svg>
-                  </div>
-                  <span>7.954</span>
-                </button>
-
-                <button
-                  class="group flex items-center gap-1 hover:text-pink-500"
-                >
-                  <div
-                    class="rounded-full p-2 group-hover:bg-pink-500 group-hover:bg-opacity-10"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      class="w-5 h-5"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
-                      />
-                    </svg>
-                  </div>
-                  <span>10.8k</span>
-                </button>
-
-                <button
-                  class="group hidden lg:flex items-center gap-1 hover:text-sky-500"
-                >
-                  <div
-                    class="rounded-full p-2 group-hover:bg-sky-500 group-hover:bg-opacity-10"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M3 22V8h4v14H3m7 0V2h4v20h-4m7 0v-8h4v8h-4Z"
-                      />
-                    </svg>
-                  </div>
-                  <span>26.2k</span>
-                </button>
-
-                <button class="hover:text-sky-500">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
+                    width="20"
+                    height="20"
                     viewBox="0 0 256 256"
                   >
                     <path
                       fill="currentColor"
-                      d="M80.3 87.6a8 8 0 0 1 0-11.3l42-42a8.1 8.1 0 0 1 11.4 0l42 42a8 8 0 0 1 0 11.3a8 8 0 0 1-11.4 0L136 59.3V152a8 8 0 0 1-16 0V59.3L91.7 87.6a8 8 0 0 1-11.4 0ZM216 144a8 8 0 0 0-8 8v56H48v-56a8 8 0 0 0-16 0v56a16 16 0 0 0 16 16h160a16 16 0 0 0 16-16v-56a8 8 0 0 0-8-8Z"
+                      d="M88.7 103.3A15.9 15.9 0 0 1 84 92a16 16 0 0 1 32 0a16 16 0 0 1-16 16a15.9 15.9 0 0 1-11.3-4.7ZM228 48v160a20.1 20.1 0 0 1-20 20H48a20.1 20.1 0 0 1-20-20V48a20.1 20.1 0 0 1 20-20h160a20.1 20.1 0 0 1 20 20Zm-24 117l-36-36l-41.9 41.8a19.9 19.9 0 0 1-28.2 0L80 153l-28 28v23h152Zm0-113H52v95l13.9-13.8a19.9 19.9 0 0 1 28.2 0L112 151l41.9-41.8a19.9 19.9 0 0 1 28.2 0L204 131Z"
                     />
                   </svg>
                 </button>
-              </div>
-            </div>
-          </div>
-          <!-- second tweet -->
-
-          <div
-            class="flex items-center w-full pt-1 pr-2 border-t border-zinc-700"
-          >
-            <div class="flex items-center pl-2 ml-16">
-              <p class="text-xs font-bold text-zinc-500">You might like</p>
-              <svg
-                class="mt-1 text-zinc-500"
-                xmlns="http://www.w3.org/2000/svg"
-                width="12"
-                height="12"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  fill="currentColor"
-                  d="M12 14a2 2 0 1 1 0-4a2 2 0 0 1 0 4Z"
-                />
-              </svg>
-              <a href="" class="text-xs font-bold text-sky-500">See more</a>
-            </div>
-
-            <button
-              class="ml-auto p-1.5 rounded-full hover:bg-sky-600 hover:bg-opacity-10"
-            >
-              <svg
-                class="text-zinc-500"
-                width="18"
-                height="18"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="2"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
-
-          <div class="flex">
-            <!-- left -->
-            <div class="pl-4 pr-2">
-              <img src="/images/elon_musk.jpg" class="rounded-full w-14" />
-            </div>
-
-            <!-- right -->
-            <div class="w-full pr-4">
-              <!-- username -->
-              <div class="relative flex items-center text-base">
-                <a href="" class="font-bold group">
-                  <span class="group-hover:underline">Elon Musk</span
-                  ><span class="text-zinc-500 font-normal"> @elonmusk</span></a
-                >
-                <svg
-                  class="mt-1 text-zinc-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M12 14a2 2 0 1 1 0-4a2 2 0 0 1 0 4Z"
-                  />
-                </svg>
-                <a href="" class="text-zinc-500 hover:underline">Jan 29</a>
-
                 <button
-                  class="absolute top-0 -right-2 rounded-full p-1.5 group hover:bg-opacity-10 hover:bg-sky-500"
+                  class="rounded-full p-2 hover:bg-sky-500 hover:bg-opacity-20"
                 >
                   <svg
+                    class="text-sky-500"
                     xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
+                    width="21"
+                    height="21"
                     viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="w-5 h-5 stroke-zinc-500 group-hover:stroke-sky-500"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
-                    />
-                  </svg>
-                </button>
-              </div>
-              <!-- tweet text -->
-              <div class="text-base font-semibold mb-2">
-                This is the cutest dog ever!
-              </div>
-              <img class="rounded-md" src="/images/cleo.JPG" />
-
-              <!-- tweet icons -->
-              <div
-                class="flex justify-between sm:gap-6 sm:justify-start lg:justify-between lg:gap-0 3xl:justify-start 3xl:gap-12 text-zinc-500 text-sm py-2"
-              >
-                <button
-                  class="group flex items-center gap-1 hover:text-sky-500"
-                >
-                  <div
-                    class="rounded-full p-2 group-hover:bg-sky-500 group-hover:bg-opacity-10"
-                  >
-                    <svg
-                      class="group-hover:"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M12 2A10 10 0 0 0 2 12a9.89 9.89 0 0 0 2.26 6.33l-2 2a1 1 0 0 0-.21 1.09A1 1 0 0 0 3 22h9a10 10 0 0 0 0-20Zm0 18H5.41l.93-.93a1 1 0 0 0 0-1.41A8 8 0 1 1 12 20Z"
-                      />
-                    </svg>
-                  </div>
-                  <span>4.276</span>
-                </button>
-
-                <button
-                  class="group flex items-center gap-1 hover:text-green-500"
-                >
-                  <div
-                    class="rounded-full p-2 group-hover:bg-green-500 group-hover:bg-opacity-10"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 1024 1024"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M136 552h63.6c4.4 0 8-3.6 8-8V288.7h528.6v72.6c0 1.9.6 3.7 1.8 5.2a8.3 8.3 0 0 0 11.7 1.4L893 255.4c4.3-5 3.6-10.3 0-13.2L749.7 129.8a8.22 8.22 0 0 0-5.2-1.8c-4.6 0-8.4 3.8-8.4 8.4V209H199.7c-39.5 0-71.7 32.2-71.7 71.8V544c0 4.4 3.6 8 8 8zm752-80h-63.6c-4.4 0-8 3.6-8 8v255.3H287.8v-72.6c0-1.9-.6-3.7-1.8-5.2a8.3 8.3 0 0 0-11.7-1.4L131 768.6c-4.3 5-3.6 10.3 0 13.2l143.3 112.4c1.5 1.2 3.3 1.8 5.2 1.8c4.6 0 8.4-3.8 8.4-8.4V815h536.6c39.5 0 71.7-32.2 71.7-71.8V480c-.2-4.4-3.8-8-8.2-8z"
-                      />
-                    </svg>
-                  </div>
-                  <span>7.954</span>
-                </button>
-
-                <button
-                  class="group flex items-center gap-1 hover:text-pink-500"
-                >
-                  <div
-                    class="rounded-full p-2 group-hover:bg-pink-500 group-hover:bg-opacity-10"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      class="w-5 h-5"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
-                      />
-                    </svg>
-                  </div>
-                  <span>10.8k</span>
-                </button>
-
-                <button
-                  class="group hidden lg:flex items-center gap-1 hover:text-sky-500"
-                >
-                  <div
-                    class="rounded-full p-2 group-hover:bg-sky-500 group-hover:bg-opacity-10"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M3 22V8h4v14H3m7 0V2h4v20h-4m7 0v-8h4v8h-4Z"
-                      />
-                    </svg>
-                  </div>
-                  <span>26.2k</span>
-                </button>
-
-                <button class="hover:text-sky-500">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 256 256"
                   >
                     <path
                       fill="currentColor"
-                      d="M80.3 87.6a8 8 0 0 1 0-11.3l42-42a8.1 8.1 0 0 1 11.4 0l42 42a8 8 0 0 1 0 11.3a8 8 0 0 1-11.4 0L136 59.3V152a8 8 0 0 1-16 0V59.3L91.7 87.6a8 8 0 0 1-11.4 0ZM216 144a8 8 0 0 0-8 8v56H48v-56a8 8 0 0 0-16 0v56a16 16 0 0 0 16 16h160a16 16 0 0 0 16-16v-56a8 8 0 0 0-8-8Z"
+                      d="M19 19H5V5h14v14zM5 3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5zm6.5 11h1v-4h-1v4zm2 0h1v-1.5H16v-1h-1.5V11h2v-1h-3v4zm-4-2v1h-1v-2h2c0-.55-.45-1-1-1h-1c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h-1z"
                     />
                   </svg>
                 </button>
+                <button
+                  class="rounded-full p-2 hover:bg-sky-500 hover:bg-opacity-20"
+                >
+                  <svg
+                    class="text-sky-500"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z"
+                    />
+                  </svg>
+                </button>
+                <button
+                  class="rounded-full p-2 hover:bg-sky-500 hover:bg-opacity-20"
+                >
+                  <svg
+                    class="text-sky-500"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                  >
+                    <g fill="none">
+                      <path
+                        d="M24 0v24H0V0h24ZM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018Zm.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022Zm-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01l-.184-.092Z"
+                      />
+                      <path
+                        fill="currentColor"
+                        d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2Zm0 2a8 8 0 1 0 0 16a8 8 0 0 0 0-16Zm2.8 9.857a1 1 0 1 1 1.4 1.428A5.984 5.984 0 0 1 12 17a5.984 5.984 0 0 1-4.2-1.715a1 1 0 0 1 1.4-1.428A3.984 3.984 0 0 0 12 15c1.09 0 2.077-.435 2.8-1.143ZM8.5 8a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3Zm7 0a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3Z"
+                      />
+                    </g>
+                  </svg>
+                </button>
+
+                <button
+                  class="ml-auto bg-sky-500 px-4 py-1.5 rounded-full text-base font-bold items-center"
+                >
+                  Tweet
+                </button>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
 
-      <!-- right -->
-      % include('suggestions-nav')
+      <!-- right/widget -->
+      <!-- prettier-ignore -->
+      <div>
+        side page
+      </div>
     </div>
+
+    <script src="/js/validate.js"></script>
+    <script>
+      async function handleSubmitTweet() {
+        const frm = event.target;
+
+        const resp = await fetch("/index", {
+          method: "POST",
+          body: new FormData(frm),
+        });
+
+        const data = await resp.text();
+        console.log(data);
+        //alert("submitted");
+      }
+    </script>
   </body>
 </html>

@@ -2,7 +2,10 @@ from bottle import default_app, get, post, template, route, run, static_file, vi
 import os
 import sqlite3
 import git
-
+import pathlib
+import x
+################################################
+#Git webhook to pythonanywhere
 @post('/f1f83b1afe324291a552bf43b219b420')
 def git_update():
   repo = git.Repo('./web_dev_mandatory_01')
@@ -11,32 +14,41 @@ def git_update():
   origin.pull()
   return ""
  
-
+################################################
+#STATIC FILES
 @get("/app.css")
 def _():
     return static_file("app.css", root=".")
+
+@get("/js/<filename>")
+def _(filename):
+    return static_file(filename, "js")
 
 @get("/images/<filename:re:.*\.jpg>")
 def _(filename):
     return static_file(filename, root=os.getcwd()+"./images")
 
-#####
+################################################
 
 def dict_factory(cursor, row):
   col_names = [col[0] for col in cursor.description]
   return {key: value for key, value in zip(col_names, row)}
 
-#####
+################################################
+# HOME PAGE
 @get("/")
 def _():
-    return "Home page Github"
-        
+    return template("index", min_length=x.TWEET_MIN_LEN, max_length=x.TWEET_MAX_LEN)
+################################################
+# FORM PAGE
+import views.tweet
 
 @get("/<username>")
 #@view("profile")
 def _(username):
     try:
-        db = sqlite3.connect(os.getcwd()+"/twitter.db")
+        db = sqlite3.connect(str(pathlib.Path(__file__).parent.resolve())+"/twitter.db")
+        #db = sqlite3.connect(os.getcwd()+"/twitter.db")
         #db = sqlite3.connect("/home/pandapoob/mysite/twitter.db")
         db.row_factory = dict_factory
         user = db.execute("SELECT * FROM users WHERE user_name=? COLLATE NOCASE", (username,)).fetchall()[0]
@@ -66,8 +78,9 @@ def _(username):
     finally:
         if "db" in locals(): db.close()
 
-#####
-
+################################################
+# APIS
+import apis.api_tweet
 
 #try will run on amazon
 try:
