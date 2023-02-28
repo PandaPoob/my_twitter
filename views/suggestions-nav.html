@@ -37,7 +37,7 @@
     <!-- search end -->
 
     <!-- latest img tweets -->
-    % if page == "profile":
+    % if page == "profile" and len(imgtweets) == 6:
     <div
       class="grid grid-cols-3 grid-rows-[100px_minmax(100px,100px)] gap-0.5 rounded-xl overflow-hidden mt-16"
     >
@@ -58,9 +58,14 @@
 
     <!-- follow sugggestions -->
     <div 
-     % if page == "profile": 
+    % if page == "profile" and len(imgtweets) == 6:
       class="bg-twittergray-900 rounded-xl pt-3 mt-4"
     % end
+
+    % if page == "profile" and len(imgtweets) == 0:
+      class="bg-twittergray-900 rounded-xl pt-3 mt-16"
+    % end
+
     % if page == "home": 
      class="sticky top-16 bg-twittergray-900 rounded-xl pt-3 mt-4"
     % end
@@ -86,7 +91,7 @@
                     >{{fsug["user_full_name"]}}</span
                   >
 
-                  % if fsug["user_verified"]:
+                  % if fsug["user_verified"] == "1":
                   <span>
                     <svg
                       width="18"
