@@ -9,13 +9,11 @@ def _():
         x.validate_tweet()
         db = x.db()
         
-    
-
         tweet_id = str(uuid.uuid4().hex)
-        tweet_user_fk = "5ae1823bcc5648bd9e5bf6602ae397d6"
+        tweet_user_fk = "b3094c2f1c144817b7cc0b718fc3c644"
         tweet_created_at = int(time.time())
         tweet_field_text = request.forms.get("tweet_field_text")
-        tweet_field_img = "0"
+        tweet_field_img = ""
         tweet_updated_at = "0"
         tweet_total_replies = "0"
         tweet_total_likes = "0"

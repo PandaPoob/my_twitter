@@ -46,23 +46,36 @@
           </div>
           <!-- sub header end -->
 
-          <!-- % include('tweet-form', min_length=min_length, max_length=min_length) -->
           <!-- tweet form -->
-          <div class="w-full pr-4 pt-4">
+          <div
+            class="w-full flex flex-grow border-b border-twitterborder pt-4 pb-2 px-4"
+          >
+            <div class="w-[10%] pr-1.5">
+              <img
+                src="/images/avatar_imgs/b3094c2f1c144817b7cc0b718fc3c644.jpg"
+                alt="Cleo"
+                class="rounded-full"
+              />
+            </div>
             <form
               method="POST"
-              class="flex gap-2"
+              id="tweet_form"
+              class="w-[90%] flex flex-col gap-2"
               onsubmit="validate(handleSubmitTweet); return false"
             >
-              <input
-                class="border"
+              <textarea
+                class="bg-black text-twittergray-400 text-xl px-4 pt-2 placeholder:text-twittergray-500 placeholder:text-xl focus:outline-none"
+                placeholder="What's happening?"
+                form="tweet_form"
                 name="tweet_field_text"
                 type="text"
                 data-validate="str"
                 data-min="{{min_length}}"
                 data-max="{{max_length}}"
-              />
-              <div class="flex w-full fill-sky-500 items-center gap-2 pt-4">
+              ></textarea>
+              <div
+                class="flex w-full fill-sky-500 items-center gap-1 pt-2 pl-3"
+              >
                 <button
                   class="rounded-full p-2 hover:bg-sky-500 hover:bg-opacity-20"
                 >
@@ -134,7 +147,7 @@
                 </button>
 
                 <button
-                  class="ml-auto bg-sky-500 px-4 py-1.5 rounded-full text-base font-bold items-center"
+                  class="ml-auto bg-sky-500 px-4 py-2 rounded-full text-base font-bold items-center"
                 >
                   Tweet
                 </button>
@@ -153,19 +166,6 @@
     </div>
 
     <script src="/js/validate.js"></script>
-    <script>
-      async function handleSubmitTweet() {
-        const frm = event.target;
-
-        const resp = await fetch("/index", {
-          method: "POST",
-          body: new FormData(frm),
-        });
-
-        const data = await resp.text();
-        console.log(data);
-        //alert("submitted");
-      }
-    </script>
+    <script src="/js/post_tweet.js"></script>
   </body>
 </html>

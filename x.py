@@ -20,7 +20,7 @@ def db():
 
 ####################################
 #tweet validation
-TWEET_MIN_LEN = 2
+TWEET_MIN_LEN = 1
 TWEET_MAX_LEN = 8
 
 def validate_tweet():

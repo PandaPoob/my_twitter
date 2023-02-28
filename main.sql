@@ -621,4 +621,4 @@ INSERT INTO tweets VALUES(
 "0",
 "0");
 
-DELETE FROM tweets WHERE tweet_id = "21e03682c6c348f09e3729ece60e4e90"; 
+DELETE FROM tweets WHERE tweet_user_fk = "b3094c2f1c144817b7cc0b718fc3c644"; 
