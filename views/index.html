@@ -1,12 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="app.css" />
-    <title>Document</title>
-  </head>
+  % include('head', title='Home')
   <body
     class="w-full h-full flex justify-center text-gray-200 bg-black overflow-hidden overflow-y-scroll"
   >
@@ -14,10 +8,10 @@
       <div
         class="hidden sm:block max-w-feed sm:w-2/12 lg:w-3/12 xl:w-[30%] xxl:w-4/12 h-screen pt-4 sm:pr-2 lg:pr-8 xxl:pr-14"
       ></div>
-      % include('mobile-header')
+      % include('nav-mobile')
 
       <!-- left/nav -->
-      % include('header')
+      % include('nav')
 
       <!-- center-right -->
 

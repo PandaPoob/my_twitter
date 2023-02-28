@@ -1,28 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="app.css" />
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="https://api.iconify.design/logos:twitter.svg"
-    />
-    <title>{{user["user_full_name"]}} @({{user["user_name"]}}) / Twitter</title>
-  </head>
+  % include('head', title=f'{user["user_full_name"]} (@{user["user_name"]})')
+
   <body
-    class="w-full h-full flex justify-center text-gray-200 bg-black overflow-hidden overflow-y-scroll"
+    class="w-full h-full flex justify-center text-twittergray-400 bg-black overflow-hidden overflow-y-scroll"
   >
     <div class="flex max-w-layout flex-grow">
       <div
-        class="hidden sm:block max-w-feed sm:w-2/12 lg:w-3/12 xl:w-[30%] xxl:w-4/12 h-screen pt-4 sm:pr-2 lg:pr-8 xxl:pr-14"
+        class="hidden sm:block max-w-feed sm:w-2/12 lg:w-3/12 xl:w-[30%] xxl:w-4/12 h-screen pt-4 sm:pr-2 lg:pr-6 xxl:pr-12"
       ></div>
-      % include('mobile-header')
+      % include('nav-mobile')
 
       <!-- left/nav -->
-      % include('header')
+      % include('nav')
 
       <!-- center-right -->
 
@@ -30,14 +20,14 @@
         class="flex flex-grow w-12/12 sm:w-10/12 lg:w-9/12 xl:w-[70%] xxl:w-8/12 md:gap-6 lg:gap-8"
       >
         <div
-          class="relative flex flex-col flex-grow max-w-feed sm:border-x sm:border-zinc-700"
+          class="relative flex flex-col flex-grow max-w-feed sm:border-x sm:border-twitterborder"
         >
           <!--  profile header -->
           <div
             class="fixed top-0 z-30 w-full max-w-[calc(600px-2px)] flex items-center gap-8 bg-black bg-opacity-[75%] backdrop-blur px-4 py-1"
           >
             <button
-              class="flex justify-center items-center rounded-full p-2 hover:bg-zinc-800"
+              class="flex justify-center items-center rounded-full p-2 hover:bg-white hover:bg-opacity-10"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -69,8 +59,8 @@
                 % end
               </div>
 
-              <p class="text-sm text-gray-500 font-medium">
-                {{user["user_total_tweets"]}} Tweets
+              <p class="text-sm text-twittergray-500 font-medium">
+                {{user["user_total_tweets"]}} Tweet
               </p>
             </div>
           </div>
@@ -99,7 +89,7 @@
 
             <div class="justify-self-end flex items-start gap-3 py-3">
               <button
-                class="rounded-full border border-gray-500 p-1.5 hover:bg-white hover:bg-opacity-10"
+                class="rounded-full border border-twittergray-500 p-1.5 hover:bg-white hover:bg-opacity-10"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -143,7 +133,7 @@
               % end
             </div>
 
-            <p class="text-base text-gray-500 font-medium pb-4">
+            <p class="text-base text-twittergray-500 pb-4">
               @{{user["user_name"]}}
             </p>
 
@@ -157,7 +147,7 @@
             <div class="flex flex-wrap gap-x-3">
               <!-- bio location -->
               % if user["user_bio_location"]:
-              <div class="flex items-center gap-0.5 text-gray-500">
+              <div class="flex items-center gap-0.5 text-twittergray-500">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -185,7 +175,7 @@
               % if user["user_bio_link"]:
               <a
                 href="/{{user['user_bio_link']}}"
-                class="flex items-center gap-0.5 text-gray-500 text-base"
+                class="flex items-center gap-0.5 text-twittergray-500 text-base"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -204,7 +194,7 @@
 
               <!-- bio birthday -->
               % if user["user_bio_birthday"]:
-              <div class="flex items-center gap-0.5 text-gray-500">
+              <div class="flex items-center gap-0.5 text-twittergray-500">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"
@@ -222,7 +212,7 @@
 
               <!-- bio created at -->
               % if user["user_bio_created_at"]:
-              <div class="flex items-center gap-0.5 text-gray-500">
+              <div class="flex items-center gap-0.5 text-twittergray-500">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -239,24 +229,26 @@
               % end
             </div>
 
-            <div class="flex gap-5 py-2">
-              <a href="/" class="text-base hover:underline">
-                <span class="">{{user["user_total_following"]}}</span>
-                <span class="text-gray-500">Following</span>
+            <div class="flex gap-5 text-md py-2">
+              <a href="/" class="hover:underline">
+                <span class="font-bold">{{user["user_total_following"]}}</span>
+                <span class="text-twittergray-500">Following</span>
               </a>
 
-              <a href="/" class="text-base hover:underline">
-                <span class="">{{user["user_total_followers"]}}</span>
-                <span class="text-gray-500">Followers</span>
+              <a href="/" class="hover:underline">
+                <span class="font-bold">{{user["user_total_followers"]}}</span>
+                <span class="text-twittergray-500">Followers</span>
               </a>
             </div>
           </div>
           <!-- end profile header -->
 
           <!-- sub nav -->
-          <nav class="flex text-base font-semibold border-b border-zinc-700">
+          <nav
+            class="flex text-base font-semibold border-b border-twitterborder"
+          >
             <a
-              class="flex flex-grow flex-col items-center pt-3 px-6 hover:bg-gray-500 hover:bg-opacity-20"
+              class="flex flex-grow flex-col items-center pt-3 px-6 hover:bg-white hover:bg-opacity-10"
               href=""
             >
               <span class="pb-2">Tweets</span>
@@ -265,17 +257,17 @@
               ></span>
             </a>
             <a
-              class="flex flex-grow justify-center items-center py-3 px-6 hover:bg-gray-500 hover:bg-opacity-20"
+              class="flex flex-grow justify-center items-center py-3 px-6 hover:bg-white hover:bg-opacity-10"
               href=""
               >Tweets & replies</a
             >
             <a
-              class="flex flex-grow justify-center items-center py-3 px-6 hover:bg-gray-500 hover:bg-opacity-20"
+              class="flex flex-grow justify-center items-center py-3 px-6 hover:bg-white hover:bg-opacity-10"
               href=""
               >Media</a
             >
             <a
-              class="flex flex-grow justify-center items-center py-3 px-6 hover:bg-gray-500 hover:bg-opacity-20"
+              class="flex flex-grow justify-center items-center py-3 px-6 hover:bg-white hover:bg-opacity-10"
               href=""
               >Likes</a
             >
