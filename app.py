@@ -54,7 +54,7 @@ def _():
         if "db" in locals(): db.close()
 ################################################
 # FORM PAGE
-import views.tweet
+#import views.tweet
 
 @get("/<username>")
 #@view("profile")
