@@ -2,11 +2,11 @@
 <html lang="en">
   % include('head', title='Home')
   <body
-    class="w-full h-full flex justify-center text-gray-200 bg-black overflow-hidden overflow-y-scroll"
+    class="w-full h-full flex justify-center text-twittergray-400 bg-black overflow-hidden overflow-y-scroll"
   >
     <div class="flex max-w-layout flex-grow">
       <div
-        class="hidden sm:block max-w-feed sm:w-2/12 lg:w-3/12 xl:w-[30%] xxl:w-4/12 h-screen pt-4 sm:pr-2 lg:pr-8 xxl:pr-14"
+        class="hidden sm:block max-w-feed sm:w-2/12 lg:w-3/12 xl:w-[30%] xxl:w-4/12 h-screen pt-4 sm:pr-2 lg:pr-6 xxl:pr-12"
       ></div>
       % include('nav-mobile')
 
@@ -14,14 +14,40 @@
       % include('nav')
 
       <!-- center-right -->
-
       <div
         class="flex flex-grow w-12/12 sm:w-10/12 lg:w-9/12 xl:w-[70%] xxl:w-8/12 md:gap-6 lg:gap-8"
       >
         <div
-          class="flex flex-col flex-grow max-w-feed sm:border-x sm:border-zinc-700 px-4"
+          class="flex flex-col flex-grow max-w-feed sm:border-x sm:border-twitterborder"
         >
+          <!-- sub header -->
+          <div
+            class="sticky top-0 z-30 w-full border-b border-twitterborder bg-black bg-opacity-[75%] backdrop-blur"
+          >
+            <h2 class="text-xl font-bold py-3 px-4">Home</h2>
+            <div class="grid grid-cols-2 text-base">
+              <a
+                href=""
+                class="font-bold grid justify-center items-center pt-4 hover:bg-white hover:bg-opacity-10"
+              >
+                <span class="flex flex-shrink pb-4">For you</span>
+                <span
+                  class="flex flex-shrink border-twitterblue border-b-[5px] rounded-full"
+                ></span>
+              </a>
+              <a
+                href=""
+                class="grid justify-center items-center pt-4 text-twittergray-500 hover:bg-white hover:bg-opacity-10"
+              >
+                <span class="flex flex-shrink pb-4">Following</span>
+                <span class="pb-[5px] rounded-full"></span>
+              </a>
+            </div>
+          </div>
+          <!-- sub header end -->
+
           <!-- % include('tweet-form', min_length=min_length, max_length=min_length) -->
+          <!-- tweet form -->
           <div class="w-full pr-4 pt-4">
             <form
               method="POST"
@@ -115,13 +141,14 @@
               </div>
             </form>
           </div>
-        </div>
-      </div>
 
-      <!-- right/widget -->
-      <!-- prettier-ignore -->
-      <div>
-        side page
+          <!-- feed/tweets -->
+          % include('tweets', tweets=tweets)
+        </div>
+
+        <!-- right/widget -->
+        <!-- prettier-ignore -->
+        % include('suggestions-nav', trends=trends, fsugg=fsugg, page="home")
       </div>
     </div>
 

@@ -38,7 +38,20 @@ def dict_factory(cursor, row):
 # HOME PAGE
 @get("/")
 def _():
-    return template("index", min_length=x.TWEET_MIN_LEN, max_length=x.TWEET_MAX_LEN)
+    try:
+        db = sqlite3.connect(str(pathlib.Path(__file__).parent.resolve())+"/twitter.db")
+        db.row_factory = dict_factory
+
+        tweets = db.execute("SELECT * FROM users_and_tweets ORDER BY users_and_tweets.tweet_created_at DESC LIMIT 0, 10").fetchall()
+        trends = trends = db.execute("SELECT * FROM trends").fetchall()
+        fsugg = db.execute("SELECT * FROM follower_suggestions").fetchall()
+
+        return template("index", min_length=x.TWEET_MIN_LEN, max_length=x.TWEET_MAX_LEN, tweets=tweets, trends=trends, fsugg=fsugg)
+    except:
+        return "error"
+
+    finally:
+        if "db" in locals(): db.close()
 ################################################
 # FORM PAGE
 import views.tweet
@@ -56,7 +69,7 @@ def _(username):
         #get users id
         user_id = user["user_id"]
         #print(f"user id: {user_id}")
-        tweets = db.execute("SELECT * FROM tweets WHERE tweet_user_fk=? ORDER BY tweets.tweet_created_at DESC LIMIT 0, 10", (user_id,)).fetchall()
+        tweets = db.execute("SELECT * FROM users_and_tweets WHERE tweet_user_fk=? ORDER BY users_and_tweets.tweet_created_at DESC LIMIT 0, 10", (user_id,)).fetchall()
         
         #get trends
         trends = db.execute("SELECT * FROM trends").fetchall()
@@ -66,8 +79,7 @@ def _(username):
 
         imgtweets = db.execute("SELECT * FROM tweets WHERE tweet_field_img <> '' AND tweet_user_fk=? ORDER BY tweets.tweet_created_at DESC LIMIT 0, 6", (user_id,)).fetchall()
 
-        print("#"*30)
-        print(imgtweets)
+    
         
         return template("profile", user=user, tweets=tweets, trends=trends, fsugg=fsugg, imgtweets=imgtweets)
     #except Exception as ex:
