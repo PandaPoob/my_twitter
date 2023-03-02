@@ -22,7 +22,10 @@
     <div class="w-full pr-4">
       <!-- user -->
       <div class="relative flex items-center text-base">
-        <a href="" class="flex items-center gap-0.5 font-bold group">
+        <a
+          href="/{{tweet['user_name']}}"
+          class="flex items-center gap-0.5 font-bold group"
+        >
           <span class="group-hover:underline">{{tweet["user_full_name"]}}</span>
           % if tweet["user_verified"] == "1":
           <svg

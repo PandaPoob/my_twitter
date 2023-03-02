@@ -37,10 +37,10 @@ CREATE TABLE tweets(
   tweet_field_text        TEXT,
   tweet_field_img         TEXT,
   tweet_updated_at        TEXT,
-  tweet_total_replies     TEXT,
-  tweet_total_likes       TEXT,
-  tweet_total_retweets    TEXT,
-  tweet_total_views       TEXT,
+  tweet_total_replies     TEXT DEFAULT 0,
+  tweet_total_likes       TEXT DEFAULT 0,
+  tweet_total_retweets    TEXT DEFAULT 0,
+  tweet_total_views       TEXT DEFAULT 0,
   PRIMARY KEY(tweet_id)
   ) WITHOUT ROWID;
 
@@ -52,7 +52,7 @@ INSERT INTO tweets VALUES(
 "",
 "500151d40e26414f82b9aca854c5a059.jpg",
 "0",
-"6586",
+"65786",
 "237100",
 "16400",
 "46900000");
@@ -64,7 +64,7 @@ INSERT INTO tweets VALUES(
 especially content moderation",
 "3c417a8c92d244dc80e7b2c2a5def367.jpg",
 "0",
-"4137",
+"10000",
 "85700",
 "8082",
 "29700000");

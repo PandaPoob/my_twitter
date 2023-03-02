@@ -55,7 +55,7 @@ def _():
 ################################################
 # FORM PAGE
 #import views.tweet
-
+import formatNumber
 @get("/<username>")
 #@view("profile")
 def _(username):
@@ -78,8 +78,17 @@ def _(username):
         fsugg = db.execute("SELECT * FROM follower_suggestions WHERE NOT user_name=?",(username,)).fetchall()
 
         imgtweets = db.execute("SELECT * FROM tweets WHERE tweet_field_img <> '' AND tweet_user_fk=? ORDER BY tweets.tweet_created_at DESC LIMIT 0, 6", (user_id,)).fetchall()
-
-    
+        #print(user)
+        #test = formatNumber.human_format(2000)
+        #print(test)
+        #for i in range(len(tweets)):
+            #if tweets[i]['tweet_total_replies']:
+                #tweets[i]['tweet_total_replies'] = int(tweets[i]['tweet_total_replies'])
+                #if tweets[i]['tweet_total_replies'] > 9999:
+                    #tweets[i]['tweet_total_replies'] = formatNumber.human_format(tweets[i]['tweet_total_replies'])
+            #else:
+                #return 0
+      
         
         return template("profile", user=user, tweets=tweets, trends=trends, fsugg=fsugg, imgtweets=imgtweets)
     #except Exception as ex:

@@ -21,3 +21,27 @@
   % if len(imgtweets) == 6:
     <div class="text-white mt-16">6 in array</div>
     % end
+
+using python in html
+<span>{{print("hello")}}</span>
+
+
+for i in range(len(tweets)):
+            if tweets[i]['tweet_total_replies']:
+                tweets[i]['tweet_total_replies'] = int(tweets[i]['tweet_total_replies'])
+                if tweets[i]['tweet_total_replies'] > 9000:
+                    print("bigboi")
+            else:
+                return 0
+
+    
+        for i in range(len(tweets)):
+            #if array[no in array][value]
+            #tweets[i]['tweet_total_replies'] = int(tweets[i]['tweet_total_replies'])
+           
+            if tweets[i]['tweet_total_replies']:
+                print(tweets[i]['tweet_total_replies'])
+                tweets[i]['tweet_total_replies'] = formatNumber.human_format(tweets[i]['tweet_total_replies'])
+                #list1[i]['address'] = 'Valid'
+            else:
+                return tweets[i]['tweet_total_replies']
