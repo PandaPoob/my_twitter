@@ -12,9 +12,9 @@ CREATE TABLE users(
   user_bio_link          TEXT,
   user_bio_birthday      TEXT NOT NULL,
   user_bio_created_at    TEXT NOT NULL,
-  user_total_followers   TEXT DEFAULT 0,
-  user_total_following   TEXT DEFAULT 0,
-  user_total_tweets      TEXT DEFAULT 0,
+  user_total_followers   INT DEFAULT 0,
+  user_total_following   INT DEFAULT 0,
+  user_total_tweets      INT DEFAULT 0,
   PRIMARY KEY(user_id)
   ) WITHOUT ROWID;
 
@@ -37,10 +37,10 @@ CREATE TABLE tweets(
   tweet_field_text        TEXT,
   tweet_field_img         TEXT,
   tweet_updated_at        TEXT,
-  tweet_total_replies     TEXT DEFAULT 0,
-  tweet_total_likes       TEXT DEFAULT 0,
-  tweet_total_retweets    TEXT DEFAULT 0,
-  tweet_total_views       TEXT DEFAULT 0,
+  tweet_total_replies     INT DEFAULT 0,
+  tweet_total_likes       INT DEFAULT 0,
+  tweet_total_retweets    INT DEFAULT 0,
+  tweet_total_views       INT DEFAULT 0,
   PRIMARY KEY(tweet_id)
   ) WITHOUT ROWID;
 
@@ -555,7 +555,7 @@ DROP TABLE IF EXISTS trends;
 CREATE TABLE trends(
   trend_id            TEXT,
   trend_title         TEXT NOT NULL,
-  trend_total_tweets  TEXT DEFAULT 0,
+  trend_total_tweets  INT DEFAULT 0,
   PRIMARY KEY(trend_id)
 ) WITHOUT ROWID;
 INSERT INTO trends VALUES("882f3de5c2e5450eaf6e59c14be1db70", "Ahri", "17100");
