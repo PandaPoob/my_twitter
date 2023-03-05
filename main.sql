@@ -11,7 +11,7 @@ CREATE TABLE users(
   user_bio_location      TEXT,
   user_bio_link          TEXT,
   user_bio_birthday      TEXT NOT NULL,
-  user_bio_created_at    TEXT NOT NULL,
+  user_bio_created_at    INT NOT NULL,
   user_total_followers   INT DEFAULT 0,
   user_total_following   INT DEFAULT 0,
   user_total_tweets      INT DEFAULT 0,
@@ -33,7 +33,7 @@ DROP TABLE IF EXISTS tweets;
 CREATE TABLE tweets(
   tweet_id                TEXT,
   tweet_user_fk           TEXT,
-  tweet_created_at        TEXT,
+  tweet_created_at        INT,
   tweet_field_text        TEXT,
   tweet_field_img         TEXT,
   tweet_updated_at        TEXT,

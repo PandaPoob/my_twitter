@@ -4,6 +4,9 @@ import sqlite3
 import git
 import pathlib
 import x
+import time
+import calendar
+
 ################################################
 #Git webhook to pythonanywhere
 @post('/f1f83b1afe324291a552bf43b219b420')
@@ -64,7 +67,11 @@ def _():
             if tweets[i]['tweet_total_views']:
                 tweets[i]['tweet_total_views'] = formatNumber.human_format(tweets[i]['tweet_total_views'])
            
-        
+            if tweets[i]['tweet_created_at']:
+                month = time.strftime('%#m', time.localtime(tweets[i]['tweet_created_at']))
+                day = time.strftime('%#d', time.localtime(tweets[i]['tweet_created_at']))
+                tweets[i]['tweet_created_at'] = f"{calendar.month_abbr[int(month)]} {day}"
+                
            #format trends numbers
         for i in range(len(trends)):
             if trends[i]['trend_total_tweets']:
@@ -92,7 +99,7 @@ def _(username):
         user = db.execute("SELECT * FROM users WHERE user_name=? COLLATE NOCASE", (username,)).fetchall()[0]
         
         user_id = user["user_id"]
-        print(f"user id: {user_id}")
+        #print(f"user id: {user_id}")
         tweets = db.execute("SELECT * FROM users_and_tweets WHERE tweet_user_fk=? ORDER BY users_and_tweets.tweet_created_at DESC LIMIT 0, 10", (user_id,)).fetchall()
         
         #get trends
@@ -130,6 +137,11 @@ def _(username):
                 
                 if tweets[i]['tweet_total_views']:
                     tweets[i]['tweet_total_views'] = formatNumber.human_format(tweets[i]['tweet_total_views'])
+
+                if tweets[i]['tweet_created_at']:
+                    month = time.strftime('%#m', time.localtime(tweets[i]['tweet_created_at']))
+                    day = time.strftime('%#d', time.localtime(tweets[i]['tweet_created_at']))
+                    tweets[i]['tweet_created_at'] = f"{calendar.month_abbr[int(month)]} {day}"
                 
         
         #format trends numbers
@@ -137,10 +149,16 @@ def _(username):
             if trends[i]['trend_total_tweets']:
                 #print(type(trends[i]['trend_total_tweets']))
                 trends[i]['trend_total_tweets'] = formatNumber.human_format(trends[i]['trend_total_tweets'])
-          
 
-   
+        #format date on user
+        if user['user_bio_created_at']:
+            year = time.strftime('%Y', time.localtime(user["user_bio_created_at"]))
+            month = time.strftime('%#m', time.localtime(user["user_bio_created_at"]))
+            user["user_bio_created_at"] = f"Joined {calendar.month_name[int(month)]} {year}"
+
+        #format date on tweet
         
+
         return template("profile", user=user, tweets=tweets, trends=trends, fsugg=fsugg, imgtweets=imgtweets)
     except Exception as ex:
         print(ex)
