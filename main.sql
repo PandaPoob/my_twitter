@@ -251,7 +251,7 @@ INSERT INTO tweets VALUES(
 "11200",
 "1100000",
 "204100",
-"0");
+"1");
 INSERT INTO tweets VALUES(
 "e165daf4ec884838bd47eb0da9a1f000",
 "63bfa35aa8204270a6480557fddf9069",
@@ -262,7 +262,7 @@ INSERT INTO tweets VALUES(
 "956",
 "27300",
 "1195",
-"0");
+"1");
 INSERT INTO tweets VALUES(
 "198c648b70304d7483c0e10fa1c5525c",
 "63bfa35aa8204270a6480557fddf9069",
@@ -273,7 +273,7 @@ INSERT INTO tweets VALUES(
 "976",
 "57700",
 "3350",
-"0");
+"1");
 INSERT INTO tweets VALUES(
 "a62046b4a2054d9f99608931ef29c4d5",
 "63bfa35aa8204270a6480557fddf9069",
@@ -284,7 +284,7 @@ INSERT INTO tweets VALUES(
 "557",
 "41100",
 "1797",
-"0");
+"1");
 INSERT INTO tweets VALUES(
 "b6173e050d4d4aa9a1fda4eb675f6221",
 "63bfa35aa8204270a6480557fddf9069",
@@ -295,7 +295,7 @@ INSERT INTO tweets VALUES(
 "7931",
 "119800",
 "36600",
-"0");
+"1");
 INSERT INTO tweets VALUES(
 "576ba96baaaf47c481b664fce91d27af",
 "63bfa35aa8204270a6480557fddf9069",
@@ -306,7 +306,7 @@ INSERT INTO tweets VALUES(
 "3326",
 "164000",
 "21100",
-"0");
+"1");
 
 
 --11 blackpink tweets

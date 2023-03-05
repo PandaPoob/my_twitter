@@ -54,28 +54,23 @@ def _():
         for i in range(len(tweets)):
             if tweets[i]['tweet_total_replies']:
                 tweets[i]['tweet_total_replies'] = formatNumber.human_format(tweets[i]['tweet_total_replies'])
-            else:
-                return 0
+        
             if tweets[i]['tweet_total_likes']:
                 tweets[i]['tweet_total_likes'] = formatNumber.human_format(tweets[i]['tweet_total_likes'])
-            else: 
-                return 0
+            
             if tweets[i]['tweet_total_retweets']:
                 tweets[i]['tweet_total_retweets'] = formatNumber.human_format(tweets[i]['tweet_total_retweets'])
-            else:
-                return 0
+            
             if tweets[i]['tweet_total_views']:
                 tweets[i]['tweet_total_views'] = formatNumber.human_format(tweets[i]['tweet_total_views'])
-            else:
-                return 0
+           
         
            #format trends numbers
         for i in range(len(trends)):
             if trends[i]['trend_total_tweets']:
                 #print(type(trends[i]['trend_total_tweets']))
                 trends[i]['trend_total_tweets'] = formatNumber.human_format(trends[i]['trend_total_tweets'])
-            else:
-                return 0
+           
 
         return template("index", min_length=x.TWEET_MIN_LEN, max_length=x.TWEET_MAX_LEN, tweets=tweets, trends=trends, fsugg=fsugg)
     except:
@@ -97,7 +92,7 @@ def _(username):
         user = db.execute("SELECT * FROM users WHERE user_name=? COLLATE NOCASE", (username,)).fetchall()[0]
         
         user_id = user["user_id"]
-        #print(f"user id: {user_id}")
+        print(f"user id: {user_id}")
         tweets = db.execute("SELECT * FROM users_and_tweets WHERE tweet_user_fk=? ORDER BY users_and_tweets.tweet_created_at DESC LIMIT 0, 10", (user_id,)).fetchall()
         
         #get trends
@@ -109,50 +104,46 @@ def _(username):
         #get img tweets
         imgtweets = db.execute("SELECT * FROM tweets WHERE tweet_field_img <> '' AND tweet_user_fk=? ORDER BY tweets.tweet_created_at DESC LIMIT 0, 6", (user_id,)).fetchall()
      
-        #format the tweet numbers
-        for i in range(len(tweets)):
-            if tweets[i]['tweet_total_replies']:
-                tweets[i]['tweet_total_replies'] = formatNumber.human_format(tweets[i]['tweet_total_replies'])
-            else:
-                return 0
-            if tweets[i]['tweet_total_likes']:
-                tweets[i]['tweet_total_likes'] = formatNumber.human_format(tweets[i]['tweet_total_likes'])
-            else: 
-                return 0
-            if tweets[i]['tweet_total_retweets']:
-                tweets[i]['tweet_total_retweets'] = formatNumber.human_format(tweets[i]['tweet_total_retweets'])
-            else:
-                return 0
-            if tweets[i]['tweet_total_views']:
-                tweets[i]['tweet_total_views'] = formatNumber.human_format(tweets[i]['tweet_total_views'])
-            else:
-                return 0
-        #format user numbers
+
+       #format user numbers
         if user['user_total_followers']:
             user["user_total_followers"] = formatNumber.human_format(user['user_total_followers'])
-        else:
-            return 0
+        
         if user['user_total_following']:
             user["user_total_following"] = formatNumber.human_format(user['user_total_following'])
-        else:
-            return 0
+       
         if user['user_total_tweets']:
             user["user_total_tweets"] = formatNumber.human_format(user['user_total_tweets'])
-        else:
-            return 0
+        
+
+        #format the tweet numbers
+        if len(tweets) != 0:
+            for i in range(len(tweets)):
+                if tweets[i]['tweet_total_replies']:
+                    tweets[i]['tweet_total_replies'] = formatNumber.human_format(tweets[i]['tweet_total_replies'])
+                
+                if tweets[i]['tweet_total_likes']:
+                    tweets[i]['tweet_total_likes'] = formatNumber.human_format(tweets[i]['tweet_total_likes'])
+                
+                if tweets[i]['tweet_total_retweets']:
+                    tweets[i]['tweet_total_retweets'] = formatNumber.human_format(tweets[i]['tweet_total_retweets'])
+                
+                if tweets[i]['tweet_total_views']:
+                    tweets[i]['tweet_total_views'] = formatNumber.human_format(tweets[i]['tweet_total_views'])
+                
         
         #format trends numbers
         for i in range(len(trends)):
             if trends[i]['trend_total_tweets']:
                 #print(type(trends[i]['trend_total_tweets']))
                 trends[i]['trend_total_tweets'] = formatNumber.human_format(trends[i]['trend_total_tweets'])
-            else:
-                return 0
+          
+
+   
         
         return template("profile", user=user, tweets=tweets, trends=trends, fsugg=fsugg, imgtweets=imgtweets)
-    #except Exception as ex:
-        #print(ex)
-    except:
+    except Exception as ex:
+        print(ex)
         return "error"
 
     finally:
