@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  % include('head', title='Home')
+  % include('comp-head', title='Home')
   <body
     class="w-full h-full flex justify-center text-twittergray-400 bg-black overflow-hidden overflow-y-scroll"
   >
@@ -8,10 +8,10 @@
       <div
         class="hidden sm:block max-w-feed sm:w-2/12 lg:w-3/12 xl:w-[30%] xxl:w-4/12 h-screen pt-4 sm:pr-2 lg:pr-6 xxl:pr-12"
       ></div>
-      % include('nav-mobile')
+      % include('comp-nav-mobile')
 
       <!-- left/nav -->
-      % include('nav')
+      % include('comp-nav')
 
       <!-- center-right -->
       <div
@@ -162,7 +162,7 @@
 
         <!-- right/widget -->
         <!-- prettier-ignore -->
-        % include('suggestions-nav', trends=trends, fsugg=fsugg, page="home")
+        % include('comp-suggestions-nav', trends=trends, fsugg=fsugg, page="home")
       </div>
     </div>
 

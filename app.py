@@ -54,7 +54,8 @@ import bridges.login
 # LOGIN PAGE
 @get("/login")
 def _():
-    return template("login")
+    return template("login", min_length=x.USERNAME_MIN_LEN, max_length=x.USERNAME_MAX_LEN)
+
 # HOME PAGE
 @get("/")
 def _():
