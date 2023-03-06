@@ -28,3 +28,14 @@ def validate_tweet():
     if len(request.forms.tweet_field_text) < TWEET_MIN_LEN: raise Exception(error)
     if len(request.forms.tweet_field_text) > TWEET_MAX_LEN: raise Exception(error)
     return request.forms.get("tweet_field_text")
+
+#tweet validation
+PASSWORD_MIN_LEN = 8
+
+def validate_login():
+    error = "Must fill out fields"
+    passerror = "Your password must be 8 characters"
+    if request.forms.login_user_name == "": raise Exception(error)
+    if len(request.forms.login_password) < PASSWORD_MIN_LEN: raise Exception(error)
+    return request.forms.get("login_user_name"), request.forms.get("request.forms.login_password")
+    

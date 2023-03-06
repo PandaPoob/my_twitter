@@ -1,4 +1,4 @@
-from bottle import default_app, get, post, template, route, run, static_file, view
+from bottle import default_app, get, post, template, response, request, route, run, static_file, view
 import os
 import sqlite3
 import git
@@ -42,9 +42,27 @@ def dict_factory(cursor, row):
 import formatNumber
 
 ################################################
+# APIS
+import apis.api_tweet
+
+################################################
+# BRIDGES
+
+import bridges.login
+
+################################################
+# LOGIN PAGE
+@get("/login")
+def _():
+    return template("login")
 # HOME PAGE
 @get("/")
 def _():
+    user = request.get_cookie("user", secret="my-secret")
+    response.add_header("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0")
+    response.add_header("Pragma", "no-cache")
+    response.add_header("Expires", 0)
+    print(user)
     try:
         db = sqlite3.connect(str(pathlib.Path(__file__).parent.resolve())+"/twitter.db")
         db.row_factory = dict_factory
@@ -78,7 +96,6 @@ def _():
                 #print(type(trends[i]['trend_total_tweets']))
                 trends[i]['trend_total_tweets'] = formatNumber.human_format(trends[i]['trend_total_tweets'])
            
-
         return template("index", min_length=x.TWEET_MIN_LEN, max_length=x.TWEET_MAX_LEN, tweets=tweets, trends=trends, fsugg=fsugg)
     except:
         return "error"
@@ -167,9 +184,6 @@ def _(username):
     finally:
         if "db" in locals(): db.close()
 
-################################################
-# APIS
-import apis.api_tweet
 
 #try will run on amazon
 try:
