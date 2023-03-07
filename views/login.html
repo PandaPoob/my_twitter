@@ -7,7 +7,11 @@
     <title>Login Twitter</title>
   </head>
   <body>
-    <form method="POST" action="/login" onsubmit="validate(); return false">
+    <form
+      method="POST"
+      action="/login"
+      onsubmit="validate(() => console.log('error here')); return false"
+    >
       <input
         name="login_user_name"
         type="text"
