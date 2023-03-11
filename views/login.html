@@ -64,6 +64,11 @@
         <input
           id="login_password"
           class="h-10 text-black rounded-sm border-2 px-2
+          % if 'password' in error:
+          border-red-500
+          % else:
+          bg-black
+          % end
           focus:outline-none focus:border-twitterblue"
           name="login_password"
           value="elonmuskpass"
