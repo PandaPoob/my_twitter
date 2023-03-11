@@ -197,6 +197,27 @@
       </a>
 
       % if logged_user:
+      <a
+        href="/logout"
+        class="flex lg:gap-4 items-center rounded-full pl-3 pr-3 lg:pr-4 py-3 hover:bg-white hover:bg-opacity-10"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
+          />
+        </svg>
+
+        <span class="text-xl hidden lg:flex">Log out</span>
+      </a>
       <button
         class="w-12 bg-twitterblue rounded-full px-2 py-3 lg:w-full pr-3 lg:pr-4 mt-2 font-bold flex align-middle justify-center hover:bg-opacity-90"
       >
