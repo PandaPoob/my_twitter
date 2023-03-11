@@ -30,7 +30,14 @@
         <!-- prettier-ignore -->
         <input id="login_user_name" 
         class="h-10 text-black rounded-sm border-2 px-2
-      
+        % if 'Username' in error:
+        border-t-red-500
+        border-b-red-500
+        border-r-red-500
+        border-l-red-500
+        % else:
+        border-white
+        % end
         focus:outline-none focus:border-twitterblue" 
         name="login_user_name"
         value="elonmusk"
@@ -65,9 +72,12 @@
           id="login_password"
           class="h-10 text-black rounded-sm border-2 px-2
           % if 'password' in error:
-          border-red-500
+          border-t-red-500
+          border-b-red-500
+          border-r-red-500
+          border-l-red-500
           % else:
-          bg-black
+          border-white
           % end
           focus:outline-none focus:border-twitterblue"
           name="login_password"
