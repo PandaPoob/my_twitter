@@ -24,7 +24,7 @@
         method="POST"
         action="/login"
         name="login_form"
-        onsubmit="validate(() => preventDefault()); return false"
+        onsubmit="validate(() => document.login_form.submit()); return false"
       >
         <label for="login_user_name" class="text-md mb-1">Username</label>
         <!-- prettier-ignore -->
