@@ -96,7 +96,8 @@
             </button>
 
             <div class="justify-self-end flex items-start gap-3 py-3">
-              %if logged_user["user_id"] != user["user_id"]:
+              <!-- prettier-ignore -->
+              %if logged_user and logged_user["user_id"] !=user["user_id"]:
               <button
                 class="rounded-full border border-twittergray-500 p-1.5 hover:bg-white hover:bg-opacity-10"
               >
@@ -116,7 +117,7 @@
               </button>
               %end
               <!-- prettier -->
-              %if logged_user["user_id"] == user["user_id"]:
+              %if logged_user and logged_user["user_id"] == user["user_id"]:
               <button
                 class="text-base text-black font-bold bg-white rounded-full hover:bg-opacity-90 py-1.5 px-4"
               >
