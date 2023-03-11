@@ -70,7 +70,7 @@ def _():
     response.add_header("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0")
     response.add_header("Pragma", "no-cache")
     response.add_header("Expires", 0)
-    print(logged_user)
+    #print(logged_user)
     try:
         db = sqlite3.connect(str(pathlib.Path(__file__).parent.resolve())+"/twitter.db")
         db.row_factory = dict_factory

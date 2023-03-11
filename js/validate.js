@@ -6,9 +6,13 @@ function validate(callback) {
   form.querySelectorAll("[data-validate]").forEach(function (element) {
     element.classList.remove("validate_error");
 
-    element.style.backgroundColor = "white";
+    //element.style.backgroundColor = "white";
+
     const id = element.getAttribute("id");
-    document.getElementById(`${id}_error_msg`).style.display = "none";
+    const errorMsgElement = document.getElementById(`${id}_error_msg`);
+    if (errorMsgElement) {
+      errorMsgElement.style.display = "none";
+    }
   });
   form.querySelectorAll("[data-validate]").forEach(function (element) {
     switch (element.getAttribute("data-validate")) {
@@ -16,13 +20,16 @@ function validate(callback) {
         const id = element.getAttribute("id");
         const errorMsgElement = document.getElementById(`${id}_error_msg`);
         //check if its empty
+
         if (element.value.length === 0) {
           //add error style
           element.classList.add("validate_error");
           //add error messsage
-          errorMsgElement.style.display = "block";
-          errorMsgElement.innerHTML =
-            element.getAttribute("error-msg-required");
+          if (errorMsgElement) {
+            errorMsgElement.style.display = "block";
+            errorMsgElement.innerHTML =
+              element.getAttribute("error-msg-required");
+          }
 
           //remove backend error
           const backendval = document.getElementById(`${id}_backend_error_msg`);
@@ -35,9 +42,10 @@ function validate(callback) {
           element.value.length > parseInt(element.getAttribute("data-max"))
         ) {
           element.classList.add("validate_error");
-
-          errorMsgElement.style.display = "block";
-          errorMsgElement.innerHTML = element.getAttribute("error-msg-len");
+          if (errorMsgElement) {
+            errorMsgElement.style.display = "block";
+            errorMsgElement.innerHTML = element.getAttribute("error-msg-len");
+          }
 
           //remove backend error
           const backendval = document.getElementById(`${id}_backend_error_msg`);

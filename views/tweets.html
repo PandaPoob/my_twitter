@@ -1,7 +1,4 @@
 <div id="tweets">
-  <!-- tweet -->
-
-  <!-- prettier -->
   % for tweet in tweets:
 
   <div
@@ -116,7 +113,7 @@
               />
             </svg>
           </div>
-          % if tweet["tweet_total_replies"] != "0":
+          % if tweet["tweet_total_replies"] != 0:
           <span>{{tweet['tweet_total_replies']}}</span>
           % end
         </button>
@@ -137,7 +134,7 @@
               />
             </svg>
           </div>
-          % if tweet["tweet_total_retweets"] != "0":
+          % if tweet["tweet_total_retweets"] != 0:
           <span>{{tweet['tweet_total_retweets']}}</span>
           % end
         </button>
@@ -161,7 +158,7 @@
               />
             </svg>
           </div>
-          % if tweet["tweet_total_likes"] != "0":
+          % if tweet["tweet_total_likes"] != 0:
           <span>{{tweet['tweet_total_likes']}}</span>
           % end
         </button>
@@ -184,7 +181,7 @@
               />
             </svg>
           </div>
-          % if tweet["tweet_total_views"] != "0":
+          % if tweet["tweet_total_views"] != 0:
           <span>{{tweet['tweet_total_views']}}</span>
           % end
         </button>
