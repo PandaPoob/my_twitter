@@ -8,10 +8,9 @@
       <div
         class="hidden sm:block max-w-feed sm:w-2/12 lg:w-3/12 xl:w-[30%] xxl:w-4/12 h-screen pt-4 sm:pr-2 lg:pr-6 xxl:pr-12"
       ></div>
-      % include('comp-nav-mobile')
 
       <!-- left/nav -->
-      % include('comp-nav')
+      % include('comp-nav', logged_user=logged_user)
 
       <!-- center-right -->
       <div
@@ -21,6 +20,7 @@
           class="flex flex-col flex-grow max-w-feed sm:border-x sm:border-twitterborder"
         >
           <!-- sub header -->
+          %if logged_user:
           <div
             class="sticky top-0 z-30 w-full border-b border-twitterborder bg-black bg-opacity-[75%] backdrop-blur"
           >
@@ -52,8 +52,8 @@
           >
             <div class="w-[10%] pr-1.5">
               <img
-                src="/images/avatar_imgs/b3094c2f1c144817b7cc0b718fc3c644.jpg"
-                alt="Cleo"
+                src="/images/avatar_imgs/{{logged_user['user_img_avatar']}}"
+                alt="{{logged_user['user_full_name']}} tweet avatar image"
                 class="rounded-full"
               />
             </div>
@@ -155,14 +155,14 @@
               </div>
             </form>
           </div>
-
+          %end
           <!-- feed/tweets -->
           % include('tweets', tweets=tweets)
         </div>
 
         <!-- right/widget -->
         <!-- prettier-ignore -->
-        % include('comp-suggestions-nav', trends=trends, fsugg=fsugg, page="home")
+        % include('comp-suggestions-nav', trends=trends, fsugg=fsugg, page="home", logged_user=logged_user)
       </div>
     </div>
 

@@ -35,7 +35,15 @@
       </form>
     </div>
     <!-- search end -->
+    % if not logged_user:
+    <div class="w-full grid bg-twittergray-900 p-4 mt-16 mr-4 rounded-xl">
+      <h2 class="text-xl font-bold">New to Twitter?</h2>
+      <p class="text-sm text-twittergray-500 mt-2">Sign up now, and get your very own timeline!</p>
+      <button class="bg-white rounded-full p-2 text-black font-bold mt-4 hover:bg-opacity-90">Create account</button>
+    </div>
+    %end
 
+    % if logged_user:
     <!-- latest img tweets -->
     % if page == "profile" and len(imgtweets) == 6:
     <div
@@ -54,8 +62,10 @@
       % end
     </div>
     % end
-    <!--     latest img tweets end -->
 
+    %end
+    <!--     latest img tweets end -->
+    % if page == "profile" or logged_user:
     <!-- follow sugggestions -->
     <div 
     % if page == "profile" and len(imgtweets) == 6:
@@ -186,5 +196,6 @@
       </a>
     </div>
     <!-- trends end -->
+   % end
   </div>
 </div>

@@ -1,22 +1,50 @@
-// ##############################
 function validate(callback) {
   const form = event.target;
   // const validate_error = "rgba(240, 130, 240, 0.2)"
-  const validate_error = "rgba(253, 63, 100, 1)";
+
+  const validate_error = "white";
   form.querySelectorAll("[data-validate]").forEach(function (element) {
     element.classList.remove("validate_error");
-    // element.style.backgroundColor = "rgba(60, 80, 100, 1)"
-    element.style.backgroundColor = "black";
+
+    element.style.backgroundColor = "white";
+    const id = element.getAttribute("id");
+    document.getElementById(`${id}_error_msg`).style.display = "none";
   });
   form.querySelectorAll("[data-validate]").forEach(function (element) {
     switch (element.getAttribute("data-validate")) {
       case "str":
-        if (
+        const id = element.getAttribute("id");
+        const errorMsgElement = document.getElementById(`${id}_error_msg`);
+        //check if its empty
+        if (element.value.length === 0) {
+          //add error style
+          element.classList.add("validate_error");
+          //add error messsage
+          errorMsgElement.style.display = "block";
+          errorMsgElement.innerHTML =
+            element.getAttribute("error-msg-required");
+
+          //remove backend error
+          const backendval = document.getElementById(`${id}_backend_error_msg`);
+          if (backendval) {
+            backendval.style.display = "none";
+            backendval.innerHTML = "";
+          }
+        } else if (
           element.value.length < parseInt(element.getAttribute("data-min")) ||
           element.value.length > parseInt(element.getAttribute("data-max"))
         ) {
           element.classList.add("validate_error");
-          element.style.backgroundColor = validate_error;
+
+          errorMsgElement.style.display = "block";
+          errorMsgElement.innerHTML = element.getAttribute("error-msg-len");
+
+          //remove backend error
+          const backendval = document.getElementById(`${id}_backend_error_msg`);
+          if (backendval) {
+            backendval.style.display = "none";
+            backendval.innerHTML = "";
+          }
         }
         break;
       case "int":
@@ -63,6 +91,7 @@ function validate(callback) {
   });
   if (!form.querySelector(".validate_error")) {
     callback();
+
     return;
   }
   form.querySelector(".validate_error").focus();
