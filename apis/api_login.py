@@ -1,5 +1,6 @@
 from bottle import post, request, response
 import x
+import bcrypt
 
 @post("/api-login")
 def _():
@@ -10,17 +11,27 @@ def _():
         # Validate
         user_name = x.validate_username()
         user_password = x.validate_password()
-        print(user_password)
+        
         # Connect to database
         db = x.db()
         user = db.execute("SELECT * FROM users WHERE user_name = ?", (user_name,)).fetchone()
-        print(30*"#", user)
+       
         if not user: raise Exception(400, "Cannot login")
+
         try:
             import production
             is_cookie_https = True
         except:
             is_cookie_https = False
+
+        hashed_password = bcrypt.hashpw(user["user_password"].encode('utf8'), bcrypt.gensalt())
+        input_hashed_password = bcrypt.hashpw(user_password.encode('utf8'), bcrypt.gensalt())
+        print(user["user_password"], hashed_password)
+        print(user_password, input_hashed_password)
+        if bcrypt.checkpw(input_hashed_password, hashed_password):
+            print("match")
+        else:
+            print("does not match")
 
         if user_password != user["user_password"]:
             
@@ -30,7 +41,7 @@ def _():
             return
         
         user.pop("user_password")
-        print("pop", user)
+        #print("pop", user)
         response.set_cookie("user", user, secret=x.COOKIE_SECRET, httponly=True, secure=is_cookie_https)
         return {"info":"success login", "user_name":user["user_name"]}
     except Exception as e:
