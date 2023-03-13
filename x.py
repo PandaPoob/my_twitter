@@ -1,6 +1,7 @@
 from bottle import request
 import pathlib
 import sqlite3
+import re
 
 
 def dict_factory(cursor, row):
@@ -30,15 +31,19 @@ def validate_tweet():
     return request.forms.get("tweet_field_text")
 
 #user validation
-USERNAME_MIN_LEN = 2
+USERNAME_MIN_LEN = 4
 USERNAME_MAX_LEN = 20
+USERNAME_REGEX = "^[a-zA-Z0-9_]*$"
 
 usernameerror = f"Username must be between {USERNAME_MIN_LEN} and {USERNAME_MAX_LEN} characters"
+usernamematcherror = f"Invalid username"
 
 PASSWORD_MIN_LEN = 8
 PASSWORD_MAX_LEN = 20
 
 passerror = f"Password must be between {USERNAME_MIN_LEN} and {USERNAME_MAX_LEN} characters"
+
+###TODO isolate validation validate_username, _password
 
 def validate_login():
     if len(request.forms.login_user_name) < USERNAME_MIN_LEN: raise Exception(usernameerror)
@@ -50,3 +55,13 @@ def validate_login():
     if len(request.forms.login_password) > PASSWORD_MAX_LEN: raise Exception(passerror)
     return request.forms.get("login_user_name"), request.forms.get("request.forms.login_password")
     
+def validate_signup():
+    #remove space before
+    print(30*"#")
+
+    request.forms.signup_user_name = request.forms.signup_user_name.strip()
+    if len(request.forms.signup_user_name) < USERNAME_MIN_LEN: raise Exception(usernameerror)
+    if len(request.forms.signup_user_name) > USERNAME_MAX_LEN: raise Exception(usernameerror)
+    if not re.match(USERNAME_REGEX, request.forms.signup_user_name): raise Exception(usernamematcherror)
+    #usernamematcherror
+    return request.forms.signup_user_name

@@ -44,6 +44,7 @@ import formatNumber
 ################################################
 # APIS
 import apis.api_tweet
+import apis.api_signup
 
 ################################################
 # BRIDGES
