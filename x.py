@@ -3,6 +3,7 @@ import pathlib
 import sqlite3
 import re
 
+COOKIE_SECRET = "872437049d2a426f9d86f1ea58b4c901"
 
 def disable_cache():
     response.add_header("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0")
@@ -45,24 +46,27 @@ USERNAME_REGEX = "^[a-zA-Z0-9_]*$"
 
 usernameerror = f"Username must be between {USERNAME_MIN_LEN} and {USERNAME_MAX_LEN} characters"
 usernamematcherror = f"Invalid username"
+   
+def validate_username():
+  request.forms.user_name = request.forms.user_name.strip()
+  if len(request.forms.user_name) < USERNAME_MIN_LEN: raise Exception(usernameerror)
+  if len(request.forms.user_name) > USERNAME_MAX_LEN: raise Exception(usernameerror)
+  if not re.match(USERNAME_REGEX, request.forms.user_name): raise Exception(usernamematcherror)
+
+  return request.forms.get("user_name")
 
 PASSWORD_MIN_LEN = 8
 PASSWORD_MAX_LEN = 20
 
-passerror = f"Password must be between {USERNAME_MIN_LEN} and {USERNAME_MAX_LEN} characters"
+passerror = f"Password must be between {PASSWORD_MIN_LEN} and {PASSWORD_MAX_LEN} characters"
 
-###TODO isolate validation validate_username, _password
+def validate_password():
+    if len(request.forms.user_password) < PASSWORD_MIN_LEN: raise Exception(passerror)
+    if len(request.forms.user_password) > PASSWORD_MAX_LEN: raise Exception(passerror)
 
-def validate_login():
-    if len(request.forms.login_user_name) < USERNAME_MIN_LEN: raise Exception(usernameerror)
-    if len(request.forms.login_user_name) > USERNAME_MAX_LEN: raise Exception(usernameerror)
+    return request.forms.get("user_password")
 
-    
-    if request.forms.login_user_name == "": raise Exception(usernameerror)
-    if len(request.forms.login_password) < PASSWORD_MIN_LEN: raise Exception(passerror)
-    if len(request.forms.login_password) > PASSWORD_MAX_LEN: raise Exception(passerror)
-    return request.forms.get("login_user_name"), request.forms.get("request.forms.login_password")
-    
+
 def validate_signup():
     #remove space before
     print(30*"#")

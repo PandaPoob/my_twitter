@@ -22,24 +22,35 @@ def _():
 def _(filename):
     return static_file(filename, "js")
 
-@get("/images/<filename>")
+@get("/images/avatar_imgs/<filename>")
 def _(filename):
-    return static_file(filename, root=os.getcwd()+"./images")
+    return static_file(filename, root=os.getcwd()+"./images/avatar_imgs/")
 
+@get("/images/cover_imgs/<filename>")
+def _(filename):
+    return static_file(filename, root=os.getcwd()+"./images/cover_imgs/")
 
-################################################
-#Import functions
-import formatNumber
+@get("/images/tweet_imgs/<filename>")
+def _(filename):
+    return static_file(filename, root=os.getcwd()+"./images/tweet_imgs/")
 
 ################################################
 #APIS
 import apis.api_tweet
+import apis.api_login
 import apis.api_signup
 
 ################################################
 #BRIDGES
-import bridges.login
-import bridges.logout
+#import bridges.login
+@get("/logout")
+def _():
+  x.disable_cache()
+
+  response.delete_cookie("user")
+  response.status = 303
+  response.set_header("Location", "/login")
+  return
 
 #PAGES
 import views.index
@@ -48,7 +59,7 @@ import views.profile
 #LOGIN PAGE
 @get("/login")
 def _():
-    logged_user = request.get_cookie("user", secret="my-secret")
+    logged_user = request.get_cookie("user", secret=x.COOKIE_SECRET)
     if logged_user:
         response.status = 303
         response.set_header("Location", "/")
@@ -60,10 +71,6 @@ def _():
 
 
 ################################################
-# FORM PAGE
-#import views.tweet
-
-
 
 
 #try will run on amazon

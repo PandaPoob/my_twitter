@@ -30,13 +30,6 @@ function validate(callback) {
             errorMsgElement.innerHTML =
               element.getAttribute("error-msg-required");
           }
-
-          //remove backend error
-          const backendval = document.getElementById(`${id}_backend_error_msg`);
-          if (backendval) {
-            backendval.style.display = "none";
-            backendval.innerHTML = "";
-          }
         } else if (
           element.value.length < parseInt(element.getAttribute("data-min")) ||
           element.value.length > parseInt(element.getAttribute("data-max"))
@@ -45,13 +38,6 @@ function validate(callback) {
           if (errorMsgElement) {
             errorMsgElement.style.display = "block";
             errorMsgElement.innerHTML = element.getAttribute("error-msg-len");
-          }
-
-          //remove backend error
-          const backendval = document.getElementById(`${id}_backend_error_msg`);
-          if (backendval) {
-            backendval.style.display = "none";
-            backendval.innerHTML = "";
           }
         }
         break;

@@ -9,7 +9,7 @@ def _():
     try:
         x.disable_cache()
         
-        logged_user = request.get_cookie("user", secret="my-secret")
+        logged_user = request.get_cookie("user", secret=x.COOKIE_SECRET)
         
         db = x.db()
         

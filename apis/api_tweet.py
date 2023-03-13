@@ -10,7 +10,7 @@ def _():
         x.validate_tweet()
         db = x.db()
 
-        logged_user = request.get_cookie("user", secret="my-secret")
+        logged_user = request.get_cookie("user", secret=x.COOKIE_SECRET)
         response.add_header("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0")
         response.add_header("Pragma", "no-cache")
         response.add_header("Expires", 0)
