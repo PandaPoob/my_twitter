@@ -1,8 +1,5 @@
-from bottle import get, template, request
+from bottle import get, template, request, response
 import x
-import time
-import calendar
-import formatNumber
 
 @get("/login")
 def _():
