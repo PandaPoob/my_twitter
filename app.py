@@ -22,7 +22,7 @@ def _():
 def _(filename):
     return static_file(filename, "js")
 
-@get("/images/<filename:re:.*\.jpg>")
+@get("/images/<filename>")
 def _(filename):
     return static_file(filename, root=os.getcwd()+"./images")
 
