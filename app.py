@@ -65,58 +65,8 @@ def _():
     return template("login", username_min_length=x.USERNAME_MIN_LEN, username_max_length=x.USERNAME_MAX_LEN, password_min_length=x.PASSWORD_MIN_LEN, password_max_length=x.PASSWORD_MAX_LEN, username_error=x.usernameerror, password_error=x.passerror, error=error)
 
 # HOME PAGE
-@get("/")
-def _():
-    logged_user = request.get_cookie("user", secret="my-secret")
-    response.add_header("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0")
-    response.add_header("Pragma", "no-cache")
-    response.add_header("Expires", 0)
-    #print(logged_user)
-    try:
-        db = sqlite3.connect(str(pathlib.Path(__file__).parent.resolve())+"/twitter.db")
-        db.row_factory = dict_factory
+import views.index
 
-
-        tweets = db.execute("SELECT * FROM users_and_tweets ORDER BY users_and_tweets.tweet_created_at DESC LIMIT 0, 10").fetchall()
-        trends = trends = db.execute("SELECT * FROM trends").fetchall()
-        if logged_user:
-            username = logged_user["user_name"]
-            fsugg = db.execute("SELECT * FROM follower_suggestions WHERE NOT user_name=?",(username,)).fetchall()
-            
-        else:
-            fsugg = db.execute("SELECT * FROM follower_suggestions").fetchall()
-
-           #format the tweet numbers
-        for i in range(len(tweets)):
-            if tweets[i]['tweet_total_replies']:
-                tweets[i]['tweet_total_replies'] = formatNumber.human_format(tweets[i]['tweet_total_replies'])
-        
-            if tweets[i]['tweet_total_likes']:
-                tweets[i]['tweet_total_likes'] = formatNumber.human_format(tweets[i]['tweet_total_likes'])
-            
-            if tweets[i]['tweet_total_retweets']:
-                tweets[i]['tweet_total_retweets'] = formatNumber.human_format(tweets[i]['tweet_total_retweets'])
-            
-            if tweets[i]['tweet_total_views']:
-                tweets[i]['tweet_total_views'] = formatNumber.human_format(tweets[i]['tweet_total_views'])
-           
-            if tweets[i]['tweet_created_at']:
-                month = time.strftime('%#m', time.localtime(tweets[i]['tweet_created_at']))
-                day = time.strftime('%#d', time.localtime(tweets[i]['tweet_created_at']))
-                tweets[i]['tweet_created_at'] = f"{calendar.month_abbr[int(month)]} {day}"
-                
-           #format trends numbers
-        for i in range(len(trends)):
-            if trends[i]['trend_total_tweets']:
-                #print(type(trends[i]['trend_total_tweets']))
-                trends[i]['trend_total_tweets'] = formatNumber.human_format(trends[i]['trend_total_tweets'])
-           
-        return template("index", min_length=x.TWEET_MIN_LEN, max_length=x.TWEET_MAX_LEN, tweets=tweets, trends=trends, fsugg=fsugg, logged_user=logged_user)
-    except:
-        return "error"
-
-    finally:
-        if "db" in locals(): db.close()
 ################################################
 # FORM PAGE
 #import views.tweet

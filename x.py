@@ -1,7 +1,13 @@
-from bottle import request
+from bottle import request, response
 import pathlib
 import sqlite3
 import re
+
+
+def disable_cache():
+    response.add_header("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0")
+    response.add_header("Pragma", "no-cache")
+    response.add_header("Expires", 0)
 
 
 def dict_factory(cursor, row):
