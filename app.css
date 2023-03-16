@@ -730,12 +730,12 @@ video {
   width: 100vw;
 }
 
-.w-8 {
-  width: 2rem;
-}
-
 .w-full {
   width: 100%;
+}
+
+.w-8 {
+  width: 2rem;
 }
 
 .w-7 {

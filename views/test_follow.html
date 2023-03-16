@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Follow test</title>
+  </head>
+  <body>
+    <div>
+      <div>Elon musk</div>
+
+      <form onsubmit="follow(); return false;">
+        <input
+          type="text"
+          name="user_followe_id"
+          value="5ae1823bcc5648bd9e5bf6602ae397d6"
+          style="display: none"
+        />
+        <button type="submit">Follow</button>
+      </form>
+    </div>
+
+    <div>
+      <div>Shakira</div>
+
+      <form onsubmit="follow(); return false;">
+        <input
+          type="text"
+          name="user_followe_id"
+          value="63bfa35aa8204270a6480557fddf9069"
+          style="display: none"
+        />
+        <button type="submit">Follow</button>
+      </form>
+    </div>
+    <script>
+      async function follow() {
+        //alert("Form submitted");
+
+        const frm = event.target;
+        const resp = await fetch("/api-follow", {
+          method: "POST",
+          body: new FormData(frm),
+        });
+
+        const data = await resp.json();
+        console.log(data);
+      }
+    </script>
+  </body>
+</html>

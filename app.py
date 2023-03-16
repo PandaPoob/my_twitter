@@ -39,6 +39,7 @@ def _(filename):
 import apis.api_tweet
 import apis.api_login
 import apis.api_signup
+import apis.api_follow
 
 ################################################
 #BRIDGES
@@ -55,6 +56,7 @@ def _():
 #PAGES
 import views.index
 import views.profile
+import views.test_follow
 
 #LOGIN PAGE
 @get("/login")
