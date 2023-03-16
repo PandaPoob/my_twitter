@@ -1,1 +1,269 @@
-[]
+[
+  {
+    "_id": "a3aa3085-eedd-4de0-9f61-2c1252ca201b",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://smses.eu.pythonanywhere.com/api-sign-up",
+    "url": "https://smses.eu.pythonanywhere.com/api-sign-up",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-03-16T13:31:10.026Z",
+    "modified": "2023-03-16T13:31:10.026Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "64494900-3ca9-4693-bf8f-e485016da5e9",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://smses.eu.pythonanywhere.com/api-sign-up",
+    "url": "https://smses.eu.pythonanywhere.com/api-sign-up",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-03-16T13:31:16.121Z",
+    "modified": "2023-03-16T13:32:59.403Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "formdata",
+      "raw": "",
+      "form": [
+        {
+          "name": "user_email",
+          "value": "freja400d@gmail.com "
+        },
+        {
+          "name": "user_phone",
+          "value": "42769758"
+        },
+        {
+          "name": "user_password",
+          "value": "jegelskerkage"
+        },
+        {
+          "name": "user_confirm_password",
+          "value": "jegelskerkage"
+        }
+      ]
+    },
+    "tests": []
+  },
+  {
+    "_id": "29326702-d3c8-4854-97c3-5a0a938fc601",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://smses.eu.pythonanywhere.com/api-sign-up?user_email invalid=frejasmith123@gmail.com",
+    "url": "https://smses.eu.pythonanywhere.com/api-sign-up?user_email invalid=frejasmith123@gmail.com",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-03-16T13:31:32.456Z",
+    "modified": "2023-03-16T13:31:32.456Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "user_email invalid",
+        "value": "frejasmith123@gmail.com",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "dde6c002-b308-4857-ad12-2233f0b7a592",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://smses.eu.pythonanywhere.com/api-login",
+    "url": "https://smses.eu.pythonanywhere.com/api-login",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-03-16T13:33:34.593Z",
+    "modified": "2023-03-16T14:43:19.544Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "formdata",
+      "raw": "",
+      "form": [
+        {
+          "name": "user_email",
+          "value": "freja400d@gmail.com "
+        },
+        {
+          "name": "user_phone",
+          "value": "42769758",
+          "isDisabled": true
+        },
+        {
+          "name": "user_password",
+          "value": "jegelskerkage"
+        },
+        {
+          "name": "user_confirm_password",
+          "value": "jegelskerkage",
+          "isDisabled": true
+        },
+        {
+          "name": "user_api_key",
+          "value": "ec2ede3ce8e64245be1fb58aff56c458",
+          "isDisabled": true
+        },
+        {
+          "name": "sms_message",
+          "value": "Nummer 2 sms",
+          "isDisabled": true
+        },
+        {
+          "name": "sms_to_phone",
+          "value": "42769758",
+          "isDisabled": true
+        }
+      ]
+    },
+    "tests": []
+  },
+  {
+    "_id": "05eaf8bc-2956-441e-9af8-7ec073587cdb",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://smses.eu.pythonanywhere.com/api-send-sms",
+    "url": "https://smses.eu.pythonanywhere.com/api-send-sms",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-03-16T13:33:52.186Z",
+    "modified": "2023-03-16T13:36:30.827Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "formdata",
+      "raw": "",
+      "form": [
+        {
+          "name": "user_email",
+          "value": "freja400d@gmail.com ",
+          "isDisabled": true
+        },
+        {
+          "name": "user_phone",
+          "value": "42769758",
+          "isDisabled": true
+        },
+        {
+          "name": "user_password",
+          "value": "jegelskerkage",
+          "isDisabled": true
+        },
+        {
+          "name": "user_confirm_password",
+          "value": "jegelskerkage",
+          "isDisabled": true
+        },
+        {
+          "name": "user_api_key",
+          "value": "ec2ede3ce8e64245be1fb58aff56c458"
+        },
+        {
+          "name": "sms_message",
+          "value": "Nummer 2 sms"
+        },
+        {
+          "name": "sms_to_phone",
+          "value": "42769758"
+        }
+      ]
+    },
+    "tests": []
+  },
+  {
+    "_id": "f857b3fe-24d3-43db-9b1c-af463ee9d6c2",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://127.0.0.1:3000/api-send-sms",
+    "url": "http://127.0.0.1:3000/api-send-sms",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-03-16T14:13:40.388Z",
+    "modified": "2023-03-16T14:13:40.388Z",
+    "headers": [],
+    "params": [],
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "isjson",
+        "value": ""
+      },
+      {
+        "type": "Content-Type",
+        "custom": "",
+        "action": "equal",
+        "value": "application/json"
+      },
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "contains",
+        "value": "info"
+      }
+    ]
+  },
+  {
+    "_id": "affa3c6a-d787-439d-b2f1-d8375be0d9bf",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://127.0.0.1:3000/api-send-sms",
+    "url": "http://127.0.0.1:3000/api-send-sms",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-03-16T14:13:45.545Z",
+    "modified": "2023-03-16T14:54:32.261Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "formdata",
+      "raw": "",
+      "form": [
+        {
+          "name": "phone_number",
+          "value": "42769758"
+        },
+        {
+          "name": "text_msg",
+          "value": "reponse"
+        }
+      ]
+    },
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "isjson",
+        "value": ""
+      },
+      {
+        "type": "Content-Type",
+        "custom": "",
+        "action": "equal",
+        "value": "application/json"
+      },
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "contains",
+        "value": "info"
+      }
+    ]
+  }
+]

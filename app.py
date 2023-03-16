@@ -40,6 +40,7 @@ import apis.api_tweet
 import apis.api_login
 import apis.api_signup
 import apis.api_follow
+import apis.api_send_sms
 
 ################################################
 #BRIDGES
@@ -57,6 +58,7 @@ def _():
 import views.index
 import views.profile
 import views.test_follow
+import views.test_sms
 
 #LOGIN PAGE
 @get("/login")
