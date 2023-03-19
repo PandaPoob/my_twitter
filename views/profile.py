@@ -73,10 +73,10 @@ def _(username):
                 trends[i]['trend_total_tweets'] = formatNumber.human_format(trends[i]['trend_total_tweets'])
 
         #format date on user
-        if user['user_bio_created_at']:
-            year = time.strftime('%Y', time.localtime(user["user_bio_created_at"]))
-            month = time.strftime('%#m', time.localtime(user["user_bio_created_at"]))
-            user["user_bio_created_at"] = f"Joined {calendar.month_name[int(month)]} {year}"
+        if user['user_created_at']:
+            year = time.strftime('%Y', time.localtime(user["user_created_at"]))
+            month = time.strftime('%#m', time.localtime(user["user_created_at"]))
+            user["user_created_at"] = f"Joined {calendar.month_name[int(month)]} {year}"
 
         #format date on tweet
         

@@ -1,3 +1,14 @@
+function getAge(date) {
+  var today = new Date();
+  var birthDate = new Date(date);
+  var age = today.getFullYear() - birthDate.getFullYear();
+  var m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  return age;
+}
+
 function validate(callback) {
   const form = event.target;
   // const validate_error = "rgba(240, 130, 240, 0.2)"
@@ -15,10 +26,10 @@ function validate(callback) {
     }
   });
   form.querySelectorAll("[data-validate]").forEach(function (element) {
+    const id = element.getAttribute("id");
+    const errorMsgElement = document.getElementById(`${id}_error_msg`);
     switch (element.getAttribute("data-validate")) {
       case "str":
-        const id = element.getAttribute("id");
-        const errorMsgElement = document.getElementById(`${id}_error_msg`);
         //check if its empty
 
         if (element.value.length === 0) {
@@ -55,9 +66,22 @@ function validate(callback) {
       case "email":
         let re =
           /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if (!re.test(element.value.toLowerCase())) {
+        if (element.value.length === 0) {
+          //add error style
           element.classList.add("validate_error");
-          element.style.backgroundColor = validate_error;
+          //add error messsage
+          if (errorMsgElement) {
+            errorMsgElement.style.display = "block";
+            errorMsgElement.innerHTML =
+              element.getAttribute("error-msg-required");
+          }
+        } else if (!re.test(element.value.toLowerCase())) {
+          element.classList.add("validate_error");
+          console.log(errorMsgElement);
+          if (errorMsgElement) {
+            errorMsgElement.style.display = "block";
+            errorMsgElement.innerHTML = element.getAttribute("error-msg-len");
+          }
         }
         break;
       case "regex":
@@ -71,14 +95,48 @@ function validate(callback) {
         }
         break;
       case "match":
-        if (
+        if (element.value.length === 0) {
+          //add error style
+          element.classList.add("validate_error");
+          //add error messsage
+          if (errorMsgElement) {
+            errorMsgElement.style.display = "block";
+            errorMsgElement.innerHTML =
+              element.getAttribute("error-msg-required");
+          }
+        } else if (
           element.value !=
           form.querySelector(
             `[name='${element.getAttribute("data-match-name")}']`
           ).value
         ) {
           element.classList.add("validate_error");
-          element.style.backgroundColor = validate_error;
+          if (errorMsgElement) {
+            errorMsgElement.style.display = "block";
+            errorMsgElement.innerHTML = element.getAttribute("error-msg-len");
+          }
+        }
+
+        break;
+      case "birthday":
+        age = getAge(element.value.replaceAll("-", "/"));
+
+        if (element.value.length === 0) {
+          //add error style
+          element.classList.add("validate_error");
+          //add error messsage
+          if (errorMsgElement) {
+            errorMsgElement.style.display = "block";
+            errorMsgElement.innerHTML =
+              element.getAttribute("error-msg-required");
+          }
+        } else if (age < 13) {
+          element.classList.add("validate_error");
+          //add error messsage
+          if (errorMsgElement) {
+            errorMsgElement.style.display = "block";
+            errorMsgElement.innerHTML = element.getAttribute("error-msg-len");
+          }
         }
         break;
     }
