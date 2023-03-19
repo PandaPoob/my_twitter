@@ -40,7 +40,7 @@ import apis.api_tweet
 import apis.api_login
 import apis.api_signup
 import apis.api_follow
-import apis.api_send_sms
+#import apis.api_send_sms
 
 ################################################
 #BRIDGES
@@ -57,22 +57,10 @@ def _():
 #PAGES
 import views.index
 import views.profile
+import views.login
+import views.signup
 import views.test_follow
-import views.test_sms
-
-#LOGIN PAGE
-@get("/login")
-def _():
-    logged_user = request.get_cookie("user", secret=x.COOKIE_SECRET)
-    if logged_user:
-        response.status = 303
-        response.set_header("Location", "/")
-
-    error = request.query.error.replace("_", " ")
-    print(error)
-    return template("login", username_min_length=x.USERNAME_MIN_LEN, username_max_length=x.USERNAME_MAX_LEN, password_min_length=x.PASSWORD_MIN_LEN, password_max_length=x.PASSWORD_MAX_LEN, username_error=x.usernameerror, password_error=x.passerror, error=error)
-
-
+#import views.test_sms
 
 ################################################
 

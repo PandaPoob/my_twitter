@@ -5,7 +5,7 @@ function displayTip() {
       Invalid credentials. Try again
     </div>
     `; */
-  document.getElementById("toast_error_msg").style.display = "block";
+  document.getElementById("toast_error_msg").style.display = "flex";
 
   setTimeout(function () {
     document.getElementById("toast_error_msg").style.display = "none";

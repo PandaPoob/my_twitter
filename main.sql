@@ -5,6 +5,7 @@ CREATE TABLE users(
   user_name              TEXT UNIQUE NOT NULL,
   user_full_name         TEXT NOT NULL,
   user_password          TEXT NOT NULL,
+  user_email             TEXT NOT NULL,
   user_img_avatar        TEXT UNIQUE,
   user_img_cover         TEXT NOT NULL,
   user_verified          TEXT DEFAULT false,
@@ -19,11 +20,11 @@ CREATE TABLE users(
   PRIMARY KEY(user_id)
   ) WITHOUT ROWID;
 
-INSERT INTO users VALUES("5ae1823bcc5648bd9e5bf6602ae397d6", "elonmusk", "Elon Musk", "elonmuskpass", "5ae1823bcc5648bd9e5bf6602ae397d6.jpg", "ad3b5a9a8fe3471d814ff845b9671cc0.jpg", True, "", "", "", "", "1243814400", "128900000", "177", "22900");
-INSERT INTO users VALUES("63bfa35aa8204270a6480557fddf9069", "shakira", "Shakira", "shakirapass", "63bfa35aa8204270a6480557fddf9069.jpg", "76a574041471471bb7a806ed197198aa.jpg", True, "MONOTONÍA YA DISPONIBLE", "Barranquilla", "linktr.ee/shakira", "November 30, 1998", "1246406399", "537000000", "235", "8002");
-INSERT INTO users VALUES("96e7977bdaab4f0abe84e7ac18a864ec", "BLACKPINK", "BLACKPINKOFFICIAL", "blackpinkpass", "96e7977bdaab4f0abe84e7ac18a864ec.jpg", "0684090441a743e6ba92eb42b4ee8816.jpg", True, "BLΛƆKPIИK", "", "lnk.to/YG_BLACKPINK", "", "1590969600", "8500000", "0", "892");
-INSERT INTO users VALUES("a3fb674a90c84918968c2425e21e1a4e", "cat_auras", "cat with confusing auras.", "cat_auraspass", "a3fb674a90c84918968c2425e21e1a4e.jpg", "0f0cb4cb07424f1ea0d0e87705cb1745.jpg", True, "Even cat can confuse “us”. | dm for credit or removal.", "", "catauras.com", "", "1654041600", "1600000", "15", "167");
-INSERT INTO users VALUES("b3094c2f1c144817b7cc0b718fc3c644", "my_name_cleo", "Cleo", "my_name_cleopass", "b3094c2f1c144817b7cc0b718fc3c644.jpg", "8e89394382ca44d2bb3cc45d067c2a7e.jpg", False, "I am a happy doge", "", "https://www.instagram.com/my_name_cleo/", "", "1677605053", "126", "0", "0");
+INSERT INTO users VALUES("5ae1823bcc5648bd9e5bf6602ae397d6", "elonmusk", "Elon Musk", "elonmuskpass", "elonmusk@mail.com", "5ae1823bcc5648bd9e5bf6602ae397d6.jpg", "ad3b5a9a8fe3471d814ff845b9671cc0.jpg", True, "", "", "", "", "1243814400", "128900000", "177", "22900");
+INSERT INTO users VALUES("63bfa35aa8204270a6480557fddf9069", "shakira", "Shakira", "shakirapass", "shakira@mail.com", "63bfa35aa8204270a6480557fddf9069.jpg", "76a574041471471bb7a806ed197198aa.jpg", True, "MONOTONÍA YA DISPONIBLE", "Barranquilla", "linktr.ee/shakira", "November 30, 1998", "1246406399", "537000000", "235", "8002");
+INSERT INTO users VALUES("96e7977bdaab4f0abe84e7ac18a864ec", "BLACKPINK", "BLACKPINKOFFICIAL", "blackpinkpass", "blackpink@mail.com", "96e7977bdaab4f0abe84e7ac18a864ec.jpg", "0684090441a743e6ba92eb42b4ee8816.jpg", True, "BLΛƆKPIИK", "", "lnk.to/YG_BLACKPINK", "", "1590969600", "8500000", "0", "892");
+INSERT INTO users VALUES("a3fb674a90c84918968c2425e21e1a4e", "cat_auras", "cat with confusing auras.", "cat_auraspass", "cat_auras@mail.com", "a3fb674a90c84918968c2425e21e1a4e.jpg", "0f0cb4cb07424f1ea0d0e87705cb1745.jpg", True, "Even cat can confuse “us”. | dm for credit or removal.", "", "catauras.com", "", "1654041600", "1600000", "15", "167");
+INSERT INTO users VALUES("b3094c2f1c144817b7cc0b718fc3c644", "my_name_cleo", "Cleo", "my_name_cleopass", "my_name_cleo @mail.com", "b3094c2f1c144817b7cc0b718fc3c644.jpg", "8e89394382ca44d2bb3cc45d067c2a7e.jpg", False, "I am a happy doge", "", "https://www.instagram.com/my_name_cleo/", "", "1677605053", "126", "0", "0");
 
 CREATE INDEX idx_users_user_first_name ON users(user_full_name);
 
