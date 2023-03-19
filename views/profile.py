@@ -21,7 +21,7 @@ def _(username):
         
         #get trends
         trends = db.execute("SELECT * FROM trends").fetchall()
-
+        
         #get follower suggestions
         if logged_user:
             username = logged_user["user_name"]

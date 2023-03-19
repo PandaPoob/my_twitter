@@ -5,7 +5,7 @@ CREATE TABLE users(
   user_name              TEXT UNIQUE NOT NULL,
   user_full_name         TEXT NOT NULL,
   user_password          TEXT NOT NULL,
-  user_email             TEXT NOT NULL,
+  user_email             TEXT UNIQUE NOT NULL,
   user_created_at        INT NOT NULL,
   user_updated_at        INT NOT NULL,
   user_img_avatar        TEXT,
@@ -625,3 +625,5 @@ INSERT INTO tweets VALUES(
 "0");
 
 DELETE FROM tweets WHERE tweet_user_fk = "b3094c2f1c144817b7cc0b718fc3c644"; 
+
+DELETE FROM users WHERE user_id = "7b84f0ebbb5842249ec95cb1eeba44c9"; 
