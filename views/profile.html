@@ -125,11 +125,21 @@
                 Edit profile
               </button>
               %else:
-              <button
-                class="text-base text-black font-bold bg-white rounded-full hover:bg-opacity-90 py-1.5 px-4"
-              >
-                Follow
-              </button>
+              <form onsubmit="follow(); return false;">
+                <input
+                  type="text"
+                  name="user_followe_id"
+                  value="{{user['user_id']}}"
+                  style="display: none"
+                />
+                <button
+                  type="submit"
+                  class="text-base text-black font-bold bg-white rounded-full hover:bg-opacity-90 py-1.5 px-4"
+                >
+                  Follow
+                </button>
+              </form>
+
               %end
             </div>
           </div>
@@ -302,5 +312,6 @@
         % include('comp-suggestions-nav', trends=trends, fsugg=fsugg, imgtweets=imgtweets, page="profile", logged_user=logged_user)
       </div>
     </div>
+    <script src="/js/app.js"></script>
   </body>
 </html>

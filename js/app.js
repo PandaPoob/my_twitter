@@ -370,3 +370,16 @@ async function handleSubmitTweet() {
 
   console.log(data);
 }
+
+async function follow() {
+  //alert("Form submitted");
+
+  const frm = event.target;
+  const resp = await fetch("/api-follow", {
+    method: "POST",
+    body: new FormData(frm),
+  });
+
+  const data = await resp.json();
+  console.log(data);
+}

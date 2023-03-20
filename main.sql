@@ -568,6 +568,15 @@ INSERT INTO trends VALUES("2a9470bc61314187b19d7190b76cd535", "Slack", "6869");
 INSERT INTO trends VALUES("c9773e2bb68647039a7a40c2ee7d4716", "Twitch", "315000");
 
 --##############################################################
+DROP TABLE IF EXISTS following;
+CREATE TABLE following(
+  follower_fk           TEXT NOT NULL,
+  followee_fk           TEXT NOT NULL,
+  following_created_at  INT NOT NULL,
+  PRIMARY KEY(follower_fk, followee_fk)
+) WITHOUT ROWID;
+
+
 -----VIEWS-----
 
 --This view is to get the user and tweets
