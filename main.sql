@@ -636,3 +636,5 @@ INSERT INTO tweets VALUES(
 DELETE FROM tweets WHERE tweet_user_fk = "b3094c2f1c144817b7cc0b718fc3c644"; 
 
 DELETE FROM users WHERE user_id = "7b84f0ebbb5842249ec95cb1eeba44c9"; 
+
+DELETE FROM following WHERE follower_fk = '5ae1823bcc5648bd9e5bf6602ae397d6' AND followee_fk = '63bfa35aa8204270a6480557fddf9069';

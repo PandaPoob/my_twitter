@@ -383,3 +383,16 @@ async function follow() {
   const data = await resp.json();
   console.log(data);
 }
+
+async function unfollow() {
+  //alert("Form submitted");
+
+  const frm = event.target;
+  const resp = await fetch("/api-unfollow", {
+    method: "POST",
+    body: new FormData(frm),
+  });
+
+  const data = await resp.json();
+  console.log(data);
+}

@@ -98,7 +98,7 @@
 
             <div class="justify-self-end flex items-start gap-3 py-3">
               <!-- prettier-ignore -->
-              %if logged_user and logged_user["user_id"] !=user["user_id"]:
+              %if logged_user and logged_user["user_id"] != user["user_id"]:
               <button
                 class="rounded-full border border-twittergray-500 p-1.5 hover:bg-white hover:bg-opacity-10"
               >
@@ -117,6 +117,17 @@
                 </svg>
               </button>
               %end
+
+              <!-- prettier -->
+              %if logged_user is None:
+              <button
+                type="submit"
+                class="text-base text-black font-bold bg-white rounded-full hover:bg-opacity-90 py-1.5 px-4"
+              >
+                Log in to follow
+              </button>
+              %end
+
               <!-- prettier -->
               %if logged_user and logged_user["user_id"] == user["user_id"]:
               <button
@@ -124,7 +135,28 @@
               >
                 Edit profile
               </button>
-              %else:
+              %end
+
+              <!-- prettier -->
+
+              %if logged_user and logged_user["user_id"] and isFollowing:
+              <form onsubmit="unfollow(); return false;">
+                <input
+                  type="text"
+                  name="user_followe_id"
+                  value="{{user['user_id']}}"
+                  style="display: none"
+                />
+                <button
+                  type="submit"
+                  class="text-base text-black font-bold bg-white rounded-full hover:bg-opacity-90 py-1.5 px-4"
+                >
+                  Unfollow
+                </button>
+              </form>
+              %end
+              <!-- prettier-ignore -->
+              %if logged_user and logged_user["user_id"] and isFollowing == False:
               <form onsubmit="follow(); return false;">
                 <input
                   type="text"
@@ -139,7 +171,6 @@
                   Follow
                 </button>
               </form>
-
               %end
             </div>
           </div>

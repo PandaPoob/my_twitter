@@ -1,8 +1,10 @@
-from bottle import default_app, get, post, response, run, static_file
+from bottle import default_app, get, post, request, response, run, static_file
 import os
 import git
 import x
-
+import uuid
+import mimetypes
+import magic
 ################################################
 #https://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@github.com/PandaPoob/web_dev_mandatory_01.git
 #Git webhook to pythonanywhere
@@ -41,8 +43,40 @@ import apis.api_tweet
 import apis.api_login
 import apis.api_signup
 import apis.api_follow
-#import apis.api_send_sms
+import apis.api_unfollow
+#import delete_later.api_send_sms
 
+@post("/upload-picture")
+def _():
+    try:
+        form_picture = request.files.get("picture")
+        name, ext = os.path.splitext(form_picture.filename)
+        #print("#"*30)
+        #print(name, ext)
+        if ext not in ('.png','.jpg','.jpeg'):
+            raise Exception(400, "File extension not allowed")
+    
+        picture_name = str(uuid.uuid4()).replace("-","")
+        picture_name = picture_name + ext
+        form_picture.save(f"pictures/{picture_name}")
+        filetype = magic.from_file(f"pictures/{picture_name}")
+
+        print(filetype)
+        #JPEG image data
+        #PNG image data
+        if "PNG image data" not in filetype and "JPEG image data" not in filetype:
+            url = os.getcwd()+f"/pictures/{picture_name}"
+            os.remove(url, dir_fd = None)
+            raise Exception(400, "File extension not allowed")
+
+        return {"info": "picture uploaded"}
+    except Exception as ex:
+        print(ex)
+        response.status = ex.args[0]
+        return {"info":ex.args[1]}
+    finally:
+        pass
+ 
 ################################################
 #BRIDGES
 #import bridges.login
@@ -61,7 +95,7 @@ import views.profile
 import views.login
 import views.signup
 import views.test_follow
-#import views.test_sms
+#import delete_later.test_sms
 
 ################################################
 

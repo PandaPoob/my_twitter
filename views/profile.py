@@ -78,10 +78,16 @@ def _(username):
             month = time.strftime('%#m', time.localtime(user["user_created_at"]))
             user["user_created_at"] = f"Joined {calendar.month_name[int(month)]} {year}"
 
-        #format date on tweet
-        
-
-        return template("profile", user=user, tweets=tweets, trends=trends, fsugg=fsugg, imgtweets=imgtweets, logged_user=logged_user)
+        #who the logged in cookie user is following
+        isFollowing = False
+        if logged_user:
+            following = db.execute("SELECT * FROM following WHERE follower_fk=?", (logged_user["user_id"],)).fetchall()
+          
+            for f in range(len(following)):   
+                if following[f]['followee_fk'] == user_id:
+                    isFollowing = True
+        print(isFollowing)
+        return template("profile", user=user, tweets=tweets, trends=trends, fsugg=fsugg, imgtweets=imgtweets, logged_user=logged_user, isFollowing=isFollowing)
     except Exception as ex:
         print(ex)
         return "error"
