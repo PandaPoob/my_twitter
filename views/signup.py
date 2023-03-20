@@ -1,4 +1,4 @@
-from bottle import get, template, request, response
+from bottle import get, template
 import x
 
 @get("/signup")
