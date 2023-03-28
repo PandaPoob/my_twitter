@@ -26,7 +26,11 @@ def _():
        
         return {"info": f"Succesful follow {user_followe_id, user_follower_id, timestamp}"}
     except Exception as ex:
-        print(ex)
+        print("ERROR", ex)
+        print("type", type(ex))
+        if str(ex).contains("UNIQUE contraint failed"):
+            response.status = 400
+            return {"info":str(ex)}
         response.status = ex.args[0]
         return {"info":ex.args[1]}
     finally:

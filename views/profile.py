@@ -94,3 +94,4 @@ def _(username):
 
     finally:
         if "db" in locals(): db.close()
+

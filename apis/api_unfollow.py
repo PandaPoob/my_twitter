@@ -13,7 +13,7 @@ def _():
         id = user["user_id"]        
         db = x.db()
         user_follower_id = db.execute("SELECT user_id FROM users WHERE user_id=?", (id,)).fetchone()
-        print(user)
+        #print(user)
         if not user_follower_id:
             raise Exception(400, "User does not exist")
 
