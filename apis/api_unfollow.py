@@ -1,6 +1,6 @@
 from bottle import post, request, response
 import x
-import time
+import formatNumber
 
 @post("/api-unfollow")
 def _():
@@ -10,21 +10,23 @@ def _():
         if not user:
             raise Exception(400, "Not logged in")
 
-        id = user["user_id"]        
+        follower_id = user["user_id"]        
         db = x.db()
-        user_follower_id = db.execute("SELECT user_id FROM users WHERE user_id=?", (id,)).fetchone()
-        #print(user)
-        if not user_follower_id:
-            raise Exception(400, "User does not exist")
 
         user_followe_id = request.forms.get("user_followe_id", "")
         if not user_followe_id:
-            raise Exception(400, "Cannot unfollow")
+            raise Exception(400, "User not found")
       
-        db.execute(f"DELETE FROM following WHERE follower_fk=? AND followee_fk=?", (id, user_followe_id))  
+        deleted_rows = db.execute("DELETE FROM following WHERE follower_fk=? AND followee_fk=?", (follower_id, user_followe_id)).rowcount 
+        if not deleted_rows: raise Exception(400, "Unfollow successful, user not found")
+
+        newfollowercount = db.execute("SELECT user_total_followers FROM users WHERE user_id=?", (user_followe_id,)).fetchone()
+        if newfollowercount:
+            newfollowercount = formatNumber.human_format(newfollowercount["user_total_followers"])
+    
         db.commit()
        
-        return {"info": f"Succesful unfollow {user_followe_id, user_follower_id}"}
+        return {"info": f"Succesful unfollow {user_followe_id}", "follower_count": newfollowercount}
     except Exception as ex:
         print(ex)
         response.status = ex.args[0]

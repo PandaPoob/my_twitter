@@ -21,10 +21,12 @@ module.exports = {
       colors: {
         twitterblue: "#1d9bf0",
         twitterborder: "#2f3336",
+        twitterbuttonborder: "#536471",
         "twittergray-400": "#e7e9ea",
         "twittergray-500": "#71767b",
         "twittergray-800": "#202327",
         "twittergray-900": "#16181c",
+        twitterRed: "#f4212e",
       },
       maxWidth: {
         layout: "1800px",

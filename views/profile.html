@@ -85,7 +85,7 @@
 
           <div class="relative flex justify-end px-4">
             <button
-              class="absolute z-10 left-4 translate-y-[-50%] flex max-w-[25%] h-auto rounded-full bg-black p-[3px]"
+              class="absolute z-10 left-4 translate-y-[-50%] flex max-w-[23%] h-auto rounded-full bg-black p-[3px]"
             >
               % if user["user_img_avatar"]:
               <img
@@ -100,7 +100,7 @@
               <!-- prettier-ignore -->
               %if logged_user and logged_user["user_id"] != user["user_id"]:
               <button
-                class="rounded-full border border-twittergray-500 p-1.5 hover:bg-white hover:bg-opacity-10"
+                class="rounded-full border border-twitterbuttonborder p-1 hover:bg-white hover:bg-opacity-10"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -131,7 +131,7 @@
               <!-- prettier -->
               %if logged_user and logged_user["user_id"] == user["user_id"]:
               <button
-                class="text-base text-black font-bold bg-white rounded-full hover:bg-opacity-90 py-1.5 px-4"
+                class="text-base text-white font-bold border border-twitterbuttonborder rounded-full hover:bg-white hover:bg-opacity-10 py-1.5 px-4 hover:transition-all"
               >
                 Edit profile
               </button>
@@ -139,8 +139,12 @@
 
               <!-- prettier -->
 
-              %if logged_user and logged_user["user_id"] and isFollowing:
-              <form onsubmit="unfollow(); return false;">
+              %if logged_user and logged_user["user_id"] != user["user_id"]:
+              <form  
+              % if not isFollowing:
+              style="display:none"
+              %end
+              id="profile_unfollow_form" onsubmit="unfollow(); return false;">
                 <input
                   type="text"
                   name="user_followe_id"
@@ -149,15 +153,20 @@
                 />
                 <button
                   type="submit"
-                  class="text-base text-black font-bold bg-white rounded-full hover:bg-opacity-90 py-1.5 px-4"
+                  class="text-base text-white font-bold border-twitterbuttonborder border rounded-full min-w-[6.5rem] py-1.5 px-4 hover:border-twitterRed hover:bg-twitterRed hover:bg-opacity-10 group"
                 >
+                <span class="hidden group-hover:block text-twitterRed">
                   Unfollow
+                </span>
+                  <span class="group-hover:hidden">Following</span>
                 </button>
               </form>
+         
+              <form 
+              % if isFollowing:
+                style="display:none"
               %end
-              <!-- prettier-ignore -->
-              %if logged_user and logged_user["user_id"] and isFollowing == False:
-              <form onsubmit="follow(); return false;">
+              id="profile_follow_form" onsubmit="follow(); return false;">
                 <input
                   type="text"
                   name="user_followe_id"
@@ -297,7 +306,7 @@
               </a>
 
               <a href="/" class="hover:underline">
-                <span class="font-bold">{{user["user_total_followers"]}}</span>
+                <span id="profile_followers_number" class="font-bold">{{user["user_total_followers"]}}</span>
                 <span class="text-twittergray-500">Followers</span>
               </a>
             </div>

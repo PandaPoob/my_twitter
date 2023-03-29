@@ -599,9 +599,9 @@ FROM users;
 ----TRIGGERS----
 SELECT name FROM sqlite_master WHERE type = "trigger";
 
+--TWEETS--
 --increase tweet count if user tweets 
 DROP TRIGGER IF EXISTS increment_user_total_tweets;
-
 CREATE TRIGGER increment_user_total_tweets AFTER INSERT ON tweets
 BEGIN 
     UPDATE users 
@@ -609,10 +609,8 @@ BEGIN
     WHERE user_id = NEW.tweet_user_fk;
 END;
 
-
 --decrease if tweet count on user if tweet is deleted
 DROP TRIGGER IF EXISTS decrement_user_total_tweets;
-
 CREATE TRIGGER decrement_user_total_tweets AFTER DELETE ON tweets
 BEGIN 
     UPDATE users 
@@ -620,7 +618,44 @@ BEGIN
     WHERE user_id = OLD.tweet_user_fk;
 END; 
 
---manual testing:
+--FOLLOWING--
+--increase follower count if user is followed
+DROP TRIGGER IF EXISTS increment_user_total_followers;
+CREATE TRIGGER increment_user_total_followers AFTER INSERT ON following
+BEGIN 
+    UPDATE users
+    SET user_total_followers = user_total_followers + 1
+    WHERE user_id = NEW.followee_fk;
+END;
+
+--decrease follower count if user is unfollowed
+DROP TRIGGER IF EXISTS decrement_user_total_followers;
+CREATE TRIGGER decrement_user_total_followers AFTER DELETE ON following
+BEGIN 
+    UPDATE users
+    SET user_total_followers = user_total_followers - 1
+    WHERE user_id = OLD.followee_fk;
+END;
+
+--increase followee count if user is followed
+DROP TRIGGER IF EXISTS increment_user_total_following;
+CREATE TRIGGER increment_user_total_following AFTER INSERT ON following
+BEGIN 
+    UPDATE users
+    SET user_total_following = user_total_following + 1
+    WHERE user_id = NEW.follower_fk;
+END;
+
+--decrease followee count if user is unfollowed
+DROP TRIGGER IF EXISTS decrement_user_total_following;
+CREATE TRIGGER decrement_user_total_following AFTER DELETE ON following
+BEGIN 
+    UPDATE users
+    SET user_total_following = user_total_following - 1
+    WHERE user_id = OLD.follower_fk;
+END;
+
+--MANUAL TESTING
 INSERT INTO tweets VALUES(
 "21e03682c6c348f09e3729ece60e4e90",
 "b3094c2f1c144817b7cc0b718fc3c644",
@@ -637,4 +672,6 @@ DELETE FROM tweets WHERE tweet_user_fk = "b3094c2f1c144817b7cc0b718fc3c644";
 
 DELETE FROM users WHERE user_id = "7b84f0ebbb5842249ec95cb1eeba44c9"; 
 
-DELETE FROM following WHERE follower_fk = '5ae1823bcc5648bd9e5bf6602ae397d6' AND followee_fk = '63bfa35aa8204270a6480557fddf9069';
+UPDATE users
+SET user_total_followers = 9999
+WHERE user_name = "my_name_cleo";
