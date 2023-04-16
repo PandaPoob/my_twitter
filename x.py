@@ -7,6 +7,7 @@ import calendar
 
 COOKIE_SECRET = "872437049d2a426f9d86f1ea58b4c901"
 ACC_STATUS_ACTIVE = "active"
+ACC_STATUS_INACTIVE = "inactive"
 
 def disable_cache():
     response.add_header("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0")

@@ -19,7 +19,7 @@ def _():
         if not user: raise Exception(400, "Cannot login")
         if not bcrypt.checkpw(user_password.encode("utf-8"), user["user_password"]):
             raise Exception(400, "Invalid credentials")
-
+        if user["user_account_status"] == "inactive": raise Exception(400, "Account has not been verified")
         try:
             import production
             is_cookie_https = True

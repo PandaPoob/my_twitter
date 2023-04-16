@@ -3,6 +3,7 @@ import x
 import bcrypt
 import uuid
 import time
+import sendEmail
 
 @post("/api-signup")
 def _():
@@ -16,6 +17,7 @@ def _():
 
         salt = bcrypt.gensalt()
         user_id = str(uuid.uuid4()).replace("-","")
+        user_api_key = str(uuid.uuid4()).replace("-","")
 
 
 
@@ -25,18 +27,21 @@ def _():
     "user_full_name": user_fullname,  
     "user_password": bcrypt.hashpw(user_password.encode('utf-8'), salt),
     "user_email" : user_email,
+    "user_phonenumber": "",
+    "user_api_key": user_api_key,
     "user_created_at" : int(time.time()),
     "user_updated_at" : int(time.time()),
     "user_img_avatar": "default.jpg",
     "user_img_cover": "default.jpg",
-    "user_verified": 0,
     "user_bio_text": "",
     "user_bio_location": "",
     "user_bio_link": "",
     "user_bio_birthday": str(user_birthday),
     "user_total_followers": 0,
     "user_total_following": 0,
-    "user_total_tweets": 0
+    "user_total_tweets": 0,
+    "user_twitterblue": False,
+    "user_account_status": x.ACC_STATUS_INACTIVE
         }
 
         values = ""
@@ -57,13 +62,14 @@ def _():
         
         db.commit()
         user.pop("user_password")
+        sendEmail.send_email(user_email, user_api_key)
         #print("pop", user)
         try:
             import production
             is_cookie_https = True
         except:
             is_cookie_https = False
-        response.set_cookie("user", user, secret=x.COOKIE_SECRET, httponly=True, secure=is_cookie_https)
+        #response.set_cookie("user", user, secret=x.COOKIE_SECRET, httponly=True, secure=is_cookie_https)
         return {
 			"info" : "user created", 
 			"user_id" : user_id,

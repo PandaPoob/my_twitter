@@ -40,132 +40,150 @@
         />
       </svg>
 
-      <h1 class="text-xl text-center mb-6">Sign up to Twitter</h1>
+      <h1 id="signup_h1" class="text-xl text-center mb-6">
+        Sign up to Twitter
+      </h1>
 
-      <form
-        class="flex flex-col"
-        onsubmit="validate(handleSubmitSignup); return false"
-      >
-        <label class="text-md mb-1" for="user_full_name">Name</label>
-        <input
-          class="h-10 text-black rounded-sm border-2 px-2 border-white focus:outline-none focus:border-twitterblue"
-          type="text"
-          id="user_full_name"
-          name="user_full_name"
-          placeholder="name"
-          data-validate="str"
-          data-min="{{fullname_min_length}}"
-          data-max="{{fullname_max_length}}"
-          error-msg-required="Name is required"
-          error-msg-len="{{fullname_error}}"
-        />
-        <p
-          id="user_full_name_error_msg"
-          class="hidden text-red-500 text-sm mt-1"
+      <div id="signup_form_container">
+        <form
+          class="flex flex-col"
+          onsubmit="validate(handleSubmitSignup); return false"
         >
-          Name is required
-        </p>
+          <label class="text-md mb-1" for="user_full_name">Name</label>
+          <input
+            class="h-10 text-black rounded-sm border-2 px-2 border-white focus:outline-none focus:border-twitterblue"
+            type="text"
+            id="user_full_name"
+            name="user_full_name"
+            placeholder="name"
+            data-validate="str"
+            data-min="{{fullname_min_length}}"
+            data-max="{{fullname_max_length}}"
+            error-msg-required="Name is required"
+            error-msg-len="{{fullname_error}}"
+          />
+          <p
+            id="user_full_name_error_msg"
+            class="hidden text-red-500 text-sm mt-1"
+          >
+            Name is required
+          </p>
 
-        <label class="mt-4 text-md mb-1" for="user_email">E-mail</label>
-        <input
-          class="h-10 text-black rounded-sm border-2 px-2 border-white focus:outline-none focus:border-twitterblue"
-          type="text"
-          id="user_email"
-          name="user_email"
-          placeholder="email"
-          data-validate="email"
-          error-msg-required="Email is required"
-          error-msg-len="Email is invalid"
-        />
-        <p id="user_email_error_msg" class="hidden text-red-500 text-sm mt-1">
-          Email is required
-        </p>
+          <label class="mt-4 text-md mb-1" for="user_email">E-mail</label>
+          <input
+            class="h-10 text-black rounded-sm border-2 px-2 border-white focus:outline-none focus:border-twitterblue"
+            type="text"
+            id="user_email"
+            name="user_email"
+            placeholder="email"
+            data-validate="email"
+            error-msg-required="Email is required"
+            error-msg-len="Email is invalid"
+          />
+          <p id="user_email_error_msg" class="hidden text-red-500 text-sm mt-1">
+            Email is required
+          </p>
 
-        <label class="mt-4 text-md mb-1" for="user_birthday">Birthday</label>
-        <input
-          class="h-10 text-black rounded-sm border-2 px-2 border-white focus:outline-none focus:border-twitterblue"
-          type="date"
-          id="user_birthday"
-          name="user_birthday"
-          max="{{birthday_max}}"
-          data-validate="birthday"
-          error-msg-required="Birthday is required"
-          error-msg-len="{{birthday_error}}"
-        />
-        <p
-          id="user_birthday_error_msg"
-          class="hidden text-red-500 text-sm mt-1"
-        >
-          Birthday is required
-        </p>
+          <label class="mt-4 text-md mb-1" for="user_birthday">Birthday</label>
+          <input
+            class="h-10 text-black rounded-sm border-2 px-2 border-white focus:outline-none focus:border-twitterblue"
+            type="date"
+            id="user_birthday"
+            name="user_birthday"
+            max="{{birthday_max}}"
+            data-validate="birthday"
+            error-msg-required="Birthday is required"
+            error-msg-len="{{birthday_error}}"
+          />
+          <p
+            id="user_birthday_error_msg"
+            class="hidden text-red-500 text-sm mt-1"
+          >
+            Birthday is required
+          </p>
 
-        <label for="user_name" class="text-md mt-4 mb-1">Username</label>
-        <input
-          id="user_name"
-          class="h-10 text-black rounded-sm border-2 px-2 border-white focus:outline-none focus:border-twitterblue"
-          name="user_name"
-          placeholder="username"
-          type="text"
-          data-validate="str"
-          data-min="{{username_min_length}}"
-          data-max="{{username_max_length}}"
-          error-msg-required="Username is required"
-          error-msg-len="{{username_error}}"
-        />
-        <p id="user_name_error_msg" class="hidden text-red-500 text-sm mt-1">
-          Username is required
-        </p>
+          <label for="user_name" class="text-md mt-4 mb-1">Username</label>
+          <input
+            id="user_name"
+            class="h-10 text-black rounded-sm border-2 px-2 border-white focus:outline-none focus:border-twitterblue"
+            name="user_name"
+            placeholder="username"
+            type="text"
+            data-validate="str"
+            data-min="{{username_min_length}}"
+            data-max="{{username_max_length}}"
+            error-msg-required="Username is required"
+            error-msg-len="{{username_error}}"
+          />
+          <p id="user_name_error_msg" class="hidden text-red-500 text-sm mt-1">
+            Username is required
+          </p>
 
-        <label for="user_password" class="text-md mt-4 mb-1">Password</label>
-        <input
-          id="user_password"
-          class="h-10 text-black rounded-sm border-2 px-2 border-white focus:outline-none focus:border-twitterblue"
-          name="user_password"
-          placeholder="password"
-          type="password"
-          data-validate="str"
-          data-min="{{password_min_length}}"
-          data-max="{{password_max_length}}"
-          error-msg-required="Password is required"
-          error-msg-len="{{password_error}}"
-        />
-        <p
-          id="user_password_error_msg"
-          class="hidden text-red-500 text-sm mt-1"
-        >
-          Password is required
+          <label for="user_password" class="text-md mt-4 mb-1">Password</label>
+          <input
+            id="user_password"
+            class="h-10 text-black rounded-sm border-2 px-2 border-white focus:outline-none focus:border-twitterblue"
+            name="user_password"
+            placeholder="password"
+            type="password"
+            data-validate="str"
+            data-min="{{password_min_length}}"
+            data-max="{{password_max_length}}"
+            error-msg-required="Password is required"
+            error-msg-len="{{password_error}}"
+          />
+          <p
+            id="user_password_error_msg"
+            class="hidden text-red-500 text-sm mt-1"
+          >
+            Password is required
+          </p>
+          <label class="mt-4 text-md mb-1" for="confirm_password"
+            >Confirm Password</label
+          >
+          <input
+            class="h-10 text-black rounded-sm border-2 px-2 border-white focus:outline-none focus:border-twitterblue"
+            type="password"
+            id="confirm_password"
+            name="confirm_password"
+            placeholder="confirm password"
+            data-match-name="user_password"
+            data-validate="match"
+            error-msg-required="Confirmed password is required"
+            error-msg-len="Passwords must match"
+          />
+          <p
+            id="confirm_password_error_msg"
+            class="hidden text-red-500 text-sm mt-1"
+          >
+            Passwords must match
+          </p>
+          <button
+            type="submit"
+            class="flex justify-center items-center bg-twitterblue rounded-full text-lg font-bold py-3 mt-8 hover:bg-opacity-[90%] h-12"
+          >
+            Sign up
+          </button>
+        </form>
+        <p class="mt-6 text-sm">
+          Already have an account? Log in
+          <a href="/login" class="underline">here!</a>
         </p>
-        <label class="mt-4 text-md mb-1" for="confirm_password"
-          >Confirm Password</label
-        >
-        <input
-          class="h-10 text-black rounded-sm border-2 px-2 border-white focus:outline-none focus:border-twitterblue"
-          type="password"
-          id="confirm_password"
-          name="confirm_password"
-          placeholder="confirm password"
-          data-match-name="user_password"
-          data-validate="match"
-          error-msg-required="Confirmed password is required"
-          error-msg-len="Passwords must match"
-        />
-        <p
-          id="confirm_password_error_msg"
-          class="hidden text-red-500 text-sm mt-1"
-        >
-          Passwords must match
+      </div>
+
+      <div id="signup_success_container" class="hidden">
+        <h2 class="font-bold text-xl mb-2">
+          You've successfully created your account!
+        </h2>
+        <p>
+          You should have received an email with a link where you can verify
+          your account. You need to verify your account before you can log in.
         </p>
-        <button
-          type="submit"
-          class="flex justify-center items-center bg-twitterblue rounded-full text-lg font-bold py-3 mt-8 hover:bg-opacity-[90%] h-12"
-        >
-          Sign up
-        </button>
-      </form>
-      <p class="mt-6 text-sm">
-        Already have an account? Log in
-        <a href="/login" class="underline">here!</a>
-      </p>
+        <p class="text-sm mt-2">
+          Verified your account? Log in
+          <a href="/login" class="underline">here!</a>
+        </p>
+      </div>
     </div>
     <script src="/js/validate.js"></script>
     <script src="/js/post_signup.js"></script>

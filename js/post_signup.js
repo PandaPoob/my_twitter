@@ -30,9 +30,13 @@ async function handleSubmitSignup() {
     const data = await resp.json();
     displayTip(data);
     return;
+  } else {
+    document.getElementById(`signup_form_container`).style.display = "none";
+    document.getElementById(`signup_success_container`).style.display = "block";
+    document.getElementById(`signup_h1`).style.display = "none";
   }
   const data = await resp.json();
 
   // Success go to profile page
-  location.href = `/${data.user_name}`;
+  //location.href = `/${data.user_name}`;
 }

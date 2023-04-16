@@ -5,7 +5,7 @@
   <body class="bg-black h-screen flex justify-center items-center text-white">
     <!-- toast error msg -->
     <div
-      id="toast_error_msg"
+      id="toast_error_msg_container"
       class="hidden fixed top-0 md:top-[4%] w-full md:w-1/3 items-center justify-center gap-4 bg-twittergray-800 md:rounded-md p-4"
     >
       <svg
@@ -20,9 +20,9 @@
           clip-rule="evenodd"
         />
       </svg>
-      <div class="">
-        <p class="text-red-400 text-lg mb-1">Invalid credentials</p>
-        <p class="text-twittergray-400 text-sm">Wrong username or password</p>
+      <div>
+        <p id="toast_error_msg_heading" class="text-red-400 text-lg mb-1"></p>
+        <p id="toast_error_msg_text" class="text-twittergray-400 text-sm"></p>
       </div>
     </div>
     <!-- end toast error msg -->
@@ -55,7 +55,7 @@
           id="user_name"
           class="h-10 text-black rounded-sm border-2 px-2 border-white focus:outline-none focus:border-twitterblue"
           name="user_name"
-          value="elonmusk"
+          value="my_name_cleo"
           placeholder="username"
           type="text"
           data-validate="str"
@@ -73,7 +73,7 @@
           id="user_password"
           class="h-10 text-black rounded-sm border-2 px-2 border-white focus:outline-none focus:border-twitterblue"
           name="user_password"
-          value="elonmuskpass"
+          value="my_name_cleopass"
           placeholder="password"
           type="password"
           data-validate="str"
