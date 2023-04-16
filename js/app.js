@@ -9,7 +9,7 @@ async function handleSubmitTweet() {
   const data = await resp.json();
 
   frm.reset();
-  if (data.tweet.user_verified == 1) {
+  if (data.tweet.user_twitterblue == 1) {
     document.querySelector("#tweets").insertAdjacentHTML(
       "afterbegin",
       ` <div

@@ -46,7 +46,7 @@
             <div>
               <div class="flex items-center gap-1">
                 <h1 class="text-xl font-bold">{{user["user_full_name"]}}</h1>
-                % if user["user_verified"] == "1":
+                % if user["user_twitterblue"]:
                 <svg
                   width="20"
                   height="20"
@@ -188,7 +188,7 @@
           <div class="px-4 pt-5 pb-1">
             <div class="flex items-center gap-1">
               <h2 class="text-xl font-bold">{{user["user_full_name"]}}</h2>
-              % if user["user_verified"] == "1":
+              % if user["user_twitterblue"]:
               <svg
                 width="20"
                 height="20"

@@ -44,6 +44,7 @@ import apis.api_login
 import apis.api_signup
 import apis.api_follow
 import apis.api_unfollow
+import apis.api_verify_email
 #import delete_later.api_send_sms
 
 @post("/upload-picture")
@@ -80,6 +81,7 @@ def _():
 ################################################
 #BRIDGES
 #import bridges.login
+
 @get("/logout")
 def _():
   x.disable_cache()
@@ -95,6 +97,7 @@ import views.profile
 import views.login
 import views.signup
 import views.test_follow
+import views.verify_user
 #import delete_later.test_sms
 
 ################################################

@@ -31,7 +31,7 @@ def _():
         db.commit()
         #SELECT Orders.OrderID, Orders.OrderDate, Customers.CustomerID, Customers.ContactName, Products.ProductID, Products.ProductName 
         #FROM orders 
-        tweet = db.execute("SELECT user_name, user_full_name, user_img_avatar, user_verified, tweet_id, tweet_created_at, tweet_field_text, tweet_field_img FROM users_and_tweets WHERE tweet_id=?", (tweet_id,)).fetchall()[0]
+        tweet = db.execute("SELECT user_name, user_full_name, user_img_avatar, user_twitterblue, tweet_id, tweet_created_at, tweet_field_text, tweet_field_img FROM users_and_tweets WHERE tweet_id=?", (tweet_id,)).fetchall()[0]
         if tweet['tweet_created_at']:
             month = time.strftime('%#m', time.localtime(tweet['tweet_created_at']))
             day = time.strftime('%#d', time.localtime(tweet['tweet_created_at']))
