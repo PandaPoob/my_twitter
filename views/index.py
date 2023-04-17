@@ -3,19 +3,20 @@ import time
 import calendar
 import x
 import formatNumber
+import jwt
 
 @get("/")
 def _():
     try:
         x.disable_cache()
         
-        logged_user = request.get_cookie("user", secret=x.COOKIE_SECRET)
-        
+        logged_user = request.get_cookie("user")
         db = x.db()
         
         tweets = db.execute("SELECT * FROM users_and_tweets ORDER BY users_and_tweets.tweet_created_at DESC LIMIT 0, 10").fetchall()
         trends = trends = db.execute("SELECT * FROM trends").fetchall()
         if logged_user:
+            logged_user = jwt.decode(logged_user, x.COOKIE_SECRET, algorithms=["HS256"])
             username = logged_user["user_name"]
             fsugg = db.execute("SELECT * FROM follower_suggestions WHERE NOT user_name=?",(username,)).fetchall()
             

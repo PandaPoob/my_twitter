@@ -1,6 +1,7 @@
 from bottle import post, request, response
 import x
 import bcrypt
+import jwt
 
 @post("/api-login")
 def _():
@@ -28,7 +29,14 @@ def _():
 
         user.pop("user_password")
         #print("pop", user)
-        response.set_cookie("user", user, secret=x.COOKIE_SECRET, httponly=True, secure=is_cookie_https)
+
+        #TODO create jwt on cookies
+        the_jwt = jwt.encode(user, x.COOKIE_SECRET, algorithm="HS256")
+        #print(the_jwt)
+        #jwt.decode(the_jwt, "the_secret", algorithms=["HS256"])
+
+        
+        response.set_cookie("user", the_jwt, httponly=True, secure=is_cookie_https)
         return {"info":"success login", "user_name":user["user_name"]}
     except Exception as e:
         print(e)
