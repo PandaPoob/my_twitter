@@ -45,6 +45,8 @@ import apis.api_signup
 import apis.api_follow
 import apis.api_unfollow
 import apis.api_verify_email
+import apis.api_search
+
 #import delete_later.api_send_sms
 
 @post("/upload-picture")

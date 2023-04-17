@@ -10,13 +10,16 @@
 
     <!-- search -->
     <div
-      class="fixed top-0 z-30 min-w-widget min-[1200px]:w-widgetxl lg:max-w-widget min-[1320px]:min-w-widgetxl bg-black py-1.5 mr-6 flex-grow"
+      class="fixed top-0 z-30 min-w-widget min-[1200px]:w-widgetxl lg:max-w-widget min-[1320px]:min-w-widgetxl bg-black pt-1.5 mr-6 flex-grow"
     >
       <form class="relative">
         <input
           class="w-full h-11 rounded-full bg-twittergray-800 text-base placeholder-twittergray-500 pl-12 focus:outline-none peer focus:border-twitterblue focus:border focus:bg-black"
           placeholder="Search Twitter"
           type="text"
+          oninput="search()"
+          onfocus="showSearchResults()"
+          onblur="hideSearchResults()"
         />
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -33,6 +36,11 @@
           />
         </svg>
       </form>
+      <div id="search_results_container" class="hidden min-h-[100px] bg-black rounded-md shadow-[0_0_10px_rgba(255,255,255,0.5)]
+      p-5">
+      <div id="search_result"></div>
+        <p class="text-base text-twittergray-500">Try searching for people, topics, or keywords</p>
+      </div>
     </div>
     <!-- search end -->
     % if not logged_user:

@@ -434,3 +434,33 @@ function getFollowerNumber(follower_number, operator) {
     }
   }
 }
+
+function showSearchResults(){
+  document.getElementById(`search_results_container`).classList.remove("hidden");
+
+
+}
+function hideSearchResults(){
+  document.getElementById(`search_results_container`).classList.add("hidden");
+
+}
+let the_timer
+function search(){
+  clearTimeout(the_timer);
+  the_timer = setTimeout(async function(){
+    //console.log("x")
+    const res = await fetch("/api-search", {
+      method: "POST"
+    })
+    const data = await res.json()
+    console.log(data)
+//TODO redo to insert adjacent html
+document.getElementById('search_results_container').innerHTML = data.map(result => 
+    `<div>
+      <div>Name: ${result.name}</div>
+    </div>`
+).join('')
+}, 500)
+
+}
+
