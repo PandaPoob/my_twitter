@@ -9,12 +9,16 @@ import jwt
 def _():
     try:
         x.disable_cache()
-        
+
+        #Get cookie if exists
         logged_user = request.get_cookie("user")
         db = x.db()
         
+        #Fetch tweets and trends
         tweets = db.execute("SELECT * FROM users_and_tweets ORDER BY users_and_tweets.tweet_created_at DESC LIMIT 0, 10").fetchall()
         trends = trends = db.execute("SELECT * FROM trends").fetchall()
+
+        #If cookie exists then decode
         if logged_user:
             logged_user = jwt.decode(logged_user, x.COOKIE_SECRET, algorithms=["HS256"])
             username = logged_user["user_name"]
@@ -23,7 +27,7 @@ def _():
         else:
             fsugg = db.execute("SELECT * FROM follower_suggestions").fetchall()
 
-           #format the tweet numbers
+        #Format the tweet numbers
         for i in range(len(tweets)):
             if tweets[i]['tweet_total_replies']:
                 tweets[i]['tweet_total_replies'] = formatNumber.human_format(tweets[i]['tweet_total_replies'])
@@ -42,7 +46,7 @@ def _():
                 day = time.strftime('%#d', time.localtime(tweets[i]['tweet_created_at']))
                 tweets[i]['tweet_created_at'] = f"{calendar.month_abbr[int(month)]} {day}"
                 
-           #format trends numbers
+        #Format trends numbers
         for i in range(len(trends)):
             if trends[i]['trend_total_tweets']:
                 #print(type(trends[i]['trend_total_tweets']))

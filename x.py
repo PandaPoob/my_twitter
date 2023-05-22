@@ -5,20 +5,36 @@ import re
 import datetime
 import calendar
 
+#COOKIE VARIABLE#
 COOKIE_SECRET = "872437049d2a426f9d86f1ea58b4c901"
+
+#USER ACCOUNT STATUS VARIABLES#
 ACC_STATUS_ACTIVE = "active"
 ACC_STATUS_INACTIVE = "inactive"
+
+#TWEET TYPE VARIABLES#
+TWEET_TYPE_DEFAULT = "default"
+TWEET_TYPE_COMMENT = "comment"
+TWEET_TYPE_RETWEET = "retweet"
+TWEET_TYPE_QUOTE = "quote"
 
 def disable_cache():
     response.add_header("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0")
     response.add_header("Pragma", "no-cache")
     response.add_header("Expires", 0)
 
-
 def dict_factory(cursor, row):
   col_names = [col[0] for col in cursor.description]
   return {key: value for key, value in zip(col_names, row)}
 
+def prepare_values():
+    values = ""
+    for key in user:
+        values += f":{key},"
+    values = values.rstrip(",")
+    print(values)
+    return values
+       
 
 def db():
   try:
