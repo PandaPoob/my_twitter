@@ -799,6 +799,10 @@ video {
   width: 100vw;
 }
 
+.w-\[50\%\] {
+  width: 50%;
+}
+
 .min-w-\[6\.5rem\] {
   min-width: 6.5rem;
 }
@@ -930,9 +934,35 @@ video {
   gap: 2rem;
 }
 
+.gap-\[2px\] {
+  gap: 2px;
+}
+
+.gap-\[\'2px\'\] {
+  gap: '2px';
+}
+
 .gap-x-3 {
   -moz-column-gap: 0.75rem;
        column-gap: 0.75rem;
+}
+
+.gap-x-0 {
+  -moz-column-gap: 0px;
+       column-gap: 0px;
+}
+
+.gap-x-0\.5 {
+  -moz-column-gap: 0.125rem;
+       column-gap: 0.125rem;
+}
+
+.gap-y-0 {
+  row-gap: 0px;
+}
+
+.gap-y-0\.5 {
+  row-gap: 0.125rem;
 }
 
 .justify-self-end {

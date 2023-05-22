@@ -21,6 +21,11 @@
   % if len(imgtweets) == 6:
     <div class="text-white mt-16">6 in array</div>
     % end
+    
+ % for images in tweet["tweet_images"]:
+       
+        % end
+
 
 using python in html
 <span>{{print("hello")}}</span>

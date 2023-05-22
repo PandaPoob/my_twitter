@@ -53,6 +53,7 @@ create TABLE tweet_images(
   tweet_images_id         VARCHAR(35) UNIQUE NOT NULL,
   tweet_images_tweet_fk   VARCHAR(35) NOT NULL,
   tweet_images_url        VARCHAR(40) UNIQUE NOT NULL,
+  tweet_images_order      INT DEFAULT 0,
   PRIMARY KEY(tweet_images_id)
 ) WITHOUT ROWID;
 

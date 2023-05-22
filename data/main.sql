@@ -609,6 +609,36 @@ INSERT INTO tweets VALUES(
 "default");
 
 --cleo image tweets
+
+--2 images
+INSERT INTO tweets VALUES(
+"930afbfbac414b0b86ba12e729851e9e",
+"d6517288b0a04e298c69646b10bb6d45",
+"b3094c2f1c144817b7cc0b718fc3c644",
+"1684791456",
+"0",
+"2 images",
+"0",
+"0",
+"0",
+"0",
+"",
+"default");
+--3 images
+INSERT INTO tweets VALUES(
+"ea7619edbb3c45baaabadae28284ccd7",
+"7dca2077157f4f6a87cd161f39699202",
+"b3094c2f1c144817b7cc0b718fc3c644",
+"1684791447",
+"0",
+"3 images",
+"0",
+"0",
+"0",
+"0",
+"",
+"default");
+--4 images
 INSERT INTO tweets VALUES(
 "c448657ea0c147ae8fe96e52259ae4f1",
 "ac0d55a60cf1423fb2379b3fd3c7ac76",
@@ -624,29 +654,73 @@ INSERT INTO tweets VALUES(
 "default");
 
 --TWEET IMAGES--
+--2 images
+--cleo img 1
+INSERT INTO tweet_images VALUES(
+"97b6dda4bc6a4385a11aee583eea2bfb",
+"930afbfbac414b0b86ba12e729851e9e",
+"fdb40744451c42b9b9b2a7783c74d612.jpg",
+0
+
+);
+--cleo img 2
+INSERT INTO tweet_images VALUES(
+"3891efbc4b624ae4953af7ee4b34f912",
+"930afbfbac414b0b86ba12e729851e9e",
+"afe45385e58142b8ad97352dcbf2357b.jpg",
+1
+);
+
+--3 images
+--cleo img 1
+INSERT INTO tweet_images VALUES(
+"8198acaeced34d74a36e4e0c1dafeb25",
+"ea7619edbb3c45baaabadae28284ccd7",
+"a95f2d8bc71d49f683cf0454e353313c.jpg",
+0
+);
+--cleo img 2
+INSERT INTO tweet_images VALUES(
+"f5c2e26f6272468293aac3f124646ac4",
+"ea7619edbb3c45baaabadae28284ccd7",
+"f1b3379a3ae8464b9c17d0c2f3036563.jpg",
+1
+);
+--cleo img 3
+INSERT INTO tweet_images VALUES(
+"b7e2861999034a6082969ff894201759",
+"ea7619edbb3c45baaabadae28284ccd7",
+"616987ec6c1249abb9e77b340870c0ae.jpg",
+2
+);
+--4 images
 --cleo img 1
 INSERT INTO tweet_images VALUES(
 "9ee51d54b2a543398ca60d39bee836c8",
 "c448657ea0c147ae8fe96e52259ae4f1",
-"904ec11f3ee54c38a4db0fb1083ba98f.jpg"
+"904ec11f3ee54c38a4db0fb1083ba98f.jpg",
+0
 );
 --cleo img 2
 INSERT INTO tweet_images VALUES(
 "ad2e4fafd91a4fdd85218a52375f429c",
 "c448657ea0c147ae8fe96e52259ae4f1",
-"857061796b524905992dad4262b85409.jpg"
+"857061796b524905992dad4262b85409.jpg",
+1
 );
 --cleo img 3
 INSERT INTO tweet_images VALUES(
 "7a6b1ecc22e542dbb01494032ea333bc",
 "c448657ea0c147ae8fe96e52259ae4f1",
-"80c60357741d4aa59600eaf1d5b949e6.jpg"
+"80c60357741d4aa59600eaf1d5b949e6.jpg",
+2
 );
 --cleo img 4
 INSERT INTO tweet_images VALUES(
 "d7f1eb1390bb4c4da5d2146d00b2937f",
 "c448657ea0c147ae8fe96e52259ae4f1",
-"cb6d0e1e2b03493c95ebf63dc4c6d7d8.jpg"
+"cb6d0e1e2b03493c95ebf63dc4c6d7d8.jpg",
+3
 );
 
 
@@ -654,182 +728,218 @@ INSERT INTO tweet_images VALUES(
 INSERT INTO tweet_images VALUES(
 "eb7415d6efec4f6d8099cb6de949218c",
 "500151d40e26414f82b9aca854c5a059",
-"00b087641d6e4c8b955564a6c8c3bb86.jpg"
+"00b087641d6e4c8b955564a6c8c3bb86.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "3ed6be65e1464998a92c7a4dda011810",
 "3c417a8c92d244dc80e7b2c2a5def367",
-"ea9cedd1220342dc8d4f9d76e823b958.jpg"
+"ea9cedd1220342dc8d4f9d76e823b958.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "02217f4997544b77aaf7c6266ee5f295",
 "1b45faeadfb046f4a90c0c151b86ca6a",
-"de2351efcc294e2d8796d5d8cf2a7631.jpg"
+"de2351efcc294e2d8796d5d8cf2a7631.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "4dbb5c61880e4203ad408faf88b799c0",
 "4b88a9d72171459ca1b4690d1a8c3792",
-"0f8ee582f1a24f3397191c564ef83393.jpg"
+"0f8ee582f1a24f3397191c564ef83393.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "fe2e1d53ec1e41a79e34d0fa0001bf5c",
 "58838f22d6be43ffae7d73585d5e2b76",
-"d00e6595f9bc47558c45f30bd34a66d0.jpg"
+"d00e6595f9bc47558c45f30bd34a66d0.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "a7fc853fb9ca4adb81167798ed82c8ac",
 "b7d54f24ac224981b41d33c68fc54323",
-"9323fd150fd84cf9991f38017db33d4d.jpg"
+"9323fd150fd84cf9991f38017db33d4d.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "3e940b31d75c49aea51d5262224a02e3",
 "d14d81bdc33d4953b0acec2867a899c7",
-"94df910b1d774b6bae0bbd314f6be012.jpg"
+"94df910b1d774b6bae0bbd314f6be012.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "05f88adc4282407ba9aa01cbd89216df",
 "b66b072968e84e98b67d342e4c92a5ef",
-"94c438d98f2940cc8f8e711f4227458d.jpg"
+"94c438d98f2940cc8f8e711f4227458d.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "8954c33aa3fd4ba1b79c05e02b1af3fd",
 "0355140a4ddf4601b472918a34e70684",
-"f4127dbd14fe42b5ac5d856d1f5a207e.jpg"
+"f4127dbd14fe42b5ac5d856d1f5a207e.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "186dc3aa1b9f4d0db137ee0852a0c4c7",
 "40adb4f73536454aa083ab2d016f639a",
-"f7036717e88d499c8e1b727fd5befbf2.jpg"
+"f7036717e88d499c8e1b727fd5befbf2.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "f163c4e7111c4e9f8a5716d697effe70",
 "0a1ec9740bc1473f981d6a396ddd5b58",
-"0f9fe9d6487e4374855565e5a42a3d05.jpg"
+"0f9fe9d6487e4374855565e5a42a3d05.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "5947237d40384dec8638cabab704bcff",
 "8382c24d21a94d2fa252b07da288f070",
-"fc0f8c2cce82492f87fd932b43203441.jpg"
+"fc0f8c2cce82492f87fd932b43203441.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "1cb4e361f92b4c9cb98c9b31470f7ee0",
 "e165daf4ec884838bd47eb0da9a1f000",
-"4b4e450df49847bfb778df8620dafb83.jpg"
+"4b4e450df49847bfb778df8620dafb83.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "20fa71b714544b9881f60fae91cc1d35",
 "198c648b70304d7483c0e10fa1c5525c",
-"f4709b9b8faa449daf02194f74ffd11b.jpg"
+"f4709b9b8faa449daf02194f74ffd11b.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "ca925d6f37d74d6b9261bb0c8c5559e0",
 "a62046b4a2054d9f99608931ef29c4d5",
-"e701f27cda9d47e0bfb368ee8da0ac57.jpg"
+"e701f27cda9d47e0bfb368ee8da0ac57.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "00e116e2926541d1932876f60d64f7e7",
 "b6173e050d4d4aa9a1fda4eb675f6221",
-"05b95fe121cd4e6dbaf8537535cfbc9f.jpg"
+"05b95fe121cd4e6dbaf8537535cfbc9f.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "87739451b3d74a0cb649767a9cbec705",
 "9a8280289f5547369e7cddbeb1a9aded",
-"6d3eafc75f684c6cabf316e30a694733.jpg"
+"6d3eafc75f684c6cabf316e30a694733.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "f3acdbb231e54dec8209a0022016b39d",
 "8b0fbf87efbb4e478a27c804e54b3cb3",
-"1bb6806142544c56a0a852bde5ad72fb.jpg"
+"1bb6806142544c56a0a852bde5ad72fb.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "bd836c5ea82640bc8f2069bfeecfdc34",
 "47b32482e78e48d093579c3f683132e1",
-"0a4fe639da1f4ee9a6663b3f58587a35.jpg"
+"0a4fe639da1f4ee9a6663b3f58587a35.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "247fdd9df15f4f28b33e3686aee5cf44",
 "bccee4843924480eb2d6931306d8fe78",
-"d638319190bb438889ed0937c9165ec8.jpg"
+"d638319190bb438889ed0937c9165ec8.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "d42f2144fe9146ed8162490a3917515c",
 "e596244e073542c79d35725493086937",
-"0982cc95f1c94dd89424bd6b82adaeec.jpg"
+"0982cc95f1c94dd89424bd6b82adaeec.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "429c60a2bafa431da6f841194c1bb985",
 "3f335349141f44a494c316ad9ae221fd",
-"2509765d56a1433a899e9085c0a9cd6d.jpg"
+"2509765d56a1433a899e9085c0a9cd6d.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "7c5f72b7884c446eb50a329b9576f70a",
 "5f7b3fff1dc24e7191bc979469b8b96c",
-"839bb1e244794a5da287905f8f99f2ea.jpg"
+"839bb1e244794a5da287905f8f99f2ea.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "1ddc77565dde4220b6a37b04a33c2b1a",
 "8d92eace86dc43a38170ce37b1d8be7f",
-"063da388b0354d8b916e55790a2bf0e3.jpg"
+"063da388b0354d8b916e55790a2bf0e3.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "5e2d89d78c0347638bed142c4d5cd3e3",
 "87b42f1e8a104867b46156b54321d2c8",
-"a1197371a154438aaa6b9ba095fd375c.jpg"
+"a1197371a154438aaa6b9ba095fd375c.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "ba76e4eccf0b4f89b590f59eb09a8244",
 "cc0613085c4c4cb5936e6fe80ccbee29",
-"a56d6f7687614a2687ec0a572f164a06.jpg"
+"a56d6f7687614a2687ec0a572f164a06.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "17d6d7a333c24b32a86dd0096e2cf0ea",
 "d908a55a28e046fabfd3f17c0df4a6dd",
-"5b479f72b43942e9b90e76f3a56a9cb8.jpg"
+"5b479f72b43942e9b90e76f3a56a9cb8.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "363a6b6d449a47cab61894b4567e12d0",
 "60e8710079ef4270ab58b2a899f830ea",
-"e7f9793f47fe4f3987f9421076c1e8a7.jpg"
+"e7f9793f47fe4f3987f9421076c1e8a7.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "d0c4752d90df41d49ceb4fb9c71acded",
 "369cf2b563854d329454fe4e1cd50180",
-"2c18896c071c413ba7b5a486db486507.jpg"
+"2c18896c071c413ba7b5a486db486507.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "1329d13d91d545baafd34b4f91fbf65d",
 "2e0dcbb08cb640159473613c9c3ea846",
-"492a20d2d41a460cbeca455d46222aaf.jpg"
+"492a20d2d41a460cbeca455d46222aaf.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "add97f677d5249238ec869ba150f9abe",
 "c292b44280144e4c90c478d4cd918963",
-"54ebc81108b3499cb34eea26d2a9f8f6.jpg"
+"54ebc81108b3499cb34eea26d2a9f8f6.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "ca56c655b80243889aaa96c21e37c854",
 "3f94b2e783d64cbfbf02ca02930c2cb6",
-"742a5ff48cd44923b44368555aaa4823.jpg"
+"742a5ff48cd44923b44368555aaa4823.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "038e37218527449d9a9948cf5fcb03c2",
 "c1ddc98ab86e4f3dab760ad3de5f2c6c",
-"7d0fc49cfd724209a963d4295c948f1b.jpg"
+"7d0fc49cfd724209a963d4295c948f1b.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "fa140188016e42ebb155933d7771889d",
 "2dc09c9d72cf439486e1132a8d5b715c",
-"5b5a30b53450494eb9c888a448e081a1.jpg"
+"5b5a30b53450494eb9c888a448e081a1.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "80fcc0a646a74d7d837c6813838c372a",
 "d6b67fc55de147ae8889f0d6187dcc50",
-"c562c04d276e4c6f83a3e541f84687a7.jpg"
+"c562c04d276e4c6f83a3e541f84687a7.jpg",
+0
 );
 INSERT INTO tweet_images VALUES(
 "1412e4f80fbf42d1817178f808e42e20",
 "1cde54c0b01444f0940c5422ad679381",
-"3d4392e7dbe144ed8bb7756c1eb729f9.jpg"
+"3d4392e7dbe144ed8bb7756c1eb729f9.jpg",
+0
 );
 
 --MANUAL TESTING--

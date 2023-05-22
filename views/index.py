@@ -19,19 +19,11 @@ def _():
        
         #Fetch images of tweets
         for i in range(len(tweets)):
-            tweet_images = db.execute("SELECT * FROM tweet_images WHERE tweet_images.tweet_images_tweet_fk=?", (tweets[i]["tweet_id"],)).fetchall()
+            tweet_images = db.execute("SELECT * FROM tweet_images WHERE tweet_images.tweet_images_tweet_fk=? ORDER BY tweet_images.tweet_images_order ASC", (tweets[i]["tweet_id"],)).fetchall()
             
-            #Declare new key
-            tweets[i]['tweet_images'] = []
-           
-            #Loop images and add them to Tweet
-            for tweet_image in tweet_images:
-                if tweet_image["tweet_images_tweet_fk"] == tweets[i]["tweet_id"]:
-                    tweet_images_list = []
-                    tweet_images_list.append(tweet_image)
-                    tweets[i]['tweet_images'] = tweet_images_list
-                    
-        
+            #Declare new key and add image list
+            tweets[i]['tweet_images'] = tweet_images
+
         #Fetch trends
         trends = db.execute("SELECT * FROM trends").fetchall()
 
@@ -68,7 +60,7 @@ def _():
         for i in range(len(trends)):
             if trends[i]['trend_total_tweets']:
                 trends[i]['trend_total_tweets'] = formatNumber.human_format(trends[i]['trend_total_tweets'])
-           
+
         return template("index", min_length=x.TWEET_MIN_LEN, max_length=x.TWEET_MAX_LEN, tweets=tweets, trends=trends, fsugg=fsugg, logged_user=logged_user)
     except Exception as ex:
         print("error", ex)

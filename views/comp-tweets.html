@@ -83,8 +83,58 @@
         <p class="text-base mt-1 mb-2">{{tweet["tweet_field_text"]}}</p>
         % end
         <!-- tweet image display-->
-        % for image in tweet["tweet_images"]:
-        <div>hey</div>
+        % if len(tweet["tweet_images"]) == 1:
+        <div class="">
+          % for images in tweet["tweet_images"]:
+          <img
+            class="rounded-xl w-full h-full object-cover"
+            alt="{{tweet['user_full_name']}} tweet image"
+            src="/images/tweet_imgs/{{images['tweet_images_url']}}"
+          />
+          % end
+        </div>
+        % elif len(tweet["tweet_images"]) == 2:
+        <div class="flex gap-0.5">
+          % for images in tweet["tweet_images"]:
+          <img
+            class="rounded-xl w-full h-full object-cover"
+            alt="{{tweet['user_full_name']}} tweet image"
+            src="/images/tweet_imgs/{{images['tweet_images_url']}}"
+          />
+          % end
+        </div>
+        % elif len(tweet["tweet_images"]) == 3:
+        <div class="flex gap-0.5">
+          <div class="w-[50%]">
+            <img
+              class="rounded-xl w-full h-full object-cover"
+              alt="{{tweet['user_full_name']}} tweet image"
+              src="/images/tweet_imgs/{{tweet['tweet_images'][0]['tweet_images_url']}}"
+            />
+          </div>
+          <div class="w-[50%] flex flex-col gap-0.5">
+            <img
+              class="rounded-xl w-full h-full object-cover"
+              alt="{{tweet['user_full_name']}} tweet image"
+              src="/images/tweet_imgs/{{tweet['tweet_images'][1]['tweet_images_url']}}"
+            />
+            <img
+              class="rounded-xl w-full h-full object-cover"
+              alt="{{tweet['user_full_name']}} tweet image"
+              src="/images/tweet_imgs/{{tweet['tweet_images'][2]['tweet_images_url']}}"
+            />
+          </div>
+        </div>
+        % elif len(tweet["tweet_images"]) == 4:
+        <div class="grid grid-cols-2 gap-0.5">
+          % for images in tweet["tweet_images"]:
+          <img
+            class="rounded-xl w-full h-full object-cover"
+            alt="{{tweet['user_full_name']}} tweet image"
+            src="/images/tweet_imgs/{{images['tweet_images_url']}}"
+          />
+          % end
+        </div>
         % end
       </div>
       <!-- tweet icons -->
