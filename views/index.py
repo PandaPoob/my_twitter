@@ -14,9 +14,26 @@ def _():
         logged_user = request.get_cookie("user")
         db = x.db()
         
-        #Fetch tweets and trends
+        #Fetch 10 latest tweets
         tweets = db.execute("SELECT * FROM users_and_tweets ORDER BY users_and_tweets.tweet_created_at DESC LIMIT 0, 10").fetchall()
-        trends = trends = db.execute("SELECT * FROM trends").fetchall()
+       
+        #Fetch images of tweets
+        for i in range(len(tweets)):
+            tweet_images = db.execute("SELECT * FROM tweet_images WHERE tweet_images.tweet_images_tweet_fk=?", (tweets[i]["tweet_id"],)).fetchall()
+            
+            #Declare new key
+            tweets[i]['tweet_images'] = []
+           
+            #Loop images and add them to Tweet
+            for tweet_image in tweet_images:
+                if tweet_image["tweet_images_tweet_fk"] == tweets[i]["tweet_id"]:
+                    tweet_images_list = []
+                    tweet_images_list.append(tweet_image)
+                    tweets[i]['tweet_images'] = tweet_images_list
+                    
+        
+        #Fetch trends
+        trends = db.execute("SELECT * FROM trends").fetchall()
 
         #If cookie exists then decode
         if logged_user:
@@ -26,7 +43,8 @@ def _():
             
         else:
             fsugg = db.execute("SELECT * FROM follower_suggestions").fetchall()
-
+          
+        
         #Format the tweet numbers
         for i in range(len(tweets)):
             if tweets[i]['tweet_total_replies']:
@@ -45,15 +63,15 @@ def _():
                 month = time.strftime('%#m', time.localtime(tweets[i]['tweet_created_at']))
                 day = time.strftime('%#d', time.localtime(tweets[i]['tweet_created_at']))
                 tweets[i]['tweet_created_at'] = f"{calendar.month_abbr[int(month)]} {day}"
-                
+        
         #Format trends numbers
         for i in range(len(trends)):
             if trends[i]['trend_total_tweets']:
-                #print(type(trends[i]['trend_total_tweets']))
                 trends[i]['trend_total_tweets'] = formatNumber.human_format(trends[i]['trend_total_tweets'])
            
         return template("index", min_length=x.TWEET_MIN_LEN, max_length=x.TWEET_MAX_LEN, tweets=tweets, trends=trends, fsugg=fsugg, logged_user=logged_user)
-    except:
+    except Exception as ex:
+        print("error", ex)
         return "error"
 
     finally:

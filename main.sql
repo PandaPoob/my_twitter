@@ -51,7 +51,7 @@ CREATE TABLE tweets(
 DROP TABLE IF EXISTS tweet_images;
 create TABLE tweet_images(
   tweet_images_id         VARCHAR(35) UNIQUE NOT NULL,
-  tweet_images_tweet_fk   VARCHAR(35) UNIQUE NOT NULL,
+  tweet_images_tweet_fk   VARCHAR(35) NOT NULL,
   tweet_images_url        VARCHAR(40) UNIQUE NOT NULL,
   PRIMARY KEY(tweet_images_id)
 ) WITHOUT ROWID;
@@ -77,21 +77,12 @@ CREATE TABLE following(
 ) WITHOUT ROWID;
 
 -----VIEWS-----
---This view is to get both tweets and images
-DROP VIEW IF EXISTS [tweets_with_images];
-CREATE VIEW tweets_with_images
-AS
-SELECT * FROM tweets
-JOIN tweet_images
-ON tweets.tweet_id = tweet_images.tweet_images_tweet_fk;
-
 --This view is to get the user, tweets and images--
-DROP VIEW IF EXISTS [users_and_tweets_with_images];
-CREATE VIEW users_and_tweets_with_images
+DROP VIEW IF EXISTS [users_and_tweets];
+CREATE VIEW users_and_tweets
 AS
 SELECT * FROM tweets
-JOIN users ON users.user_id = tweets.tweet_user_fk
-JOIN tweet_images ON tweets.tweet_id = tweet_images.tweet_images_tweet_fk;
+JOIN users ON users.user_id = tweets.tweet_user_fk;
 
 --This view is for follow suggestions so we do not get unnecessary info--
 DROP VIEW IF EXISTS [follower_suggestions];

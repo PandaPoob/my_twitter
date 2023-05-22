@@ -624,11 +624,31 @@ INSERT INTO tweets VALUES(
 "default");
 
 --TWEET IMAGES--
+--cleo img 1
 INSERT INTO tweet_images VALUES(
 "9ee51d54b2a543398ca60d39bee836c8",
 "c448657ea0c147ae8fe96e52259ae4f1",
 "904ec11f3ee54c38a4db0fb1083ba98f.jpg"
 );
+--cleo img 2
+INSERT INTO tweet_images VALUES(
+"ad2e4fafd91a4fdd85218a52375f429c",
+"c448657ea0c147ae8fe96e52259ae4f1",
+"857061796b524905992dad4262b85409.jpg"
+);
+--cleo img 3
+INSERT INTO tweet_images VALUES(
+"7a6b1ecc22e542dbb01494032ea333bc",
+"c448657ea0c147ae8fe96e52259ae4f1",
+"80c60357741d4aa59600eaf1d5b949e6.jpg"
+);
+--cleo img 4
+INSERT INTO tweet_images VALUES(
+"d7f1eb1390bb4c4da5d2146d00b2937f",
+"c448657ea0c147ae8fe96e52259ae4f1",
+"cb6d0e1e2b03493c95ebf63dc4c6d7d8.jpg"
+);
+
 
 
 INSERT INTO tweet_images VALUES(
@@ -825,7 +845,6 @@ INSERT INTO tweets VALUES(
 "0",
 "0");
 
-
 DELETE FROM tweets WHERE tweet_user_fk = "b3094c2f1c144817b7cc0b718fc3c644"; 
 
 DELETE FROM users WHERE user_id = "7b84f0ebbb5842249ec95cb1eeba44c9"; 
@@ -833,3 +852,8 @@ DELETE FROM users WHERE user_id = "7b84f0ebbb5842249ec95cb1eeba44c9";
 UPDATE users
 SET user_total_followers = 9999
 WHERE user_name = "my_name_cleo";
+
+SELECT * FROM tweets
+JOIN users ON users.user_id = tweets.tweet_user_fk
+JOIN tweet_images ON tweets.tweet_id = tweet_images.tweet_images_tweet_fk
+WHERE users.user_name = "my_name_cleo";
