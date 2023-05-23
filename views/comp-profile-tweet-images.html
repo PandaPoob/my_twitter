@@ -1,0 +1,32 @@
+
+    <div
+    %if len(imgtweets) == 2:
+        class="grid grid-cols-2 gap-0.5 rounded-xl overflow-hidden md:min-h-[160px] lg:min-h-[200px]"
+
+    %elif len(imgtweets) == 3:
+        class="grid grid-cols-2 grid-rows-[100px_minmax(100px,100px)] gap-0.5 rounded-xl overflow-hidden md:min-h-[160px] lg:min-h-[200px] [&>*:nth-child(1)]:row-span-2"
+
+    %elif len(imgtweets) == 4:
+        class="grid grid-cols-2 grid-rows-[100px_minmax(100px,100px)] gap-0.5 rounded-xl overflow-hidden md:min-h-[160px] lg:min-h-[200px]"
+
+    %elif len(imgtweets) == 5:
+        class="grid grid-cols-6 md:grid-rows-[80px_minmax(80px,80px)] lg:grid-rows-[100px_minmax(100px,100px)] gap-0.5 rounded-xl overflow-hidden md:max-h-[160px] lg:max-h-[200px] [&>*:nth-child(1)]:col-span-3 [&>*:nth-child(2)]:col-span-3 [&>*:nth-last-child(-n+3)]:col-span-2"
+
+    %elif len(imgtweets) == 6:
+        class="grid grid-cols-3 lg:grid-rows-[100px_minmax(100px,100px)] gap-0.5 rounded-xl overflow-hidden md:min-h-[160px] lg:min-h-[200px]"
+
+    %end
+      >
+      <!-- prettier-ignore -->
+      % for image in imgtweets:
+      <a href="" class="flex">
+        <img
+          class="w-full object-cover"
+          src="/images/tweet_imgs/{{image['tweet_image_url']}}"
+          alt=""
+        />
+      </a>
+      % end
+    </div>
+    <!-- elif -->
+

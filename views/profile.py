@@ -46,9 +46,7 @@ def _(username):
             fsugg = db.execute("SELECT * FROM follower_suggestions WHERE NOT user_name=?",(username,)).fetchall()
         
         #Get 6 latest image tweets
-        #@todo this is insane select pls fix
-        imgtweets = db.execute("SELECT tweet_image_url, tweet_id FROM tweet_images JOIN tweets ON tweet_images.tweet_image_tweet_fk=tweets.tweet_id JOIN users ON users.user_id=tweets.tweet_user_fk WHERE users.user_id=? ORDER BY tweet_images.tweet_image_created_at DESC, tweet_images.tweet_image_order ASC LIMIT 0, 6", (profile_id,)).fetchall()
-        print(imgtweets)
+        imgtweets = db.execute("SELECT tweet_image_url, tweet_id FROM tweet_images JOIN tweets ON tweet_image_tweet_fk=tweet_id JOIN users ON user_id=tweet_user_fk WHERE user_id=? ORDER BY tweet_created_at DESC, tweet_image_order ASC LIMIT 0, 6", (profile_id,)).fetchall()
         
        #Format profile numbers
         if profile['user_total_followers']:
@@ -60,8 +58,8 @@ def _(username):
         if profile['user_total_tweets']:
             profile["user_total_tweets"] = formatNumber.human_format(profile['user_total_tweets'])
         
-
         #format the tweet numbers
+        #@todo maybe make this general func
         if len(tweets) != 0:
             for i in range(len(tweets)):
                 if tweets[i]['tweet_total_replies']:
@@ -87,13 +85,13 @@ def _(username):
             if trends[i]['trend_total_tweets']:
                 trends[i]['trend_total_tweets'] = formatNumber.human_format(trends[i]['trend_total_tweets'])
 
-        #Format date @todo maybe make this general func
+        #Format date
         if profile['user_created_at']:
             year = time.strftime('%Y', time.localtime(profile["user_created_at"]))
             month = time.strftime('%#m', time.localtime(profile["user_created_at"]))
             profile["user_created_at"] = f"Joined {calendar.month_name[int(month)]} {year}"
 
-        #Boolean for whether profile is logged user's
+        #Boolean for whether logged_user follows profile
         isFollowing = False
         if logged_user:
             following = db.execute("SELECT * FROM following WHERE follower_fk=?", (logged_user["user_id"],)).fetchall()

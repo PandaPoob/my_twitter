@@ -731,8 +731,6 @@ INSERT INTO tweet_images VALUES(
 "1684775108"
 );
 
-
-
 INSERT INTO tweet_images VALUES(
 "eb7415d6efec4f6d8099cb6de949218c",
 "500151d40e26414f82b9aca854c5a059",
@@ -987,17 +985,82 @@ INSERT INTO tweet_images VALUES(
 );
 
 --MANUAL TESTING--
+--profile image tweets
 INSERT INTO tweets VALUES(
-"21e03682c6c348f09e3729ece60e4e90",
-"b3094c2f1c144817b7cc0b718fc3c644",
-"1677607833",
-"My first tweet",
+"73eee66e077c41fd8d4a9e2614450518",
+"01302392cca04bfca50b7aab67b438a2",
+"79719555b96049059e00dd672a37c8e5",
+"1684836489",
+"0",
+"1 image",
+"0",
+"0",
+"0",
+"0",
 "",
+"default");
+
+INSERT INTO tweets VALUES(
+"b839286df428480d8e693094ed51afec",
+"0dca6667a87e4a56be99506070292b23",
+"79719555b96049059e00dd672a37c8e5",
+"1684728488",
+"0",
+"1 image",
 "0",
 "0",
 "0",
 "0",
-"0");
+"",
+"default");
+
+--TWEET IMAGES FOR PROFILE--
+INSERT INTO tweet_images VALUES(
+"227e9c08d4bb44e3b80442299f5cb0da",
+"73eee66e077c41fd8d4a9e2614450518",
+"59bdcf753d0a41eb9f4b122f1ddb4df0.jpg",
+0,
+"1676287168"
+);
+INSERT INTO tweet_images VALUES(
+"6004aeaa0deb4c5090577a0570f179c3",
+"73eee66e077c41fd8d4a9e2614450518",
+"0e3992695687482ca4353df97360dd2e.jpg",
+1,
+"1676287168"
+);
+INSERT INTO tweet_images VALUES(
+"cffbfbfa5e7440c0b1a04bb2bef6bf82",
+"73eee66e077c41fd8d4a9e2614450518",
+"2af42445a39c4cf68d5f71be570be32b.jpg",
+2,
+"1676287168"
+);
+INSERT INTO tweet_images VALUES(
+"651f6e4c66234c67b7b57b3d9f78dc02",
+"73eee66e077c41fd8d4a9e2614450518",
+"832f5ac15c474ce4b0e918efe3f8d0fb.jpg",
+3,
+"1676287168"
+);
+INSERT INTO tweet_images VALUES(
+"6c07d9227bd546579c0b7cadb80e9897",
+"b839286df428480d8e693094ed51afec",
+"a4bff06e0a9b4b9c9bfd831a6e462e91.jpg",
+0,
+"1684728488"
+);
+INSERT INTO tweet_images VALUES(
+"b9508208eef744cda483402ee2c6c27b",
+"b839286df428480d8e693094ed51afec",
+"209cb256b1f2415c92a4014db15c503b.jpg",
+1,
+"1684728488"
+);
+
+DELETE FROM tweet_images WHERE tweet_image_id = "651f6e4c66234c67b7b57b3d9f78dc02"; 
+
+DELETE FROM tweet_images WHERE tweet_image_tweet_fk = "b839286df428480d8e693094ed51afec"; 
 
 DELETE FROM tweets WHERE tweet_user_fk = "b3094c2f1c144817b7cc0b718fc3c644"; 
 

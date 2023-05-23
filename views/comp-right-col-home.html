@@ -1,0 +1,31 @@
+<div
+  class="relative hidden md:flex flex-col pb-1 mr-6 min-w-widget max-w-widget min-[1200px]:w-widgetxl min-[1200px]:max-w-widgetxl lg:max-w-widget min-[1320px]:min-w-widgetxl"
+>
+  % if logged_user:
+  <!-- only display these if logged in -->
+  <!-- search -->
+  % include('comp-search-form')
+  <!-- trends -->
+  <!-- prettier-ignore -->
+  <div class="mt-16">
+    % include('comp-trends', trends=trends)
+  </div>
+  <div class="sticky top-16">
+    <!-- follower suggestions -->
+    % include('comp-follower-suggestions', fsugg=fsugg)
+    <!-- footer -->
+    % include('comp-footer')
+  </div>
+
+  %end
+
+  <!-- signup comp -->
+  % if not logged_user:
+  <!-- prettier-ignore -->
+  <div class="mt-1.5">
+    % include('comp-signup-cta')
+  </div>
+  % include('comp-footer')
+  <!-- signup comp end -->
+  %end
+</div>

@@ -1,0 +1,53 @@
+<div
+  class="relative hidden md:flex flex-col pb-1 mr-6 min-w-widget max-w-widget min-[1200px]:w-widgetxl min-[1200px]:max-w-widgetxl lg:max-w-widget min-[1320px]:min-w-widgetxl"
+>
+  <!-- search -->
+  % include('comp-search-form')
+  <!-- search end -->
+
+  <!-- signup comp -->
+  % if not logged_user:
+  <!-- prettier-ignore -->
+  <div class="mt-16">
+    % include('comp-signup-cta')
+  </div>
+  %end
+  <!-- signup comp end -->
+
+  <!-- tweet images -->
+  % if len(imgtweets) >= 2:
+  <!-- prettier-ignore -->
+  <div 
+    %if logged_user:
+      class="mt-16"
+    %else:
+      class="mt-4"
+    %end
+  >
+      % include('comp-profile-tweet-images', fsugg=fsugg)
+  </div>
+  % end
+  <!-- tweet images end -->
+
+  <!-- follower suggestions -->
+  <!-- prettier-ignore -->
+  <div
+    %if logged_user and len(imgtweets) <= 1:
+    class="mt-12"
+    %end
+  >
+      % include('comp-follower-suggestions', fsugg=fsugg)
+  </div>
+
+  <!-- follower suggestions end-->
+
+  <div class="sticky top-12">
+    <!-- trends -->
+    <div class="mt-4">
+      <!-- prettier-ignore -->
+      % include('comp-trends', trends=trends)
+    </div>
+    <!-- footer -->
+    % include('comp-footer')
+  </div>
+</div>

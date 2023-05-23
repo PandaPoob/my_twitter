@@ -1,0 +1,43 @@
+<div class="w-full bg-twittergray-900 pt-3 mr-4 rounded-xl">
+  <h2 class="text-xl font-bold px-4 pb-2">Trends for you</h2>
+  <ul>
+    % for trend in trends:
+    <li class="relative">
+      <a
+        class="relative flex flex-col gap-1 hover:bg-white hover:bg-opacity-[3%] p-4"
+        href="/"
+      >
+        <span class="block font-bold text-base"> {{trend["trend_title"]}}</span>
+        <span class="text-sm text-twittergray-500"
+          >{{trend["trend_total_tweets"]}} Tweets</span
+        >
+      </a>
+      <button
+        class="absolute top-4 right-4 rounded-full p-1 group hover:bg-twitterblue hover:bg-opacity-10"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6 text-twittergray-500 group-hover:text-twitterblue"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+          />
+        </svg>
+      </button>
+    </li>
+    % end
+  </ul>
+
+  <a
+    href=""
+    class="w-full flex justify-start p-4 text-twitterblue text-base rounded-b-md hover:bg-white hover:bg-opacity-[3%]"
+  >
+    Show more
+  </a>
+</div>

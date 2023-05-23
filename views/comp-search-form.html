@@ -1,0 +1,37 @@
+<div
+  class="fixed top-0 z-30 min-w-widget min-[1200px]:w-widgetxl lg:max-w-widget min-[1320px]:min-w-widgetxl bg-black pt-1.5 pb-1 mr-6 flex-grow"
+>
+  <form class="relative">
+    <input
+      class="w-full h-11 rounded-full bg-twittergray-800 text-base placeholder-twittergray-500 pl-12 focus:outline-none peer focus:border-twitterblue focus:border focus:bg-black"
+      placeholder="Search Twitter"
+      type="text"
+      oninput="search()"
+      onfocus="showSearchResults()"
+      onblur="hideSearchResults()"
+    />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="w-5 h-5 absolute text-twittergray-500 top-3 left-4 peer-focus:text-twitterblue"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+      />
+    </svg>
+  </form>
+  <div
+    id="search_results_container"
+    class="hidden min-h-[100px] bg-black rounded-md shadow-[0_0_10px_rgba(255,255,255,0.5)] p-5"
+  >
+    <div id="search_result"></div>
+    <p class="text-base text-twittergray-500">
+      Try searching for people, topics, or keywords
+    </p>
+  </div>
+</div>
