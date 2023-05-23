@@ -11,15 +11,18 @@ def _():
         x.disable_cache()
 
         #Get cookie if exists
-        logged_user = request.get_cookie("user")
+        logged_user = x.request_cookie()
+
+        #Open database
         db = x.db()
         
         #Fetch 10 latest tweets
         tweets = db.execute("SELECT * FROM users_and_tweets ORDER BY users_and_tweets.tweet_created_at DESC LIMIT 0, 10").fetchall()
        
-        #Fetch images of tweets
+        #Fetch images of tweets 
+        # @todo perhaps make this general 
         for i in range(len(tweets)):
-            tweet_images = db.execute("SELECT * FROM tweet_images WHERE tweet_images.tweet_images_tweet_fk=? ORDER BY tweet_images.tweet_images_order ASC", (tweets[i]["tweet_id"],)).fetchall()
+            tweet_images = db.execute("SELECT * FROM tweet_images WHERE tweet_images.tweet_image_tweet_fk=? ORDER BY tweet_images.tweet_image_order ASC", (tweets[i]["tweet_id"],)).fetchall()
             
             #Declare new key and add image list
             tweets[i]['tweet_images'] = tweet_images
@@ -29,15 +32,14 @@ def _():
 
         #If cookie exists then decode
         if logged_user:
-            logged_user = jwt.decode(logged_user, x.COOKIE_SECRET, algorithms=["HS256"])
+            logged_user = x.decode_cookie(logged_user)
             username = logged_user["user_name"]
             fsugg = db.execute("SELECT * FROM follower_suggestions WHERE NOT user_name=?",(username,)).fetchall()
             
         else:
             fsugg = db.execute("SELECT * FROM follower_suggestions").fetchall()
-          
-        
-        #Format the tweet numbers
+           
+        #Format tweet numbers
         for i in range(len(tweets)):
             if tweets[i]['tweet_total_replies']:
                 tweets[i]['tweet_total_replies'] = formatNumber.human_format(tweets[i]['tweet_total_replies'])

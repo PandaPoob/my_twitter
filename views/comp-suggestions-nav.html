@@ -54,16 +54,16 @@
 
     % if logged_user:
     <!-- latest img tweets -->
-    % if page == "profile" and len(imgtweets) == 6:
+    % if page == "profile" and len(imgtweets) >= 1:
     <div
       class="grid grid-cols-3 grid-rows-[100px_minmax(100px,100px)] gap-0.5 rounded-xl overflow-hidden mt-16"
     >
-      % for imgtweet in imgtweets:
+      % for image in imgtweets:
 
       <a href="" class="flex col-span-1 row-span-1">
         <img
           class="w-full object-cover"
-          src="/images/tweet_imgs/{{imgtweet['tweet_field_img']}}"
+          src="/images/tweet_imgs/{{image['tweet_image_url']}}"
           alt=""
         />
       </a>

@@ -50,11 +50,12 @@ CREATE TABLE tweets(
 --TWEET IMAGES--
 DROP TABLE IF EXISTS tweet_images;
 create TABLE tweet_images(
-  tweet_images_id         VARCHAR(35) UNIQUE NOT NULL,
-  tweet_images_tweet_fk   VARCHAR(35) NOT NULL,
-  tweet_images_url        VARCHAR(40) UNIQUE NOT NULL,
-  tweet_images_order      INT DEFAULT 0,
-  PRIMARY KEY(tweet_images_id)
+  tweet_image_id          VARCHAR(35) UNIQUE NOT NULL,
+  tweet_image_tweet_fk    VARCHAR(35) NOT NULL,
+  tweet_image_url         VARCHAR(40) UNIQUE NOT NULL,
+  tweet_image_order       INT DEFAULT 0,
+  tweet_image_created_at  INT NOT NULL,
+  PRIMARY KEY(tweet_image_id)
 ) WITHOUT ROWID;
 
 

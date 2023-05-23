@@ -8,41 +8,57 @@ import formatNumber
 def _(username):
     try:
         x.disable_cache()
-
-        logged_user = request.get_cookie("user", secret=x.COOKIE_SECRET)
-      
+        
+        #Get cookie if exists
+        logged_user = x.request_cookie()
+        
+        #Open database
         db = x.db()
-    
-        user = db.execute("SELECT * FROM users WHERE user_name=? COLLATE NOCASE", (username,)).fetchall()[0]
+
+        #Fetch profile
+        profile = db.execute("SELECT * FROM users WHERE user_name=? COLLATE NOCASE", (username,)).fetchall()[0]
         
-        user_id = user["user_id"]
-        #print(f"user id: {user_id}")
-        tweets = db.execute("SELECT * FROM users_and_tweets WHERE tweet_user_fk=? ORDER BY users_and_tweets.tweet_created_at DESC LIMIT 0, 10", (user_id,)).fetchall()
+        #Profile id
+        profile_id = profile["user_id"]
+
+        #Fetch tweets
+        tweets = db.execute("SELECT * FROM users_and_tweets WHERE tweet_user_fk=? ORDER BY users_and_tweets.tweet_created_at DESC LIMIT 0, 10", (profile_id,)).fetchall()
         
-        #get trends
+        #Fetch images of tweets 
+        # @todo perhaps make this general 
+        for i in range(len(tweets)):
+            tweet_images = db.execute("SELECT * FROM tweet_images WHERE tweet_images.tweet_image_tweet_fk=? ORDER BY tweet_images.tweet_image_order ASC", (tweets[i]["tweet_id"],)).fetchall()
+            
+            #Declare new key and add image list
+            tweets[i]['tweet_images'] = tweet_images
+
+        #Fetch trends
         trends = db.execute("SELECT * FROM trends").fetchall()
         
-        #get follower suggestions
+        #If cookie exists then decode
+        #@todo show only relevant
         if logged_user:
+            logged_user = x.decode_cookie(logged_user)
             username = logged_user["user_name"]
+            #Fetch follower suggestions
             fsugg = db.execute("SELECT * FROM follower_suggestions WHERE NOT user_name=?",(username,)).fetchall()
         else:
             fsugg = db.execute("SELECT * FROM follower_suggestions WHERE NOT user_name=?",(username,)).fetchall()
         
-
-        #get img tweets
-        imgtweets = db.execute("SELECT * FROM tweets WHERE tweet_field_img <> '' AND tweet_user_fk=? ORDER BY tweets.tweet_created_at DESC LIMIT 0, 6", (user_id,)).fetchall()
-     
-
-       #format user numbers
-        if user['user_total_followers']:
-            user["user_total_followers"] = formatNumber.human_format(user['user_total_followers'])
+        #Get 6 latest image tweets
+        #@todo this is insane select pls fix
+        imgtweets = db.execute("SELECT tweet_image_url, tweet_id FROM tweet_images JOIN tweets ON tweet_images.tweet_image_tweet_fk=tweets.tweet_id JOIN users ON users.user_id=tweets.tweet_user_fk WHERE users.user_id=? ORDER BY tweet_images.tweet_image_created_at DESC, tweet_images.tweet_image_order ASC LIMIT 0, 6", (profile_id,)).fetchall()
+        print(imgtweets)
         
-        if user['user_total_following']:
-            user["user_total_following"] = formatNumber.human_format(user['user_total_following'])
+       #Format profile numbers
+        if profile['user_total_followers']:
+            profile["user_total_followers"] = formatNumber.human_format(profile['user_total_followers'])
+        
+        if profile['user_total_following']:
+            profile["user_total_following"] = formatNumber.human_format(profile['user_total_following'])
        
-        if user['user_total_tweets']:
-            user["user_total_tweets"] = formatNumber.human_format(user['user_total_tweets'])
+        if profile['user_total_tweets']:
+            profile["user_total_tweets"] = formatNumber.human_format(profile['user_total_tweets'])
         
 
         #format the tweet numbers
@@ -66,28 +82,27 @@ def _(username):
                     tweets[i]['tweet_created_at'] = f"{calendar.month_abbr[int(month)]} {day}"
                 
         
-        #format trends numbers
+        #Format trends numbers
         for i in range(len(trends)):
             if trends[i]['trend_total_tweets']:
-                #print(type(trends[i]['trend_total_tweets']))
                 trends[i]['trend_total_tweets'] = formatNumber.human_format(trends[i]['trend_total_tweets'])
 
-        #format date on user
-        if user['user_created_at']:
-            year = time.strftime('%Y', time.localtime(user["user_created_at"]))
-            month = time.strftime('%#m', time.localtime(user["user_created_at"]))
-            user["user_created_at"] = f"Joined {calendar.month_name[int(month)]} {year}"
+        #Format date @todo maybe make this general func
+        if profile['user_created_at']:
+            year = time.strftime('%Y', time.localtime(profile["user_created_at"]))
+            month = time.strftime('%#m', time.localtime(profile["user_created_at"]))
+            profile["user_created_at"] = f"Joined {calendar.month_name[int(month)]} {year}"
 
-        #who the logged in cookie user is following
+        #Boolean for whether profile is logged user's
         isFollowing = False
         if logged_user:
             following = db.execute("SELECT * FROM following WHERE follower_fk=?", (logged_user["user_id"],)).fetchall()
           
             for f in range(len(following)):   
-                if following[f]['followee_fk'] == user_id:
+                if following[f]['followee_fk'] == profile_id:
                     isFollowing = True
-        print(isFollowing)
-        return template("profile", user=user, tweets=tweets, trends=trends, fsugg=fsugg, imgtweets=imgtweets, logged_user=logged_user, isFollowing=isFollowing)
+
+        return template("profile", profile=profile, tweets=tweets, trends=trends, fsugg=fsugg, imgtweets=imgtweets, logged_user=logged_user, isFollowing=isFollowing)
     except Exception as ex:
         print(ex)
         return "error"

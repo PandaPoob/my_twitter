@@ -4,6 +4,7 @@ import sqlite3
 import re
 import datetime
 import calendar
+import jwt
 
 #COOKIE VARIABLE#
 COOKIE_SECRET = "872437049d2a426f9d86f1ea58b4c901"
@@ -22,6 +23,14 @@ def disable_cache():
     response.add_header("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0")
     response.add_header("Pragma", "no-cache")
     response.add_header("Expires", 0)
+
+def request_cookie():
+    logged_user = request.get_cookie("user")
+    return logged_user
+
+def decode_cookie(logged_user):
+    logged_user = jwt.decode(logged_user, COOKIE_SECRET, algorithms=["HS256"])
+    return logged_user
 
 def dict_factory(cursor, row):
   col_names = [col[0] for col in cursor.description]

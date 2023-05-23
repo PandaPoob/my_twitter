@@ -100,6 +100,7 @@ import views.login
 import views.signup
 import views.test_follow
 import views.verify_user
+import views.tweet
 #import delete_later.test_sms
 
 ################################################
