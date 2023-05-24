@@ -10,7 +10,7 @@
     method="POST"
     id="tweet_form"
     class="w-[90%] flex flex-col gap-2"
-    onsubmit="validate(handleSubmitTweet); return false"
+    onsubmit="handleSubmitTweet(); return false"
   >
     <textarea
       id="tweet_field_text"
@@ -20,12 +20,17 @@
       name="tweet_field_text"
       type="text"
       data-validate="str"
-      data-min="{{min_length}}"
       data-max="{{max_length}}"
       error-msg-required="msg is required"
       error-msg-len="error msg len"
     ></textarea>
-
+    <input
+      id="tweet_field_image"
+      name="tweet_field_image"
+      type="file"
+      multiple="multiple"
+      accept="image/jpeg, image/png, image/jpg"
+    />
     <div class="flex w-full fill-sky-500 items-center gap-1 pt-2 pl-3">
       <button class="rounded-full p-2 hover:bg-sky-500 hover:bg-opacity-20">
         <svg
@@ -97,6 +102,18 @@
       </button>
     </div>
   </form>
+  <script>
+    const imageInput = document.getElementById("tweet_field_image");
+    let imagesArray = [];
+    imageInput.addEventListener("change", () => {
+      const files = imageInput.files;
+      //validate here frontend wise?
+      for (let i = 0; i < files.length; i++) {
+        imagesArray.push(files[i]);
+      }
+      console.log(imagesArray);
+    });
+  </script>
   <script src="/js/post_tweet.js"></script>
   <script src="/js/validate.js"></script>
 </div>

@@ -4,35 +4,71 @@ import uuid
 import time
 import calendar
 import jwt
+import os, glob
+import magic
 
 @post("/tweet")
 def _():
     try:
-        #Backend validation 
-        x.validate_tweet()
-      
-        #Get cookie
-        logged_user = request.get_cookie("user")
-        
-        #If user cookie exists
-        if logged_user:
-        
+        x.disable_cache()
+        #Check if user is logged in
+        logged_user = x.request_cookie()
+        if not logged_user:
+            raise Exception(400, "Log in to tweet")
 
-        #Decode cookie
-            logged_user = jwt.decode(logged_user, x.COOKIE_SECRET, algorithms=["HS256"])
-            print(logged_user)
-        #Add headers
-            response.add_header("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0")
-            response.add_header("Pragma", "no-cache")
-            response.add_header("Expires", 0)
+        #Backend validation
+        #Validate tweet text
+        tweet_text = x.validate_tweet_field_text()
         
-        #Prepare data
+        #Make sure it is string
+        if not tweet_text:
+            tweet_text = str("")
+    
+        #Get tweet images
+        tweet_images = request.files.getall("tweet_field_image")
+
+        #Max 4 images
+        if len(tweet_images) > x.TWEET_MAX_IMG_NO: raise Exception(400, "tweet_field_image max images is 4")
+
+        if len(tweet_images) >= 1 and tweet_images[0].filename != "empty":
+            #Validate images
+            for tweet_image in tweet_images:
+
+            #Validate file type on ext
+                x.validate_image_type(tweet_image)
+
+                #Upload to temp folder
+                name, ext = os.path.splitext(tweet_image.filename)
+                tweet_image_name = str(uuid.uuid4().hex)
+                tweet_image.save(f"images/temp_imgs/{tweet_image_name+ext}")
+
+                #Validate image size
+                filesize = os.stat(f"images/temp_imgs/{tweet_image_name+ext}").st_size
+                x.validate_image_size(filesize)
+
+                #Validate image data filetype
+                filetype = magic.from_file(f"images/temp_imgs/{tweet_image_name+ext}")
+                x.validate_image_datatype(filetype)
+
+        #Validate tweet content
+        elif tweet_images[0].filename == "empty" and not tweet_text: raise Exception(400, "Tweet must have atleast 1 image or text")
+        
+        #REMEMBER DELETE IMAGES IN TEMP AFTER SUCCESFULL PUSH
+        #Decode cookie
+        if logged_user:        
+            logged_user = x.decode_cookie(logged_user)
+            x.disable_cache()
+        
+            #Prepare tweet data
+            tweet_id = str(uuid.uuid4().hex)
+            tweet_created_at = int(time.time())
             tweet = {
-                "tweet_id": str(uuid.uuid4().hex),
+                "tweet_id": tweet_id,
+                "tweet_slug": str(uuid.uuid4().hex),
                 "tweet_user_fk": logged_user["user_id"],
-                "tweet_created_at": int(time.time()),
-                "tweet_field_text": request.forms.get("tweet_field_text"),
+                "tweet_created_at": tweet_created_at,
                 "tweet_updated_at": 0,
+                "tweet_field_text": tweet_text,
                 "tweet_total_replies": 0,
                 "tweet_total_likes": 0,
                 "tweet_total_retweets": 0,
@@ -40,40 +76,64 @@ def _():
                 "tweet_parent_id": "",
                 "tweet_type": x.TWEET_TYPE_DEFAULT,
             }
-            tweet_id = str(uuid.uuid4().hex)
-            tweet_user_fk = logged_user["user_id"]
-            tweet_created_at = int(time.time())
-            tweet_field_text = request.forms.get("tweet_field_text")
-            tweet_field_img = ""
-            tweet_updated_at = "0"
-            tweet_total_replies = "0"
-            tweet_total_likes = "0"
-            tweet_total_retweets = "0"
-            tweet_total_views = "0"
 
-        #Open database
-            values = x.prepare_values()
-            print(30*"#")
-            print("values:", values)
+            values = x.prepare_values(tweet)
+            print(values)
 
+            #Open database
             db = x.db()
-            db.execute("INSERT INTO tweets VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",(tweet_id, tweet_user_fk, tweet_created_at, tweet_field_text, tweet_field_img, tweet_updated_at, tweet_total_replies, tweet_total_likes, tweet_total_retweets, tweet_total_views))
-            db.commit()
-          
-            #tweet = db.execute("SELECT user_name, user_full_name, user_img_avatar, user_twitterblue, tweet_id, tweet_created_at, tweet_field_text, tweet_field_img FROM users_and_tweets WHERE tweet_id=?", (tweet_id,)).fetchall()[0]
-        
+
+            #Insert tweets into database
+            db.execute(f"INSERT INTO tweets VALUES({values})", tweet)
+  
+            #Format date to frontend and immediate display      
             #if tweet['tweet_created_at']:
              #   month = time.strftime('%#m', time.localtime(tweet['tweet_created_at']))
               #  day = time.strftime('%#d', time.localtime(tweet['tweet_created_at']))
                # tweet['tweet_created_at'] = f"{calendar.month_abbr[int(month)]} {day}"
 
+            #if there are images then loop through them and upload to tweet_images
+            if len(tweet_images) >= 1 and tweet_images[0].filename != "empty":
+                for i in range(len(tweet_images)): 
+                    index = tweet_images[i]
+        
+                    #Upload to image folder
+                    name, ext = os.path.splitext(tweet_image.filename)
+                    tweet_image_url = str(uuid.uuid4().hex+ext)
+                    tweet_image.save(f"images/tweet_imgs/{tweet_image_url}")
+
+                    #Prepare image data
+                    tweet_image_data = {
+                        "tweet_image_id": str(uuid.uuid4().hex),
+                        "tweet_image_tweet_fk": tweet_id,
+                        "tweet_image_url": tweet_image_url,
+                        "tweet_image_order": index,
+                        "tweet_image_created_at": tweet_created_at,
+                    }
+                    img_values = x.prepare_values(tweet_image_data)
+                    print(img_values)
+
+                    #Insert tweet images in database
+                    db.execute(f"INSERT INTO tweet_images VALUES({img_values})", tweet_image_data)
+
+                    #delete temporary
+                #upoload
+
+            #db.commit()
+
 
         return {"info":"ok", "tweet":tweet}
     except Exception as ex:
-        #this exception is being called from x file, ex is error in x.py
-        
-        response.status = 400
-        return {"info": str(ex)}
-
-    finally: #Will always happen
+        try:
+            response.status = ex.args[0]
+            return {"info":ex.args[1]}
+        except:
+            response.status = 500
+            return {"info":str(ex)}
+        finally:
+            dir = 'images/temp_imgs'
+            filelist = glob.glob(os.path.join(dir, "*"))
+            for f in filelist:
+                os.remove(f)
+    finally:
         if "db" in locals(): db.close()

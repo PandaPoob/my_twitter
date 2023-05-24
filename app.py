@@ -74,9 +74,12 @@ def _():
 
         return {"info": "picture uploaded"}
     except Exception as ex:
-        print(ex)
-        response.status = ex.args[0]
-        return {"info":ex.args[1]}
+        try: # Controlled exception, usually comming from the x file
+            response.status = ex.args[0]
+            return {"info":ex.args[1]}
+        except: # Something unknown went wrong
+            response.status = 500
+            return {"info":str(ex)}
     finally:
         pass
  

@@ -1062,7 +1062,7 @@ DELETE FROM tweet_images WHERE tweet_image_id = "651f6e4c66234c67b7b57b3d9f78dc0
 
 DELETE FROM tweet_images WHERE tweet_image_tweet_fk = "b839286df428480d8e693094ed51afec"; 
 
-DELETE FROM tweets WHERE tweet_user_fk = "b3094c2f1c144817b7cc0b718fc3c644"; 
+DELETE FROM tweets WHERE tweet_id = "0497ba7c0bf841a2bbe4018f411f1612"; 
 
 DELETE FROM users WHERE user_id = "7b84f0ebbb5842249ec95cb1eeba44c9"; 
 

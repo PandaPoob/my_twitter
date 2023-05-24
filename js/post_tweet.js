@@ -1,16 +1,24 @@
 async function handleSubmitTweet() {
+  const tweet_field_images = document.getElementById("tweet_field_image").files;
   const frm = event.target;
+  //const test = new FormData(frm);
 
   const resp = await fetch("/tweet", {
     method: "POST",
     body: new FormData(frm),
   });
 
-  const data = await resp.json();
-  console.log(data);
+  if (!resp.ok) {
+    console.log("oops");
 
-  frm.reset();
-  if (data.tweet.user_twitterblue == 1) {
+    return;
+  } else {
+    const data = await resp.json();
+    console.log(data);
+  }
+
+  //frm.reset();
+  /*   if (data.tweet.user_twitterblue == 1) {
     document.querySelector("#tweets").insertAdjacentHTML(
       "afterbegin",
       ` <div
@@ -369,5 +377,5 @@ async function handleSubmitTweet() {
     );
   }
 
-  console.log(data);
+  console.log(data); */
 }

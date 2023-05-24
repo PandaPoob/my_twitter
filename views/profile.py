@@ -1,4 +1,4 @@
-from bottle import get, template, response, request
+from bottle import get, template
 import time
 import calendar
 import x

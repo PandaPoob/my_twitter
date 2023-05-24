@@ -1,9 +1,8 @@
-from bottle import get, template, request
+from bottle import get, template
 import time
 import calendar
 import x
 import formatNumber
-import jwt
 
 @get("/")
 def _():
@@ -62,8 +61,8 @@ def _():
         for i in range(len(trends)):
             if trends[i]['trend_total_tweets']:
                 trends[i]['trend_total_tweets'] = formatNumber.human_format(trends[i]['trend_total_tweets'])
-
-        return template("index", min_length=x.TWEET_MIN_LEN, max_length=x.TWEET_MAX_LEN, tweets=tweets, trends=trends, fsugg=fsugg, logged_user=logged_user)
+        #@todo remove min length
+        return template("index", max_length=x.TWEET_MAX_LEN, tweets=tweets, trends=trends, fsugg=fsugg, logged_user=logged_user)
     except Exception as ex:
         print("error", ex)
         return "error"

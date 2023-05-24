@@ -5,6 +5,7 @@ import re
 import datetime
 import calendar
 import jwt
+import os
 
 #COOKIE VARIABLE#
 COOKIE_SECRET = "872437049d2a426f9d86f1ea58b4c901"
@@ -19,6 +20,8 @@ TWEET_TYPE_COMMENT = "comment"
 TWEET_TYPE_RETWEET = "retweet"
 TWEET_TYPE_QUOTE = "quote"
 
+
+#GENERAL FUNCTIONS#
 def disable_cache():
     response.add_header("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0")
     response.add_header("Pragma", "no-cache")
@@ -36,15 +39,6 @@ def dict_factory(cursor, row):
   col_names = [col[0] for col in cursor.description]
   return {key: value for key, value in zip(col_names, row)}
 
-def prepare_values():
-    values = ""
-    for key in user:
-        values += f":{key},"
-    values = values.rstrip(",")
-    print(values)
-    return values
-       
-
 def db():
   try:
     db = sqlite3.connect(str(pathlib.Path(__file__).parent.resolve())+"/twitter.db")
@@ -57,16 +51,45 @@ def db():
   finally:
     pass
 
-####################################
-#tweet validation
-TWEET_MIN_LEN = 1
-TWEET_MAX_LEN = 8
+def prepare_values(vals):
+    values = ""
+    for key in vals:
+        values += f":{key},"
+    values = values.rstrip(",")
+    return values
 
-def validate_tweet():
-    error = f"tweet_field_text min {TWEET_MIN_LEN} max {TWEET_MAX_LEN} characters"
-    if len(request.forms.tweet_field_text) < TWEET_MIN_LEN: raise Exception(error)
-    if len(request.forms.tweet_field_text) > TWEET_MAX_LEN: raise Exception(error)
+#2mb for profile image and cover
+#VALIDATION FUNCTIONS#
+
+#Tweet field text#
+#@todo change max len to 280
+TWEET_MAX_LEN = 6
+TWEET_MAX_IMG_SIZE = 5000000 #5MB
+TWEET_MAX_IMG_NO = 4
+
+def validate_tweet_field_text():
+    error = f"tweet_field_text max {TWEET_MAX_LEN} characters"
+    if len(request.forms.tweet_field_text) > TWEET_MAX_LEN: raise Exception(400, error)
     return request.forms.get("tweet_field_text")
+
+def validate_image_size(filesize):
+    error = f"Max size per image is 5mb"
+    if filesize > TWEET_MAX_IMG_SIZE: raise Exception(400, error)
+    return
+
+def validate_image_type(tweet_image):
+    error = f"tweet_field_image only accepts file ext JPG, JPEG, PNG"
+    name, ext = os.path.splitext(tweet_image.filename)
+    if ext not in ('.png','.jpg','.jpeg'): raise Exception(400, error)
+    return
+
+def validate_image_datatype(filetype):
+    error = f"tweet_field_image only accepts datatype JPG, JPEG, PNG"
+    if "PNG image data" not in filetype and "JPEG image data" not in filetype:
+            raise Exception(400, error)
+    return
+
+
 
 ########################################################################
 USER_FULL_NAME_MIN = 2
