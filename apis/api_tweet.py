@@ -25,11 +25,20 @@ def _():
         #Get tweet images
         tweet_images = request.files.getall("tweet_field_image")
 
-        #Max 4 images
-        if len(tweet_images) > x.TWEET_MAX_IMG_NO: raise Exception(400, "tweet_field_image max images is 4")
+        #Get image amount
+        image_amount = 0
+        if len(tweet_images) >= 1 and tweet_images[0].filename == "empty":
+            image_amount = 0
+        elif len(tweet_images) > x.TWEET_MAX_IMG_NO:
+            #Max 4 images
+            raise Exception(400, "tweet_field_image max images is 4")
+        else:
+            image_amount = len(tweet_images)
 
-        if len(tweet_images) >= 1 and tweet_images[0].filename != "empty":
-            #Validate images
+        #Validate images
+        if image_amount >=1:
+            
+            #Loop images
             for tweet_image in tweet_images:
 
             #Validate file type on ext
@@ -49,9 +58,8 @@ def _():
                 x.validate_image_datatype(filetype)
 
         #Validate tweet content
-        elif tweet_images[0].filename == "empty" and not tweet_text: raise Exception(400, "Tweet must have atleast 1 image or text")
+        if image_amount == 0 and not tweet_text: raise Exception(400, "Tweet must have atleast 1 image or text")
         
-        #REMEMBER DELETE IMAGES IN TEMP AFTER SUCCESFULL PUSH
         #Decode cookie
         if logged_user:        
             logged_user = x.decode_cookie(logged_user)
@@ -67,7 +75,7 @@ def _():
                 "tweet_created_at": tweet_created_at,
                 "tweet_updated_at": 0,
                 "tweet_field_text": tweet_text,
-                "tweet_field_images": 0,
+                "tweet_field_images": image_amount,
                 "tweet_total_replies": 0,
                 "tweet_total_likes": 0,
                 "tweet_total_retweets": 0,
@@ -90,41 +98,46 @@ def _():
                # tweet['tweet_created_at'] = f"{calendar.month_abbr[int(month)]} {day}"
 
             #
-            image_amount = 0
+            
             #Check if there are images
-            if len(tweet_images) >= 1 and tweet_images[0].filename != "empty":
+            if image_amount >= 1:
                 #Loop, save and post
                 for i in range(len(tweet_images)): 
-                    index = int(i)
-                    #Upload to image folder
-                    name, ext = os.path.splitext(tweet_images[i].filename)
-                    tweet_image_url = str(uuid.uuid4().hex+ext)
-                    tweet_images[i].save(f"images/tweet_imgs/{tweet_image_url}")
+                    try:
+                        index = int(i)
+                        #Upload to image folder
+                        name, ext = os.path.splitext(tweet_images[i].filename)
+                        tweet_image_url = str(uuid.uuid4().hex+ext)
+                        tweet_images[i].save(f"images/tweet_imgs/{tweet_image_url}")
                     
-                    #Prepare image data
-                    tweet_image_data = {
-                        "tweet_image_id": str(uuid.uuid4().hex),
-                        "tweet_image_tweet_fk": tweet_id,
-                        "tweet_image_url": tweet_image_url,
-                        "tweet_image_order": index,
-                        "tweet_image_created_at": tweet_created_at,
-                    }
-                    img_values = x.prepare_values(tweet_image_data)
+                        #Prepare image data
+                        tweet_image_data = {
+                            "tweet_image_id": str(uuid.uuid4().hex),
+                            "tweet_image_tweet_fk": tweet_id,
+                            "tweet_image_url": tweet_image_url,
+                            "tweet_image_order": index,
+                            "tweet_image_created_at": tweet_created_at,
+                        }
+                        img_values = x.prepare_values(tweet_image_data)
 
-                    #Insert tweet images in database
-                    total_rows_inserted = db.execute(f"INSERT INTO tweet_images VALUES({img_values})", tweet_image_data).rowcount
-                    
-                    #for every count +1 into variable
-                    image_amount = total_rows_inserted + image_amount
-                    
-            print(image_amount)
+                        #Insert tweet images in database
+                        if index == 0:
+                            print("1 image")
+                        db.execute(f"INSERT INTO tweet_image VALUES({img_values})", tweet_image_data)
+                    except Exception as ex:
+                        #If insert fails then remove image from folder
+                        url = os.getcwd()+f"/images/tweet_imgs/{tweet_image_url}"
+                        os.remove(url, dir_fd = None)
+                        raise Exception(500, str(ex))
+
             #Commit
-            db.commit()
-            #Return necessary info 
+            #db.commit()
+            #Return necessary info
         return {"info":"ok", "tweet":tweet, "images": tweet_image_data}
     except Exception as ex:
         try:
             response.status = ex.args[0]
+            print("GOT HERE")
             return {"info":ex.args[1]}
         except:
             response.status = 500
@@ -133,6 +146,7 @@ def _():
             #clear temp images
             dir = 'images/temp_imgs'
             x.clear_img_folder(dir)
+            if "db" in locals(): db.rollback()
     finally:
         #clear temp images
         dir = 'images/temp_imgs'

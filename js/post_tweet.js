@@ -17,11 +17,12 @@ async function handleSubmitTweet() {
     frm.reset();
 
     console.log(typeof data.images);
-    render_tweet(data);
+    console.log(data.images);
+    //render_tweet(data);
   }
 
   function render_tweet(data) {
-    console.log(data);
+    //console.log(data);
     //this comes from data
     const imageNo = 2;
     const test = 1;

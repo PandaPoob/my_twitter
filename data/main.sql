@@ -21,7 +21,6 @@ BEGIN
     WHERE tweet_id = NEW.tweet_image_tweet_fk;
 END;
 
-
 --TWEETS--
   --11 elon musk tweets
 INSERT INTO tweets VALUES(
@@ -503,7 +502,6 @@ INSERT INTO tweets VALUES(
 "12000000",
 "",
 "default");
-
 
 --TWEETS IMAGES--
 INSERT INTO tweet_images VALUES(
