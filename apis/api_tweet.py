@@ -101,6 +101,8 @@ def _():
             
             #Check if there are images
             if image_amount >= 1:
+                
+                saved_images = []
                 #Loop, save and post
                 for i in range(len(tweet_images)): 
                     try:
@@ -109,7 +111,10 @@ def _():
                         name, ext = os.path.splitext(tweet_images[i].filename)
                         tweet_image_url = str(uuid.uuid4().hex+ext)
                         tweet_images[i].save(f"images/tweet_imgs/{tweet_image_url}")
-                    
+
+                        #Store url of saved imgs
+                        saved_images.append(tweet_image_url)
+
                         #Prepare image data
                         tweet_image_data = {
                             "tweet_image_id": str(uuid.uuid4().hex),
@@ -121,34 +126,35 @@ def _():
                         img_values = x.prepare_values(tweet_image_data)
 
                         #Insert tweet images in database
-                        if index == 0:
-                            print("1 image")
-                        db.execute(f"INSERT INTO tweet_image VALUES({img_values})", tweet_image_data)
+                        db.execute(f"INSERT INTO tweet_images VALUES({img_values})", tweet_image_data)
                     except Exception as ex:
-                        #If insert fails then remove image from folder
-                        url = os.getcwd()+f"/images/tweet_imgs/{tweet_image_url}"
-                        os.remove(url, dir_fd = None)
+                        #If insert fails then remove all images from folder
+                        print(saved_images)
+                        for saved_image in saved_images:
+                            print(saved_image)
+                            url = os.getcwd()+f"/images/tweet_imgs/{saved_image}"
+                            os.remove(url, dir_fd = None)
+                        
                         raise Exception(500, str(ex))
 
             #Commit
-            #db.commit()
-            #Return necessary info
+            db.commit()
         return {"info":"ok", "tweet":tweet, "images": tweet_image_data}
+    
     except Exception as ex:
         try:
             response.status = ex.args[0]
-            print("GOT HERE")
             return {"info":ex.args[1]}
         except:
             response.status = 500
             return {"info":str(ex)}
         finally:
-            #clear temp images
+            #Clear temp images
             dir = 'images/temp_imgs'
             x.clear_img_folder(dir)
             if "db" in locals(): db.rollback()
     finally:
-        #clear temp images
+        #Clear temp images
         dir = 'images/temp_imgs'
         x.clear_img_folder(dir)
         if "db" in locals(): db.close()
