@@ -2,11 +2,11 @@ import bcrypt
 import x
 db = x.db()
 
-user = db.execute("SELECT * FROM users WHERE user_name= 'elonmusk' ").fetchall()[0]
+user = db.execute("SELECT * FROM users WHERE user_name= 'my_name_cleo' ").fetchall()[0]
 
 salt = bcrypt.gensalt()
 pw = bcrypt.hashpw(user['user_password'].encode('utf-8'), salt)
-db.execute(f"UPDATE users SET user_password=? WHERE user_name = 'elonmusk'", (pw,))
+db.execute(f"UPDATE users SET user_password=? WHERE user_name = 'my_name_cleo'", (pw,))
 db.commit()
 db.close()
 

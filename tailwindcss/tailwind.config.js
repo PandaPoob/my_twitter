@@ -20,6 +20,7 @@ module.exports = {
       },
       colors: {
         twitterblue: "#1d9bf0",
+        twittergold: "#e2b719",
         twitterborder: "#2f3336",
         twitterbuttonborder: "#536471",
         "twittergray-400": "#e7e9ea",

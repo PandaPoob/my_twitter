@@ -2,9 +2,7 @@ from bottle import post, request, response
 import x
 import uuid
 import time
-import calendar
-import jwt
-import os, glob
+import os
 import magic
 
 @post("/tweet")
@@ -90,12 +88,13 @@ def _():
               #  day = time.strftime('%#d', time.localtime(tweet['tweet_created_at']))
                # tweet['tweet_created_at'] = f"{calendar.month_abbr[int(month)]} {day}"
 
+            #
+            image_amount = 0
             #Check if there are images
             if len(tweet_images) >= 1 and tweet_images[0].filename != "empty":
                 #Loop, save and post
                 for i in range(len(tweet_images)): 
                     index = int(i)
-
                     #Upload to image folder
                     name, ext = os.path.splitext(tweet_images[i].filename)
                     tweet_image_url = str(uuid.uuid4().hex+ext)
@@ -112,11 +111,16 @@ def _():
                     img_values = x.prepare_values(tweet_image_data)
 
                     #Insert tweet images in database
-                    db.execute(f"INSERT INTO tweet_images VALUES({img_values})", tweet_image_data)
+                    total_rows_inserted = db.execute(f"INSERT INTO tweet_images VALUES({img_values})", tweet_image_data).rowcount
+                    
+                    #for every count +1 into variable
+                    image_amount = total_rows_inserted + image_amount
+                    
+            print(image_amount)
             #Commit
             db.commit()
-
-        return {"info":"ok", "tweet":tweet}
+            #Return necessary info 
+        return {"info":"ok", "tweet":tweet, "images": tweet_image_data}
     except Exception as ex:
         try:
             response.status = ex.args[0]

@@ -1,6 +1,5 @@
 --USERS--
 INSERT INTO users VALUES("5ae1823bcc5648bd9e5bf6602ae397d6", "elonmusk", "Elon Musk", "elonmuskpass", "elonmusk@mail.com", "", "e265f79e1e4b4469a11bde9717b7162b", "1243814400", "1243814400", "5ae1823bcc5648bd9e5bf6602ae397d6.jpg", "ad3b5a9a8fe3471d814ff845b9671cc0.jpg", "", "", "", "", "128900000", "177", "22900", True, "active");
-INSERT INTO users VALUES("63bfa35aa8204270a6480557fddf9069", "shakira", "Shakira", "shakirapass", "shakira@mail.com", "", "9feb12d3732e4f32bfdf9c37a732541f", "1246406399", "1246406399", "63bfa35aa8204270a6480557fddf9069.jpg", "76a574041471471bb7a806ed197198aa.jpg", "MONOTONÍA YA DISPONIBLE", "Barranquilla", "linktr.ee/shakira", "November 30, 1998", "537000000", "235", "8002", True, "active");
 INSERT INTO users VALUES("96e7977bdaab4f0abe84e7ac18a864ec", "BLACKPINK", "BLACKPINKOFFICIAL", "blackpinkpass", "blackpink@mail.com",  "", "187d76aec40b44c1bf1df636a9cfe000", "1590969600", "1590969600", "96e7977bdaab4f0abe84e7ac18a864ec.jpg", "0684090441a743e6ba92eb42b4ee8816.jpg", "BLΛƆKPIИK", "", "lnk.to/YG_BLACKPINK", "", "8500000", "0", "892", True, "active");
 INSERT INTO users VALUES("a3fb674a90c84918968c2425e21e1a4e", "cat_auras", "cat with confusing auras.", "cat_auraspass", "cat_auras@mail.com", "", "a1780a8149dc45148cea5405c6adcbc4", "1654041600", "1654041600", "a3fb674a90c84918968c2425e21e1a4e.jpg", "0f0cb4cb07424f1ea0d0e87705cb1745.jpg", "Even cat can confuse “us”. | dm for credit or removal.", "", "catauras.com", "", "1600000", "15", "167", True, "active");
 INSERT INTO users VALUES("b3094c2f1c144817b7cc0b718fc3c644", "my_name_cleo", "Cleo", "my_name_cleopass", "my_name_cleo@mail.com", "", "046032e204ef4a0a8a76083f14485d54", "1677605053", "1677605053", "b3094c2f1c144817b7cc0b718fc3c644.jpg", "8e89394382ca44d2bb3cc45d067c2a7e.jpg", "I am a happy doge", "", "https://www.instagram.com/my_name_cleo/", "", "126", "0", "0", False, "inactive");
@@ -23,6 +22,7 @@ INSERT INTO tweets VALUES(
 "1676834368",
 "0",
 "",
+"0",
 "65786",
 "237100",
 "16400",
@@ -38,6 +38,7 @@ INSERT INTO tweets VALUES(
 "0",
 "All things in moderation, 
 especially content moderation",
+"0",
 "10000",
 "85700",
 "8082",
@@ -51,6 +52,7 @@ INSERT INTO tweets VALUES(
 "1676812768",
 "0",
 "BingChatGPT reminds me of Lucky in Waiting for Godot",
+"0",
 "4125",
 "63000",
 "4301",
@@ -64,6 +66,7 @@ INSERT INTO tweets VALUES(
 "1676798368",
 "0",
 "",
+"0",
 "14600",
 "461400",
 "31500",
@@ -77,6 +80,7 @@ INSERT INTO tweets VALUES(
 "1676719168",
 "0",
 "Surround your house with treadmills set to jogging speed to stop walking dead ur welcome",
+"0",
 "17300",
 "462500",
 "36800",
@@ -90,6 +94,7 @@ INSERT INTO tweets VALUES(
 "1676704768",
 "0",
 "Interesting",
+"0",
 "10800",
 "173700",
 "17800",
@@ -103,6 +108,7 @@ INSERT INTO tweets VALUES(
 "1676701168",
 "0",
 "",
+"0",
 "5991",
 "120600",
 "8351",
@@ -118,6 +124,7 @@ INSERT INTO tweets VALUES(
 "Note: if many people who you follow or like also follow me, it is highly probable that the algorithm will recommend my tweets. It’s not super sophisticated.
 
 In coming months, we will offer the ability to adjust the algorithm to closer match what is most compelling to you.",
+"0",
 "10400",
 "161800",
 "11500",
@@ -131,6 +138,7 @@ INSERT INTO tweets VALUES(
 "1676625568",
 "0",
 "What we need is TruthGPT",
+"0",
 "21300",
 "297300",
 "29600",
@@ -148,6 +156,7 @@ INSERT INTO tweets VALUES(
 We're taking the (obvious) corrective action of tying ads to keywords & topics in tweets, like Google does with search.
 
 This will improve contextual relevance dramatically.",
+"0",
 "7720",
 "126700",
 "8218",
@@ -161,6 +170,7 @@ INSERT INTO tweets VALUES(
 "1676607568",
 "0",
 "ChatGPT to the mainstream media",
+"0",
 "9747",
 "325300",
 "26900",
@@ -174,155 +184,11 @@ INSERT INTO tweets VALUES(
 "1676467168",
 "0",
 "He's great with numbers!",
+"0",
 "14900",
 "614200",
 "40100",
 "80600000",
-"",
-"default");
-
---11 shakira tweets
-INSERT INTO tweets VALUES(
-"0355140a4ddf4601b472918a34e70684",
-"220b3ad490fb4909b9665b7d974a536e",
-"63bfa35aa8204270a6480557fddf9069",
-"1672492768",
-"0",
-"Música y amistad, la mejor combinación",
-"1791",
-"69400",
-"2442",
-"5000000",
-"",
-"default");
-INSERT INTO tweets VALUES(
-"9c5a606cea5e4f83ac7212d546f663c0",
-"6f7ba09da87146389daf2c205f82ccf8",
-"63bfa35aa8204270a6480557fddf9069",
-"1672406368",
-"0",
-"Estou contigo Brazil.",
-"2833",
-"214600",
-"9570",
-"69000000",
-"",
-"default");
-INSERT INTO tweets VALUES(
-"40adb4f73536454aa083ab2d016f639a",
-"f51ff35d0c9c49d5855f2291039ac2f7",
-"63bfa35aa8204270a6480557fddf9069",
-"1671974368",
-"0",
-"In the desert this Christmas, searching for serenity. En el desierto buscando la serenidad en esta navidad.",
-"1177",
-"12700",
-"3980",
-"5100000",
-"",
-"default");
-INSERT INTO tweets VALUES(
-"0a1ec9740bc1473f981d6a396ddd5b58",
-"00aac862c88746419a612ab96e21a0bc",
-"63bfa35aa8204270a6480557fddf9069",
-"1671887968",
-"0",
-"Thanks for all the love and support you gave me and my kids during this year. I wish you a sweet holiday. Here's to a 2023 that's filled with peace and hope.",
-"780",
-"33400",
-"1535",
-"21000000",
-"",
-"default");
-INSERT INTO tweets VALUES(
-"8382c24d21a94d2fa252b07da288f070",
-"f6b4ab3e302e4458814e12cfcb016dbe",
-"63bfa35aa8204270a6480557fddf9069",
-"1671376768",
-"0",
-"Today at the final of the World Cup, I only hope the players on the field and the whole world remembers that there’s a man and fellow footballer called Amir Nasr, on death row, only for speaking in favor of Women's rights.",
-"3292",
-"573500",
-"151400",
-"24000000",
-"",
-"default");
-INSERT INTO tweets VALUES(
-"0abb3835b51a44c28e7c931f524d4329",
-"14fdcf07fe43435a8770d909f673c2bd",
-"63bfa35aa8204270a6480557fddf9069",
-"1670685568",
-"0",
-"This time for Africa!!",
-"11200",
-"1100000",
-"204100",
-"1",
-"",
-"default");
-INSERT INTO tweets VALUES(
-"e165daf4ec884838bd47eb0da9a1f000",
-"dee930956fa64c939439b94df484f420",
-"63bfa35aa8204270a6480557fddf9069",
-"1667315968",
-"0",
-"Is this so pathetic that I'm eating my kids candy?",
-"956",
-"27300",
-"1195",
-"1",
-"",
-"default");
-INSERT INTO tweets VALUES(
-"198c648b70304d7483c0e10fa1c5525c",
-"aa5b029f394e42b3b67cfcb2c4706862",
-"63bfa35aa8204270a6480557fddf9069",
-"1667229568",
-"0",
-"De porrista a súper héroe. Por cierto la mujer maravilla fue mi primer disfraz! Halloween, la excusa perfecta para sublimar deseos de infancia! ",
-"976",
-"57700",
-"3350",
-"1",
-"",
-"default");
-INSERT INTO tweets VALUES(
-"a62046b4a2054d9f99608931ef29c4d5",
-"536d66f347ae41ffb32d39eb41d2e5f0",
-"63bfa35aa8204270a6480557fddf9069",
-"1666192768",
-"0",
-"Gracias por la camiseta Ozu!  And happy launch day!",
-"557",
-"41100",
-"1797",
-"1",
-"",
-"default");
-INSERT INTO tweets VALUES(
-"b6173e050d4d4aa9a1fda4eb675f6221",
-"915bdeb6ad02469795f4cd0b2849b713",
-"63bfa35aa8204270a6480557fddf9069",
-"1665501568",
-"0",
-"My heart is with Mahsa Amini's family and with the women and schoolgirls of Iran and all those fighting for freedom of expression.",
-"7931",
-"119800",
-"36600",
-"1",
-"",
-"default");
-INSERT INTO tweets VALUES(
-"576ba96baaaf47c481b664fce91d27af",
-"ee78c76982f24529a23b8d035a73f2d6",
-"63bfa35aa8204270a6480557fddf9069",
-"1660144768",
-"0",
-"Perteneciste a una raza antigua. De pies descalzos y de sueños blancos…",
-"3326",
-"164000",
-"21100",
-"1",
 "",
 "default");
 
@@ -334,6 +200,7 @@ INSERT INTO tweets VALUES(
 "1676647168",
 "0",
 "BLACKPINK TOUR MERCH RESTOCK",
+"0",
 "603",
 "33300",
 "4497",
@@ -347,6 +214,7 @@ INSERT INTO tweets VALUES(
 "1676639968",
 "0",
 "BLACKPINK [BORN PINK] VINYL",
+"0",
 "703",
 "26900",
 "4100",
@@ -360,6 +228,7 @@ INSERT INTO tweets VALUES(
 "1675430368",
 "0",
 "Abu Dhabi, you guys were just🔥 We had so much fun on stage and the night was just so beautiful✨ Hope to do this all over again soon!",
+"0",
 "316",
 "62300",
 "12600",
@@ -373,6 +242,7 @@ INSERT INTO tweets VALUES(
 "1675257568",
 "0",
 "#BLACKPINK WORLD TOUR [BORN PINK] AUSTRALIA POSTER",
+"0",
 "485",
 "47300",
 "8965",
@@ -386,6 +256,7 @@ INSERT INTO tweets VALUES(
 "1674479968",
 "0",
 "#BLACKPINK 'Shut Down' DANCE PERFORMANCE VIDEO HITS 100 MILLION VIEWS",
+"0",
 "499",
 "63600",
 "15600",
@@ -400,6 +271,7 @@ INSERT INTO tweets VALUES(
 "0",
 "#BLACKPINK 2nd VINYL LP [BORN PINK] -LIMITED EDITION-
 Detail page notice has been uploaded",
+"0",
 "402",
 "51000",
 "9205",
@@ -414,6 +286,7 @@ INSERT INTO tweets VALUES(
 "0",
 "Three days haven't felt so short! We certainly had a blast with our Hong Kong fans this week🔥
 Thank you so much for these unforgettable memories. Love you all!❤️",
+"0",
 "317",
 "78300",
 "16800",
@@ -427,6 +300,7 @@ INSERT INTO tweets VALUES(
 "1673875168",
 "0",
 "#BLACKPINK '불장난 (PLAYING WITH FIRE)' M/V HITS 800 MILLION VIEWS",
+"0",
 "408",
 "56100",
 "14300",
@@ -442,6 +316,7 @@ INSERT INTO tweets VALUES(
 "0",
 "HAPPY BIRTHDAY JENNIE 🎉
 ✅2023.01.16",
+"0",
 "7730",
 "251600",
 "101800",
@@ -455,6 +330,7 @@ INSERT INTO tweets VALUES(
 "1673443168",
 "0",
 "BLACKPINK COACHELLA HEADLINER ANNOUNCEMENT POSTER",
+"0",
 "2023",
 "152700",
 "55600",
@@ -471,6 +347,7 @@ INSERT INTO tweets VALUES(
 "1676923228",
 "0",
 "Sunny ☀️",
+"0",
 "72",
 "41100",
 "3652",
@@ -484,6 +361,7 @@ INSERT INTO tweets VALUES(
 "1676908828",
 "0",
 "",
+"0",
 "106",
 "50500",
 "7055",
@@ -497,6 +375,7 @@ INSERT INTO tweets VALUES(
 "1676883628",
 "0",
 "",
+"0",
 "281",
 "135800",
 "18200",
@@ -510,6 +389,7 @@ INSERT INTO tweets VALUES(
 "1676854828",
 "0",
 "",
+"0",
 "186",
 "133900",
 "15700",
@@ -523,6 +403,7 @@ INSERT INTO tweets VALUES(
 "1676812768",
 "0",
 "",
+"0",
 "108",
 "136200",
 "13400",
@@ -536,6 +417,7 @@ INSERT INTO tweets VALUES(
 "1676805568",
 "0",
 "",
+"0",
 "255",
 "173700",
 "22800",
@@ -549,6 +431,7 @@ INSERT INTO tweets VALUES(
 "1676719168",
 "0",
 "",
+"0",
 "449",
 "283400",
 "44200",
@@ -562,6 +445,7 @@ INSERT INTO tweets VALUES(
 "1676546368",
 "0",
 "Hide and seek",
+"0",
 "250",
 "133100",
 "14700",
@@ -575,6 +459,7 @@ INSERT INTO tweets VALUES(
 "1676459968",
 "0",
 "mood",
+"0",
 "666",
 "365200",
 "61000",
@@ -588,6 +473,7 @@ INSERT INTO tweets VALUES(
 "1676287168",
 "0",
 "Me and you 🤍",
+"0",
 "2516",
 "312100",
 "41300",
@@ -601,6 +487,7 @@ INSERT INTO tweets VALUES(
 "1676114368",
 "0",
 "meow",
+"0",
 "154",
 "15300",
 "3640",
@@ -608,129 +495,8 @@ INSERT INTO tweets VALUES(
 "",
 "default");
 
---cleo image tweets
 
---2 images
-INSERT INTO tweets VALUES(
-"930afbfbac414b0b86ba12e729851e9e",
-"d6517288b0a04e298c69646b10bb6d45",
-"b3094c2f1c144817b7cc0b718fc3c644",
-"1684791456",
-"0",
-"2 images",
-"0",
-"0",
-"0",
-"0",
-"",
-"default");
---3 images
-INSERT INTO tweets VALUES(
-"ea7619edbb3c45baaabadae28284ccd7",
-"7dca2077157f4f6a87cd161f39699202",
-"b3094c2f1c144817b7cc0b718fc3c644",
-"1684791447",
-"0",
-"3 images",
-"0",
-"0",
-"0",
-"0",
-"",
-"default");
---4 images
-INSERT INTO tweets VALUES(
-"c448657ea0c147ae8fe96e52259ae4f1",
-"ac0d55a60cf1423fb2379b3fd3c7ac76",
-"b3094c2f1c144817b7cc0b718fc3c644",
-"1684775108",
-"0",
-"4 images",
-"0",
-"0",
-"0",
-"0",
-"",
-"default");
-
---TWEET IMAGES--
---2 images
---cleo img 1
-INSERT INTO tweet_images VALUES(
-"97b6dda4bc6a4385a11aee583eea2bfb",
-"930afbfbac414b0b86ba12e729851e9e",
-"fdb40744451c42b9b9b2a7783c74d612.jpg",
-0,
-"1684791456"
-);
---cleo img 2
-INSERT INTO tweet_images VALUES(
-"3891efbc4b624ae4953af7ee4b34f912",
-"930afbfbac414b0b86ba12e729851e9e",
-"afe45385e58142b8ad97352dcbf2357b.jpg",
-1,
-"1684791456"
-);
-
---3 images
---cleo img 1
-INSERT INTO tweet_images VALUES(
-"8198acaeced34d74a36e4e0c1dafeb25",
-"ea7619edbb3c45baaabadae28284ccd7",
-"a95f2d8bc71d49f683cf0454e353313c.jpg",
-0,
-"1684791447"
-);
---cleo img 2
-INSERT INTO tweet_images VALUES(
-"f5c2e26f6272468293aac3f124646ac4",
-"ea7619edbb3c45baaabadae28284ccd7",
-"f1b3379a3ae8464b9c17d0c2f3036563.jpg",
-1,
-"1684791447"
-);
---cleo img 3
-INSERT INTO tweet_images VALUES(
-"b7e2861999034a6082969ff894201759",
-"ea7619edbb3c45baaabadae28284ccd7",
-"616987ec6c1249abb9e77b340870c0ae.jpg",
-2,
-"1684791447"
-);
---4 images
---cleo img 1
-INSERT INTO tweet_images VALUES(
-"9ee51d54b2a543398ca60d39bee836c8",
-"c448657ea0c147ae8fe96e52259ae4f1",
-"904ec11f3ee54c38a4db0fb1083ba98f.jpg",
-0,
-"1684775108"
-);
---cleo img 2
-INSERT INTO tweet_images VALUES(
-"ad2e4fafd91a4fdd85218a52375f429c",
-"c448657ea0c147ae8fe96e52259ae4f1",
-"857061796b524905992dad4262b85409.jpg",
-1,
-"1684775108"
-);
---cleo img 3
-INSERT INTO tweet_images VALUES(
-"7a6b1ecc22e542dbb01494032ea333bc",
-"c448657ea0c147ae8fe96e52259ae4f1",
-"80c60357741d4aa59600eaf1d5b949e6.jpg",
-2,
-"1684775108"
-);
---cleo img 4
-INSERT INTO tweet_images VALUES(
-"d7f1eb1390bb4c4da5d2146d00b2937f",
-"c448657ea0c147ae8fe96e52259ae4f1",
-"cb6d0e1e2b03493c95ebf63dc4c6d7d8.jpg",
-3,
-"1684775108"
-);
-
+--TWEETS IMAGES--
 INSERT INTO tweet_images VALUES(
 "eb7415d6efec4f6d8099cb6de949218c",
 "500151d40e26414f82b9aca854c5a059",
@@ -786,62 +552,6 @@ INSERT INTO tweet_images VALUES(
 "94c438d98f2940cc8f8e711f4227458d.jpg",
 0,
 "1676467168"
-);
-INSERT INTO tweet_images VALUES(
-"8954c33aa3fd4ba1b79c05e02b1af3fd",
-"0355140a4ddf4601b472918a34e70684",
-"f4127dbd14fe42b5ac5d856d1f5a207e.jpg",
-0,
-"1672492768"
-);
-INSERT INTO tweet_images VALUES(
-"186dc3aa1b9f4d0db137ee0852a0c4c7",
-"40adb4f73536454aa083ab2d016f639a",
-"f7036717e88d499c8e1b727fd5befbf2.jpg",
-0,
-"1671974368"
-);
-INSERT INTO tweet_images VALUES(
-"f163c4e7111c4e9f8a5716d697effe70",
-"0a1ec9740bc1473f981d6a396ddd5b58",
-"0f9fe9d6487e4374855565e5a42a3d05.jpg",
-0,
-"1671887968"
-);
-INSERT INTO tweet_images VALUES(
-"5947237d40384dec8638cabab704bcff",
-"8382c24d21a94d2fa252b07da288f070",
-"fc0f8c2cce82492f87fd932b43203441.jpg",
-0,
-"1671376768"
-);
-INSERT INTO tweet_images VALUES(
-"1cb4e361f92b4c9cb98c9b31470f7ee0",
-"e165daf4ec884838bd47eb0da9a1f000",
-"4b4e450df49847bfb778df8620dafb83.jpg",
-0,
-"1667315968"
-);
-INSERT INTO tweet_images VALUES(
-"20fa71b714544b9881f60fae91cc1d35",
-"198c648b70304d7483c0e10fa1c5525c",
-"f4709b9b8faa449daf02194f74ffd11b.jpg",
-0,
-"1667229568"
-);
-INSERT INTO tweet_images VALUES(
-"ca925d6f37d74d6b9261bb0c8c5559e0",
-"a62046b4a2054d9f99608931ef29c4d5",
-"e701f27cda9d47e0bfb368ee8da0ac57.jpg",
-0,
-"1666192768"
-);
-INSERT INTO tweet_images VALUES(
-"00e116e2926541d1932876f60d64f7e7",
-"b6173e050d4d4aa9a1fda4eb675f6221",
-"05b95fe121cd4e6dbaf8537535cfbc9f.jpg",
-0,
-"1665501568"
 );
 INSERT INTO tweet_images VALUES(
 "87739451b3d74a0cb649767a9cbec705",
@@ -983,95 +693,4 @@ INSERT INTO tweet_images VALUES(
 0,
 "1676287168"
 );
-
---MANUAL TESTING--
---profile image tweets
-INSERT INTO tweets VALUES(
-"73eee66e077c41fd8d4a9e2614450518",
-"01302392cca04bfca50b7aab67b438a2",
-"79719555b96049059e00dd672a37c8e5",
-"1684836489",
-"0",
-"1 image",
-"0",
-"0",
-"0",
-"0",
-"",
-"default");
-
-INSERT INTO tweets VALUES(
-"b839286df428480d8e693094ed51afec",
-"0dca6667a87e4a56be99506070292b23",
-"79719555b96049059e00dd672a37c8e5",
-"1684728488",
-"0",
-"1 image",
-"0",
-"0",
-"0",
-"0",
-"",
-"default");
-
---TWEET IMAGES FOR PROFILE--
-INSERT INTO tweet_images VALUES(
-"227e9c08d4bb44e3b80442299f5cb0da",
-"73eee66e077c41fd8d4a9e2614450518",
-"59bdcf753d0a41eb9f4b122f1ddb4df0.jpg",
-0,
-"1676287168"
-);
-INSERT INTO tweet_images VALUES(
-"6004aeaa0deb4c5090577a0570f179c3",
-"73eee66e077c41fd8d4a9e2614450518",
-"0e3992695687482ca4353df97360dd2e.jpg",
-1,
-"1676287168"
-);
-INSERT INTO tweet_images VALUES(
-"cffbfbfa5e7440c0b1a04bb2bef6bf82",
-"73eee66e077c41fd8d4a9e2614450518",
-"2af42445a39c4cf68d5f71be570be32b.jpg",
-2,
-"1676287168"
-);
-INSERT INTO tweet_images VALUES(
-"651f6e4c66234c67b7b57b3d9f78dc02",
-"73eee66e077c41fd8d4a9e2614450518",
-"832f5ac15c474ce4b0e918efe3f8d0fb.jpg",
-3,
-"1676287168"
-);
-INSERT INTO tweet_images VALUES(
-"6c07d9227bd546579c0b7cadb80e9897",
-"b839286df428480d8e693094ed51afec",
-"a4bff06e0a9b4b9c9bfd831a6e462e91.jpg",
-0,
-"1684728488"
-);
-INSERT INTO tweet_images VALUES(
-"b9508208eef744cda483402ee2c6c27b",
-"b839286df428480d8e693094ed51afec",
-"209cb256b1f2415c92a4014db15c503b.jpg",
-1,
-"1684728488"
-);
-
-DELETE FROM tweet_images WHERE tweet_image_id = "651f6e4c66234c67b7b57b3d9f78dc02"; 
-
-DELETE FROM tweet_images WHERE tweet_image_tweet_fk = "b839286df428480d8e693094ed51afec"; 
-
-DELETE FROM tweets WHERE tweet_user_fk = "b3094c2f1c144817b7cc0b718fc3c644"; 
-
-DELETE FROM users WHERE user_id = "7b84f0ebbb5842249ec95cb1eeba44c9"; 
-
-UPDATE users
-SET user_account_status = "active"
-WHERE user_name = "my_name_cleo";
-
-SELECT * FROM tweets
-JOIN users ON users.user_id = tweets.tweet_user_fk
-JOIN tweet_images ON tweets.tweet_id = tweet_images.tweet_images_tweet_fk
-WHERE users.user_name = "my_name_cleo";
 

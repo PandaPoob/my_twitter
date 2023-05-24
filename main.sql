@@ -37,6 +37,7 @@ CREATE TABLE tweets(
   tweet_created_at        INT NOT NULL,
   tweet_updated_at        INT,
   tweet_field_text        VARCHAR(280),
+  tweet_field_images      INT DEFAULT 0,
   tweet_total_replies     INT DEFAULT 0,
   tweet_total_likes       INT DEFAULT 0,
   tweet_total_retweets    INT DEFAULT 0,
@@ -96,6 +97,15 @@ FROM users;
 
 --TRIGGERS--
 SELECT name FROM sqlite_master WHERE type = "trigger";
+
+--DELETE LATER
+DROP TRIGGER IF EXISTS update_tweet_images;
+CREATE TRIGGER update_tweet_images AFTER INSERT ON tweet_images
+BEGIN 
+    UPDATE tweets
+    SET tweet_field_images = tweet_field_images + 1
+    WHERE tweet_id = NEW.tweet_image_tweet_fk;
+END;
 
 --increase tweet count if user tweets 
 DROP TRIGGER IF EXISTS increment_user_total_tweets;
