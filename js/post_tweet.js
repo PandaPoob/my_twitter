@@ -9,16 +9,51 @@ async function handleSubmitTweet() {
   });
 
   if (!resp.ok) {
-    console.log("oops");
-
+    const data = await resp.json();
+    console.log(data.info);
     return;
   } else {
     const data = await resp.json();
-    console.log(data);
+    frm.reset();
+
+    render_tweet(data);
   }
 
-  //frm.reset();
-  /*   if (data.tweet.user_twitterblue == 1) {
+  function render_tweet(data) {
+    console.log(data);
+    //this comes from data
+    const imageNo = 1;
+
+    //what about tweet text
+    //what about
+    const one_image = `<p>one image tweet</p>`;
+
+    const two_images = `<p>two image tweet</p>`;
+
+    const three_images = `<p>three image tweet</p>`;
+
+    const four_images = `<p>four image tweet</p>`;
+
+    switch (imageNo) {
+      case 1:
+        document
+          .querySelector("#tweets")
+          .insertAdjacentHTML("afterbegin", one_image);
+      case 2:
+        document
+          .querySelector("#tweets")
+          .insertAdjacentHTML("afterbegin", two_images);
+      case 3:
+        document
+          .querySelector("#tweets")
+          .insertAdjacentHTML("afterbegin", three_images);
+      case 4:
+        document
+          .querySelector("#tweets")
+          .insertAdjacentHTML("afterbegin", four_images);
+    }
+
+    /*   if (data.tweet.user_twitterblue == 1) {
     document.querySelector("#tweets").insertAdjacentHTML(
       "afterbegin",
       ` <div
@@ -375,7 +410,6 @@ async function handleSubmitTweet() {
     </div>
   </div>`
     );
+  } */
   }
-
-  console.log(data); */
 }

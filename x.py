@@ -5,7 +5,7 @@ import re
 import datetime
 import calendar
 import jwt
-import os
+import os, glob
 
 #COOKIE VARIABLE#
 COOKIE_SECRET = "872437049d2a426f9d86f1ea58b4c901"
@@ -58,12 +58,17 @@ def prepare_values(vals):
     values = values.rstrip(",")
     return values
 
+def clear_img_folder(dir):
+    filelist = glob.glob(os.path.join(dir, "*"))
+    for f in filelist:
+      os.remove(f)
+
 #2mb for profile image and cover
 #VALIDATION FUNCTIONS#
 
 #Tweet field text#
 #@todo change max len to 280
-TWEET_MAX_LEN = 6
+TWEET_MAX_LEN = 8
 TWEET_MAX_IMG_SIZE = 5000000 #5MB
 TWEET_MAX_IMG_NO = 4
 

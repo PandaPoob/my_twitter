@@ -76,9 +76,7 @@ def _():
                 "tweet_parent_id": "",
                 "tweet_type": x.TWEET_TYPE_DEFAULT,
             }
-
             values = x.prepare_values(tweet)
-            print(values)
 
             #Open database
             db = x.db()
@@ -92,16 +90,17 @@ def _():
               #  day = time.strftime('%#d', time.localtime(tweet['tweet_created_at']))
                # tweet['tweet_created_at'] = f"{calendar.month_abbr[int(month)]} {day}"
 
-            #if there are images then loop through them and upload to tweet_images
+            #Check if there are images
             if len(tweet_images) >= 1 and tweet_images[0].filename != "empty":
+                #Loop, save and post
                 for i in range(len(tweet_images)): 
-                    index = tweet_images[i]
-        
-                    #Upload to image folder
-                    name, ext = os.path.splitext(tweet_image.filename)
-                    tweet_image_url = str(uuid.uuid4().hex+ext)
-                    tweet_image.save(f"images/tweet_imgs/{tweet_image_url}")
+                    index = int(i)
 
+                    #Upload to image folder
+                    name, ext = os.path.splitext(tweet_images[i].filename)
+                    tweet_image_url = str(uuid.uuid4().hex+ext)
+                    tweet_images[i].save(f"images/tweet_imgs/{tweet_image_url}")
+                    
                     #Prepare image data
                     tweet_image_data = {
                         "tweet_image_id": str(uuid.uuid4().hex),
@@ -111,16 +110,11 @@ def _():
                         "tweet_image_created_at": tweet_created_at,
                     }
                     img_values = x.prepare_values(tweet_image_data)
-                    print(img_values)
 
                     #Insert tweet images in database
                     db.execute(f"INSERT INTO tweet_images VALUES({img_values})", tweet_image_data)
-
-                    #delete temporary
-                #upoload
-
-            #db.commit()
-
+            #Commit
+            db.commit()
 
         return {"info":"ok", "tweet":tweet}
     except Exception as ex:
@@ -131,9 +125,11 @@ def _():
             response.status = 500
             return {"info":str(ex)}
         finally:
+            #clear temp images
             dir = 'images/temp_imgs'
-            filelist = glob.glob(os.path.join(dir, "*"))
-            for f in filelist:
-                os.remove(f)
+            x.clear_img_folder(dir)
     finally:
+        #clear temp images
+        dir = 'images/temp_imgs'
+        x.clear_img_folder(dir)
         if "db" in locals(): db.close()
