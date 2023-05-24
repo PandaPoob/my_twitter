@@ -8,7 +8,6 @@ import formatNumber
 def _():
     try:
         x.disable_cache()
-
         #Get cookie if exists
         logged_user = x.request_cookie()
 

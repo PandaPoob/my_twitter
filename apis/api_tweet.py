@@ -97,12 +97,11 @@ def _():
               #  day = time.strftime('%#d', time.localtime(tweet['tweet_created_at']))
                # tweet['tweet_created_at'] = f"{calendar.month_abbr[int(month)]} {day}"
 
-            #
             
+            saved_images = []
             #Check if there are images
             if image_amount >= 1:
                 
-                saved_images = []
                 #Loop, save and post
                 for i in range(len(tweet_images)): 
                     try:
@@ -137,8 +136,16 @@ def _():
                         raise Exception(500, str(ex))
 
             #Commit
-            db.commit() 
-        return {"info":"ok", "tweet":tweet, "image_amount":image_amount, "images": saved_images}
+            #db.commit()
+            
+            author = { 
+                "user_name": logged_user["user_name"], 
+                "full_name": logged_user["user_full_name"], 
+                "img_avatar": logged_user["user_img_avatar"], 
+                "twitter_status": logged_user["user_twitter_status"]
+                }
+            
+        return {"info":"ok", "content": {"tweet":tweet, "image_amount":image_amount, "images": saved_images, "author": author}}
     
     except Exception as ex:
         try:
