@@ -29,10 +29,10 @@ function renderTweet(data) {
 
   //Tweet template
   const template = `<div
-    class="relative w-full height-auto flex pt-3 bg-black border-b border-zinc-700 hover:bg-white hover:bg-opacity-[3%] hover:cursor-pointer">
+    class="relative w-full height-auto flex pt-3 bg-black border-b border-zinc-700 hover:bg-white hover:bg-opacity-[3%]">
     <a href="/${author.user_name}/status/${tweet.tweet_slug}"
       class="absolute top-0 left-0 right-0 bottom-0"
-    >
+    > </a>
       <!-- left -->
       <div class="pl-4 pr-4">
         <a href="/${author.user_name}" class="relative z-20">
@@ -43,11 +43,11 @@ function renderTweet(data) {
           />
         </a>
       </div>
-
       <!-- right -->
-      <div class="w-full pr-4">
+      <div class="w-full flex flex-col pr-4">
+
         <!-- user -->
-        <div class="relative flex items-center text-base">
+        <div class="relative flex items-center text-base mr-auto">
           <a
             href="/${author.user_name}"
             class="flex items-center gap-0.5 font-bold group"
@@ -68,13 +68,15 @@ function renderTweet(data) {
             height="12"
             viewBox="0 0 24 24"
           >
-            <path fill="currentColor" d="M12 14a2 2 0 1 1 0-4a2 2 0 0 1 0 4Z" />
+          <path fill="currentColor" d="M12 14a2 2 0 1 1 0-4a2 2 0 0 1 0 4Z" />
           </svg>
-          <a href="" class="text-zinc-500 hover:underline"
-            >Now</a
-          >
-          <button
-            class="absolute -top-1 -right-2 rounded-full p-1.5 group hover:bg-opacity-10 hover:bg-twitterblue"
+
+          <a href="/${author.user_name}/status/${tweet.tweet_slug}" class="text-zinc-500 hover:underline">Now</a>
+          
+        </div>
+                 <button
+            style="cursor:default;"
+            class="absolute top-1 right-2 rounded-full p-1.5 z-30 group hover:bg-opacity-10 hover:bg-twitterblue"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -91,7 +93,6 @@ function renderTweet(data) {
               />
             </svg>
           </button>
-        </div>
 
         <!-- tweet content -->
         <div>
@@ -105,7 +106,7 @@ function renderTweet(data) {
         <div
           class="flex justify-between sm:gap-6 sm:justify-start lg:gap-8 text-zinc-500 text-sm py-1.5 -ml-2"
         >
-          <button class="group flex items-center gap-1 hover:text-twitterblue">
+          <button style="cursor:default;" class="relative z-20 group flex items-center gap-1 hover:text-twitterblue">
             <div
               class="rounded-full p-2 group-hover:bg-twitterblue group-hover:bg-opacity-10"
             >
@@ -123,7 +124,7 @@ function renderTweet(data) {
             </div>
           </button>
 
-          <button class="group flex items-center gap-1 hover:text-green-500">
+          <button style="cursor:default;" class="relative z-20 group flex items-center gap-1 hover:text-green-500">
             <div
               class="rounded-full p-2 group-hover:bg-green-500 group-hover:bg-opacity-10"
             >
@@ -142,7 +143,7 @@ function renderTweet(data) {
         
           </button>
 
-          <button class="group flex items-center gap-1 hover:text-pink-500">
+          <button style="cursor:default;" class="relative z-20 group flex items-center gap-1 hover:text-pink-500">
             <div
               class="rounded-full p-2 group-hover:bg-pink-500 group-hover:bg-opacity-10"
             >
@@ -165,7 +166,8 @@ function renderTweet(data) {
           </button>
 
           <button
-            class="group hidden lg:flex items-center gap-1 hover:text-twitterblue"
+            style="cursor:default;"
+            class="relative z-20 group hidden lg:flex items-center gap-1 hover:text-twitterblue"
           >
             <div
               class="rounded-full p-2 group-hover:bg-twitterblue group-hover:bg-opacity-10"
@@ -186,7 +188,8 @@ function renderTweet(data) {
           </button>
 
           <button
-            class="rounded-full p-2 hover:text-twitterblue hover:bg-twitterblue hover:bg-opacity-10"
+            style="cursor:default;"
+            class="relative z-20 rounded-full p-2 hover:text-twitterblue hover:bg-twitterblue hover:bg-opacity-10"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -202,13 +205,12 @@ function renderTweet(data) {
           </button>
         </div>
       </div>
-    </a>
+   
   </div>`;
 
   document.querySelector("#tweets").insertAdjacentHTML("afterbegin", template);
 }
 function getAccountStatus(user_twitter_status) {
-  console.log(user_twitter_status);
   switch (user_twitter_status) {
     case "basic":
       return "";

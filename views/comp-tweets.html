@@ -2,14 +2,14 @@
   % for tweet in tweets:
 
   <div
-    class="relative w-full height-auto flex pt-3 bg-black border-b border-zinc-700 hover:bg-white hover:bg-opacity-[3%] hover:cursor-pointer"
+    class="relative w-full height-auto flex pt-3 px-4 bg-black border-b border-zinc-700 hover:bg-white hover:bg-opacity-[3%]"
   >
     <a
       href="/{{tweet['user_name']}}/status/{{tweet['tweet_slug']}}"
-      class="absolute top-0 left-0 right-0 bottom-0"
-    >
+      class="absolute top-0 left-0 right-0 bottom-0 z-10"
+    ></a>
       <!-- left -->
-      <div class="pl-4 pr-4">
+      <div class="mr-3 min-w-[48px]">
         % if tweet["user_img_avatar"]:
         <a href="/{{tweet['user_name']}}" class="relative z-20">
           <img
@@ -22,16 +22,20 @@
       </div>
 
       <!-- right -->
-      <div class="w-full pr-4">
+      <div class="relative flex flex-col w-full">
         <!-- user -->
-        <div class="relative flex items-center text-base">
+       
+          <div class="relative flex flex-shrink-1 items-center justify-start text-base z-20 max-w-[calc(100%-48px)]">
+
           <a
             href="/{{tweet['user_name']}}"
-            class="flex items-center gap-0.5 font-bold group"
+            class="flex items-center flex-shrink-1 justify-start gap-0.5 font-bold group max-w-[80%]"
           >
-            <span class="group-hover:underline"
+          <div class="grid">
+            <span class="text-ellipsis whitespace-nowrap overflow-hidden break-words group-hover:underline"
               >{{tweet["user_full_name"]}}</span
             >
+            </div>
             % if tweet["user_twitter_status"] == "blue":
             <svg
               width="18"
@@ -45,12 +49,13 @@
               />
             </svg>
             % end
-            <span class="text-zinc-500 font-normal">
+            <span class="text-zinc-500 font-normal text-ellipsis whitespace-nowrap overflow-hidden break-words">
               @{{tweet["user_name"]}}</span
             >
           </a>
 
-          <svg
+          <div class="flex items-center">
+            <svg
             class="mt-1 text-zinc-500"
             xmlns="http://www.w3.org/2000/svg"
             width="12"
@@ -58,12 +63,17 @@
             viewBox="0 0 24 24"
           >
             <path fill="currentColor" d="M12 14a2 2 0 1 1 0-4a2 2 0 0 1 0 4Z" />
-          </svg>
-          <a href="" class="text-zinc-500 hover:underline"
+            </svg>
+
+            <a href="" class="text-zinc-500 hover:underline whitespace-nowrap"
             >{{tweet["tweet_created_at"]}}</a
-          >
+            >
+        </div>
+
+          </div>
+
           <button
-            class="absolute -top-1 -right-2 rounded-full p-1.5 group hover:bg-opacity-10 hover:bg-twitterblue"
+            class="absolute -top-2 right-0 z-20 flex items-center justify-center rounded-full p-1.5 group hover:bg-opacity-10 hover:bg-twitterblue min-w-[36px] min-h-[36px]"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +90,7 @@
               />
             </svg>
           </button>
-        </div>
+       
 
         <!-- tweet content -->
         <div>
@@ -115,7 +125,7 @@
         <div
           class="flex justify-between sm:gap-6 sm:justify-start lg:gap-8 text-zinc-500 text-sm py-1.5 -ml-2"
         >
-          <button class="group flex items-center gap-1 hover:text-twitterblue">
+          <button class="relative z-20 group flex items-center gap-1 hover:text-twitterblue">
             <div
               class="rounded-full p-2 group-hover:bg-twitterblue group-hover:bg-opacity-10"
             >
@@ -136,7 +146,7 @@
             % end
           </button>
 
-          <button class="group flex items-center gap-1 hover:text-green-500">
+          <button class="relative z-20 group flex items-center gap-1 hover:text-green-500">
             <div
               class="rounded-full p-2 group-hover:bg-green-500 group-hover:bg-opacity-10"
             >
@@ -157,7 +167,7 @@
             % end
           </button>
 
-          <button class="group flex items-center gap-1 hover:text-pink-500">
+          <button class="relative z-20 group flex items-center gap-1 hover:text-pink-500">
             <div
               class="rounded-full p-2 group-hover:bg-pink-500 group-hover:bg-opacity-10"
             >
@@ -182,7 +192,7 @@
           </button>
 
           <button
-            class="group hidden lg:flex items-center gap-1 hover:text-twitterblue"
+            class="relative z-20 group hidden lg:flex items-center gap-1 hover:text-twitterblue"
           >
             <div
               class="rounded-full p-2 group-hover:bg-twitterblue group-hover:bg-opacity-10"
@@ -205,7 +215,7 @@
           </button>
 
           <button
-            class="rounded-full p-2 hover:text-twitterblue hover:bg-twitterblue hover:bg-opacity-10"
+            class="relative z-20 rounded-full p-2 hover:text-twitterblue hover:bg-twitterblue hover:bg-opacity-10"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -221,7 +231,7 @@
           </button>
         </div>
       </div>
-    </a>
+    
   </div>
 
   % end
