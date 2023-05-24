@@ -67,6 +67,7 @@ def _():
                 "tweet_created_at": tweet_created_at,
                 "tweet_updated_at": 0,
                 "tweet_field_text": tweet_text,
+                "tweet_field_images": 0,
                 "tweet_total_replies": 0,
                 "tweet_total_likes": 0,
                 "tweet_total_retweets": 0,

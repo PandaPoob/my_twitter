@@ -12,6 +12,15 @@ INSERT INTO trends VALUES("43ace034564c42788169ac18aaf601f5", "Suicide Squad", "
 INSERT INTO trends VALUES("2a9470bc61314187b19d7190b76cd535", "Slack", "6869");
 INSERT INTO trends VALUES("c9773e2bb68647039a7a40c2ee7d4716", "Twitch", "315000");
 
+--TRIGGER SO TWEET IMAGE NO GETS UPDATED
+DROP TRIGGER IF EXISTS update_tweet_images;
+CREATE TRIGGER update_tweet_images AFTER INSERT ON tweet_images
+BEGIN 
+    UPDATE tweets
+    SET tweet_field_images = tweet_field_images + 1
+    WHERE tweet_id = NEW.tweet_image_tweet_fk;
+END;
+
 
 --TWEETS--
   --11 elon musk tweets

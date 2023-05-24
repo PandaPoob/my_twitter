@@ -89,15 +89,15 @@
           <p class="text-base mt-1 mb-2">{{tweet["tweet_field_text"]}}</p>
           % end
           <!-- tweet image display-->
-          % if len(tweet["tweet_images"]) >= 1:
+          % if tweet["tweet_field_images"]:
           <div 
-          %if len(tweet['tweet_images']) == 1:
+          %if tweet["tweet_field_images"] == 1:
           class="mt-3"
-          %elif len(tweet['tweet_images']) == 2:
+          %elif tweet["tweet_field_images"] == 2:
           class="mt-3 flex gap-0.5"
-          %elif len(tweet['tweet_images']) == 3:
+          %elif tweet["tweet_field_images"] == 3:
           class="mt-3 grid grid-cols-2 grid-rows-2 gap-0.5 [&>*:nth-child(1)]:row-span-2"
-          %elif len(tweet['tweet_images']) == 4:
+          %elif tweet["tweet_field_images"] == 4:
           class="mt-3 grid grid-cols-2 grid-rows-2 gap-0.5"
           %end
           >

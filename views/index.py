@@ -19,11 +19,11 @@ def _():
         tweets = db.execute("SELECT * FROM users_and_tweets ORDER BY users_and_tweets.tweet_created_at DESC LIMIT 0, 10").fetchall()
        
         #Fetch images of tweets 
-        # @todo perhaps make this general 
         for i in range(len(tweets)):
-            tweet_images = db.execute("SELECT * FROM tweet_images WHERE tweet_images.tweet_image_tweet_fk=? ORDER BY tweet_images.tweet_image_order ASC", (tweets[i]["tweet_id"],)).fetchall()
+            if tweets[i]["tweet_field_images"] > 0:
+                tweet_images = db.execute("SELECT * FROM tweet_images WHERE tweet_images.tweet_image_tweet_fk=? ORDER BY tweet_images.tweet_image_order ASC", (tweets[i]["tweet_id"],)).fetchall()
             
-            #Declare new key and add image list
+                #Declare new key and add image list
             tweets[i]['tweet_images'] = tweet_images
 
         #Fetch trends
