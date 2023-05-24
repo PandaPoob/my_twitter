@@ -2,28 +2,31 @@
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users(
-  user_id                TEXT UNIQUE NOT NULL,
-  user_name              TEXT UNIQUE NOT NULL,
-  user_full_name         TEXT NOT NULL,
-  user_password          TEXT NOT NULL,
-  user_email             TEXT UNIQUE NOT NULL,
-  user_phonenumber       TEXT,
-  user_api_key           TEXT UNIQUE NOT NULL,
+  user_id                VARCHAR(35) UNIQUE NOT NULL,
+  user_name              VARCHAR(15) UNIQUE NOT NULL,
   user_created_at        INT NOT NULL,
-  user_updated_at        INT NOT NULL,
-  user_img_avatar        TEXT,
-  user_img_cover         TEXT,
-  user_bio_text          TEXT,
-  user_bio_location      TEXT,
-  user_bio_link          TEXT,
-  user_bio_birthday      TEXT NOT NULL,
-  user_total_followers   INT DEFAULT 0,
-  user_total_following   INT DEFAULT 0,
+  user_updated_at        INT,
+  user_api_key           VARCHAR(35) UNIQUE,
+  user_admin             BOOLEAN DEFAULT 0,
+  user_twitter_status    VARCHAR(5) DEFAULT "basic",
+  user_account_status    VARCHAR(11) DEFAULT "inactive",
+  user_email             VARCHAR(100) UNIQUE NOT NULL,
+  user_phonenumber       VARCHAR(15),
+  user_full_name         VARCHAR(50) NOT NULL,
+  user_birthday          VARCHAR(10) NOT NULL,         
+  user_password          VARCHAR(255) NOT NULL,
+  user_img_avatar        VARCHAR(35) NOT NULL,
+  user_img_cover         VARCHAR(35) NOT NULL,
+  user_bio_text          VARCHAR(160),
+  user_bio_location      VARCHAR(30),
+  user_bio_link          VARCHAR(100),
+  user_bio_birthday      BOOLEAN DEFAULT 1,
   user_total_tweets      INT DEFAULT 0,
-  user_twitterblue       BOOLEAN DEFAULT false,
-  user_account_status    VARCHAR(8) DEFAULT "inactive",
+  user_total_following   INT DEFAULT 0,
+  user_total_followers   INT DEFAULT 0,
   PRIMARY KEY(user_id)
   ) WITHOUT ROWID;
+
 
 CREATE INDEX idx_users_user_first_name ON users(user_full_name);
 
@@ -91,7 +94,7 @@ JOIN users ON users.user_id = tweets.tweet_user_fk;
 DROP VIEW IF EXISTS [follower_suggestions];
 CREATE VIEW follower_suggestions
 AS
-SELECT users.user_id, users.user_name, users.user_full_name, users.user_img_avatar, users.user_twitterblue
+SELECT users.user_id, users.user_name, users.user_full_name, users.user_img_avatar, users.user_twitter_status
 FROM users;
 
 

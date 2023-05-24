@@ -129,17 +129,16 @@ def _():
                         db.execute(f"INSERT INTO tweet_images VALUES({img_values})", tweet_image_data)
                     except Exception as ex:
                         #If insert fails then remove all images from folder
-                        print(saved_images)
+
                         for saved_image in saved_images:
-                            print(saved_image)
                             url = os.getcwd()+f"/images/tweet_imgs/{saved_image}"
                             os.remove(url, dir_fd = None)
                         
                         raise Exception(500, str(ex))
 
             #Commit
-            db.commit()
-        return {"info":"ok", "tweet":tweet, "images": tweet_image_data}
+            db.commit() 
+        return {"info":"ok", "tweet":tweet, "image_amount":image_amount, "images": saved_images}
     
     except Exception as ex:
         try:
