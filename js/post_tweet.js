@@ -76,7 +76,7 @@ function renderTweet(data) {
         </div>
                  <button
             style="cursor:default;"
-            class="absolute top-1 right-2 rounded-full p-1.5 z-30 group hover:bg-opacity-10 hover:bg-twitterblue"
+            class="absolute top-1.5 right-2 rounded-full p-1.5 z-30 group hover:bg-opacity-10 hover:bg-twitterblue"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -253,7 +253,7 @@ function getImageLayout(image_amount, images) {
   } else {
     switch (image_amount) {
       case 1:
-        return `<div class="mt-3">
+        return `<div class="mt-4">
             <img
               class="rounded-xl w-full h-full object-cover"
               alt="tweet image"
@@ -261,7 +261,7 @@ function getImageLayout(image_amount, images) {
             />
           </div>`;
       case 2:
-        return `<div class="mt-3 flex gap-0.5">
+        return `<div class="mt-4 flex gap-0.5">
             <img
               class="rounded-xl w-full h-full object-cover"
               alt="tweet image 1"
@@ -274,7 +274,7 @@ function getImageLayout(image_amount, images) {
             />
           </div>`;
       case 3:
-        return `<div class="mt-3 grid grid-cols-2 grid-rows-2 gap-0.5 [&>*:nth-child(1)]:row-span-2">
+        return `<div class="mt-4 grid grid-cols-2 grid-rows-2 gap-0.5 [&>*:nth-child(1)]:row-span-2">
             <img
               class="rounded-xl w-full h-full object-cover"
               alt="tweet image 1"
@@ -292,7 +292,7 @@ function getImageLayout(image_amount, images) {
             />
           </div>`;
       case 4:
-        return `<div class="mt-3 grid grid-cols-2 grid-rows-2 gap-0.5">
+        return `<div class="mt-4 grid grid-cols-2 grid-rows-2 gap-0.5">
             <img
               class="rounded-xl w-full h-full object-cover"
               alt="tweet image 1"

@@ -91,13 +91,6 @@ def _():
             #Insert tweets into database
             db.execute(f"INSERT INTO tweets VALUES({values})", tweet)
   
-            #Format date to frontend and immediate display      
-            #if tweet['tweet_created_at']:
-             #   month = time.strftime('%#m', time.localtime(tweet['tweet_created_at']))
-              #  day = time.strftime('%#d', time.localtime(tweet['tweet_created_at']))
-               # tweet['tweet_created_at'] = f"{calendar.month_abbr[int(month)]} {day}"
-
-            
             saved_images = []
             #Check if there are images
             if image_amount >= 1:
@@ -137,7 +130,6 @@ def _():
 
             #Commit
             #db.commit()
-            
             author = { 
                 "user_name": logged_user["user_name"], 
                 "full_name": logged_user["user_full_name"], 
