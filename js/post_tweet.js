@@ -1,3 +1,79 @@
+//const imageInput = document.getElementById("tweet_field_image");
+let storedTweetImages = []
+function handleTweetImages(){
+  //Get image input
+  storedTweetImages = [];
+  const imageInput = document.getElementById("tweet_field_image")
+  //Array to store current images
+
+
+  //Get files
+  const files = imageInput.files;
+
+  //Store in array
+  for (let i = 0; i < files.length; i++) {
+    storedTweetImages.push(files[i]);
+  }
+  prepareOutput();
+}
+
+function prepareOutput() {
+  //HTML array
+  let images = "";
+
+  //Populate array HTML
+  storedTweetImages.forEach((image, index) => {
+    if (storedTweetImages.length == 3 && index == 0) {
+      console.log(storedTweetImages)
+      images += `<div class="relative row-span-2">
+            <img 
+              src="${URL.createObjectURL(image)}" 
+              alt="image" 
+              class="rounded-xl w-full h-full object-cover"/>
+              <button type="button" class="absolute top-1 left-1 w-6 h-6 rounded-full flex justify-center items-center text-white bg-opacity-60 bg-black hover:bg-opacity-50" onclick="removeImage(${index})">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z"/></svg>
+              </button>
+          </div>`;
+    } else {
+      images += `<div class="relative">
+            <img 
+              src="${URL.createObjectURL(image)}" 
+              alt="image" 
+              class="rounded-xl w-full h-full object-cover"/>
+              <button type="button" class="absolute top-1 left-1 w-6 h-6 rounded-full flex justify-center items-center text-white bg-opacity-60 bg-black hover:bg-opacity-50" onclick="removeImage(${index})">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z"/></svg>
+              </button>
+          </div>`;
+    }
+  });
+  
+  getOutputLayout(images)     
+}
+
+function removeImage(index) {
+  storedTweetImages.splice(index, 1);
+  prepareOutput();
+}
+
+function getOutputLayout(images) {
+  const output = document.querySelector("output");
+
+  //Clear all layout on output
+  output.className = "";
+
+  //Set style on image amount
+  if (storedTweetImages.length == 2) {
+    output.classList.add("output_images_2")
+  } else if (storedTweetImages.length >= 3) {
+    output.classList.add("output_images")
+  }
+
+  //Push images into output
+  output.innerHTML = images;
+}
+
+
+
 async function handleSubmitTweet() {
   const frm = event.target;
 
@@ -210,6 +286,7 @@ function renderTweet(data) {
 
   document.querySelector("#tweets").insertAdjacentHTML("afterbegin", template);
 }
+//Get component for twitter status
 function getAccountStatus(user_twitter_status) {
   switch (user_twitter_status) {
     case "basic":
@@ -240,6 +317,7 @@ function getAccountStatus(user_twitter_status) {
             </svg>`;
   }
 }
+//Get component for tweet text
 function getTextContent(tweet_text) {
   if (tweet_text) {
     return `<p class="text-base mt-1 mb-2">${tweet_text}</p>`;
@@ -247,6 +325,7 @@ function getTextContent(tweet_text) {
     return ``;
   }
 }
+//Get component for tweet images
 function getImageLayout(image_amount, images) {
   if (image_amount == 0) {
     return ``;

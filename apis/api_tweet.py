@@ -54,6 +54,7 @@ def _():
                 x.validate_image_size(filesize)
 
                 #Validate image data filetype
+                
                 filetype = magic.from_file(f"images/temp_imgs/{tweet_image_name+ext}")
                 x.validate_image_datatype(filetype)
 

@@ -31,8 +31,9 @@
       multiple="multiple"
       accept="image/jpeg, image/png, image/jpg"
       class="hidden"
+      onchange="handleTweetImages()"
     />
-    <output></output>
+    <output id="output_images"></output>
     <div class="flex w-full fill-sky-500 items-center gap-1 pt-2 pl-3">
       <label
         for="tweet_field_image"
@@ -117,39 +118,7 @@
       </button>
     </div>
   </form>
-  <script>
-    let imagesArray = [];
-    const imageInput = document.getElementById("tweet_field_image");
-    imageInput.addEventListener("change", () => {
-      //Array to store current images
 
-      const files = imageInput.files;
-
-      for (let i = 0; i < files.length; i++) {
-        imagesArray.push(files[i]);
-      }
-      displayImages();
-    });
-    function displayImages() {
-      let images = "";
-      imagesArray.forEach((image, index) => {
-        images += `<div>
-                <img 
-                  src="${URL.createObjectURL(image)}" 
-                  alt="image" 
-                  class="rounded-xl w-full h-full object-cover"/>
-                
-                  <span onclick="deleteImage(${index})">&times;</span>
-              </div>`;
-      });
-      const output = document.querySelector("output");
-      output.innerHTML = images;
-    }
-    function deleteImage(index) {
-      imagesArray.splice(index, 1);
-      displayImages();
-    }
-  </script>
   <script src="/js/post_tweet.js"></script>
   <script src="/js/validate.js"></script>
 </div>
