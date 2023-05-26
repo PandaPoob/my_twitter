@@ -659,6 +659,14 @@ video {
   top: 1.25rem;
 }
 
+.bottom-1 {
+  bottom: 0.25rem;
+}
+
+.left-1 {
+  left: 0.25rem;
+}
+
 .z-0 {
   z-index: 0;
 }
@@ -1234,6 +1242,10 @@ video {
   --tw-bg-opacity: 75%;
 }
 
+.bg-opacity-60 {
+  --tw-bg-opacity: 0.6;
+}
+
 .fill-sky-500 {
   fill: #0ea5e9;
 }
@@ -1391,6 +1403,14 @@ video {
 
 .pt-5 {
   padding-top: 1.25rem;
+}
+
+.pr-4 {
+  padding-right: 1rem;
+}
+
+.pl-4 {
+  padding-left: 1rem;
 }
 
 .text-center {
@@ -1639,6 +1659,10 @@ video {
 
 .hover\:bg-opacity-\[90\%\]:hover {
   --tw-bg-opacity: 90%;
+}
+
+.hover\:bg-opacity-50:hover {
+  --tw-bg-opacity: 0.5;
 }
 
 .hover\:text-green-500:hover {

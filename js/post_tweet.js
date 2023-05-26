@@ -140,7 +140,6 @@ function prepareOutput() {
     document.getElementById("submit_tweet_btn").disabled = true;
   } else if (storedTweetImages.length !== 0) {
     document.getElementById("submit_tweet_btn").disabled = false;
-    console.log("Got here");
   }
   //HTML array
   let images = "";
@@ -148,13 +147,12 @@ function prepareOutput() {
   //Populate array HTML
   storedTweetImages.forEach((image, index) => {
     if (storedTweetImages.length == 3 && index == 0) {
-      console.log(storedTweetImages);
-      images += `<div class="relative row-span-2">
+      images += `<div class="relative" style="grid-row:1/3;">
             <img 
               src="${URL.createObjectURL(image)}" 
               alt="image" 
-              class="rounded-xl w-full h-full object-cover"/>
-              <button type="button" class="absolute top-1 left-1 w-6 h-6 rounded-full flex justify-center items-center text-white bg-opacity-60 bg-black hover:bg-opacity-50" onclick="removeImage(${index})">
+              class="relative rounded-xl w-full h-full object-cover"/>
+              <button type="button" class="absolute top-0 left-1 mt-1 w-6 h-6 rounded-full flex justify-center items-center text-white bg-opacity-60 bg-black hover:bg-opacity-50" onclick="removeImage(${index})">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z"/></svg>
               </button>
           </div>`;
@@ -163,8 +161,8 @@ function prepareOutput() {
             <img 
               src="${URL.createObjectURL(image)}" 
               alt="image" 
-              class="rounded-xl w-full h-full object-cover"/>
-              <button type="button" class="absolute top-1 left-1 w-6 h-6 rounded-full flex justify-center items-center text-white bg-opacity-60 bg-black hover:bg-opacity-50" onclick="removeImage(${index})">
+              class="relative rounded-xl w-full h-full object-cover"/>
+              <button type="button" class="absolute top-0 left-1 mt-1 w-6 h-6 rounded-full flex justify-center items-center text-white bg-opacity-60 bg-black hover:bg-opacity-50" onclick="removeImage(${index})">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z"/></svg>
               </button>
           </div>`;
@@ -216,7 +214,6 @@ async function handleSubmitTweet() {
 }
 
 function renderTweet(data) {
-  console.log(data);
   const { image_amount, tweet, images, author } = data.content;
 
   //Conditional components that make up tweet
@@ -226,7 +223,7 @@ function renderTweet(data) {
 
   //Tweet template
   const template = `<div
-    class="relative w-full height-auto flex pt-3 bg-black border-b border-zinc-700 hover:bg-white hover:bg-opacity-[3%]">
+    class="relative w-full height-auto flex pt-3 px-4 bg-black border-b border-zinc-700 hover:bg-white hover:bg-opacity-[3%]">
     <a href="/${author.user_name}/status/${tweet.tweet_slug}"
       class="absolute top-0 left-0 right-0 bottom-0"
     > </a>

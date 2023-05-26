@@ -1,9 +1,9 @@
 <div class="w-full flex flex-grow border-b border-twitterborder pt-4 pb-2 px-4">
-  <div class="w-[10%] pr-1.5">
+  <div class="min-w-[48px] pr-1.5">
     <img
       src="/images/avatar_imgs/{{logged_user['user_img_avatar']}}"
       alt="{{logged_user['user_full_name']}} tweet avatar image"
-      class="rounded-full"
+      class="rounded-full w-14"
     />
   </div>
   <form
@@ -33,7 +33,9 @@
       data-max-img="{{max_img}}"
       data-max-imgs="{{max_imgs}}"
     />
-    <output id="output_images"></output>
+    <div class="ml-4">
+      <output id="output_images"></output>
+    </div>
     <div class="flex w-full items-center justify-between gap-1 pt-2 pl-3">
       <div class="flex fill-sky-500 items-center gap-1">
         <label
