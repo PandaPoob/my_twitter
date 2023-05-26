@@ -19,7 +19,7 @@ def send_email(receiver_email, user_api_key):
     except:
         root = "http://127.0.0.1:3000/"
 
-    # Create the plain-text and HTML version of your message
+    # Creating the plain-text and HTML version of email
     text = """\
     Welcome!,
     Thank you for signing up to my exam project!"""

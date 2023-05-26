@@ -3,7 +3,6 @@ import os
 import git
 import x
 import uuid
-import mimetypes
 import magic
 ################################################
 #https://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@github.com/PandaPoob/web_dev_mandatory_01.git

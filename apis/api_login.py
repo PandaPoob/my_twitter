@@ -27,6 +27,7 @@ def _():
         except:
             is_cookie_https = False
 
+        #Removing pw from cookie
         user.pop("user_password")
         #print("pop", user)
 

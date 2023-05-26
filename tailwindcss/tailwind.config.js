@@ -17,6 +17,7 @@ module.exports = {
         base: ["0.938rem", { lineHeight: "normal" }], //15px
         lg: ["1.063rem", { lineHeight: "normal" }], //17px
         xl: ["1.25rem", { lineHeight: "normal" }], //20px,
+        xxl: ["1.75rem", { lineHeight: "normal" }], //32px,
       },
       colors: {
         twitterblue: "#1d9bf0",
