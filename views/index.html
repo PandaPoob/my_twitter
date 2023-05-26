@@ -48,7 +48,7 @@
 
           <!-- tweet form -->
           <!-- prettier-ignore -->
-          % include('comp-tweet_form', logged_user=logged_user, max_length=max_length)
+          % include('comp-tweet_form', logged_user=logged_user, max_tweet=max_tweet, max_img=max_img, max_imgs=max_imgs)
           <!-- prettier-ignore -->
           %end
           <!-- feed/tweets -->
@@ -59,6 +59,18 @@
         % include('comp-right-col-home', trends=trends, fsugg=fsugg, page="home", logged_user=logged_user)
       </div>
     </div>
+
+    <div
+      class="fixed z-50 bottom-0 left-0 right-0 md:bottom-6 md:flex md:justify-center"
+    >
+      <div
+        id="notif_container"
+        class="hidden items-center bg-twitterblue px-6 py-2 font-semibold md:rounded-sm"
+      >
+        <p></p>
+      </div>
+    </div>
+
     <script src="/js/validate.js"></script>
     <script src="/js/app.js"></script>
   </body>

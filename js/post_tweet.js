@@ -1,33 +1,46 @@
-let storedTweetImages = []
+let storedTweetImages = [];
 
-function validateTextTweetInput(){
-  tweet_text = document.getElementById("tweet_field_text").value
-  tweet_text.length
-  
-  const max_length = parseInt(document.getElementById("tweet_field_text").getAttribute("data-max"))
-  
+function validateTextTweetInput() {
+  const tweet_text = document.getElementById("tweet_field_text").value;
+  const max_length = parseInt(
+    document.getElementById("tweet_field_text").getAttribute("data-max")
+  );
+
   //If text is bigger than max disable
   if (tweet_text.length > max_length) {
     document.getElementById("submit_tweet_btn").disabled = true;
-  //If there is text enabled
-  } else if (tweet_text.length !== 0)  {
+    //If there is text enabled
+  } else if (tweet_text.length !== 0) {
     document.getElementById("submit_tweet_btn").disabled = false;
     //If there is not text or images disabled
   } else if (tweet_text.length == 0 && storedTweetImages.length == 0) {
     document.getElementById("submit_tweet_btn").disabled = true;
   }
 
-  //render length vali display here
+  //Get characters left and insert
+  const char_left = max_length - tweet_text.length;
+  const number_text = document.getElementById("max_length_number");
+  const number_container = document.getElementById(
+    "container_max_length_number"
+  );
+  number_text.innerHTML = char_left;
+
+  if (char_left <= 0) {
+    number_container.style.borderColor = "#f4212e";
+    number_text.style.color = "#f4212e";
+  } else {
+    number_container.style.borderColor = "#2f3336";
+    number_text.style.color = "#71767b";
   }
-  
-function handleTweetImages(){
+}
+
+function handleTweetImages() {
   //Empty and reset array
   storedTweetImages = [];
 
   //Get image input
-  const imageInput = document.getElementById("tweet_field_image")
+  const imageInput = document.getElementById("tweet_field_image");
   //Array to store current images
-
 
   //Get files
   const files = imageInput.files;
@@ -36,48 +49,98 @@ function handleTweetImages(){
   for (let i = 0; i < files.length; i++) {
     storedTweetImages.push(files[i]);
   }
-  
+
+  const max_imgs = parseInt(imageInput.getAttribute("data-max-imgs"));
+  const max_img_size = parseInt(imageInput.getAttribute("data-max-img"));
+
   //VALIDATION//
   //Maximum of 4 images
-  //@todo get max from x
-  if (storedTweetImages.length > 4) {
-    console.log("Can only have 4 images")
+  if (storedTweetImages.length > max_imgs) {
+    displayNotifToaster("Please choose up to 4 images");
+  } else {
+    fullValidation();
   }
-
- //@todo get max from x
-  storedTweetImages.forEach((img) => {
-    if (img.size > 5000000) {
-      console.log("Image is too big")
-    }
-  })
-
-/* const file = storedTweetImages[0]
-
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        resolve(reader.result);
-      };
-      reader.onerror = reject;
-      reader.readAsArrayBuffer(file.slice(0, 2));
+  function fullValidation() {
+    storedTweetImages.forEach((img) => {
+      //Size
+      if (img.size > max_img_size) {
+        displayNotifToaster("One or more images exceed the size limit of 5MB");
+      }
+      //Type
+      else {
+        validateImageMagicType(img)
+          .then((imageType) => {
+            if (!imageType.includes("jpeg") && !imageType.includes("png")) {
+              displayNotifToaster(
+                "One or more images are not the accepted filetype"
+              );
+            } else {
+              //Show images if all validation passes
+              prepareOutput();
+            }
+          })
+          .catch((error) => {
+            //If api fails return error message as notification
+            displayNotifToaster(error.message);
+          });
+      }
     });
-   */
-
-  console.log(storedTweetImages[0])
-
-  //Validate image size
-  //Validate image not accepted ext
-  //Validate on "fake" img
-
-  prepareOutput();
+  }
 }
+
+function validateImageMagicType(file) {
+  return new Promise((resolve, reject) => {
+    //Using HTML5 File API
+    const reader = new FileReader();
+
+    reader.onloadend = function () {
+      const arr = new Uint8Array(reader.result).subarray(0, 4);
+      let header = "";
+
+      for (let i = 0; i < arr.length; i++) {
+        header += arr[i].toString(16);
+      }
+
+      let imageType = "";
+
+      switch (header) {
+        case "89504e47":
+          imageType = "image/png";
+          break;
+        case "ffd8ffe0":
+        case "ffd8ffe1":
+        case "ffd8ffe2":
+          imageType = "image/jpeg";
+          break;
+        default:
+          imageType = "unknown";
+          break;
+      }
+      resolve(imageType);
+    };
+
+    reader.onerror = function () {
+      reject(new Error("Error reading file."));
+    };
+
+    reader.readAsArrayBuffer(file);
+  });
+}
+
 function prepareOutput() {
-  tweet_text = document.getElementById("tweet_field_text").value
-  //hvis length ikke er 0 så enable btn
-  if (storedTweetImages.length == 0 && tweet_text.length == 0) {
+  tweet_text = document.getElementById("tweet_field_text").value;
+  const max_length = parseInt(
+    document.getElementById("tweet_field_text").getAttribute("data-max")
+  );
+
+  if (
+    (storedTweetImages.length == 0 && tweet_text.length == 0) ||
+    tweet_text.length > max_length
+  ) {
     document.getElementById("submit_tweet_btn").disabled = true;
   } else if (storedTweetImages.length !== 0) {
     document.getElementById("submit_tweet_btn").disabled = false;
+    console.log("Got here");
   }
   //HTML array
   let images = "";
@@ -85,7 +148,7 @@ function prepareOutput() {
   //Populate array HTML
   storedTweetImages.forEach((image, index) => {
     if (storedTweetImages.length == 3 && index == 0) {
-      console.log(storedTweetImages)
+      console.log(storedTweetImages);
       images += `<div class="relative row-span-2">
             <img 
               src="${URL.createObjectURL(image)}" 
@@ -107,7 +170,7 @@ function prepareOutput() {
           </div>`;
     }
   });
-  displayOutputImages(images)     
+  displayOutputImages(images);
 }
 
 function removeImage(index) {
@@ -123,16 +186,14 @@ function displayOutputImages(images) {
 
   //Set style on image amount
   if (storedTweetImages.length == 2) {
-    output.classList.add("output_images_2")
+    output.classList.add("output_images_2");
   } else if (storedTweetImages.length >= 3) {
-    output.classList.add("output_images")
+    output.classList.add("output_images");
   }
 
   //Push images into output
   output.innerHTML = images;
-
 }
-
 
 async function handleSubmitTweet() {
   const frm = event.target;
@@ -455,4 +516,30 @@ function getImageLayout(image_amount, images) {
           </div>`;
     }
   }
+}
+
+let notifTimer;
+function displayNotifToaster(errorMsg) {
+  //Get elements in html
+  const output = document.querySelector("output");
+  const container = document.getElementById("notif_container");
+  const content = container.querySelector("p");
+
+  //Reset image display
+  output.className = "";
+  output.innerHTML = "";
+  //Reset notification
+  if (notifTimer) {
+    clearTimeout(notifTimer);
+    container.style.display = "none";
+    content.innerHTML = "";
+  }
+  //Display
+  container.style.display = "flex";
+  content.innerHTML = errorMsg;
+
+  notifTimer = setTimeout(function () {
+    container.style.display = "none";
+    content.innerHTML = errorMsg;
+  }, 5000);
 }

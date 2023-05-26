@@ -61,7 +61,7 @@ def _():
             if trends[i]['trend_total_tweets']:
                 trends[i]['trend_total_tweets'] = formatNumber.human_format(trends[i]['trend_total_tweets'])
         #@todo remove min length
-        return template("index", max_length=x.TWEET_MAX_LEN, tweets=tweets, trends=trends, fsugg=fsugg, logged_user=logged_user)
+        return template("index", max_tweet=x.TWEET_MAX_LEN, max_img=x.TWEET_MAX_IMG_SIZE, max_imgs=x.TWEET_MAX_IMG_NO, tweets=tweets, trends=trends, fsugg=fsugg, logged_user=logged_user)
     except Exception as ex:
         print("error", ex)
         return "error"

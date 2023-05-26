@@ -67,9 +67,11 @@ function showSearchResults() {
     .getElementById(`search_results_container`)
     .classList.remove("hidden");
 }
+
 function hideSearchResults() {
   document.getElementById(`search_results_container`).classList.add("hidden");
 }
+
 let the_timer;
 function search() {
   clearTimeout(the_timer);

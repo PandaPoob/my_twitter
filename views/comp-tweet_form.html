@@ -20,10 +20,7 @@
       name="tweet_field_text"
       type="text"
       onkeyup="validateTextTweetInput()"
-      data-validate="str"
-      data-max="{{max_length}}"
-      error-msg-required="msg is required"
-      error-msg-len="error msg len"
+      data-max="{{max_tweet}}"
     ></textarea>
     <input
       id="tweet_field_image"
@@ -33,95 +30,112 @@
       accept="image/jpeg, image/png, image/jpg"
       class="hidden"
       onchange="handleTweetImages()"
+      data-max-img="{{max_img}}"
+      data-max-imgs="{{max_imgs}}"
     />
     <output id="output_images"></output>
-    <div class="flex w-full fill-sky-500 items-center gap-1 pt-2 pl-3">
-      <label
-        for="tweet_field_image"
-        class="rounded-full p-2 hover:bg-sky-500 hover:bg-opacity-20 cursor-pointer"
-      >
-        <svg
-          class="text-sky-500"
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          viewBox="0 0 256 256"
+    <div class="flex w-full items-center justify-between gap-1 pt-2 pl-3">
+      <div class="flex fill-sky-500 items-center gap-1">
+        <label
+          for="tweet_field_image"
+          class="rounded-full p-2 hover:bg-sky-500 hover:bg-opacity-20 cursor-pointer"
         >
-          <path
-            fill="currentColor"
-            d="M88.7 103.3A15.9 15.9 0 0 1 84 92a16 16 0 0 1 32 0a16 16 0 0 1-16 16a15.9 15.9 0 0 1-11.3-4.7ZM228 48v160a20.1 20.1 0 0 1-20 20H48a20.1 20.1 0 0 1-20-20V48a20.1 20.1 0 0 1 20-20h160a20.1 20.1 0 0 1 20 20Zm-24 117l-36-36l-41.9 41.8a19.9 19.9 0 0 1-28.2 0L80 153l-28 28v23h152Zm0-113H52v95l13.9-13.8a19.9 19.9 0 0 1 28.2 0L112 151l41.9-41.8a19.9 19.9 0 0 1 28.2 0L204 131Z"
-          />
-        </svg>
-      </label>
-
-      <button
-        type="button"
-        class="rounded-full p-2 hover:bg-sky-500 hover:bg-opacity-20 cursor-default"
-      >
-        <svg
-          class="text-sky-500"
-          xmlns="http://www.w3.org/2000/svg"
-          width="21"
-          height="21"
-          viewBox="0 0 24 24"
-        >
-          <path
-            fill="currentColor"
-            d="M19 19H5V5h14v14zM5 3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5zm6.5 11h1v-4h-1v4zm2 0h1v-1.5H16v-1h-1.5V11h2v-1h-3v4zm-4-2v1h-1v-2h2c0-.55-.45-1-1-1h-1c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h-1z"
-          />
-        </svg>
-      </button>
-      <button
-        type="button"
-        class="rounded-full p-2 hover:bg-sky-500 hover:bg-opacity-20 cursor-default"
-      >
-        <svg
-          class="text-sky-500"
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-        >
-          <path
-            fill="currentColor"
-            d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z"
-          />
-        </svg>
-      </button>
-      <button
-        type="button"
-        class="rounded-full p-2 hover:bg-sky-500 hover:bg-opacity-20 cursor-default"
-      >
-        <svg
-          class="text-sky-500"
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-        >
-          <g fill="none">
-            <path
-              d="M24 0v24H0V0h24ZM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018Zm.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022Zm-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01l-.184-.092Z"
-            />
+          <svg
+            class="text-sky-500"
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 256 256"
+          >
             <path
               fill="currentColor"
-              d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2Zm0 2a8 8 0 1 0 0 16a8 8 0 0 0 0-16Zm2.8 9.857a1 1 0 1 1 1.4 1.428A5.984 5.984 0 0 1 12 17a5.984 5.984 0 0 1-4.2-1.715a1 1 0 0 1 1.4-1.428A3.984 3.984 0 0 0 12 15c1.09 0 2.077-.435 2.8-1.143ZM8.5 8a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3Zm7 0a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3Z"
+              d="M88.7 103.3A15.9 15.9 0 0 1 84 92a16 16 0 0 1 32 0a16 16 0 0 1-16 16a15.9 15.9 0 0 1-11.3-4.7ZM228 48v160a20.1 20.1 0 0 1-20 20H48a20.1 20.1 0 0 1-20-20V48a20.1 20.1 0 0 1 20-20h160a20.1 20.1 0 0 1 20 20Zm-24 117l-36-36l-41.9 41.8a19.9 19.9 0 0 1-28.2 0L80 153l-28 28v23h152Zm0-113H52v95l13.9-13.8a19.9 19.9 0 0 1 28.2 0L112 151l41.9-41.8a19.9 19.9 0 0 1 28.2 0L204 131Z"
             />
-          </g>
-        </svg>
-      </button>
+          </svg>
+        </label>
 
-      <button
-        type="submit"
-        id="submit_tweet_btn"
-        class="ml-auto bg-sky-500 px-4 py-2 rounded-full text-base font-bold items-center hover:bg-opacity-90 disabled:bg-opacity-50 disabled:text-twittergray-500"
-        disabled
+        <button
+          type="button"
+          class="rounded-full p-2 hover:bg-sky-500 hover:bg-opacity-20 cursor-default"
         >
-        Tweet
-      </button>
+          <svg
+            class="text-sky-500"
+            xmlns="http://www.w3.org/2000/svg"
+            width="21"
+            height="21"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M19 19H5V5h14v14zM5 3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5zm6.5 11h1v-4h-1v4zm2 0h1v-1.5H16v-1h-1.5V11h2v-1h-3v4zm-4-2v1h-1v-2h2c0-.55-.45-1-1-1h-1c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h-1z"
+            />
+          </svg>
+        </button>
+        <button
+          type="button"
+          class="rounded-full p-2 hover:bg-sky-500 hover:bg-opacity-20 cursor-default"
+        >
+          <svg
+            class="text-sky-500"
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z"
+            />
+          </svg>
+        </button>
+        <button
+          type="button"
+          class="rounded-full p-2 hover:bg-sky-500 hover:bg-opacity-20 cursor-default"
+        >
+          <svg
+            class="text-sky-500"
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+          >
+            <g fill="none">
+              <path
+                d="M24 0v24H0V0h24ZM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018Zm.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022Zm-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01l-.184-.092Z"
+              />
+              <path
+                fill="currentColor"
+                d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2Zm0 2a8 8 0 1 0 0 16a8 8 0 0 0 0-16Zm2.8 9.857a1 1 0 1 1 1.4 1.428A5.984 5.984 0 0 1 12 17a5.984 5.984 0 0 1-4.2-1.715a1 1 0 0 1 1.4-1.428A3.984 3.984 0 0 0 12 15c1.09 0 2.077-.435 2.8-1.143ZM8.5 8a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3Zm7 0a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3Z"
+              />
+            </g>
+          </svg>
+        </button>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div>
+          <div
+            id="container_max_length_number"
+            class="flex items-center justify-center border-2 border-twitterborder rounded-full w-7 h-7"
+          >
+            <p
+              id="max_length_number"
+              class="text-[10px] text-center text-twittergray-500"
+            >
+              {{max_tweet}}
+            </p>
+          </div>
+        </div>
+        <button
+          type="submit"
+          id="submit_tweet_btn"
+          class="ml-auto bg-sky-500 px-4 py-2 rounded-full text-base font-bold items-center hover:bg-opacity-90 disabled:bg-opacity-50 disabled:text-twittergray-500"
+          disabled
+        >
+          Tweet
+        </button>
+      </div>
     </div>
   </form>
-
   <script src="/js/post_tweet.js"></script>
-  <script src="/js/validate.js"></script>
 </div>
