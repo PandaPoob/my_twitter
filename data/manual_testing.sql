@@ -13,9 +13,7 @@ DELETE FROM tweets WHERE tweet_user_fk = "b3094c2f1c144817b7cc0b718fc3c644";
 SELECT * FROM tweets WHERE tweet_user_fk = "b3094c2f1c144817b7cc0b718fc3c644";
 
 --Delete all tweets images
-DELETE FROM tweet_images WHERE tweet_image_tweet_fk = "d10405c2a23a40db8e7c70a9f7323f52"; 
-
-
+DELETE FROM tweet_images WHERE tweet_image_tweet_fk = "e728f427dd2644fa8a90e27ae335ad43"; 
 
 --Update user
 UPDATE users

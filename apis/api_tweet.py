@@ -130,7 +130,7 @@ def _():
                         raise Exception(500, str(ex))
 
             #Commit
-            #db.commit()
+            db.commit()
             author = { 
                 "user_name": logged_user["user_name"], 
                 "full_name": logged_user["user_full_name"], 

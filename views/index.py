@@ -13,7 +13,7 @@ def _():
 
         #Open database
         db = x.db()
-        
+
         #Fetch 10 latest tweets
         tweets = db.execute("SELECT * FROM users_and_tweets ORDER BY users_and_tweets.tweet_created_at DESC LIMIT 0, 10").fetchall()
        

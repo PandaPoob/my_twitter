@@ -19,6 +19,7 @@
       form="tweet_form"
       name="tweet_field_text"
       type="text"
+      onkeyup="validateTextTweetInput()"
       data-validate="str"
       data-max="{{max_length}}"
       error-msg-required="msg is required"
@@ -112,8 +113,10 @@
 
       <button
         type="submit"
-        class="ml-auto bg-sky-500 px-4 py-2 rounded-full text-base font-bold items-center hover:bg-opacity-90"
-      >
+        id="submit_tweet_btn"
+        class="ml-auto bg-sky-500 px-4 py-2 rounded-full text-base font-bold items-center hover:bg-opacity-90 disabled:bg-opacity-50 disabled:text-twittergray-500"
+        disabled
+        >
         Tweet
       </button>
     </div>

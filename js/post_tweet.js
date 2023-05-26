@@ -1,8 +1,30 @@
-//const imageInput = document.getElementById("tweet_field_image");
 let storedTweetImages = []
+
+function validateTextTweetInput(){
+  tweet_text = document.getElementById("tweet_field_text").value
+  tweet_text.length
+  
+  const max_length = parseInt(document.getElementById("tweet_field_text").getAttribute("data-max"))
+  
+  //If text is bigger than max disable
+  if (tweet_text.length > max_length) {
+    document.getElementById("submit_tweet_btn").disabled = true;
+  //If there is text enabled
+  } else if (tweet_text.length !== 0)  {
+    document.getElementById("submit_tweet_btn").disabled = false;
+    //If there is not text or images disabled
+  } else if (tweet_text.length == 0 && storedTweetImages.length == 0) {
+    document.getElementById("submit_tweet_btn").disabled = true;
+  }
+
+  //render length vali display here
+  }
+  
 function handleTweetImages(){
-  //Get image input
+  //Empty and reset array
   storedTweetImages = [];
+
+  //Get image input
   const imageInput = document.getElementById("tweet_field_image")
   //Array to store current images
 
@@ -14,10 +36,49 @@ function handleTweetImages(){
   for (let i = 0; i < files.length; i++) {
     storedTweetImages.push(files[i]);
   }
+  
+  //VALIDATION//
+  //Maximum of 4 images
+  //@todo get max from x
+  if (storedTweetImages.length > 4) {
+    console.log("Can only have 4 images")
+  }
+
+ //@todo get max from x
+  storedTweetImages.forEach((img) => {
+    if (img.size > 5000000) {
+      console.log("Image is too big")
+    }
+  })
+
+/* const file = storedTweetImages[0]
+
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        resolve(reader.result);
+      };
+      reader.onerror = reject;
+      reader.readAsArrayBuffer(file.slice(0, 2));
+    });
+   */
+
+  console.log(storedTweetImages[0])
+
+  //Validate image size
+  //Validate image not accepted ext
+  //Validate on "fake" img
+
   prepareOutput();
 }
-
 function prepareOutput() {
+  tweet_text = document.getElementById("tweet_field_text").value
+  //hvis length ikke er 0 så enable btn
+  if (storedTweetImages.length == 0 && tweet_text.length == 0) {
+    document.getElementById("submit_tweet_btn").disabled = true;
+  } else if (storedTweetImages.length !== 0) {
+    document.getElementById("submit_tweet_btn").disabled = false;
+  }
   //HTML array
   let images = "";
 
@@ -46,8 +107,7 @@ function prepareOutput() {
           </div>`;
     }
   });
-  
-  getOutputLayout(images)     
+  displayOutputImages(images)     
 }
 
 function removeImage(index) {
@@ -55,7 +115,7 @@ function removeImage(index) {
   prepareOutput();
 }
 
-function getOutputLayout(images) {
+function displayOutputImages(images) {
   const output = document.querySelector("output");
 
   //Clear all layout on output
@@ -70,8 +130,8 @@ function getOutputLayout(images) {
 
   //Push images into output
   output.innerHTML = images;
-}
 
+}
 
 
 async function handleSubmitTweet() {
@@ -89,7 +149,7 @@ async function handleSubmitTweet() {
   } else {
     const data = await resp.json();
     frm.reset();
-
+    document.getElementById("submit_tweet_btn").disabled = true;
     renderTweet(data);
   }
 }
