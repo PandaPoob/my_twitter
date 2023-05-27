@@ -3,9 +3,10 @@ import pathlib
 import sqlite3
 import re
 import datetime
-import calendar
 import jwt
 import os, glob
+import shutil
+import uuid
 
 #COOKIE VARIABLE#
 COOKIE_SECRET = "872437049d2a426f9d86f1ea58b4c901"
@@ -66,6 +67,12 @@ def clear_img_folder(dir):
     filelist = glob.glob(os.path.join(dir, "*"))
     for f in filelist:
       os.remove(f)
+
+def generate_image(source_img_path, new_img_path):
+      new_img_name = f"{str(uuid.uuid4().hex)}.jpg"
+      new_img_path = os.getcwd()+new_img_path+new_img_name
+      shutil.copy(source_img_path, new_img_path)
+      return new_img_name  
 
 #@TODO 2mb for profile image and cover
 
