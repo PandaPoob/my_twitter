@@ -23,7 +23,7 @@ def send_email(receiver_email, user_api_key):
     text = """\
     Welcome!,
     Thank you for signing up to my exam project!"""
-    html = f"""\
+    old = f"""\
     <html>
       <body style="background-color: black; color: white; padding: 12px; border-radius: 10px; text-align: center">
         <p style="font-size: 24px; margin-bottom: 0; margin-top: 4px">Welcome!</p>
@@ -32,6 +32,79 @@ def send_email(receiver_email, user_api_key):
            href="{root+"verify-user/"+user_api_key}">Verify account</a>
       </body>
     </html>
+    """
+
+    html = f"""\
+    <html>
+    <head>
+    <style>
+        .body {{
+        display: flex;
+        justify-content: center;
+        font-family: sans-serif;
+      }}
+      .container {{
+        display: grid;
+        background-color: black;
+        color: white;
+        border-radius: 2%;
+        max-width: 400px;
+        padding: 2rem;
+      }}
+      h2 {{
+        text-align: center;
+        margin-top: 0.5rem;
+        margin-bottom: 0;
+        font-size: 3rem;
+        font-weight: 400;
+      }}
+      .welcome {{
+        text-align: center;
+        margin-top: 0.5rem;
+        margin-bottom: 1.5rem;
+        font-size: 14px;
+      }}
+
+      #button {{
+        background-color: #1d9bf0;
+        color: white;
+        text-decoration: none;
+        line-height: 30px; 
+        text-align: center;
+        height: 2rem;
+        border-radius: 1rem;
+        cursor: pointer;
+        font-weight: bold;
+      
+      }}
+      .button:hover {{
+        opacity: 90%;
+        cursor: pointer;
+      }}
+
+      .disclaimer {{
+        font-size: 12px;
+      }} 
+    </style>
+  </head>
+        <body">
+        <div class="container">
+      <h2>Welcome!</h2>
+      <p class="welcome">
+        Thank you for signing up to my exam project! You can verify your account
+        by clicking on the link below.
+      </p>
+      <a id="button" href="{root+"verify-user/"+user_api_key}">Verifiy account</a>
+
+      <p class="disclaimer">
+        *Please note that this project is in beta and bugs may occur. If you
+        find any you are welcome to contact our team, aka. Freja on sender's
+        email.
+      </p>
+    </div>
+  </body>
+</html>
+
     """
 
 # Turn these into plain/html MIMEText objects

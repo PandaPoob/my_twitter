@@ -149,11 +149,10 @@ def validate_user_birthday():
   user_birthday = user_birthday.split("-")
   date_birthday = datetime.date(int(user_birthday[0]), int(user_birthday[1]), int(user_birthday[2]))
   age = calculate_age(datetime.date(int(user_birthday[0]), int(user_birthday[1]), int(user_birthday[2])))
- 
+
   if date_birthday > USER_BIRTHDAY_MAX : raise Exception(400, userbirthdayerror)
   if age < 13 : raise Exception(400,  userbirthdayminerror)
-  user_birthday = f"{calendar.month_name[int(user_birthday[1])]} {user_birthday[2]}, {user_birthday[0]}"
-  return user_birthday
+  return date_birthday
 
 #FULL NAME MUST BE BETWEEN 2-50 CHAR
 USER_FULL_NAME_MIN = 2

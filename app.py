@@ -1,4 +1,4 @@
-from bottle import default_app, get, post, request, response, run, static_file
+from bottle import default_app, get, post, request, response, run, static_file, template
 import os
 import git
 import x

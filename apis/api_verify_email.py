@@ -26,6 +26,7 @@ def _():
         #create new api key
         new_api_key = str(uuid.uuid4().hex)
 
+        #Update updated at
 
 
         #commit
