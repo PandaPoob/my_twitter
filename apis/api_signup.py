@@ -33,7 +33,7 @@ def _():
         
         #Check that user name is not taken
         check_username = db.execute("SELECT user_name FROM users WHERE user_name=?", (user_name,)).fetchone()
-        if check_username: raise Exception(400, "Username already exists")
+        if check_username: raise Exception(400, "Username is already taken")
 
         #API KEY
         user_api_key = str(uuid.uuid4().hex)

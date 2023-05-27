@@ -1,18 +1,9 @@
-function displayTip(data) {
-  document.getElementById("toast_error_msg_signup").style.display = "flex";
-  document.getElementById("toast_error_text").innerHTML = data.info;
-  setTimeout(function () {
-    document.getElementById("toast_error_msg_signup").style.display = "none";
-    //document.querySelector(`[data-tip-id='${tip_id}']`).remove();
-  }, 4000);
-}
-
 async function handleSubmitSignup() {
+  //Disable btn and add loader
   const btn = event.target;
   btn.disabled = true;
-
-  //document.getElementById("form_default").style.display = "none";
-  //document.getElementById("form_loading").style.display = "block";
+  document.getElementById("form_default").style.display = "none";
+  document.getElementById("form_loading").style.display = "block";
 
   const frm = event.target;
 
@@ -20,23 +11,113 @@ async function handleSubmitSignup() {
     method: "POST",
     body: new FormData(frm),
   });
-  btn.disabled = false;
-
-  //document.getElementById("form_default").style.display = "block";
-  //document.getElementById("form_loading").style.display = "none";
 
   if (!resp.ok) {
-    console.log("Cannot signup");
     const data = await resp.json();
-    displayTip(data);
+    //Reset button state
+    document.getElementById("form_default").style.display = "block";
+    document.getElementById("form_loading").style.display = "none";
+    //Show toaster
+    displayToasterTop(data.info);
     return;
-  } else {
+  } else if (resp.ok) {
     document.getElementById(`signup_form_container`).style.display = "none";
+    document.getElementById(`heading`).style.display = "none";
     document.getElementById(`signup_success_container`).style.display = "block";
-    document.getElementById(`signup_h1`).style.display = "none";
   }
-  const data = await resp.json();
+}
 
-  // Success go to profile page
-  //location.href = `/${data.user_name}`;
+function fullNameCounter() {
+  input = document.querySelector('input[name="user_full_name"]');
+  document.getElementById("user_full_name_error_msg").style.display = "none";
+  input.classList.remove("validate_error");
+  const counter = document.querySelector(".full_name_no");
+  counter.innerHTML = input.value.length;
+}
+
+function validateFullName() {
+  //handle fullname
+  input = document.querySelector('input[name="user_full_name"]');
+  const min_val = parseInt(input.getAttribute("min-val"));
+
+  if (input.value.length < min_val) {
+    document.getElementById("user_full_name_error_msg").style.display = "block";
+    input.classList.add("validate_error");
+  } else {
+    input = document.querySelector('input[name="user_full_name"]');
+    document.getElementById("user_full_name_error_msg").style.display = "none";
+  }
+}
+function resetEmailVal() {
+  input = document.querySelector('input[name="user_email"]');
+  document.getElementById("user_email_error_msg").style.display = "none";
+  input.classList.remove("validate_error");
+}
+
+function validateEmail() {
+  input = document.querySelector('input[name="user_email"]');
+  const regex =
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-ZæøåÆØÅ\-0-9]+\.)+[a-zA-ZæøåÆØÅ]{2,}))$/;
+
+  const max_val = parseInt(input.getAttribute("max-val"));
+  const min_val = parseInt(input.getAttribute("min-val"));
+  if (
+    !(input.value.length >= min_val && input.value.length <= max_val) ||
+    !regex.test(input.value)
+  ) {
+    document.getElementById("user_email_error_msg").style.display = "block";
+    input.classList.add("validate_error");
+  } else {
+    document.getElementById("user_email_error_msg").style.display = "none";
+    input.classList.remove("validate_error");
+  }
+}
+
+function getAge(date) {
+  let today = new Date();
+  let birthDate = new Date(date);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  let m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  return age;
+}
+
+function validateBirthday() {
+  input = document.querySelector('input[name="user_birthday"]');
+  document.getElementById("user_birthday_error_msg").style.display = "none";
+  input.classList.remove("validate_error");
+  let age = getAge(input.value.replaceAll("-", "/"));
+
+  if (input.value.length === 0 || age < 13) {
+    document.getElementById("user_birthday_error_msg").style.display = "block";
+    input.classList.add("validate_error");
+  } else {
+    document.getElementById("user_birthday_error_msg").style.display = "none";
+    input.classList.remove("validate_error");
+  }
+}
+
+function userNamecounter() {
+  input = document.querySelector('input[name="user_name"]');
+  document.getElementById("user_name_error_msg").style.display = "none";
+  input.classList.remove("validate_error");
+
+  const counter = document.querySelector(".user_name_no");
+  counter.innerHTML = input.value.length;
+}
+
+function checkForm() {
+  validateFullName();
+  validateEmail();
+  validateBirthday();
+  validateUserName();
+  validatePassword();
+  confirmPassword();
+
+  const form = event.target;
+  if (!form.querySelector(".validate_error")) {
+    handleSubmitSignup();
+  }
 }

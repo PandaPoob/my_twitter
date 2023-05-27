@@ -115,7 +115,7 @@ USERNAME_MAX_LEN = 15
 USERNAME_REGEX = "^[a-zA-Z0-9_]*$"
 
 def validate_username():
-  usernameerror = f"Username must be between {USERNAME_MIN_LEN} and {USERNAME_MAX_LEN} characters"
+  usernameerror = f"user_name must be between {USERNAME_MIN_LEN} and {USERNAME_MAX_LEN} characters"
   usernamematcherror = f"user_name must only contain numbers and letters and _"
   user_name = request.forms.get("user_name", "")
   user_name = user_name.strip()
@@ -129,7 +129,8 @@ def validate_username():
 #EMAIL MUST BE BETWEEN 3-100 CHAR AND MATCH STANDARDIZED REGULAR EXP
 USER_EMAIL_MIN = 3
 USER_EMAIL_MAX = 100
-USER_EMAIL_REGEX = "^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$"
+USER_EMAIL_REGEX = "^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-ZæøåÆØÅ\-0-9]+\.)+[a-zA-ZæøåÆØÅ]{2,}))$"
+
 
 def validate_user_email():
   useremailerror = f"user_email invalid"
@@ -146,19 +147,19 @@ def calculate_age(born):
     return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
 
 #USER MUST BE 13+ OF AGE AND CANNOT HAVE BEEN IN THE FUTURE
-USER_BIRTHDAY_MAX = datetime.date.today()
+USER_BIRTHDAY_MIN = 13
 
 def validate_user_birthday():
   userbirthdayerror = "user_birthday invalid"
-  userbirthdayminerror = "User must be 13 years or older to sign up"  
+  userbirthdayminerror = "user must be 13 years or older to sign up"  
   user_birthday = request.forms.get("user_birthday", "")       
   user_birthday = user_birthday.strip()
   user_birthday = user_birthday.split("-")
   date_birthday = datetime.date(int(user_birthday[0]), int(user_birthday[1]), int(user_birthday[2]))
   age = calculate_age(datetime.date(int(user_birthday[0]), int(user_birthday[1]), int(user_birthday[2])))
 
-  if date_birthday > USER_BIRTHDAY_MAX : raise Exception(400, userbirthdayerror)
-  if age < 13 : raise Exception(400,  userbirthdayminerror)
+  if date_birthday > datetime.date.today() : raise Exception(400, userbirthdayerror)
+  if age < USER_BIRTHDAY_MIN : raise Exception(400,  userbirthdayminerror)
   return date_birthday
 
 #FULL NAME MUST BE BETWEEN 2-50 CHAR
@@ -166,7 +167,7 @@ USER_FULL_NAME_MIN = 2
 USER_FULL_NAME_MAX = 50
 
 def validate_fullname():
-  fullnameerror = f"Name must be between {USER_FULL_NAME_MIN} and {USER_FULL_NAME_MAX} characters"
+  fullnameerror = f"full_name must be between {USER_FULL_NAME_MIN} and {USER_FULL_NAME_MAX} characters"
   user_full_name = request.forms.get("user_full_name", "")
   user_full_name = user_full_name.strip()
   if len(user_full_name) < USER_FULL_NAME_MIN: raise Exception(fullnameerror)

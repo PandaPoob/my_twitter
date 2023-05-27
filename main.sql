@@ -83,6 +83,14 @@ CREATE TABLE following(
 ) WITHOUT ROWID;
 
 -----VIEWS-----
+--This view is for all active users--
+DROP VIEW IF EXISTS [active_users];
+CREATE VIEW active_users
+AS
+SELECT * FROM users
+WHERE users.user_account_status = "active";
+
+
 --This view is to get the user, tweets and images--
 DROP VIEW IF EXISTS [users_and_tweets];
 CREATE VIEW users_and_tweets
@@ -95,8 +103,8 @@ DROP VIEW IF EXISTS [follower_suggestions];
 CREATE VIEW follower_suggestions
 AS
 SELECT users.user_id, users.user_name, users.user_full_name, users.user_img_avatar, users.user_twitter_status
-FROM users;
-
+FROM users
+WHERE users.user_account_status = "active";
 
 --TRIGGERS--
 SELECT name FROM sqlite_master WHERE type = "trigger";

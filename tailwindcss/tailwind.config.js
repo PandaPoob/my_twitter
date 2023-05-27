@@ -11,6 +11,9 @@ module.exports = {
         xl: "1500px",
         xxl: "1800px",
       },
+      fontFamily: {
+        body: ['"Open Sans"'],
+      },
       fontSize: {
         sm: ["0.813rem", { lineHeight: "normal" }], //13px
         md: ["0.875em", { lineHeight: "normal" }], //14px

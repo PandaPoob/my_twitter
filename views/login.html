@@ -4,93 +4,73 @@
   % include('comp-head', title='Login')
   <body class="bg-black h-screen flex justify-center items-center text-white">
     <!-- toast error msg -->
-    <div
-      id="toast_error_msg_container"
-      class="hidden fixed top-0 md:top-[4%] w-full md:w-1/3 items-center justify-center gap-4 bg-twittergray-800 md:rounded-md p-4"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        class="w-8 h-8 text-red-500"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z"
-          clip-rule="evenodd"
-        />
-      </svg>
-      <div>
-        <p id="toast_error_msg_heading" class="text-red-400 text-lg mb-1"></p>
-        <p id="toast_error_msg_text" class="text-twittergray-400 text-sm"></p>
-      </div>
-    </div>
+    % include('comp-toaster-top')
     <!-- end toast error msg -->
+    <div class="p-4 mx-4 w-full max-w-feed mb-8">
+      <a href="/" class="flex justify-center mb-2">
+        <svg
+          xml
+          s="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          class="text-twitterblue justify-self-center w-28 h-auto"
+        >
+          <path
+            fill="currentColor"
+            d="M22.46 6c-.77.35-1.6.58-2.46.69c.88-.53 1.56-1.37 1.88-2.38c-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29c0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15c0 1.49.75 2.81 1.91 3.56c-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07a4.28 4.28 0 0 0 4 2.98a8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56c.84-.6 1.56-1.36 2.14-2.23Z"
+          />
+        </svg>
+      </a>
 
-    <div class="grid p-4 mx-4 w-full md:w-1/3">
-      <svg
-        xml
-        s="http://www.w3.org/2000/svg"
-        width="32"
-        height="32"
-        viewBox="0 0 24 24"
-        class="text-twitterblue justify-self-center w-20 h-auto"
-      >
-        <path
-          fill="currentColor"
-          d="M22.46 6c-.77.35-1.6.58-2.46.69c.88-.53 1.56-1.37 1.88-2.38c-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29c0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15c0 1.49.75 2.81 1.91 3.56c-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07a4.28 4.28 0 0 0 4 2.98a8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56c.84-.6 1.56-1.36 2.14-2.23Z"
-        />
-      </svg>
-
-      <h1 class="text-xl text-center mb-6">Log in to Twitter</h1>
+      <h1 class="text-xxl text-center font-semibold">Log in to Twitter</h1>
       <form
         class="flex flex-col"
         method="POST"
         name="login_form"
-        onsubmit="validate(handleSubmitLogin); return false"
+        onsubmit="checkForm(); return false"
       >
-        <label for="user_name" class="text-md mb-1">Username</label>
+        <div class="relative flex flex-col justify-start min-h-[100px]">
+          <label for="user_name" class="text-md mt-2 mb-1">Username</label>
+          <input
+            id="user_name"
+            class="h-12 text-twittergray-900 text-lg rounded-sm border-2 px-2 border-white focus:outline-none focus:border-twitterblue"
+            name="user_name"
+            placeholder="Username"
+            type="text"
+            maxlength="{{validation_vars['username']['max']}}"
+            min-val="{{validation_vars['username']['min']}}"
+            onblur="validateUserName()"
+          />
+          <p id="user_name_error_msg" class="hidden text-red-500 text-sm mt-1">
+            Username must be a minimum of 2 characters and can only contain
+            letters, numbers, and _
+          </p>
+        </div>
 
-        <input
-          id="user_name"
-          class="h-10 text-black rounded-sm border-2 px-2 border-white focus:outline-none focus:border-twitterblue"
-          name="user_name"
-          value="elonmusk"
-          placeholder="username"
-          type="text"
-          data-validate="str"
-          data-min="{{username_min_length}}"
-          data-max="{{username_max_length}}"
-          error-msg-required="Username is required"
-          error-msg-len="{{username_error}}"
-        />
-        <p id="user_name_error_msg" class="hidden text-red-500 text-sm mt-1">
-          Username is required
-        </p>
-
-        <label for="user_password" class="text-md mt-4 mb-1">Password</label>
-        <input
-          id="user_password"
-          class="h-10 text-black rounded-sm border-2 px-2 border-white focus:outline-none focus:border-twitterblue"
-          name="user_password"
-          value="elonmuskpass"
-          placeholder="password"
-          type="password"
-          data-validate="str"
-          data-min="{{password_min_length}}"
-          data-max="{{password_max_length}}"
-          error-msg-required="Password is required"
-          error-msg-len="{{password_error}}"
-        />
-        <p
-          id="user_password_error_msg"
-          class="hidden text-red-500 text-sm mt-1"
-        >
-          Password is required
-        </p>
+        <div class="flex flex-col justify-start min-h-[100px]">
+          <label for="user_password" class="text-md mt-2 mb-1">Password</label>
+          <input
+            id="user_password"
+            class="h-12 text-twittergray-900 rounded-sm border-2 px-2 border-white focus:outline-none focus:border-twitterblue"
+            name="user_password"
+            placeholder="Password"
+            type="password"
+            maxlength="{{validation_vars['password']['max']}}"
+            min-val="{{validation_vars['password']['min']}}"
+            onblur="validatePassword()"
+          />
+          <p
+            id="user_password_error_msg"
+            class="hidden text-red-500 text-sm mt-1"
+          >
+            Password must be 8-50 characters, contain one upper- and lowercase
+            letter and one number
+          </p>
+        </div>
 
         <button
-          class="flex justify-center items-center bg-twitterblue rounded-full text-lg font-bold py-3 mt-8 hover:bg-opacity-[90%] h-12"
+          class="flex justify-center items-center bg-twitterblue rounded-full text-lg font-bold py-3 mt-4 hover:bg-opacity-[90%] h-12"
           type="submit"
         >
           <span id="form_default">Login</span>
@@ -114,12 +94,14 @@
           </svg>
         </button>
       </form>
-      <p class="mt-6 text-sm">
+      <p class="mt-4 text-sm">
         Don't have an account? Sign up
         <a href="/signup" class="underline">here!</a>
       </p>
     </div>
-    <script src="/js/validate.js"></script>
     <script src="/js/post_login.js"></script>
+    <script src="/js/vali_username.js"></script>
+    <script src="/js/vali_passwords.js"></script>
+    <script src="/js/toaster_top.js"></script>
   </body>
 </html>

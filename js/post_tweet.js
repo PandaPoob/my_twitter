@@ -514,7 +514,6 @@ function getImageLayout(image_amount, images) {
     }
   }
 }
-
 let notifTimer;
 function displayNotifToaster(errorMsg) {
   //Get elements in html
