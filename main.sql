@@ -96,7 +96,7 @@ DROP VIEW IF EXISTS [users_and_tweets];
 CREATE VIEW users_and_tweets
 AS
 SELECT * FROM tweets
-JOIN users ON users.user_id = tweets.tweet_user_fk;
+INNER JOIN users ON users.user_id = tweets.tweet_user_fk;
 
 --This view is for follow suggestions so we do not get unnecessary info--
 DROP VIEW IF EXISTS [follower_suggestions];

@@ -49,6 +49,7 @@ def db():
     db = sqlite3.connect(str(pathlib.Path(__file__).parent.resolve())+"/twitter.db")
     #db = sqlite3.connect(os.getcwd()+"/twitter.db")
     #db = sqlite3.connect("/home/pandapoob/mysite/twitter.db")
+    #db.execute("PRAGMA foreign_keys=ON") 
     db.row_factory = dict_factory
     return db
   except Exception as ex:
