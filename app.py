@@ -5,8 +5,9 @@ import x
 import uuid
 import magic
 ################################################
-#https://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@github.com/PandaPoob/web_dev_mandatory_01.git
+#https://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@github.com/PandaPoob/web_dev_mandatory_01.git
 #Git webhook to pythonanywhere
+#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
 @post('/f1f83b1afe324291a552bf43b219b420')
 def git_update():
   repo = git.Repo('./web_dev_mandatory_01')
