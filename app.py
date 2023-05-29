@@ -53,8 +53,6 @@ def _():
     try:
         form_picture = request.files.get("picture")
         name, ext = os.path.splitext(form_picture.filename)
-        #print("#"*30)
-        #print(name, ext)
         if ext not in ('.png','.jpg','.jpeg'):
             raise Exception(400, "File extension not allowed")
     
