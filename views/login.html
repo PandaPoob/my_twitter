@@ -7,14 +7,14 @@
     % include('comp-toaster-top')
     <!-- end toast error msg -->
     <div class="p-4 mx-4 w-full max-w-feed mb-8">
-      <a href="/" class="flex justify-center mb-2">
+      <a href="/" class="flex justify-center mb-6">
         <svg
           xml
           s="http://www.w3.org/2000/svg"
           width="32"
           height="32"
           viewBox="0 0 24 24"
-          class="text-twitterblue justify-self-center w-28 h-auto"
+          class="text-twitterblue justify-self-center w-10 h-auto"
         >
           <path
             fill="currentColor"
@@ -25,10 +25,10 @@
 
       <h1 class="text-xxl text-center font-semibold">Log in to Twitter</h1>
       <form
-        class="flex flex-col"
+        class="flex flex-col mb-4"
         method="POST"
         name="login_form"
-        onsubmit="checkForm(); return false"
+        onsubmit="checkLoginForm(); return false"
       >
         <div class="relative flex flex-col justify-start min-h-[100px]">
           <label for="user_name" class="text-md mt-2 mb-1">Username</label>
@@ -70,7 +70,7 @@
         </div>
 
         <button
-          class="flex justify-center items-center bg-twitterblue rounded-full text-lg font-bold py-3 mt-4 hover:bg-opacity-[90%] h-12"
+          class="flex justify-center items-center bg-twitterblue rounded-full text-lg font-bold py-3 mt-2 hover:bg-opacity-[90%] h-12"
           type="submit"
         >
           <span id="form_default">Login</span>
@@ -94,9 +94,14 @@
           </svg>
         </button>
       </form>
-      <p class="mt-4 text-sm">
-        Don't have an account? Sign up
-        <a href="/signup" class="underline">here!</a>
+      <a
+        class="grid border border-twitterborder bg-black rounded-full text-lg font-semibold text-center py-3 mt-6 hover:bg-white hover:bg-opacity-[3%]"
+        href="/forgot-password"
+        >Forgot your password?</a
+      >
+      <p class="mt-8 text-twittergray-400">
+        Don't have an account?
+        <a href="/signup" class="text-twitterblue">Sign up</a>
       </p>
     </div>
     <script src="/js/post_login.js"></script>

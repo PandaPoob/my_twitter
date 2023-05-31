@@ -42,9 +42,12 @@ def _(filename):
 import apis.api_tweet
 import apis.api_login
 import apis.api_signup
+import apis.api_verify_email
+import apis.api_forgot_password
+import apis.api_reset_password
 import apis.api_follow
 import apis.api_unfollow
-import apis.api_verify_email
+
 import apis.api_search
 
 #import delete_later.api_send_sms
@@ -102,18 +105,18 @@ import views.signup
 import views.test_follow
 import views.verify_user
 import views.tweet
+import views.forgot_password
+import views.reset_password
 #import delete_later.test_sms
 
 ################################################
 
-#try will run on amazon
+#Runs on PythonAnywhere
 try:
     import production
-    #x.DB_PATH = "/home/pandapoob/mysite/"
     application = default_app()
 
-#except will run local
+#Runs locally
 except Exception as ex:
     print("Server running locally")
     run(host="127.0.0.1", port=3000, reloader=True, debug=True)
-#run(host="127.0.0.1", port=3000, reloader=True, debug=True)

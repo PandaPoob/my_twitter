@@ -11,6 +11,12 @@ import uuid
 #COOKIE VARIABLE#
 COOKIE_SECRET = "872437049d2a426f9d86f1ea58b4c901"
 
+#RESET PASSWORD TOKEN TIME#
+RESET_TOKEN_TIME = 1
+
+#TOKEN SECRET#
+TOKEN_SECRET = "8cea50aee2564fe5b19da8b1a95960f5"
+
 #USER ACCOUNT STATUS VARIABLES#
 ACC_STATUS_ACTIVE = "active"
 ACC_STATUS_INACTIVE = "inactive"
@@ -49,7 +55,7 @@ def db():
     db = sqlite3.connect(str(pathlib.Path(__file__).parent.resolve())+"/twitter.db")
     #db = sqlite3.connect(os.getcwd()+"/twitter.db")
     #db = sqlite3.connect("/home/pandapoob/mysite/twitter.db")
-    #db.execute("PRAGMA foreign_keys=ON") 
+    db.execute("PRAGMA foreign_keys=ON") 
     db.row_factory = dict_factory
     return db
   except Exception as ex:

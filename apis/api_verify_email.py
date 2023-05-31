@@ -33,8 +33,6 @@ def _():
         db.execute(f"UPDATE users SET user_api_key=? WHERE user_id=?", (new_api_key, user_id))
         db.execute(f"UPDATE users SET user_updated_at=? WHERE user_id=?", (updated_at, user_id))
 
-        #TODO update user's updated at_
-
         #Commit
         db.commit()
 

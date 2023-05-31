@@ -3,7 +3,7 @@ import x
 import bcrypt
 import uuid
 import time
-import sendEmail
+import utils.sendEmail
 import os
 
 @post("/api-signup")
@@ -81,7 +81,90 @@ def _():
 
         db.commit()
 
-        sendEmail.send_email(user_email, user_api_key)
+        
+        # Creating the plain-text and HTML version of email
+        try:
+            import production
+            root = "https://pandapoob.eu.pythonanywhere.com/"
+        except:
+            root = "http://127.0.0.1:3000/"
+            
+        text = """\
+    Welcome!,
+    Thank you for signing up to my exam project!"""
+        html = f"""\
+    <html>
+    <head>
+    <style>
+        .body {{
+        display: flex;
+        justify-content: center;
+        font-family: sans-serif;
+      }}
+      .container {{
+        display: grid;
+        background-color: black;
+        color: white;
+        border-radius: 2%;
+        max-width: 400px;
+        padding: 2rem;
+      }}
+      h2 {{
+        text-align: center;
+        margin-top: 0.5rem;
+        margin-bottom: 0;
+        font-size: 3rem;
+        font-weight: 400;
+      }}
+      .welcome {{
+        text-align: center;
+        margin-top: 0.5rem;
+        margin-bottom: 1.5rem;
+        font-size: 14px;
+      }}
+
+      #button {{
+        background-color: #1d9bf0;
+        color: white;
+        text-decoration: none;
+        line-height: 30px; 
+        text-align: center;
+        height: 2rem;
+        border-radius: 1rem;
+        cursor: pointer;
+        font-weight: bold;
+      
+      }}
+      .button:hover {{
+        opacity: 90%;
+        cursor: pointer;
+      }}
+
+      .disclaimer {{
+        font-size: 12px;
+      }} 
+    </style>
+  </head>
+        <body">
+        <div class="container">
+      <h2>Welcome!</h2>
+      <p class="welcome">
+        Thank you for signing up to my exam project! You can verify your account
+        by clicking on the link below.
+      </p>
+      <a id="button" href="{root+"verify-user/"+user_api_key}">Verifiy account</a>
+
+      <p class="disclaimer">
+        *Please note that this project is in beta and bugs may occur. If you
+        find any you are welcome to contact our team, aka. Freja on sender's
+        email.
+      </p>
+    </div>
+  </body>
+</html>
+    """
+        subject = "Freja's exam's site signup"
+        utils.sendEmail.send_email(user_email, text, html, subject)
 
         return {
 			"info" : "user created", 

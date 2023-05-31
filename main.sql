@@ -1,3 +1,5 @@
+--  FOREIGN KEY(tweet_user_fk) REFERENCES users(user_id)
+
 --USERS--
 DROP TABLE IF EXISTS users;
 

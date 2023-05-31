@@ -7,14 +7,14 @@
     <!-- end toast error msg -->
 
     <div class="p-4 mx-4 w-full max-w-feed mt-8">
-      <a href="/" class="flex justify-center mb-2">
+      <a href="/" class="flex justify-center mb-6">
         <svg
           xml
           s="http://www.w3.org/2000/svg"
           width="32"
           height="32"
           viewBox="0 0 24 24"
-          class="text-twitterblue justify-self-center w-28 h-auto"
+          class="text-twitterblue justify-self-center w-10 h-auto"
         >
           <path
             fill="currentColor"
@@ -23,12 +23,12 @@
         </svg>
       </a>
 
-      <h1 id="heading" class="text-xxl text-center font-semibold">
-        Sign up to Twitter
+      <h1 id="heading" class="text-xxl text-center font-semibold mb-2">
+        Join Twitter today
       </h1>
 
       <div id="signup_form_container" class="pb-4">
-        <form class="flex flex-col" onsubmit="checkForm(); return false">
+        <form class="flex flex-col" onsubmit="checkSignupForm(); return false">
           <div class="relative flex flex-col justify-start min-h-[92px]">
             <label class="text-md mb-1" for="user_full_name">Name </label>
             <input
@@ -192,9 +192,9 @@
             </svg>
           </button>
         </form>
-        <p class="mt-4 text-sm">
-          Already have an account? Log in
-          <a href="/login" class="underline">here!</a>
+        <p class="mt-8 text-twittergray-400">
+          Already have an account?
+          <a href="/login" class="text-twitterblue">Log in</a>
         </p>
       </div>
 
@@ -212,10 +212,10 @@
         </p>
       </div>
     </div>
-
-    <script src="/js/post_signup.js"></script>
     <script src="/js/toaster_top.js"></script>
+    <script src="/js/post_signup.js"></script>
     <script src="/js/vali_username.js"></script>
     <script src="/js/vali_passwords.js"></script>
+    <script src="/js/vali_email.js"></script>
   </body>
 </html>

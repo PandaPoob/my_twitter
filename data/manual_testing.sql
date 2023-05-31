@@ -15,12 +15,12 @@ SELECT * FROM tweets WHERE tweet_user_fk = "b3094c2f1c144817b7cc0b718fc3c644";
 --Delete all tweets images
 DELETE FROM tweet_images WHERE tweet_image_tweet_fk = "e728f427dd2644fa8a90e27ae335ad43"; 
 
-DELETE FROM users WHERE user_name = "test";
+DELETE FROM users WHERE user_name = "freja";
 
 --Update user
 UPDATE users
-SET user_account_status = "active"
-WHERE user_name = "my_name_cleo";
+SET user_account_status = "inactive"
+WHERE user_name = "freja";
 
 --See user and user's tweets
 SELECT * FROM tweets

@@ -1,6 +1,6 @@
 from bottle import post, request, response
 import x
-import formatNumber
+import utils.formatNumber
 
 @post("/api-unfollow")
 def _():
@@ -22,7 +22,7 @@ def _():
 
         newfollowercount = db.execute("SELECT user_total_followers FROM users WHERE user_id=?", (user_followe_id,)).fetchone()
         if newfollowercount:
-            newfollowercount = formatNumber.human_format(newfollowercount["user_total_followers"])
+            newfollowercount = utils.formatNumber.human_format(newfollowercount["user_total_followers"])
     
         db.commit()
        

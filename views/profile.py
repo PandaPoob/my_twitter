@@ -2,7 +2,7 @@ from bottle import get, template
 import time
 import calendar
 import x
-import formatNumber
+import utils.formatNumber
 
 @get("/<username>")
 def _(username):
@@ -50,29 +50,29 @@ def _(username):
         
        #Format profile numbers
         if profile['user_total_followers']:
-            profile["user_total_followers"] = formatNumber.human_format(profile['user_total_followers'])
+            profile["user_total_followers"] = utils.formatNumber.human_format(profile['user_total_followers'])
         
         if profile['user_total_following']:
-            profile["user_total_following"] = formatNumber.human_format(profile['user_total_following'])
+            profile["user_total_following"] = utils.formatNumber.human_format(profile['user_total_following'])
        
         if profile['user_total_tweets']:
-            profile["user_total_tweets"] = formatNumber.human_format(profile['user_total_tweets'])
+            profile["user_total_tweets"] = utils.formatNumber.human_format(profile['user_total_tweets'])
         
         #format the tweet numbers
         #@todo maybe make this general func
         if len(tweets) != 0:
             for i in range(len(tweets)):
                 if tweets[i]['tweet_total_replies']:
-                    tweets[i]['tweet_total_replies'] = formatNumber.human_format(tweets[i]['tweet_total_replies'])
+                    tweets[i]['tweet_total_replies'] = utils.formatNumber.human_format(tweets[i]['tweet_total_replies'])
                 
                 if tweets[i]['tweet_total_likes']:
-                    tweets[i]['tweet_total_likes'] = formatNumber.human_format(tweets[i]['tweet_total_likes'])
+                    tweets[i]['tweet_total_likes'] = utils.formatNumber.human_format(tweets[i]['tweet_total_likes'])
                 
                 if tweets[i]['tweet_total_retweets']:
-                    tweets[i]['tweet_total_retweets'] = formatNumber.human_format(tweets[i]['tweet_total_retweets'])
+                    tweets[i]['tweet_total_retweets'] = utils.formatNumber.human_format(tweets[i]['tweet_total_retweets'])
                 
                 if tweets[i]['tweet_total_views']:
-                    tweets[i]['tweet_total_views'] = formatNumber.human_format(tweets[i]['tweet_total_views'])
+                    tweets[i]['tweet_total_views'] = utils.formatNumber.human_format(tweets[i]['tweet_total_views'])
 
                 if tweets[i]['tweet_created_at']:
                     month = time.strftime('%#m', time.localtime(tweets[i]['tweet_created_at']))
@@ -83,7 +83,7 @@ def _(username):
         #Format trends numbers
         for i in range(len(trends)):
             if trends[i]['trend_total_tweets']:
-                trends[i]['trend_total_tweets'] = formatNumber.human_format(trends[i]['trend_total_tweets'])
+                trends[i]['trend_total_tweets'] = utils.formatNumber.human_format(trends[i]['trend_total_tweets'])
 
         #Format date
         if profile['user_created_at']:

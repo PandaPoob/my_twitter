@@ -2,7 +2,7 @@ from bottle import get, template
 import time
 import calendar
 import x
-import formatNumber
+import utils.formatNumber
 
 @get("/")
 def _():
@@ -38,16 +38,16 @@ def _():
         #Format tweet numbers
         for i in range(len(tweets)):
             if tweets[i]['tweet_total_replies']:
-                tweets[i]['tweet_total_replies'] = formatNumber.human_format(tweets[i]['tweet_total_replies'])
+                tweets[i]['tweet_total_replies'] = utils.formatNumber.human_format(tweets[i]['tweet_total_replies'])
         
             if tweets[i]['tweet_total_likes']:
-                tweets[i]['tweet_total_likes'] = formatNumber.human_format(tweets[i]['tweet_total_likes'])
+                tweets[i]['tweet_total_likes'] = utils.formatNumber.human_format(tweets[i]['tweet_total_likes'])
             
             if tweets[i]['tweet_total_retweets']:
-                tweets[i]['tweet_total_retweets'] = formatNumber.human_format(tweets[i]['tweet_total_retweets'])
+                tweets[i]['tweet_total_retweets'] = utils.formatNumber.human_format(tweets[i]['tweet_total_retweets'])
             
             if tweets[i]['tweet_total_views']:
-                tweets[i]['tweet_total_views'] = formatNumber.human_format(tweets[i]['tweet_total_views'])
+                tweets[i]['tweet_total_views'] = utils.formatNumber.human_format(tweets[i]['tweet_total_views'])
            
             if tweets[i]['tweet_created_at']:
                 month = time.strftime('%#m', time.localtime(tweets[i]['tweet_created_at']))
@@ -57,7 +57,7 @@ def _():
         #Format trends numbers
         for i in range(len(trends)):
             if trends[i]['trend_total_tweets']:
-                trends[i]['trend_total_tweets'] = formatNumber.human_format(trends[i]['trend_total_tweets'])
+                trends[i]['trend_total_tweets'] = utils.formatNumber.human_format(trends[i]['trend_total_tweets'])
       
         return template("index", max_tweet=x.TWEET_MAX_LEN, max_img=x.TWEET_MAX_IMG_SIZE, max_imgs=x.TWEET_MAX_IMG_NO, tweets=tweets, trends=trends, fsugg=fsugg, logged_user=logged_user)
     except Exception as ex:
