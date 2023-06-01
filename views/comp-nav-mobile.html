@@ -1,8 +1,8 @@
+%if logged_user:
 <div
   class="fixed w-screen flex justify-between py-4 sm:hidden bottom-0 left-0 right-0 z-50 bg-black border-t border-zinc-700"
 >
-  %if logged_user:
-  <div class="flex justify-between w-full px-10">
+  <div class="flex sm:hidden justify-between w-full px-10">
     <a href="/">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -71,19 +71,33 @@
       </svg>
     </a>
   </div>
-  %else:
-  <div class="w-full grid grid-cols-2 gap-4 px-4">
-    <a
-      href="/login"
-      class="bg-white rounded-full flex justify-center items-center py-1 text-twitterblue font-bold"
-      >Login</a
-    >
-    <a
-      href=""
-      class="bg-twitterblue rounded-full flex justify-center items-center py-1 font-bold"
-      >Sign up</a
-    >
-  </div>
-
-  %end
 </div>
+%else:
+<div
+  class="fixed w-screen flex justify-between py-4 ms:py-3 lg:py-2 xl:py-1 bottom-0 left-0 right-0 z-50 bg-black border-t border-zinc-700 sm:border-none sm:bg-twitterblue"
+>
+  <div class="w-full flex items-center justify-center gap-10 lg:gap-2 px-4">
+    <div
+      class="hidden max-w-feed lg:flex lg:w-4/12 xl:w-[30%] xxl:w-4/12 lg:pr-20 xxl:pr-10"
+    ></div>
+    <div
+      class="hidden ms:flex flex-col lg:w-10/12 xl:w-[70%] xxl:w-8/12 xl:ml-24"
+    >
+      <h4 class="text-[23px] font-bold">Don't miss what's happening</h4>
+      <p>People on Twitter are the first to know.</p>
+    </div>
+    <div class="w-full grid grid-cols-2 gap-4 px-4 ms:flex ms:w-auto lg:w-3/12">
+      <a
+        href="/login"
+        class="border border-twittergray-500 rounded-full flex justify-center items-center py-1 px-4 text-twitterblue font-bold sm:border-white sm:text-white"
+        >Login</a
+      >
+      <a
+        href="/signup"
+        class="bg-twitterblue rounded-full flex justify-center items-center py-1 px-4 font-bold sm:bg-white sm:text-black"
+        >Sign up</a
+      >
+    </div>
+  </div>
+</div>
+%end
