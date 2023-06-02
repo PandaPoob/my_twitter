@@ -177,8 +177,8 @@ def validate_fullname():
   fullnameerror = f"full_name must be between {USER_FULL_NAME_MIN} and {USER_FULL_NAME_MAX} characters"
   user_full_name = request.forms.get("user_full_name", "")
   user_full_name = user_full_name.strip()
-  if len(user_full_name) < USER_FULL_NAME_MIN: raise Exception(fullnameerror)
-  if len(user_full_name) > USER_FULL_NAME_MAX: raise Exception(fullnameerror)
+  if len(user_full_name) < USER_FULL_NAME_MIN: raise Exception(400, fullnameerror)
+  if len(user_full_name) > USER_FULL_NAME_MAX: raise Exception(400, fullnameerror)
 
   return user_full_name
 
@@ -205,3 +205,39 @@ def validate_user_confirm_password():
 	confirm_password = confirm_password.strip()
 	if confirm_password != user_password: raise Exception(400, error)
 	return confirm_password
+
+#USER BIO#
+USER_BIO_TEXT_MAX = 160
+
+def validate_bio_text():
+  bioerror = f"Bio text has a max of {USER_BIO_TEXT_MAX} characters"
+  user_bio_text = request.forms.get("user_bio_text", "")
+  user_bio_text = user_bio_text.strip()
+  if len(user_bio_text) > USER_BIO_TEXT_MAX: raise Exception(400, bioerror)
+
+  return user_bio_text
+
+
+#USER BIO LINK#
+USER_BIO_LINK_MAX = 100
+USER_BIO_LINK_REGEX = "^(http|https)://[^\s/$.?#].[^\s]*$"
+
+def validate_bio_link():
+  biolinkerror = f"Bio link has a max of {USER_BIO_LINK_MAX} characters"
+  user_bio_link = request.forms.get("user_bio_link", "")
+  user_bio_link = user_bio_link.strip()
+  if len(user_bio_link) > USER_BIO_LINK_MAX: raise Exception(400, biolinkerror)
+
+  return user_bio_link
+
+
+#USER BIO LOCATION#
+USER_BIO_LOC_MAX = 30
+
+def validate_bio_loc():
+  biolocerror = f"Bio location has a max of {USER_BIO_LOC_MAX} characters"
+  user_bio_location = request.forms.get("user_bio_location", "")
+  user_bio_location = user_bio_location.strip()
+  if len(user_bio_location) > USER_BIO_LOC_MAX: raise Exception(400, biolocerror)
+
+  return user_bio_location

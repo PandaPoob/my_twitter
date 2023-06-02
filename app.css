@@ -860,6 +860,8 @@ video {
 
 .max-w-feed {
   max-width: 600px;
+.max-w-\[23\%\] {
+  max-width: 23%;
 }
 
 .max-w-widget {
@@ -979,6 +981,14 @@ video {
 
 .gap-1 {
   gap: 0.25rem;
+}
+
+.gap-10 {
+  gap: 2.5rem;
+}
+
+.gap-2 {
+  gap: 0.5rem;
 }
 
 .gap-3 {
@@ -1118,6 +1128,7 @@ video {
 }
 
 .bg-twittergray-900 {
+.bg-black {
   --tw-bg-opacity: 1;
   background-color: rgb(22 24 28 / var(--tw-bg-opacity));
 }
@@ -1321,6 +1332,10 @@ video {
 .text-xl {
   font-size: 1.25rem;
   line-height: normal;
+}
+
+.text-\[23px\] {
+  font-size: 23px;
 }
 
 .text-base {
@@ -1800,24 +1815,42 @@ video {
     min-height: 200px;
   }
 
+<<<<<<< Updated upstream
   .lg\:w-4\/12 {
     width: 33.333333%;
   }
 
   .lg\:w-10\/12 {
     width: 83.333333%;
+=======
+  .lg\:w-10\/12 {
+    width: 83.333333%;
+  }
+
+  .lg\:w-3\/12 {
+    width: 25%;
+>>>>>>> Stashed changes
   }
 
   .lg\:w-3\/12 {
     width: 25%;
   }
 
+<<<<<<< Updated upstream
   .lg\:w-full {
     width: 100%;
   }
 
   .lg\:w-9\/12 {
     width: 75%;
+=======
+  .lg\:w-9\/12 {
+    width: 75%;
+  }
+
+  .lg\:w-full {
+    width: 100%;
+>>>>>>> Stashed changes
   }
 
   .lg\:max-w-widget {
@@ -1849,6 +1882,7 @@ video {
     padding-bottom: 0.5rem;
   }
 
+<<<<<<< Updated upstream
   .lg\:px-4 {
     padding-left: 1rem;
     padding-right: 1rem;
@@ -1865,6 +1899,19 @@ video {
   .lg\:pr-4 {
     padding-right: 1rem;
   }
+=======
+  .lg\:pr-20 {
+    padding-right: 5rem;
+  }
+
+  .lg\:pr-4 {
+    padding-right: 1rem;
+  }
+
+  .lg\:pr-6 {
+    padding-right: 1.5rem;
+  }
+>>>>>>> Stashed changes
 }
 
 @media (min-width: 1320px) {

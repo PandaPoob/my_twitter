@@ -131,6 +131,7 @@
               <!-- prettier -->
               %if logged_user and logged_user["user_id"] == profile["user_id"]:
               <button
+              onclick="openEditModal()"
                 class="text-base text-white font-bold border border-twitterbuttonborder rounded-full hover:bg-white hover:bg-opacity-10 py-1.5 px-4 hover:transition-all"
               >
                 Edit profile
@@ -350,8 +351,11 @@
         <!-- right/widget -->
         <!-- prettier-ignore -->
         % include('comp-right-col-profile', trends=trends, fsugg=fsugg, imgtweets=imgtweets, logged_user=logged_user)
+        <!-- prettier-ignore -->
+        % include('comp-modal-profile')
       </div>
     </div>
     <script src="/js/app.js"></script>
+    <script src="/js/post_edit_profile.js"></script>
   </body>
 </html>
