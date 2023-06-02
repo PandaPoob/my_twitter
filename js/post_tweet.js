@@ -1,38 +1,59 @@
 let storedTweetImages = [];
+let circumference = "";
+const circle = document.getElementById("progress_circle")
+
+window.onload = () => {
+  //Set progress on circle val
+  const radius = circle.r.baseVal.value;
+  circumference = radius * 2 * Math.PI;
+  circle.style.strokeDasharray = `${circumference} ${circumference}`;
+  circle.style.strokeDashoffset = circumference;
+};
 
 function validateTextTweetInput() {
-  const tweet_text = document.getElementById("tweet_field_text").value;
+  const tweet = document.getElementById("tweet_field_text");
+  const tweet_text = tweet.value;
   const max_length = parseInt(
-    document.getElementById("tweet_field_text").getAttribute("data-max")
+    tweet.getAttribute("data-max")
   );
 
+  //Text component validation
+  circle.style.stroke = "#1d9bf0";
+    if (tweet_text.length > max_length) {
+      circle.style.stroke = "#f4212e";
+      //set to red stop function
+    } else {
+      const percentage = (tweet_text.length / max_length) * 100;
+      setProgress(percentage)    
+    }
+
+ 
+  
+  const tweet_btn = document.getElementById("submit_tweet_btn")
   //If text is bigger than max disable
   if (tweet_text.length > max_length) {
-    document.getElementById("submit_tweet_btn").disabled = true;
+    tweet_btn.disabled = true;
     //If there is text enabled
   } else if (tweet_text.length !== 0) {
-    document.getElementById("submit_tweet_btn").disabled = false;
+    tweet_btn.disabled = false;
     //If there is not text or images disabled
   } else if (tweet_text.length == 0 && storedTweetImages.length == 0) {
-    document.getElementById("submit_tweet_btn").disabled = true;
+    tweet_btn.disabled = true;
   }
 
   //Get characters left and insert
   const char_left = max_length - tweet_text.length;
   const number_text = document.getElementById("max_length_number");
-  const number_container = document.getElementById(
-    "container_max_length_number"
-  );
+
   number_text.innerHTML = char_left;
 
-  if (char_left <= 0) {
-    number_container.style.borderColor = "#f4212e";
-    number_text.style.color = "#f4212e";
-  } else {
-    number_container.style.borderColor = "#2f3336";
-    number_text.style.color = "#71767b";
-  }
 }
+
+function setProgress(percent){
+  const offset = circumference - percent / 100 * circumference;
+  circle.style.strokeDashoffset = offset;
+}
+
 
 function handleTweetImages() {
   //Empty and reset array
