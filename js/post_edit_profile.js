@@ -78,8 +78,6 @@ async function handleSubmitEditProfile() {
     document.getElementById("form_default").style.display = "block";
     document.getElementById("form_loading").style.display = "none";
 
-    //Show toaster
-
     return;
   } else if (resp.ok) {
     edit_profile_modal.style.display = "none";
