@@ -100,7 +100,24 @@ def _(username):
                 if following[f]['followee_fk'] == profile_id:
                     isFollowing = True
 
-        return template("profile", profile=profile, tweets=tweets, trends=trends, fsugg=fsugg, imgtweets=imgtweets, logged_user=logged_user, isFollowing=isFollowing)
+        #bio, location, link
+        validation_vars = {
+            "fullname": {
+                "min": x.USER_FULL_NAME_MIN,
+                "max": x.USER_FULL_NAME_MAX
+            },
+            "bio": {
+                "max": x.USER_BIO_TEXT_MAX
+            },
+            "location": {
+                "max": x.USER_BIO_LOC_MAX
+            },
+             "link": {
+                "max": x.USER_BIO_LINK_MAX
+            },
+        }
+
+        return template("profile", profile=profile, tweets=tweets, trends=trends, fsugg=fsugg, imgtweets=imgtweets, logged_user=logged_user, isFollowing=isFollowing, validation_vars=validation_vars)
     except Exception as ex:
         print(ex)
         return "error"

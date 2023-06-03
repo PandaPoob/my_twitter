@@ -1,3 +1,213 @@
-<div id="modal_bg" class="hidden">
-  <div id="modal_content"></div>
+<div
+  id="modal_bg"
+  class="hidden absolute z-[100] h-full w-full bg-black ms:bg-opacity-80"
+>
+  <div
+    id="modal_content"
+    class="absolute z-[101] h-full w-full bg-black max-w-feed p-4"
+  >
+    <!-- modal header -->
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-6">
+        <button
+          onclick="closeEditModal()"
+          class="ms:hidden rounded-full p-2 hover:bg-white hover:bg-opacity-[10%]"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            class="w-5 h-5"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+            />
+          </svg>
+        </button>
+        <button
+          onclick="closeEditModal()"
+          class="hidden ms:block rounded-full p-2 hover:bg-white hover:bg-opacity-[10%]"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+        <h2 class="text-white font-bold text-xl">Edit profile</h2>
+      </div>
+
+      <button
+        class="flex justify-center items-center bg-white rounded-full text-black font-semibold text-lg py-2 px-4 hover:bg-opacity-[94%]"
+        type="submit"
+        form="edit_profile_form"
+      >
+        <span id="form_default">Save</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          id="form_loading"
+          class="animate-spin hidden"
+        >
+          <path
+            fill="currentColor"
+            d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"
+            opacity=".25"
+          />
+          <path
+            fill="currentColor"
+            d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z"
+          ></path>
+        </svg>
+      </button>
+    </div>
+    <!-- modal header end -->
+
+    <form
+      class="flex flex-col mb-4"
+      id="edit_profile_form"
+      method="POST"
+      name="edit_profile_form"
+      onsubmit="checkEditForm(); return false"
+    >
+      <!-- full name input -->
+      <div class="relative flex flex-col justify-start min-h-[92px]">
+        <label class="text-md mb-1 text-twittergray-500" for="user_full_name"
+          >Name</label
+        >
+        <input
+          class="h-12 text-white text-lg rounded-sm border px-2 bg-black border-twitterborder focus:outline-none focus:border-twitterblue"
+          type="text"
+          value="{{logged_user['user_full_name']}}"
+          id="user_full_name"
+          name="user_full_name"
+          placeholder="Name"
+          maxlength="{{validation_vars['fullname']['max']}}"
+          min-val="{{validation_vars['fullname']['min']}}"
+          onblur="validateFullName()"
+          onkeyup="fullNameCounter()"
+        />
+        <span
+          class="absolute top-7 right-2 flex items-center text-twittergray-500 text-sm"
+        >
+          <span class="full_name_no val_no" for="user_full_name">0</span>
+          <span>/{{validation_vars['fullname']['max']}}</span>
+        </span>
+        <p
+          id="user_full_name_error_msg"
+          class="hidden text-red-500 text-sm mt-1"
+        >
+          Name must be a minimum of 2 characters
+        </p>
+      </div>
+
+      <!-- bio input -->
+      <div class="relative flex flex-col justify-start min-h-[92px]">
+        <label class="text-md mb-1 text-twittergray-500" for="user_bio_text"
+          >Bio</label
+        >
+        <!-- prettier-ignore -->
+        <textarea
+          class="h-24 text-white text-lg rounded-sm border pb-2 pt-4 px-2 bg-black border-twitterborder focus:outline-none focus:border-twitterblue mb-4"
+          type="text"
+          value="{{logged_user['user_bio_text']}}"
+          id="user_bio_text"
+          name="user_bio_text"
+          placeholder="Bio"
+          maxlength="{{validation_vars['bio']['max']}}"
+          onkeyup="validateBio()"
+        >{{logged_user['user_bio_text']}}</textarea>
+        <span
+          class="absolute top-7 right-2 flex items-center text-twittergray-500 text-sm"
+        >
+          <span id="counter_user_bio_text" class="val_no" for="user_bio_text"
+            >0</span
+          >
+          <span>/{{validation_vars['bio']['max']}}</span>
+        </span>
+      </div>
+
+      <!-- bio location -->
+      <div class="relative flex flex-col justify-start min-h-[92px]">
+        <label class="text-md mb-1 text-twittergray-500" for="user_bio_location"
+          >Location</label
+        >
+        <input
+          class="h-12 text-white text-lg rounded-sm border px-2 bg-black border-twitterborder focus:outline-none focus:border-twitterblue"
+          type="text"
+          value="{{logged_user['user_bio_location']}}"
+          id="user_bio_location"
+          name="user_bio_location"
+          placeholder="Location"
+          maxlength="{{validation_vars['location']['max']}}"
+          onkeyup="validateLocation()"
+        />
+        <span
+          class="absolute top-7 right-2 flex items-center text-twittergray-500 text-sm"
+        >
+          <span
+            id="counter_user_bio_location"
+            class="val_no"
+            for="user_bio_location"
+            >0</span
+          >
+          <span>/{{validation_vars['location']['max']}}</span>
+        </span>
+      </div>
+
+      <!-- bio link -->
+      <div class="relative flex flex-col justify-start min-h-[92px]">
+        <label class="text-md mb-1 text-twittergray-500" for="user_bio_link"
+          >Website</label
+        >
+        <input
+          class="h-12 text-white text-lg rounded-sm border py-1 px-2 bg-black border-twitterborder focus:outline-none focus:border-twitterblue"
+          type="text"
+          value="{{logged_user['user_bio_link']}}"
+          id="user_bio_link"
+          name="user_bio_link"
+          placeholder="Website"
+          maxlength="{{validation_vars['link']['max']}}"
+          onblur="validateLink()"
+          onkeyup="countLink()"
+        />
+        <span
+          class="absolute top-7 right-2 flex items-center text-twittergray-500 text-sm"
+        >
+          <span id="counter_user_bio_link" class="val_no" for="user_bio_link"
+            >0</span
+          >
+          <span>/{{validation_vars['link']['max']}}</span>
+        </span>
+        <p
+          id="user_bio_link_error_msg"
+          class="hidden text-red-500 text-sm mt-1"
+        >
+          Not a valid url
+        </p>
+      </div>
+    </form>
+  </div>
+  <script>
+    function closeEditModal() {
+      const edit_profile_modal = document.getElementById("modal_bg");
+      edit_profile_modal.style.display = "none";
+      location.reload();
+    }
+  </script>
 </div>

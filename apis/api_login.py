@@ -37,7 +37,7 @@ def _():
         #Removing pw from cookie
         user.pop("user_password")
 
-        #Using jwet to encode user cookie
+        #Using jwt to encode user cookie
         the_jwt = jwt.encode(user, x.COOKIE_SECRET, algorithm="HS256")
         
         #Setting the cookie with user

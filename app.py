@@ -45,9 +45,10 @@ import apis.api_signup
 import apis.api_verify_email
 import apis.api_forgot_password
 import apis.api_reset_password
+import apis.api_edit_profile
+
 import apis.api_follow
 import apis.api_unfollow
-
 import apis.api_search
 
 #import delete_later.api_send_sms
