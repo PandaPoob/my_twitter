@@ -5,21 +5,17 @@ import uuid
 import os
 import magic
 import utils.prepareImages as p
-import datetime
 import time
-import bottle
 
 @post('/api-edit-profile')
 def _():
     try:
+        x.disable_cache()
+
         #Get cookie user
         logged_user = x.request_cookie()
         #Decode cookie
         logged_user = x.decode_cookie(logged_user)
-        x.disable_cache()
-        #DELETE AFTER
-        #db = x.db()
-        #logged_user = db.execute("SELECT * FROM users WHERE user_name = ?", ("my_name_cleo",)).fetchone()
         
         if not logged_user:
             raise Exception(400, "Log in to edit profile")
@@ -41,11 +37,7 @@ def _():
         cover_filename = user_img_cover.filename
 
         folder_path = ""
-        #Vi får sent nothing hvis folk ikke ændrer billede derfor:
-        #If filename empty = DO NOTHING -> bc then nothing new has been uploaded
 
-
-        #if !filename
         if avatar_filename != "empty" or cover_filename != "empty":
             #Create temp folder
             folder_name = logged_user["user_id"]
@@ -176,14 +168,17 @@ def _():
             try:
                 import production
                 is_cookie_https = True
+                curr_domain = "https://pandapoob.eu.pythonanywhere.com/"
             except Exception as ex:
                 is_cookie_https = False
+                curr_domain = "http://127.0.0.1:3000/"
+
             
             user = db.execute("SELECT * FROM users WHERE user_name = ?", (logged_user["user_name"],)).fetchone()
             user.pop("user_password")
     
             the_jwt = jwt.encode(user, x.COOKIE_SECRET, algorithm="HS256")
-            response.set_cookie("user", the_jwt, httponly=True, secure=is_cookie_https, path='/', domain='127.0.0.1')
+            response.set_cookie("user", the_jwt, httponly=True, secure=is_cookie_https, path='/', domain=curr_domain)
 
         return {"info":"ok"}
     except Exception as ex:

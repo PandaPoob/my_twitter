@@ -31,8 +31,10 @@ def _():
         try:
             import production
             is_cookie_https = True
+            curr_domain = "https://pandapoob.eu.pythonanywhere.com/"
         except:
             is_cookie_https = False
+            curr_domain = "http://127.0.0.1:3000/"
 
         #Removing pw from cookie
         user.pop("user_password")
@@ -41,7 +43,7 @@ def _():
         the_jwt = jwt.encode(user, x.COOKIE_SECRET, algorithm="HS256")
         
         #Setting the cookie with user
-        response.set_cookie("user", the_jwt, httponly=True, secure=is_cookie_https, path='/', domain='127.0.0.1')
+        response.set_cookie("user", the_jwt, httponly=True, secure=is_cookie_https, path='/', domain=curr_domain)
         return {"info":"success login", "user_name":user["user_name"]}
     except Exception as e:
         print(e)
