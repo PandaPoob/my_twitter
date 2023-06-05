@@ -40,7 +40,7 @@ def getDomain():
   try:
     import production
     is_cookie_https = True
-    curr_domain = ".pandapoob.eu.pythonanywhere.com/"
+    curr_domain = ".pandapoob.eu.pythonanywhere.com"
     return (is_cookie_https, curr_domain)
   except:
     is_cookie_https = False
