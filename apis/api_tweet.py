@@ -14,7 +14,6 @@ def _():
         if not logged_user:
             raise Exception(400, "Log in to tweet")
 
-        #Backend validation
         #Validate tweet text
         tweet_text = x.validate_tweet_field_text()
         
@@ -35,9 +34,19 @@ def _():
         else:
             image_amount = len(tweet_images)
 
+        #Tweet id
+        tweet_id = str(uuid.uuid4().hex)
+        
+        folder_path = ""
         #Validate images
         if image_amount >=1:
             
+            #Create temp tolder
+            folder_name = tweet_id
+            directory_path = x.ROOT+"/images/temp_imgs/"
+            folder_path = os.path.join(directory_path, folder_name)
+            os.makedirs(folder_path)
+
             #Loop images
             for tweet_image in tweet_images:
 
@@ -47,14 +56,14 @@ def _():
                 #Upload to temp folder
                 name, ext = os.path.splitext(tweet_image.filename)
                 tweet_image_name = str(uuid.uuid4().hex)
-                tweet_image.save(f"images/temp_imgs/{tweet_image_name+ext}")
+                tweet_image.save(f"{folder_path}/{tweet_image_name+ext}")
 
                 #Validate image size
-                filesize = os.stat(f"images/temp_imgs/{tweet_image_name+ext}").st_size
+                filesize = os.stat(f"{folder_path}/{tweet_image_name+ext}").st_size
                 x.validate_image_size(filesize)
 
                 #Validate image data filetype
-                filetype = magic.from_file(f"images/temp_imgs/{tweet_image_name+ext}")
+                filetype = magic.from_file(f"{folder_path}/{tweet_image_name+ext}")
                 x.validate_image_datatype(filetype)
 
         #Validate tweet content
@@ -66,7 +75,6 @@ def _():
             x.disable_cache()
         
             #Prepare tweet data
-            tweet_id = str(uuid.uuid4().hex)
             tweet_created_at = int(time.time())
             tweet = {
                 "tweet_id": tweet_id,
@@ -102,7 +110,7 @@ def _():
                         #Upload to image folder
                         name, ext = os.path.splitext(tweet_images[i].filename)
                         tweet_image_url = str(uuid.uuid4().hex+ext)
-                        tweet_images[i].save(f"images/tweet_imgs/{tweet_image_url}")
+                        tweet_images[i].save(x.ROOT+f"/images/tweet_imgs/{tweet_image_url}")
 
                         #Store url of saved imgs
                         saved_images.append(tweet_image_url)
@@ -121,9 +129,10 @@ def _():
                         db.execute(f"INSERT INTO tweet_images VALUES({img_values})", tweet_image_data)
                     except Exception as ex:
                         #If insert fails then remove all images from folder
-
+                    
                         for saved_image in saved_images:
-                            url = os.getcwd()+f"/images/tweet_imgs/{saved_image}"
+                            #url = os.getcwd()+f"/images/tweet_imgs/{saved_image}"
+                            url = x.ROOT+f"/images/tweet_imgs/{saved_image}"
                             os.remove(url, dir_fd = None)
                         
                         raise Exception(500, str(ex))
@@ -148,11 +157,9 @@ def _():
             return {"info":str(ex)}
         finally:
             #Clear temp images
-            dir = 'images/temp_imgs'
-            x.clear_img_folder(dir)
+            x.delete_img_folder(folder_path)
             if "db" in locals(): db.rollback()
     finally:
         #Clear temp images
-        dir = 'images/temp_imgs'
-        x.clear_img_folder(dir)
+        x.delete_img_folder(folder_path)
         if "db" in locals(): db.close()

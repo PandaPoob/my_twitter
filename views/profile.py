@@ -1,4 +1,4 @@
-from bottle import get, template
+from bottle import get, template, request
 import time
 import calendar
 import x
@@ -11,10 +11,12 @@ def _(username):
         
         #Get cookie if exists
         logged_user = x.request_cookie()
-        
+        #print("hERE", logged_user)
+
+        #response.delete_cookie("user")
         #Open database
         db = x.db()
-
+        
         #Fetch profile
         profile = db.execute("SELECT * FROM users WHERE user_name=? COLLATE NOCASE", (username,)).fetchall()[0]
         
@@ -37,8 +39,11 @@ def _(username):
         
         #If cookie exists then decode
         #@todo show only relevant
+
         if logged_user:
+            
             logged_user = x.decode_cookie(logged_user)
+      
             username = logged_user["user_name"]
             #Fetch follower suggestions
             fsugg = db.execute("SELECT * FROM follower_suggestions WHERE NOT user_name=?",(username,)).fetchall()
@@ -115,6 +120,9 @@ def _(username):
              "link": {
                 "max": x.USER_BIO_LINK_MAX
             },
+            "img": {
+                "max": x.USER_IMG_MAX_SIZE
+            }
         }
 
         return template("profile", profile=profile, tweets=tweets, trends=trends, fsugg=fsugg, imgtweets=imgtweets, logged_user=logged_user, isFollowing=isFollowing, validation_vars=validation_vars)

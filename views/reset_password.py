@@ -24,7 +24,7 @@ def _(token):
             "max": x.PASSWORD_MAX_LEN,   
         }
 
-        return template("reset_password", user_api_key=user_api_key, password_val=password_val)
+        return template("reset_password", token=token, password_val=password_val)
 
     except Exception as ex:
         print(ex)

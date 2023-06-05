@@ -2,14 +2,90 @@ const edit_profile_modal = document.getElementById("modal_bg");
 
 function openEditModal() {
   //display modal
-  edit_profile_modal.style.display = "block";
+  edit_profile_modal.style.display = "flex";
 
-  //set all input fields length
+  //Set input fields length
   document.querySelectorAll(".val_no").forEach(function (element) {
     input_parent_name = element.getAttribute("for");
     parent = document.getElementById(input_parent_name);
     element.innerHTML = parent.value.length;
   });
+}
+
+function handleImgCover() {
+  //validate type
+  const coverInput = document.getElementById("user_img_cover");
+  const cover = coverInput.files[0];
+
+  const max_img_size = parseInt(coverInput.getAttribute("data-max-img"));
+
+  validateImage(cover, max_img_size, (isCover = true));
+}
+
+function displayCoverImg(cover) {
+  //display here
+  document.getElementById("current_cover_img").style.filter = "brightness(0%)";
+
+  const previewImage = document.getElementById("preview_cover");
+
+  const image = `
+          <img
+              src="${URL.createObjectURL(cover)}" 
+              alt="Preview Image"
+             class="absolute top-0 left-0 w-full h-full object-cover z-[101]"/>
+           `;
+  previewImage.innerHTML = "";
+  previewImage.insertAdjacentHTML("afterbegin", image);
+}
+
+function handleImgAvatar() {
+  //validate type
+  const avatarInput = document.getElementById("user_img_avatar");
+  const avatar = avatarInput.files[0];
+
+  const max_img_size = parseInt(avatarInput.getAttribute("data-max-img"));
+
+  validateImage(avatar, max_img_size);
+}
+
+function displayAvatarImg(avatar) {
+  //display here
+  document.getElementById("current_avatar_img").style.filter = "brightness(0%)";
+
+  const previewImage = document.getElementById("preview_avatar");
+
+  const image = `
+          <img
+              src="${URL.createObjectURL(avatar)}" 
+              alt="Preview Image"
+             class="absolute top-0 left-0 w-full h-full object-cover z-[101] rounded-full p-0.5 bg-black"/>
+           `;
+  previewImage.innerHTML = "";
+  previewImage.insertAdjacentHTML("afterbegin", image);
+}
+
+function validateImage(img, max, isCover) {
+  if (img.size > max) {
+    displayNotifToaster("Image exceed the size limit of 2MB");
+  } else {
+    validateImageMagicType(img)
+      .then((imageType) => {
+        if (!imageType.includes("jpeg") && !imageType.includes("png")) {
+          displayNotifToaster("The image is not the accepted filetype");
+        } else {
+          //Show images if all validation passes
+          if (isCover) {
+            displayCoverImg(img);
+          } else {
+            displayAvatarImg(img);
+          }
+        }
+      })
+      .catch((error) => {
+        //If api fails return error message as notification
+        displayNotifToaster(error.message);
+      });
+  }
 }
 
 function validateBio() {
@@ -81,6 +157,6 @@ async function handleSubmitEditProfile() {
     return;
   } else if (resp.ok) {
     edit_profile_modal.style.display = "none";
-    location.reload();
+    window.location.reload();
   }
 }

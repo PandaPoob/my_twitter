@@ -354,11 +354,16 @@
 
      
       </div>
-              <!-- prettier-ignore -->
-         % include('comp-modal-profile', validation_vars=validation_vars, logged_user=logged_user)
     </div>
+    <!-- prettier-ignore -->
+    %if logged_user:
+      % include('comp-modal-profile', validation_vars=validation_vars, logged_user=logged_user)
+    %end
     <script src="/js/app.js"></script>
     <script src="/js/post_edit_profile.js"></script>
    <script src="/js/vali_fullname.js"></script>
+    <script src="/js/toaster_bot.js"></script>
+  <script src="/js/vali_img_magic.js"></script>
+   
   </body>
 </html>

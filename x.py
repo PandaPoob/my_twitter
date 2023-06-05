@@ -8,6 +8,9 @@ import os, glob
 import shutil
 import uuid
 
+#ROOT VARIABLE
+ROOT = str(pathlib.Path(__file__).parent.resolve())
+
 #COOKIE VARIABLE#
 COOKIE_SECRET = "872437049d2a426f9d86f1ea58b4c901"
 
@@ -70,18 +73,15 @@ def prepare_values(vals):
     values = values.rstrip(",")
     return values
 
-def clear_img_folder(dir):
-    filelist = glob.glob(os.path.join(dir, "*"))
-    for f in filelist:
-      os.remove(f)
+def delete_img_folder(dir):
+   if (dir):
+      shutil.rmtree(dir)
 
 def generate_image(source_img_path, new_img_path):
       new_img_name = f"{str(uuid.uuid4().hex)}.jpg"
       new_img_path = os.getcwd()+new_img_path+new_img_name
       shutil.copy(source_img_path, new_img_path)
-      return new_img_name  
-
-#@TODO 2mb for profile image and cover
+      return new_img_name
 
 ###########################---VALIDATION FUNCTIONS---###########################
 
@@ -104,8 +104,9 @@ def validate_image_size(filesize):
     return
 
 def validate_image_type(tweet_image):
-    error = f"tweet_field_image only accepts file ext JPG, JPEG, PNG"
+    error = f"only accept accept images with file ext jpg, jpeg, png"
     name, ext = os.path.splitext(tweet_image.filename)
+    print(ext)
     if ext not in ('.png','.jpg','.jpeg'): raise Exception(400, error)
     return
 
@@ -241,3 +242,12 @@ def validate_bio_loc():
   if len(user_bio_location) > USER_BIO_LOC_MAX: raise Exception(400, biolocerror)
 
   return user_bio_location
+
+#USER IMAGES#
+USER_AVATAR_ASPECT = (400, 400)
+USER_COVER_ASPECT = (1500, 500)
+USER_IMG_MAX_SIZE =  2000000
+
+def validate_profile_image_size(filesize):
+   imgsizeerror = f"Profile image can have a max size {USER_IMG_MAX_SIZE} bytes"
+   if filesize > TWEET_MAX_IMG_SIZE: raise Exception(400, imgsizeerror)

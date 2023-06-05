@@ -1,10 +1,10 @@
 <div
   id="modal_bg"
-  class="hidden absolute z-[100] h-full w-full bg-black ms:bg-opacity-80"
+  class="hidden fixed top-0 bottom-0 right-0 left-0 z-[100] min-h-full w-full justify-center bg-black ms:bg-opacity-[50%]"
 >
   <div
     id="modal_content"
-    class="absolute z-[101] h-full w-full bg-black max-w-feed p-4"
+    class="absolute z-[101] w-full flex flex-col justify-center bg-black max-w-feed p-4 ms:self-center rounded-md"
   >
     <!-- modal header -->
     <div class="flex items-center justify-between">
@@ -85,8 +85,98 @@
       name="edit_profile_form"
       onsubmit="checkEditForm(); return false"
     >
+      <!-- cover img preview and input -->
+      <div class="relative max-w-[1500px] height-auto mt-2">
+        <label
+          for="user_img_cover"
+          class="absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] z-[102] rounded-full p-2 bg-black bg-opacity-50 hover:bg-opacity-30 cursor-pointer text-white"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            class="r-jwli3a r-4qtqp9 r-yyyyoo r-18yzcnr r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-yc9v9c w-7 h-7 fill-white"
+          >
+            <g>
+              <path
+                d="M9.697 3H11v2h-.697l-3 2H5c-.276 0-.5.224-.5.5v11c0 .276.224.5.5.5h14c.276 0 .5-.224.5-.5V10h2v8.5c0 1.381-1.119 2.5-2.5 2.5H5c-1.381 0-2.5-1.119-2.5-2.5v-11C2.5 6.119 3.619 5 5 5h1.697l3-2zM12 10.5c-1.105 0-2 .895-2 2s.895 2 2 2 2-.895 2-2-.895-2-2-2zm-4 2c0-2.209 1.791-4 4-4s4 1.791 4 4-1.791 4-4 4-4-1.791-4-4zM17 2c0 1.657-1.343 3-3 3v1c1.657 0 3 1.343 3 3h1c0-1.657 1.343-3 3-3V5c-1.657 0-3-1.343-3-3h-1z"
+              ></path>
+            </g>
+          </svg>
+        </label>
+        <img
+          id="current_cover_img"
+          class="w-full object-cover"
+          src="/images/cover_imgs/{{logged_user['user_img_cover']}}"
+          alt="edit cover image"
+        />
+        <output
+          id="preview_cover"
+          class="absolute block top-0 w-full h-full pb-[33.33%] z-[101]"
+        >
+        </output>
+      </div>
+      <div>
+        <input
+          type="file"
+          id="user_img_cover"
+          name="user_img_cover"
+          class="hidden"
+          accept="image/png, image/jpeg"
+          data-max-img="{{validation_vars['img']['max']}}"
+          onchange="handleImgCover()"
+        />
+      </div>
+      <!-- cover img preview and input end -->
+
+      <!-- avatar img preview and input -->
+      <div
+        class="relative z-[103] max-w-[30%] sm:max-w-[112px] height-auto rounded-full"
+      >
+        <div class="absolute top-0 left-0 translate-y-[-50%]">
+          <label
+            for="user_img_avatar"
+            class="absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] z-[105] rounded-full p-2 bg-black bg-opacity-50 hover:bg-opacity-30 cursor-pointer text-white"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              class="r-jwli3a r-4qtqp9 r-yyyyoo r-18yzcnr r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-yc9v9c w-7 h-7 fill-white"
+            >
+              <g>
+                <path
+                  d="M9.697 3H11v2h-.697l-3 2H5c-.276 0-.5.224-.5.5v11c0 .276.224.5.5.5h14c.276 0 .5-.224.5-.5V10h2v8.5c0 1.381-1.119 2.5-2.5 2.5H5c-1.381 0-2.5-1.119-2.5-2.5v-11C2.5 6.119 3.619 5 5 5h1.697l3-2zM12 10.5c-1.105 0-2 .895-2 2s.895 2 2 2 2-.895 2-2-.895-2-2-2zm-4 2c0-2.209 1.791-4 4-4s4 1.791 4 4-1.791 4-4 4-4-1.791-4-4zM17 2c0 1.657-1.343 3-3 3v1c1.657 0 3 1.343 3 3h1c0-1.657 1.343-3 3-3V5c-1.657 0-3-1.343-3-3h-1z"
+                ></path>
+              </g>
+            </svg>
+          </label>
+          <img
+            id="current_avatar_img"
+            class="w-full object-cover rounded-full p-0.5 bg-black"
+            src="/images/avatar_imgs/{{logged_user['user_img_avatar']}}"
+            alt="edit avatar image"
+          />
+          <output
+            id="preview_avatar"
+            class="absolute block top-0 w-full h-full pb-[100%] z-[104]"
+          >
+          </output>
+        </div>
+      </div>
+      <div>
+        <input
+          type="file"
+          id="user_img_avatar"
+          name="user_img_avatar"
+          class="hidden"
+          accept="image/png, image/jpeg"
+          data-max-img="{{validation_vars['img']['max']}}"
+          onchange="handleImgAvatar()"
+        />
+      </div>
+      <!-- avatar img preview and input end -->
+
       <!-- full name input -->
-      <div class="relative flex flex-col justify-start min-h-[92px]">
+      <div class="relative flex flex-col justify-start min-h-[92px] mt-16">
         <label class="text-md mb-1 text-twittergray-500" for="user_full_name"
           >Name</label
         >
@@ -202,6 +292,7 @@
         </p>
       </div>
     </form>
+    % include('comp-toaster-bot')
   </div>
   <script>
     function closeEditModal() {

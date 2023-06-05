@@ -41,7 +41,7 @@ def _():
         the_jwt = jwt.encode(user, x.COOKIE_SECRET, algorithm="HS256")
         
         #Setting the cookie with user
-        response.set_cookie("user", the_jwt, httponly=True, secure=is_cookie_https)
+        response.set_cookie("user", the_jwt, httponly=True, secure=is_cookie_https, path='/', domain='127.0.0.1')
         return {"info":"success login", "user_name":user["user_name"]}
     except Exception as e:
         print(e)

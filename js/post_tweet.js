@@ -1,6 +1,6 @@
 let storedTweetImages = [];
 let circumference = "";
-const circle = document.getElementById("progress_circle")
+const circle = document.getElementById("progress_circle");
 
 window.onload = () => {
   //Set progress on circle val
@@ -13,23 +13,19 @@ window.onload = () => {
 function validateTextTweetInput() {
   const tweet = document.getElementById("tweet_field_text");
   const tweet_text = tweet.value;
-  const max_length = parseInt(
-    tweet.getAttribute("data-max")
-  );
+  const max_length = parseInt(tweet.getAttribute("data-max"));
 
   //Text component validation
   circle.style.stroke = "#1d9bf0";
-    if (tweet_text.length > max_length) {
-      circle.style.stroke = "#f4212e";
-      //set to red stop function
-    } else {
-      const percentage = (tweet_text.length / max_length) * 100;
-      setProgress(percentage)    
-    }
+  if (tweet_text.length > max_length) {
+    circle.style.stroke = "#f4212e";
+    //set to red stop function
+  } else {
+    const percentage = (tweet_text.length / max_length) * 100;
+    setProgress(percentage);
+  }
 
- 
-  
-  const tweet_btn = document.getElementById("submit_tweet_btn")
+  const tweet_btn = document.getElementById("submit_tweet_btn");
   //If text is bigger than max disable
   if (tweet_text.length > max_length) {
     tweet_btn.disabled = true;
@@ -46,14 +42,12 @@ function validateTextTweetInput() {
   const number_text = document.getElementById("max_length_number");
 
   number_text.innerHTML = char_left;
-
 }
 
-function setProgress(percent){
-  const offset = circumference - percent / 100 * circumference;
+function setProgress(percent) {
+  const offset = circumference - (percent / 100) * circumference;
   circle.style.strokeDashoffset = offset;
 }
-
 
 function handleTweetImages() {
   //Empty and reset array
@@ -77,7 +71,7 @@ function handleTweetImages() {
   //VALIDATION//
   //Maximum of 4 images
   if (storedTweetImages.length > max_imgs) {
-    displayNotifToaster("Please choose up to 4 images");
+    displayNotifToaster("Please choose up to 4 images", (clear = true));
   } else {
     fullValidation();
   }
@@ -85,7 +79,10 @@ function handleTweetImages() {
     storedTweetImages.forEach((img) => {
       //Size
       if (img.size > max_img_size) {
-        displayNotifToaster("One or more images exceed the size limit of 5MB");
+        displayNotifToaster(
+          "One or more images exceed the size limit of 5MB",
+          (clear = true)
+        );
       }
       //Type
       else {
@@ -93,7 +90,8 @@ function handleTweetImages() {
           .then((imageType) => {
             if (!imageType.includes("jpeg") && !imageType.includes("png")) {
               displayNotifToaster(
-                "One or more images are not the accepted filetype"
+                "One or more images are not the accepted filetype",
+                (clear = true)
               );
             } else {
               //Show images if all validation passes
@@ -102,50 +100,11 @@ function handleTweetImages() {
           })
           .catch((error) => {
             //If api fails return error message as notification
-            displayNotifToaster(error.message);
+            displayNotifToaster(error.message, (clear = true));
           });
       }
     });
   }
-}
-
-function validateImageMagicType(file) {
-  return new Promise((resolve, reject) => {
-    //Using HTML5 File API
-    const reader = new FileReader();
-
-    reader.onloadend = function () {
-      const arr = new Uint8Array(reader.result).subarray(0, 4);
-      let header = "";
-
-      for (let i = 0; i < arr.length; i++) {
-        header += arr[i].toString(16);
-      }
-
-      let imageType = "";
-
-      switch (header) {
-        case "89504e47":
-          imageType = "image/png";
-          break;
-        case "ffd8ffe0":
-        case "ffd8ffe1":
-        case "ffd8ffe2":
-          imageType = "image/jpeg";
-          break;
-        default:
-          imageType = "unknown";
-          break;
-      }
-      resolve(imageType);
-    };
-
-    reader.onerror = function () {
-      reject(new Error("Error reading file."));
-    };
-
-    reader.readAsArrayBuffer(file);
-  });
 }
 
 function prepareOutput() {
@@ -173,7 +132,7 @@ function prepareOutput() {
               src="${URL.createObjectURL(image)}" 
               alt="image" 
               class="relative rounded-xl w-full h-full object-cover"/>
-              <button type="button" class="absolute top-0 left-1 mt-1 w-6 h-6 rounded-full flex justify-center items-center text-white bg-opacity-60 bg-black hover:bg-opacity-50" onclick="removeImage(${index})">
+              <button type="button" style="background-color:rgba(0, 0, 0, 0.8); left: 0.25rem;" class="absolute top-0 mt-1 w-6 h-6 rounded-full flex justify-center items-center text-white hover:bg-opacity-50" onclick="removeImage(${index})">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z"/></svg>
               </button>
           </div>`;
@@ -183,7 +142,7 @@ function prepareOutput() {
               src="${URL.createObjectURL(image)}" 
               alt="image" 
               class="relative rounded-xl w-full h-full object-cover"/>
-              <button type="button" class="absolute top-0 left-1 mt-1 w-6 h-6 rounded-full flex justify-center items-center text-white bg-opacity-60 bg-black hover:bg-opacity-50" onclick="removeImage(${index})">
+              <button type="button" style="background-color:rgba(0, 0, 0, 0.5); left: 0.25rem;" class="absolute top-0 mt-1 w-6 h-6 rounded-full flex justify-center items-center text-white hover:bg-opacity-50" onclick="removeImage(${index})">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z"/></svg>
               </button>
           </div>`;
@@ -249,7 +208,7 @@ function renderTweet(data) {
       class="absolute top-0 left-0 right-0 bottom-0"
     > </a>
       <!-- left -->
-      <div class="pl-4 pr-4">
+      <div class="pl-4" style="padding-right: 1rem">
         <a href="/${author.user_name}" class="relative z-20">
           <img
             src="/images/avatar_imgs/${author.img_avatar}"
@@ -534,29 +493,4 @@ function getImageLayout(image_amount, images) {
           </div>`;
     }
   }
-}
-let notifTimer;
-function displayNotifToaster(errorMsg) {
-  //Get elements in html
-  const output = document.querySelector("output");
-  const container = document.getElementById("notif_container");
-  const content = container.querySelector("p");
-
-  //Reset image display
-  output.className = "";
-  output.innerHTML = "";
-  //Reset notification
-  if (notifTimer) {
-    clearTimeout(notifTimer);
-    container.style.display = "none";
-    content.innerHTML = "";
-  }
-  //Display
-  container.style.display = "flex";
-  content.innerHTML = errorMsg;
-
-  notifTimer = setTimeout(function () {
-    container.style.display = "none";
-    content.innerHTML = errorMsg;
-  }, 5000);
 }

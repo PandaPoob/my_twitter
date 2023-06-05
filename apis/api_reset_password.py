@@ -3,6 +3,7 @@ import x
 import uuid
 import time
 import bcrypt
+import utils.validateResetToken as v
 
 @post('/api-reset-password')
 def _():
@@ -13,9 +14,12 @@ def _():
         x.validate_user_confirm_password()
         
         #Get api key from form
-        user_api_key = request.forms.get("user_api_key")
-        if not user_api_key: raise Exception(400, "Missing request body")
-        
+        token = request.forms.get("token")
+        if not token: raise Exception(400, "Missing request body")
+
+        #Decode token
+        user_api_key = v.validate_reset_token(token)
+
         #Open database
         db = x.db()
         
@@ -29,20 +33,15 @@ def _():
         salt = bcrypt.gensalt()
         new_pw = bcrypt.hashpw(user_password.encode('utf-8'), salt)
 
-        #Update account password
-        db.execute(f"UPDATE users SET user_password=? WHERE user_api_key=?", (new_pw, user_api_key,))
-        
         #New api key
         new_api_key = str(uuid.uuid4().hex)
-    
+
         #Updated at
         updated_at = int(time.time())
 
-        #Assign new api key
-        db.execute(f"UPDATE users SET user_api_key=? WHERE user_id=?", (new_api_key, user["user_id"],))
-        db.execute(f"UPDATE users SET user_updated_at=? WHERE user_id=?", (updated_at, user["user_id"],))
-      
-
+        #Update account password
+        db.execute(f"UPDATE users SET user_password=?, user_api_key=?, user_updated_at=? WHERE user_api_key=?", (new_pw, new_api_key, updated_at, user_api_key,))
+        
         #Commit
         db.commit()
 

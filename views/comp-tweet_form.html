@@ -116,48 +116,45 @@
 
       <div class="flex items-center gap-3">
         <div class="relative">
-          
           <div
             class="absolute top-0 left-0 flex items-center justify-center w-[30px] h-[30px]"
-            >
-          <p
-            id="max_length_number"
-            class="text-[10px] text-center text-twittergray-500"
+          >
+            <p
+              id="max_length_number"
+              class="text-[10px] text-center text-twittergray-500"
             >
               {{max_tweet}}
-          </p>
+            </p>
           </div>
 
-          <svg
-          class="absolute top-0 left-0 z-0"
-          width="30"
-          height="30">
-          <circle
-          stroke="#2f3336"
-          stroke-width="2"
-          fill="transparent"
-          r="11"
-          cx="15"
-          cy="15"/>
-      
+          <svg class="absolute top-0 left-0 z-0" width="30" height="30">
+            <circle
+              stroke="#2f3336"
+              stroke-width="2"
+              fill="transparent"
+              r="11"
+              cx="15"
+              cy="15"
+            />
           </svg>
-      <svg
-      class="relative z-10"
-      width="30"
-      height="30">
-    
-      <circle
-       id="progress_circle"
-       style="transition-property: stroke-dashoffset; transform-origin: 50% 50%; transform: rotate(-90deg); transition: 0.35s stroke-dashoffset;"
-       stroke="#2f3336"
-       stroke-width="2"
-       stroke-dashoffset="0"
-       fill="transparent"
-       r="11"
-       cx="15"
-       cy="15"/>
-      </svg>
-  
+          <svg class="relative z-10" width="30" height="30">
+            <circle
+              id="progress_circle"
+              style="
+                transition-property: stroke-dashoffset;
+                transform-origin: 50% 50%;
+                transform: rotate(-90deg);
+                transition: 0.35s stroke-dashoffset;
+              "
+              stroke="#2f3336"
+              stroke-width="2"
+              stroke-dashoffset="0"
+              fill="transparent"
+              r="11"
+              cx="15"
+              cy="15"
+            />
+          </svg>
         </div>
         <button
           type="submit"
@@ -171,4 +168,6 @@
     </div>
   </form>
   <script src="/js/post_tweet.js"></script>
+  <script src="/js/toaster_bot.js"></script>
+  <script src="/js/vali_img_magic.js"></script>
 </div>

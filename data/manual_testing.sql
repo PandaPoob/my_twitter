@@ -13,7 +13,7 @@ DELETE FROM tweets WHERE tweet_user_fk = "b3094c2f1c144817b7cc0b718fc3c644";
 SELECT * FROM tweets WHERE tweet_user_fk = "b3094c2f1c144817b7cc0b718fc3c644";
 
 --Delete all tweets images
-DELETE FROM tweet_images WHERE tweet_image_tweet_fk = "e728f427dd2644fa8a90e27ae335ad43"; 
+DELETE FROM tweet_images WHERE tweet_image_tweet_fk = "b4e0d6b9d87340668e5407ac3dd48836"; 
 
 DELETE FROM users WHERE user_name = "freja";
 
