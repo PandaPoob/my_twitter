@@ -36,6 +36,17 @@ TWEET_TYPE_RETWEET = "retweet"
 TWEET_TYPE_QUOTE = "quote"
 
 #GENERAL FUNCTIONS#
+def getDomain():
+  try:
+    import production
+    is_cookie_https = True
+    curr_domain = ".pandapoob.eu.pythonanywhere.com/"
+    return (is_cookie_https, curr_domain)
+  except:
+    is_cookie_https = False
+    curr_domain = ".127.0.0.1"
+    return (is_cookie_https, curr_domain)
+
 def disable_cache():
     response.add_header("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0")
     response.add_header("Pragma", "no-cache")
@@ -43,6 +54,8 @@ def disable_cache():
 
 def request_cookie():
     logged_user = request.get_cookie("user")
+    #result = getDomain()
+    #logged_user = request.get_cookie("user", httponly=True,  secure=result[0], path='/', domain=result[1] )
     return logged_user
 
 def decode_cookie(logged_user):

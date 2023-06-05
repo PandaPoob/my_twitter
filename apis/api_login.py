@@ -27,23 +27,15 @@ def _():
         #User needs to verify
         if user["user_account_status"] == "inactive": raise Exception(401, "Account has not been verified")
 
-        #Pythonanywhere vs local
-        try:
-            import production
-            is_cookie_https = True
-            curr_domain = "https://pandapoob.eu.pythonanywhere.com/"
-        except:
-            is_cookie_https = False
-            curr_domain = "http://127.0.0.1:3000/"
-
         #Removing pw from cookie
         user.pop("user_password")
 
         #Using jwt to encode user cookie
         the_jwt = jwt.encode(user, x.COOKIE_SECRET, algorithm="HS256")
         
-        #Setting the cookie with user
-        response.set_cookie("user", the_jwt, httponly=True, secure=is_cookie_https, path='/', domain=curr_domain)
+        result = x.getDomain()
+
+        response.set_cookie("user", the_jwt, httponly=True, secure=result[0], path='/', domain=result[1])
         return {"info":"success login", "user_name":user["user_name"]}
     except Exception as e:
         print(e)

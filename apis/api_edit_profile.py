@@ -165,20 +165,14 @@ def _():
                 os.remove(url, dir_fd = None)
             
             #Set new cookie
-            try:
-                import production
-                is_cookie_https = True
-                curr_domain = "https://pandapoob.eu.pythonanywhere.com/"
-            except Exception as ex:
-                is_cookie_https = False
-                curr_domain = "http://127.0.0.1:3000/"
-
-            
             user = db.execute("SELECT * FROM users WHERE user_name = ?", (logged_user["user_name"],)).fetchone()
             user.pop("user_password")
     
             the_jwt = jwt.encode(user, x.COOKIE_SECRET, algorithm="HS256")
-            response.set_cookie("user", the_jwt, httponly=True, secure=is_cookie_https, path='/', domain=curr_domain)
+
+            result = x.getDomain()
+
+            response.set_cookie("user", the_jwt, httponly=True, secure=result[0], path='/', domain=result[1])
 
         return {"info":"ok"}
     except Exception as ex:
