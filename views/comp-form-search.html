@@ -1,0 +1,66 @@
+<form
+  class="relative"
+  method="POST"
+  id="search_form"
+  onsubmit="handleSearch(); return false"
+>
+  <input
+    class="w-full h-11 rounded-full bg-twittergray-800 text-base placeholder-twittergray-500 pl-12 focus:outline-none peer focus:border-twitterblue focus:border focus:bg-black"
+    placeholder="Search Twitter"
+    type="text"
+    name="search_query"
+    {{!get('query', '')}}
+    oninput="search()"
+    onfocus="showSearchResults()"
+    onblur="hideSearchResults()"
+  />
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke-width="1.5"
+    stroke="currentColor"
+    class="w-5 h-5 absolute text-twittergray-500 top-3 left-4 peer-focus:text-twitterblue"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+    />
+  </svg>
+</form>
+<!-- prettier-ignore -->
+<div
+  id="search_results_container"
+  %if isCenter:
+  class="hidden absolute z-20 w-full bg-black rounded-md shadow-[0_0_10px_rgba(255,255,255,0.5)]"
+  %else:
+  class="hidden relative z-20 bg-black rounded-md shadow-[0_0_10px_rgba(255,255,255,0.5)]"
+  %end
+>
+  <a
+    id="search_link"
+    href="/"
+    class="hidden relative z-60 gap-5 hover:bg-white hover:bg-opacity-10 p-5"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="2"
+      stroke="currentColor"
+      class="w-7 h-7 text-white"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+      />
+    </svg>
+    <span></span>
+  </a>
+  <ul id="search_results"></ul>
+  <p id="search_help" class="text-base text-twittergray-500 p-5">
+    Try searching for people, topics, or keywords
+  </p>
+</div>

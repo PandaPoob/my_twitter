@@ -2,7 +2,11 @@
   class="relative hidden md:flex flex-col pb-1 mr-6 min-w-widget max-w-widget min-[1200px]:w-widgetxl min-[1200px]:max-w-widgetxl lg:max-w-widget min-[1320px]:min-w-widgetxl"
 >
   <!-- search -->
-  % include('comp-search-form')
+  <div
+    class="fixed top-0 z-30 min-w-widget min-[1200px]:w-widgetxl lg:max-w-widget min-[1320px]:min-w-widgetxl bg-black pt-1.5 pb-1 mr-6 flex-grow"
+  >
+    % include('comp-form-search', isCenter="")
+  </div>
   <!-- search end -->
 
   <!-- signup comp -->

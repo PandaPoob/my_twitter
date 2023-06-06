@@ -4,7 +4,11 @@
   % if logged_user:
   <!-- only display these if logged in -->
   <!-- search -->
-  % include('comp-search-form')
+  <div
+    class="fixed top-0 z-30 min-w-widget min-[1200px]:w-widgetxl lg:max-w-widget min-[1320px]:min-w-widgetxl bg-black pt-1.5 pb-1 mr-6 flex-grow"
+  >
+    % include('comp-form-search', isCenter="")
+  </div>
   <!-- trends -->
   <!-- prettier-ignore -->
   <div class="mt-16">

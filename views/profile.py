@@ -11,9 +11,7 @@ def _(username):
         
         #Get cookie if exists
         logged_user = x.request_cookie()
-        #print("hERE", logged_user)
 
-        #response.delete_cookie("user")
         #Open database
         db = x.db()
         
