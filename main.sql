@@ -106,7 +106,9 @@ CREATE VIEW follower_suggestions
 AS
 SELECT users.user_id, users.user_name, users.user_full_name, users.user_img_avatar, users.user_twitter_status
 FROM users
-WHERE users.user_account_status = "active";
+WHERE users.user_account_status = "active"
+ORDER BY user_total_followers DESC
+LIMIT 5;
 
 --TRIGGERS--
 SELECT name FROM sqlite_master WHERE type = "trigger";

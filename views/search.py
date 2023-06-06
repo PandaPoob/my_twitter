@@ -9,7 +9,6 @@ def _():
     try:
         x.disable_cache()
         query = request.query.query
-        print(query)
 
         logged_user = x.request_cookie()
     
@@ -34,10 +33,36 @@ def _():
 
         #Fetch follower suggestions
         username = logged_user["user_name"]
-        fsugg = db.execute("SELECT * FROM follower_suggestions WHERE NOT user_name=?",(username,)).fetchall()
+        user_id = logged_user["user_id"]
 
+        #Get users that are not the logged in user and are not already followed
+        fsugg = db.execute("""
+                SELECT * FROM follower_suggestions
+                WHERE user_name != ? 
+                AND user_id NOT IN (
+                SELECT followee_fk
+                FROM following
+                WHERE follower_fk = ?
+                )""", (username, user_id)).fetchall() 
+        
+        #Preparing the search query
+        exequery = "%" + query + "%"  
         #Fetch people
-        people_result = db.execute("SELECT user_name, user_twitter_status, user_full_name, user_img_avatar, user_bio_text FROM active_users WHERE user_name LIKE '%' || ? || '%' OR user_full_name LIKE '%' || ? || '%' ORDER BY user_name LIKE ? DESC, user_full_name LIKE ? DESC LIMIT 3", (query, query, query, query)).fetchall()
+        #@todo make this smarter?
+        people_result = db.execute("""
+    SELECT 
+        active_users.user_name, 
+        active_users.user_twitter_status, 
+        active_users.user_full_name, 
+        active_users.user_img_avatar, 
+        active_users.user_bio_text, 
+            CASE WHEN following.followee_fk IS NULL THEN 0 ELSE 1 END AS is_followed
+    FROM active_users
+    LEFT JOIN following ON active_users.user_id = following.followee_fk AND following.follower_fk = ?
+    WHERE active_users.user_name LIKE ? OR active_users.user_full_name LIKE ?
+    ORDER BY active_users.user_name LIKE ? DESC, active_users.user_full_name LIKE ? DESC
+    LIMIT 3
+    """, (user_id, exequery, exequery, exequery, exequery)).fetchall()
 
         #Fetch tweets
         tweets = db.execute("SELECT * FROM users_and_tweets WHERE tweet_field_text LIKE '%' || ? || '%' ORDER BY tweet_field_text LIKE ? DESC LIMIT 10", (query, query)).fetchall()

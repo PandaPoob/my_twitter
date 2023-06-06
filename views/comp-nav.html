@@ -101,7 +101,9 @@
         href="/{{logged_user['user_name']}}"
         class="flex lg:gap-4 items-center rounded-full pl-3 pr-3 lg:pr-4 py-3 hover:bg-white hover:bg-opacity-10"
       >
-        %if page == "profile":
+        <!-- prettier-ignore -->
+        %if page == "profile" and profile.get("user_name") == logged_user["user_name"]:
+        <!-- %if page == "profile" and get("profile["user_name"]") == logged_user["user_name"]: -->
         <svg
           viewBox="0 0 24 24"
           aria-hidden="true"

@@ -30,10 +30,20 @@ def _():
         if logged_user:
             logged_user = x.decode_cookie(logged_user)
             username = logged_user["user_name"]
-            fsugg = db.execute("SELECT * FROM follower_suggestions WHERE NOT user_name=?",(username,)).fetchall()
+            user_id = logged_user["user_id"]
+
+            #Get users that are not the logged in user and are not already followed
+            fsugg = db.execute("""
+                SELECT * FROM follower_suggestions
+                WHERE user_name != ? 
+                AND user_id NOT IN (
+                SELECT followee_fk
+                FROM following
+                WHERE follower_fk = ?
+                )""", (username, user_id)).fetchall()
             
         else:
-            fsugg = db.execute("SELECT * FROM follower_suggestions").fetchall()
+            fsugg = ""
            
         #Format tweet numbers
         for i in range(len(tweets)):

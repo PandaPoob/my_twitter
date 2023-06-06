@@ -89,6 +89,7 @@
           <div class="mt-4 border-b border-twitterborder">
             <h2 class="text-xl font-bold mx-4 mb-4">People</h2>
             <ul class="flex flex-col">
+              <!-- if they are followed then it should say unfollow -->
               % for person in people_result:
               <li class="relative hover:bg-white hover:bg-opacity-[3%]">
                 <a href="/{{person['user_name']}}" class="flex py-4 px-4">
@@ -130,11 +131,26 @@
                     </span>
                   </span>
                 </a>
+                %if person["user_name"] != logged_user["user_name"]:
+                <!-- prettier-ignore -->
+                %if person["is_followed"]:
                 <button
-                  class="absolute top-[50%] translate-y-[-50%] right-0 z-20 bg-white text-twittergray-900 text-base font-bold rounded-full py-1.5 px-4 mr-4 hover:bg-opacity-90"
+                  class="absolute top-[50%] translate-y-[-50%] right-0 z-20 mr-4 text-base text-white font-bold border-twitterbuttonborder border rounded-full min-w-[6.5rem] py-1.5 px-4 hover:border-twitterRed hover:bg-twitterRed hover:bg-opacity-10 group cursor-default"
+                >
+                  <span class="hidden group-hover:block text-twitterRed"
+                    >Unfollow</span
+                  >
+                  <span class="group-hover:hidden">Following</span>
+                </button>
+                %else:
+                <button
+                  class="absolute top-[50%] translate-y-[-50%] right-0 z-20 bg-white text-twittergray-900 text-base font-bold rounded-full py-1.5 px-4 mr-4 hover:bg-opacity-90 cursor-default"
                 >
                   Follow
                 </button>
+                %end
+                <!-- prettier-ignore -->
+                %end
               </li>
               %end
             </ul>

@@ -6,38 +6,59 @@ import utils.formatNumber
 @post("/api-follow")
 def _():
     try:
-        #check if someone is logged in
-        user = request.get_cookie("user", secret=x.COOKIE_SECRET)
-        if not user:
-            raise Exception(400, "Not logged in")
+        #Get cookie user
+        logged_user = x.request_cookie()
 
-        id = user["user_id"]        
+        if not logged_user:
+            raise Exception(400, "Log in to follow")
+        
+        #Decode cookie
+        if logged_user:        
+            logged_user = x.decode_cookie(logged_user)
+
+        #Open database   
         db = x.db()
-        user_follower_id = db.execute("SELECT user_id FROM users WHERE user_id=?", (id,)).fetchone()
-       
+
+        #Confirm cookie user exists
+        user_follower_id = db.execute("SELECT user_id FROM active_users WHERE user_id=?", (logged_user["user_id"],)).fetchone()
         if not user_follower_id:
             raise Exception(400, "User does not exist")
 
+        #Get user_followe_id
         user_followe_id = request.forms.get("user_followe_id", "")
+
+        #Confirm this user exists
+        user_followe_id = db.execute("SELECT user_id FROM active_users WHERE user_id=?", (user_followe_id,)).fetchone()
+
         if not user_followe_id:
             raise Exception(400, "Cannot follow")
         
-        timestamp = int(time.time())
+        if user_follower_id == user_followe_id["user_id"]: raise Exception(400, "User cannot follow themselves")
+        
+        
 
-        db.execute("INSERT INTO following VALUES(?, ?, ?)",(user_follower_id['user_id'], user_followe_id, timestamp))
-        newfollowercount = db.execute("SELECT user_total_followers FROM users WHERE user_id=?", (user_followe_id,)).fetchone()
-        if newfollowercount:
-            newfollowercount = utils.formatNumber.human_format(newfollowercount["user_total_followers"])
+        follow = {
+            "follower_fk": user_follower_id['user_id'],
+            "followee_fk": user_followe_id['user_id'],
+            "following_created_at": int(time.time()),
+        }
+    
+        values = x.prepare_values(follow)
+
+        db.execute(f"INSERT INTO following VALUES({values})", follow)
+        
+        #newfollowercount = db.execute("SELECT user_total_followers FROM users WHERE user_id=?", (user_followe_id,)).fetchone()
+        #if newfollowercount:
+         #   newfollowercount = utils.formatNumber.human_format(newfollowercount["user_total_followers"])
     
         db.commit()                  
-        return {"info": f"Succesful followed {user_followe_id}", "follower_count": newfollowercount}
+        return {"info": f"Succesfully followed"}
     except Exception as ex:
-
-        if "UNIQUE constraint failed" in str(ex):
-            response.status = 400
+        try:
+            response.status = ex.args[0]
+            return {"info":ex.args[1]}
+        except:
+            response.status = 500
             return {"info":str(ex)}
-     
-        response.status = ex.args[0]
-        return {"info":ex.args[1]}
     finally:
         if "db" in locals(): db.close()

@@ -14,7 +14,8 @@
       % include('comp-nav-mobile', logged_user=logged_user)
 
       <!-- left/nav -->
-      % include('comp-nav', logged_user=logged_user, page="profile")
+      <!-- prettier-ignore -->
+      % include('comp-nav', logged_user=logged_user, page="profile", profile=profile)
 
       <!-- center-right -->
 
@@ -120,18 +121,18 @@
 
               <!-- prettier -->
               %if logged_user is None:
-              <button
-                type="submit"
+              <a
                 class="text-base text-black font-bold bg-white rounded-full hover:bg-opacity-90 py-1.5 px-4"
+                href="/login"
               >
-                Log in to follow
-              </button>
+                Log in to follow</a
+              >
               %end
 
               <!-- prettier -->
               %if logged_user and logged_user["user_id"] == profile["user_id"]:
               <button
-              onclick="openEditModal()"
+                onclick="openEditModal()"
                 class="text-base text-white font-bold border border-twitterbuttonborder rounded-full hover:bg-white hover:bg-opacity-10 py-1.5 px-4 hover:transition-all"
               >
                 Edit profile
@@ -141,46 +142,9 @@
               <!-- prettier -->
 
               %if logged_user and logged_user["user_id"] != profile["user_id"]:
-              <form  
-              %if not isFollowing:
-              style="display:none"
-              %end
-              id="profile_unfollow_form" onsubmit="unfollow(); return false;">
-                <input
-                  type="text"
-                  name="user_followe_id"
-                  value="{{profile['user_id']}}"
-                  style="display: none"
-                />
-                <button
-                  type="submit"
-                  class="text-base text-white font-bold border-twitterbuttonborder border rounded-full min-w-[6.5rem] py-1.5 px-4 hover:border-twitterRed hover:bg-twitterRed hover:bg-opacity-10 group"
-                >
-                <span class="hidden group-hover:block text-twitterRed">
-                  Unfollow
-                </span>
-                  <span class="group-hover:hidden">Following</span>
-                </button>
-              </form>
-         
-              <form 
-              %if isFollowing:
-                style="display:none"
-              %end
-              id="profile_follow_form" onsubmit="follow(); return false;">
-                <input
-                  type="text"
-                  name="user_followe_id"
-                  value="{{profile['user_id']}}"
-                  style="display: none"
-                />
-                <button
-                  type="submit"
-                  class="text-base text-black font-bold bg-white rounded-full hover:bg-opacity-90 py-1.5 px-4"
-                >
-                  Follow
-                </button>
-              </form>
+              <!-- prettier-ignore -->
+              % include('comp-form-follow', profile=profile)
+              <!-- prettier-ignore -->
               %end
             </div>
           </div>
@@ -259,7 +223,9 @@
                     d="M167.6 88.4a8 8 0 0 1 0 11.3l-67.9 67.9a8.1 8.1 0 0 1-11.3 0a8 8 0 0 1 0-11.3l67.9-67.9a8 8 0 0 1 11.3 0Zm-28.3 84.9L111 201.5a39.7 39.7 0 0 1-56.5 0a40 40 0 0 1 0-56.5l28.2-28.3a8 8 0 0 0-11.3-11.3l-28.3 28.3a56 56 0 0 0 79.2 79.2l28.3-28.3a8 8 0 0 0 0-11.3a7.9 7.9 0 0 0-11.3 0Zm73.6-130.2a56.1 56.1 0 0 0-79.2 0l-28.3 28.3a8 8 0 0 0 11.3 11.3L145 54.5a39.7 39.7 0 0 1 56.5 0a40 40 0 0 1 0 56.5l-28.2 28.3a7.9 7.9 0 0 0 0 11.3a7.7 7.7 0 0 0 5.6 2.4a8 8 0 0 0 5.7-2.4l28.3-28.3a56.1 56.1 0 0 0 0-79.2Z"
                   />
                 </svg>
-                <span class="text-twitterblue">{{profile["user_bio_link"]}}</span>
+                <span class="text-twitterblue"
+                  >{{profile["user_bio_link"]}}</span
+                >
               </a>
               % end
 
@@ -302,12 +268,16 @@
 
             <div class="flex gap-5 text-md py-2">
               <a href="/" class="hover:underline">
-                <span class="font-bold">{{profile["user_total_following"]}}</span>
+                <span class="font-bold"
+                  >{{profile["user_total_following"]}}</span
+                >
                 <span class="text-twittergray-500">Following</span>
               </a>
 
               <a href="/" class="hover:underline">
-                <span id="profile_followers_number" class="font-bold">{{profile["user_total_followers"]}}</span>
+                <span id="profile_followers_number" class="font-bold"
+                  >{{profile["user_total_followers"]}}</span
+                >
                 <span class="text-twittergray-500">Followers</span>
               </a>
             </div>
@@ -343,16 +313,36 @@
               >Likes</a
             >
           </nav>
-
+          %if len(tweets) == 0:
+          <div class="flex flex-col items-center mt-8">
+            <div>
+              <!-- prettier-ignore -->
+              % if not logged_user or logged_user["user_name"] != profile["user_name"]:
+              <h2 class="text-xxl font-bold">
+                @{{profile["user_name"]}} hasn't Tweeted
+              </h2>
+              <p class="text-twittergray-500 pl-1 mt-2">
+                When they do, their Tweets will show up here.
+              </p>
+              %elif logged_user["user_name"] == profile["user_name"]:
+              <h2 class="text-xxl font-bold">You don't have any tweets</h2>
+              <p class="text-twittergray-500 pl-1 mt-2">
+                When you do, your Tweets will show up here.
+              </p>
+              %end
+            </div>
+          </div>
+          <!-- prettier-ignore -->
+          %else:
           <!-- feed/tweets -->
           % include('comp-tweets', tweets=tweets)
+          <!-- prettier-ignore -->
+          %end
         </div>
 
         <!-- right/widget -->
         <!-- prettier-ignore -->
         % include('comp-right-col-profile', trends=trends, fsugg=fsugg, imgtweets=imgtweets, logged_user=logged_user)
-
-     
       </div>
     </div>
     <!-- prettier-ignore -->
@@ -361,9 +351,8 @@
     %end
     <script src="/js/app.js"></script>
     <script src="/js/post_edit_profile.js"></script>
-   <script src="/js/vali_fullname.js"></script>
+    <script src="/js/vali_fullname.js"></script>
     <script src="/js/toaster_bot.js"></script>
-  <script src="/js/vali_img_magic.js"></script>
-   
+    <script src="/js/vali_img_magic.js"></script>
   </body>
 </html>

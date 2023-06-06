@@ -36,22 +36,28 @@ def _(username):
         trends = db.execute("SELECT * FROM trends").fetchall()
         
         #If cookie exists then decode
-        #@todo show only relevant
-
         if logged_user:
-            
             logged_user = x.decode_cookie(logged_user)
-      
-            username = logged_user["user_name"]
-            #Fetch follower suggestions
-            fsugg = db.execute("SELECT * FROM follower_suggestions WHERE NOT user_name=?",(username,)).fetchall()
+            logged_username = logged_user["user_name"]
+            user_id = logged_user["user_id"]
+
+            #Get users that are not the logged in user, the profile and are not already followed
+            fsugg = db.execute("""
+                SELECT * FROM follower_suggestions
+                WHERE user_name NOT IN  (?, ?) 
+                AND user_id NOT IN (
+                SELECT followee_fk
+                FROM following
+                WHERE follower_fk = ?
+                )""", (logged_username, username, user_id)).fetchall()
         else:
+            #if not logged then fetch all where the user is not in
             fsugg = db.execute("SELECT * FROM follower_suggestions WHERE NOT user_name=?",(username,)).fetchall()
         
         #Get 6 latest image tweets
         imgtweets = db.execute("SELECT tweet_image_url, tweet_id FROM tweet_images JOIN tweets ON tweet_image_tweet_fk=tweet_id JOIN users ON user_id=tweet_user_fk WHERE user_id=? ORDER BY tweet_created_at DESC, tweet_image_order ASC LIMIT 0, 6", (profile_id,)).fetchall()
         
-       #Format profile numbers
+        #Format profile numbers
         if profile['user_total_followers']:
             profile["user_total_followers"] = utils.formatNumber.human_format(profile['user_total_followers'])
         
@@ -61,7 +67,7 @@ def _(username):
         if profile['user_total_tweets']:
             profile["user_total_tweets"] = utils.formatNumber.human_format(profile['user_total_tweets'])
         
-        #format the tweet numbers
+        #Format the tweet numbers
         #@todo maybe make this general func
         if len(tweets) != 0:
             for i in range(len(tweets)):
@@ -103,7 +109,7 @@ def _(username):
                 if following[f]['followee_fk'] == profile_id:
                     isFollowing = True
 
-        #bio, location, link
+        #Validation variables
         validation_vars = {
             "fullname": {
                 "min": x.USER_FULL_NAME_MIN,

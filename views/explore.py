@@ -8,28 +8,32 @@ import calendar
 def _():
     try:
         x.disable_cache()
-        query = request.query.query
-        print(query)
 
         logged_user = x.request_cookie()
-    
 
-        if logged_user:
-            logged_user = x.decode_cookie(logged_user)
-
-  
+       
         #Open database
         db = x.db()
 
+        if logged_user:
+            logged_user = x.decode_cookie(logged_user)
+            #Fetch follower suggestions
+            username = logged_user["user_name"]
+            user_id = logged_user["user_id"]
+            #Get users that are not the logged in user and are not already followed
+            fsugg = db.execute("""
+                SELECT * FROM follower_suggestions
+                WHERE user_name != ? 
+                AND user_id NOT IN (
+                SELECT followee_fk
+                FROM following
+                WHERE follower_fk = ?
+                )""", (username, user_id)).fetchall() 
+        else:
+            fsugg = ""   
+
         #Fetch trends
         trends = db.execute("SELECT * FROM trends").fetchall()
-
-        #Fetch follower suggestions
-        username = logged_user["user_name"]
-        fsugg = db.execute("SELECT * FROM follower_suggestions WHERE NOT user_name=?",(username,)).fetchall()
-
-        #Fetch people
-        people_result = db.execute("SELECT user_name, user_twitter_status, user_full_name, user_img_avatar, user_bio_text FROM active_users WHERE user_name LIKE '%' || ? || '%' OR user_full_name LIKE '%' || ? || '%' ORDER BY user_name LIKE ? DESC, user_full_name LIKE ? DESC LIMIT 3", (query, query, query, query)).fetchall()
 
         #Fetch tweets
         tweets = db.execute("SELECT * FROM users_and_tweets ORDER BY users_and_tweets.tweet_created_at DESC, users_and_tweets.tweet_total_likes DESC LIMIT 0, 10").fetchall()
@@ -65,7 +69,7 @@ def _():
             if trends[i]['trend_total_tweets']:
                 trends[i]['trend_total_tweets'] = utils.formatNumber.human_format(trends[i]['trend_total_tweets'])
 
-        return template("explore", query=query, logged_user=logged_user, trends=trends, fsugg=fsugg, people_result=people_result, tweets=tweets)
+        return template("explore", logged_user=logged_user, trends=trends, fsugg=fsugg, tweets=tweets)
     except Exception as ex:
         print(ex)
         return "error"

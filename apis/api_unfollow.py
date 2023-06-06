@@ -5,28 +5,42 @@ import utils.formatNumber
 @post("/api-unfollow")
 def _():
     try:
-        #check if someone is logged in
-        user = request.get_cookie("user", secret=x.COOKIE_SECRET)
-        if not user:
-            raise Exception(400, "Not logged in")
+        #Get cookie user
+        logged_user = x.request_cookie()
 
-        follower_id = user["user_id"]        
+        if not logged_user:
+            raise Exception(400, "Log in to unfollow")
+        
+        #Decode cookie
+        if logged_user:        
+            logged_user = x.decode_cookie(logged_user)
+
+        #Open database       
         db = x.db()
 
-        user_followe_id = request.forms.get("user_followe_id", "")
-        if not user_followe_id:
-            raise Exception(400, "User not found")
-      
-        deleted_rows = db.execute("DELETE FROM following WHERE follower_fk=? AND followee_fk=?", (follower_id, user_followe_id)).rowcount 
-        if not deleted_rows: raise Exception(400, "Unfollow successful, user not found")
+        #Confirm cookie user exists
+        user_unfollower_id = db.execute("SELECT user_id FROM active_users WHERE user_id=?", (logged_user["user_id"],)).fetchone()
+        if not user_unfollower_id:
+            raise Exception(400, "User does not exist")
 
-        newfollowercount = db.execute("SELECT user_total_followers FROM users WHERE user_id=?", (user_followe_id,)).fetchone()
-        if newfollowercount:
-            newfollowercount = utils.formatNumber.human_format(newfollowercount["user_total_followers"])
+        #Get the user_unfollowe_id
+        user_unfollowe_id = request.forms.get("user_unfollowe_id", "")
+        if not user_unfollowe_id:
+            raise Exception(400, "User not found")
+        
+        #remove following from table
+      
+        deleted_rows = db.execute("DELETE FROM following WHERE follower_fk=? AND followee_fk=?", (user_unfollower_id["user_id"], user_unfollowe_id)).rowcount 
+        
+        if not deleted_rows: raise Exception(400, "Unfollow successful, users not found")
+
+        #newfollowercount = db.execute("SELECT user_total_followers FROM users WHERE user_id=?", (user_followe_id,)).fetchone()
+        #if newfollowercount:
+        #    newfollowercount = utils.formatNumber.human_format(newfollowercount["user_total_followers"])
     
         db.commit()
        
-        return {"info": f"Succesful unfollow {user_followe_id}", "follower_count": newfollowercount}
+        return {"info": f"Succesfully unfollowed"}
     except Exception as ex:
         print(ex)
         response.status = ex.args[0]

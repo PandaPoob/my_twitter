@@ -20,6 +20,7 @@
           class="flex flex-col flex-grow max-w-feed sm:border-x sm:border-twitterborder"
         >
           <!-- search -->
+          %if logged_user:
           <div
             class="sticky top-0 z-30 flex items-center gap-4 px-2 pb-4 pt-1 border-b border-twitterborder bg-black bg-opacity-[75%] backdrop-blur"
           >
@@ -93,7 +94,7 @@
               % end
             </ul>
           </div>
-
+          %end
           <!-- feed/tweets -->
           % include('comp-tweets', tweets=tweets)
         </div>
@@ -102,6 +103,7 @@
         <div
           class="relative hidden md:flex flex-col pb-1 mr-6 min-w-widget max-w-widget min-[1200px]:w-widgetxl min-[1200px]:max-w-widgetxl lg:max-w-widget min-[1320px]:min-w-widgetxl"
         >
+          %if logged_user:
           <!-- trends -->
           <div class="mt-4">
             <!-- prettier-ignore -->
@@ -110,9 +112,15 @@
           <div class="sticky top-0">
             <!-- follower suggestions -->
             % include('comp-follower-suggestions', fsugg=fsugg)
-            <!-- footer -->
-            % include('comp-footer')
           </div>
+          %else:
+          <!-- prettier-ignore -->
+          <div class="mt-1.5">
+            % include('comp-signup-cta')
+          </div>
+          %end
+          <!-- footer -->
+          % include('comp-footer')
         </div>
       </div>
     </div>

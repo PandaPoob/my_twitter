@@ -1,0 +1,26 @@
+%if isFollowing:
+<form id="profile_unfollow_form" onsubmit="unfollow(); return false;">
+  <input
+    type="hidden"
+    name="user_unfollowe_id"
+    value="{{profile['user_id']}}"
+  />
+  <button
+    type="submit"
+    class="text-base text-white font-bold border-twitterbuttonborder border rounded-full min-w-[6.5rem] py-1.5 px-4 hover:border-twitterRed hover:bg-twitterRed hover:bg-opacity-10 group"
+  >
+    <span class="hidden group-hover:block text-twitterRed">Unfollow</span>
+    <span class="group-hover:hidden">Following</span>
+  </button>
+</form>
+%else:
+<form id="profile_follow_form" onsubmit="follow(); return false;">
+  <input type="hidden" name="user_followe_id" value="{{profile['user_id']}}" />
+  <button
+    type="submit"
+    class="text-base text-black font-bold bg-white rounded-full hover:bg-opacity-90 py-1.5 px-4"
+  >
+    Follow
+  </button>
+</form>
+%end
