@@ -80,6 +80,8 @@ import views.tweet
 import views.forgot_password
 import views.reset_password
 import views.search
+import views.explore
+import views.settings
 #import delete_later.test_sms
 
 ################################################

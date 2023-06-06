@@ -125,10 +125,12 @@ function search() {
           articles += `<li>
         <a
           href="/${result.user_name}"
-          class="flex items-center gap-4 px-5 py-4 hover:bg-white hover:bg-opacity-10"
+          style="padding-inline: 20px;"
+          class="flex items-center gap-4 py-4 hover:bg-white hover:bg-opacity-10"
         >
           <img
-            class="rounded-full max-w-[56px] min-w-[10%]"
+            style="max-width: 56px;"
+            class="rounded-full"
             src="/images/avatar_imgs/${result.user_img_avatar}"
             alt=""
           />

@@ -28,152 +28,163 @@
         href="/"
         class="flex lg:gap-4 items-center rounded-full pl-3 pr-3 lg:pr-4 py-3 hover:bg-white hover:bg-opacity-10"
       >
+        %if page == "home":
         <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
           viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="currentColor"
-          class="w-7 h-7"
+          aria-hidden="true"
+          class="w-7 h-7 fill-white"
+          class="r-1nao33i r-4qtqp9 r-yyyyoo r-lwhw9o r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-cnnz9e"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
-          />
+          <g>
+            <path
+              d="M12 1.696L.622 8.807l1.06 1.696L3 9.679V19.5C3 20.881 4.119 22 5.5 22h13c1.381 0 2.5-1.119 2.5-2.5V9.679l1.318.824 1.06-1.696L12 1.696zM12 16.5c-1.933 0-3.5-1.567-3.5-3.5s1.567-3.5 3.5-3.5 3.5 1.567 3.5 3.5-1.567 3.5-3.5 3.5z"
+            ></path>
+          </g>
         </svg>
-        <span class="text-xl hidden lg:flex">Homee</span>
+        <span class="text-xl hidden lg:flex font-bold">Home</span>
+        %else:
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          class="w-7 h-7 fill-white"
+          class="r-1nao33i r-4qtqp9 r-yyyyoo r-lwhw9o r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-cnnz9e"
+        >
+          <g>
+            <path
+              d="M12 9c-2.209 0-4 1.791-4 4s1.791 4 4 4 4-1.791 4-4-1.791-4-4-4zm0 6c-1.105 0-2-.895-2-2s.895-2 2-2 2 .895 2 2-.895 2-2 2zm0-13.304L.622 8.807l1.06 1.696L3 9.679V19.5C3 20.881 4.119 22 5.5 22h13c1.381 0 2.5-1.119 2.5-2.5V9.679l1.318.824 1.06-1.696L12 1.696zM19 19.5c0 .276-.224.5-.5.5h-13c-.276 0-.5-.224-.5-.5V8.429l7-4.375 7 4.375V19.5z"
+            ></path>
+          </g>
+        </svg>
+        <span class="text-xl hidden lg:flex">Home</span>
+        %end
       </a>
       % end
       <a
-        href=""
+        href="/explore"
         class="flex lg:gap-4 items-center rounded-full pl-3 pr-3 lg:pr-4 py-3 hover:bg-white hover:bg-opacity-10"
       >
+        %if page == "explore":
         <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="28"
-          height="28"
           viewBox="0 0 24 24"
+          aria-hidden="true"
+          class="w-7 h-7 fill-white"
+          class="r-1nao33i r-4qtqp9 r-yyyyoo r-lwhw9o r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-cnnz9e"
         >
-          <g fill="none" fill-rule="evenodd">
+          <g>
             <path
-              d="M24 0v24H0V0h24ZM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018Zm.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022Zm-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01l-.184-.092Z"
-            />
-            <path
-              fill="currentColor"
-              d="M10.124 3.008a1 1 0 0 1 .868 1.116L10.508 8h3.984l.516-4.124a1 1 0 1 1 1.984.248L16.508 8H20a1 1 0 1 1 0 2h-3.742l-.5 4H19.5a1 1 0 1 1 0 2h-3.992l-.516 4.124a1 1 0 1 1-1.984-.248L13.492 16H9.508l-.516 4.124a1 1 0 1 1-1.984-.248L7.492 16H4.5a1 1 0 1 1 0-2h3.242l.5-4H5a1 1 0 0 1 0-2h3.492l.516-4.124a1 1 0 0 1 1.116-.868ZM13.742 14l.5-4h-3.984l-.5 4h3.984Z"
-            />
+              d="M10.64 3.157l-.36 3.593h4.99l.38-3.892 2.99.299-.36 3.593h2.97v2.5h-3.22l-.55 5.5h2.77v2.5h-3.02l-.39 3.892-2.98-.299.36-3.593H9.23l-.39 3.892-2.98-.299.36-3.593H2.75v-2.5h3.72l.55-5.5H3.75v-2.5h3.52l.38-3.892 2.99.299zm3.83 11.593l.55-5.5h-4.99l-.55 5.5h4.99z"
+            ></path>
           </g>
         </svg>
+
+        <span class="text-xl hidden lg:flex font-bold">Explore</span>
+        %else:
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          class="w-7 h-7 fill-white"
+          class="r-1nao33i r-4qtqp9 r-yyyyoo r-lwhw9o r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-cnnz9e"
+        >
+          <g>
+            <path
+              d="M10.09 3.098L9.72 7h5.99l.39-4.089 1.99.187L17.72 7h3.78v2h-3.97l-.56 6h3.53v2h-3.72l-.38 4.089-1.99-.187.36-3.902H8.78l-.38 4.089-1.99-.187L6.77 17H2.5v-2h4.46l.56-6H3.5V7h4.21l.39-4.089 1.99.187zM14.96 15l.56-6H9.53l-.56 6h5.99z"
+            ></path>
+          </g>
+        </svg>
+
         <span class="text-xl hidden lg:flex">Explore</span>
+        %end
       </a>
       % if logged_user:
-      <a
-        href=""
-        class="flex lg:gap-4 items-center rounded-full pl-3 pr-3 lg:pr-4 py-3 hover:bg-white hover:bg-opacity-10"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="currentColor"
-          class="w-7 h-7 flex justify-start items-start"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
-          />
-        </svg>
-        <span class="text-xl hidden lg:flex">Notifications</span>
-      </a>
 
       <a
-        href=""
+        href="/{{logged_user['user_name']}}"
         class="flex lg:gap-4 items-center rounded-full pl-3 pr-3 lg:pr-4 py-3 hover:bg-white hover:bg-opacity-10"
       >
+        %if page == "profile":
         <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
           viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="currentColor"
-          class="w-7 h-7"
+          aria-hidden="true"
+          class="w-7 h-7 fill-white"
+          class="r-1nao33i r-4qtqp9 r-yyyyoo r-lwhw9o r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-cnnz9e"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
-          />
+          <g>
+            <path
+              d="M17.863 13.44c1.477 1.58 2.366 3.8 2.632 6.46l.11 1.1H3.395l.11-1.1c.266-2.66 1.155-4.88 2.632-6.46C7.627 11.85 9.648 11 12 11s4.373.85 5.863 2.44zM12 2C9.791 2 8 3.79 8 6s1.791 4 4 4 4-1.79 4-4-1.791-4-4-4z"
+            ></path>
+          </g>
         </svg>
-        <span class="text-xl hidden lg:flex">Messages</span>
-      </a>
-
-      <a
-        href=""
-        class="flex lg:gap-4 items-center rounded-full pl-3 pr-3 lg:pr-4 py-3 hover:bg-white hover:bg-opacity-10"
-      >
+        <span class="text-xl hidden lg:flex font-bold">Profile</span>
+        %else:
         <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
           viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="currentColor"
-          class="w-7 h-7"
+          aria-hidden="true"
+          class="w-7 h-7 fill-white"
+          class="r-1nao33i r-4qtqp9 r-yyyyoo r-lwhw9o r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-cnnz9e"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
-          />
+          <g>
+            <path
+              d="M5.651 19h12.698c-.337-1.8-1.023-3.21-1.945-4.19C15.318 13.65 13.838 13 12 13s-3.317.65-4.404 1.81c-.922.98-1.608 2.39-1.945 4.19zm.486-5.56C7.627 11.85 9.648 11 12 11s4.373.85 5.863 2.44c1.477 1.58 2.366 3.8 2.632 6.46l.11 1.1H3.395l.11-1.1c.266-2.66 1.155-4.88 2.632-6.46zM12 4c-1.105 0-2 .9-2 2s.895 2 2 2 2-.9 2-2-.895-2-2-2zM8 6c0-2.21 1.791-4 4-4s4 1.79 4 4-1.791 4-4 4-4-1.79-4-4z"
+            ></path>
+          </g>
         </svg>
-        <span class="text-xl hidden lg:flex">Bookmarks</span>
-      </a>
-
-      <a
-        href=""
-        class="flex lg:gap-4 items-center rounded-full pl-3 pr-3 lg:pr-4 py-3 hover:bg-white hover:bg-opacity-10"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="28"
-          height="28"
-          viewBox="0 0 24 24"
-        >
-          <path
-            fill="currentColor"
-            d="M20 22H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1zm-1-2V4H5v16h14zM8 7h8v2H8V7zm0 4h8v2H8v-2zm0 4h5v2H8v-2z"
-          />
-        </svg>
-        <span class="text-xl hidden lg:flex">Lists</span>
+        <span class="text-xl hidden lg:flex">Profile</span>
+        %end
       </a>
 
       <a
         href="/{{logged_user['user_name']}}"
         class="flex lg:gap-4 items-center rounded-full pl-3 pr-3 lg:pr-4 py-3 hover:bg-white hover:bg-opacity-10"
       >
+        %if page == "status":
+        <svg
+          viewBox="0 0 24 24"
+          class="w-7 h-7 fill-white"
+          class="r-1nao33i r-4qtqp9 r-yyyyoo r-lwhw9o r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-cnnz9e"
+        >
+          <g>
+            <path
+              d="M16.5 3H2v18h15c3.038 0 5.5-2.46 5.5-5.5 0-1.4-.524-2.68-1.385-3.65-.08-.09-.089-.22-.023-.32.574-.87.908-1.91.908-3.03C22 5.46 19.538 3 16.5 3zm-.796 5.99c.457-.05.892-.17 1.296-.35-.302.45-.684.84-1.125 1.15.004.1.006.19.006.29 0 2.94-2.269 6.32-6.421 6.32-1.274 0-2.46-.37-3.459-1 .177.02.357.03.539.03 1.057 0 2.03-.35 2.803-.95-.988-.02-1.821-.66-2.109-1.54.138.03.28.04.425.04.206 0 .405-.03.595-.08-1.033-.2-1.811-1.1-1.811-2.18v-.03c.305.17.652.27 1.023.28-.606-.4-1.004-1.08-1.004-1.85 0-.4.111-.78.305-1.11 1.113 1.34 2.775 2.22 4.652 2.32-.038-.17-.058-.33-.058-.51 0-1.23 1.01-2.22 2.256-2.22.649 0 1.235.27 1.647.7.514-.1.997-.28 1.433-.54-.168.52-.526.96-.992 1.23z"
+            ></path>
+          </g>
+        </svg>
+        <span class="text-xl hidden lg:flex font-bold">Twitter blue</span>
+        %else:
+        <svg
+          viewBox="0 0 24 24"
+          class="w-7 h-7 fill-white"
+          class="r-1nao33i r-4qtqp9 r-yyyyoo r-lwhw9o r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-cnnz9e"
+        >
+          <g>
+            <path
+              d="M15.704 8.99c.457-.05.891-.17 1.296-.35-.302.45-.685.84-1.125 1.15.004.1.006.19.006.29 0 2.94-2.269 6.32-6.421 6.32-1.274 0-2.46-.37-3.459-1 .177.02.357.03.539.03 1.057 0 2.03-.35 2.803-.95-.988-.02-1.821-.66-2.109-1.54.138.03.28.04.425.04.206 0 .405-.03.595-.08-1.033-.2-1.811-1.1-1.811-2.18v-.03c.305.17.652.27 1.023.28-.606-.4-1.004-1.08-1.004-1.85 0-.4.111-.78.305-1.11 1.113 1.34 2.775 2.22 4.652 2.32-.038-.17-.058-.33-.058-.51 0-1.23 1.01-2.22 2.256-2.22.649 0 1.235.27 1.647.7.514-.1.997-.28 1.433-.54-.168.52-.526.96-.992 1.23zM2 21h15c3.038 0 5.5-2.46 5.5-5.5 0-1.4-.524-2.68-1.385-3.65-.08-.09-.089-.22-.023-.32.574-.87.908-1.91.908-3.03C22 5.46 19.538 3 16.5 3H2v18zM16.5 5C18.433 5 20 6.57 20 8.5c0 1.01-.43 1.93-1.12 2.57-.468.43-.414 1.19.111 1.55.914.63 1.509 1.69 1.509 2.88 0 1.93-1.567 3.5-3.5 3.5H4V5h12.5z"
+            ></path>
+          </g>
+        </svg>
+
+        <span class="text-xl hidden lg:flex">Twitter Blue</span>
+        %end
+      </a>
+
+      <a
+        href="/settings"
+        class="flex lg:gap-4 items-center rounded-full pl-3 pr-3 lg:pr-4 py-3 hover:bg-white hover:bg-opacity-10"
+      >
+        %if page == "settings":
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          fill="none"
           viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="currentColor"
+          fill="currentColor"
           class="w-7 h-7"
         >
           <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+            fill-rule="evenodd"
+            d="M11.828 2.25c-.916 0-1.699.663-1.85 1.567l-.091.549a.798.798 0 01-.517.608 7.45 7.45 0 00-.478.198.798.798 0 01-.796-.064l-.453-.324a1.875 1.875 0 00-2.416.2l-.243.243a1.875 1.875 0 00-.2 2.416l.324.453a.798.798 0 01.064.796 7.448 7.448 0 00-.198.478.798.798 0 01-.608.517l-.55.092a1.875 1.875 0 00-1.566 1.849v.344c0 .916.663 1.699 1.567 1.85l.549.091c.281.047.508.25.608.517.06.162.127.321.198.478a.798.798 0 01-.064.796l-.324.453a1.875 1.875 0 00.2 2.416l.243.243c.648.648 1.67.733 2.416.2l.453-.324a.798.798 0 01.796-.064c.157.071.316.137.478.198.267.1.47.327.517.608l.092.55c.15.903.932 1.566 1.849 1.566h.344c.916 0 1.699-.663 1.85-1.567l.091-.549a.798.798 0 01.517-.608 7.52 7.52 0 00.478-.198.798.798 0 01.796.064l.453.324a1.875 1.875 0 002.416-.2l.243-.243c.648-.648.733-1.67.2-2.416l-.324-.453a.798.798 0 01-.064-.796c.071-.157.137-.316.198-.478.1-.267.327-.47.608-.517l.55-.091a1.875 1.875 0 001.566-1.85v-.344c0-.916-.663-1.699-1.567-1.85l-.549-.091a.798.798 0 01-.608-.517 7.507 7.507 0 00-.198-.478.798.798 0 01.064-.796l.324-.453a1.875 1.875 0 00-.2-2.416l-.243-.243a1.875 1.875 0 00-2.416-.2l-.453.324a.798.798 0 01-.796.064 7.462 7.462 0 00-.478-.198.798.798 0 01-.517-.608l-.091-.55a1.875 1.875 0 00-1.85-1.566h-.344zM12 15.75a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5z"
+            clip-rule="evenodd"
           />
         </svg>
-        <span class="text-xl hidden lg:flex">Profile</span>
-      </a>
-      % end
-      <a
-        href=""
-        class="flex lg:gap-4 items-center rounded-full pl-3 pr-3 lg:pr-4 py-3 hover:bg-white hover:bg-opacity-10"
-      >
+        <span class="text-xl hidden lg:flex font-bold">Settings</span>
+        %else:
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -194,7 +205,88 @@
           />
         </svg>
         <span class="text-xl hidden lg:flex">Settings</span>
+        %end
       </a>
+
+      <a
+        href=""
+        class="flex lg:gap-4 items-center rounded-full pl-3 pr-3 lg:pr-4 py-3 hover:bg-white hover:bg-opacity-10 cursor-default"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          class="w-7 h-7 fill-white"
+          class="r-1nao33i r-4qtqp9 r-yyyyoo r-lwhw9o r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-cnnz9e"
+        >
+          <g>
+            <path
+              d="M19.993 9.042C19.48 5.017 16.054 2 11.996 2s-7.49 3.021-7.999 7.051L2.866 18H7.1c.463 2.282 2.481 4 4.9 4s4.437-1.718 4.9-4h4.236l-1.143-8.958zM12 20c-1.306 0-2.417-.835-2.829-2h5.658c-.412 1.165-1.523 2-2.829 2zm-6.866-4l.847-6.698C6.364 6.272 8.941 4 11.996 4s5.627 2.268 6.013 5.295L18.864 16H5.134z"
+            ></path>
+          </g>
+        </svg>
+        <span class="text-xl hidden lg:flex">Notifications</span>
+      </a>
+
+      <a
+        href=""
+        class="flex lg:gap-4 items-center rounded-full pl-3 pr-3 lg:pr-4 py-3 hover:bg-white hover:bg-opacity-10 cursor-default"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          class="w-7 h-7 fill-white"
+          class="r-1nao33i r-4qtqp9 r-yyyyoo r-lwhw9o r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-cnnz9e"
+        >
+          <g>
+            <path
+              d="M1.998 5.5c0-1.381 1.119-2.5 2.5-2.5h15c1.381 0 2.5 1.119 2.5 2.5v13c0 1.381-1.119 2.5-2.5 2.5h-15c-1.381 0-2.5-1.119-2.5-2.5v-13zm2.5-.5c-.276 0-.5.224-.5.5v2.764l8 3.638 8-3.636V5.5c0-.276-.224-.5-.5-.5h-15zm15.5 5.463l-8 3.636-8-3.638V18.5c0 .276.224.5.5.5h15c.276 0 .5-.224.5-.5v-8.037z"
+            ></path>
+          </g>
+        </svg>
+        <span class="text-xl hidden lg:flex">Messages</span>
+      </a>
+
+      <a
+        href=""
+        class="flex lg:gap-4 items-center rounded-full pl-3 pr-3 lg:pr-4 py-3 hover:bg-white hover:bg-opacity-10 cursor-default"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          class="w-7 h-7 fill-white"
+          class="r-1nao33i r-4qtqp9 r-yyyyoo r-lwhw9o r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-cnnz9e"
+        >
+          <g>
+            <path
+              d="M4 4.5C4 3.12 5.119 2 6.5 2h11C18.881 2 20 3.12 20 4.5v18.44l-8-5.71-8 5.71V4.5zM6.5 4c-.276 0-.5.22-.5.5v14.56l6-4.29 6 4.29V4.5c0-.28-.224-.5-.5-.5h-11z"
+            ></path>
+          </g>
+        </svg>
+        <span class="text-xl hidden lg:flex">Bookmarks</span>
+      </a>
+
+      <!--       <a
+        href=""
+        class="flex lg:gap-4 items-center rounded-full pl-3 pr-3 lg:pr-4 py-3 hover:bg-white hover:bg-opacity-10 cursor-default"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          class="w-7 h-7 fill-white"
+          class="r-1nao33i r-4qtqp9 r-yyyyoo r-lwhw9o r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-cnnz9e"
+        >
+          <g>
+            <path
+              d="M3 4.5C3 3.12 4.12 2 5.5 2h13C19.88 2 21 3.12 21 4.5v15c0 1.38-1.12 2.5-2.5 2.5h-13C4.12 22 3 20.88 3 19.5v-15zM5.5 4c-.28 0-.5.22-.5.5v15c0 .28.22.5.5.5h13c.28 0 .5-.22.5-.5v-15c0-.28-.22-.5-.5-.5h-13zM16 10H8V8h8v2zm-8 2h8v2H8v-2z"
+            ></path>
+          </g>
+        </svg>
+        <span class="text-xl hidden lg:flex">Lists</span>
+      </a> -->
+
+      % end
+
+      <!-- prettier-ignore -->
 
       % if logged_user:
       <a
@@ -219,7 +311,7 @@
         <span class="text-xl hidden lg:flex">Log out</span>
       </a>
       <button
-        class="w-12 bg-twitterblue rounded-full px-2 py-3 lg:w-full pr-3 lg:pr-4 mt-2 font-bold flex align-middle justify-center hover:bg-opacity-90"
+        class="w-12 bg-twitterblue rounded-full px-2 py-3 lg:w-full pr-3 lg:pr-4 mt-2 font-bold flex align-middle justify-center hover:bg-opacity-90 cursor-default"
       >
         <svg
           class="flex justify-center flex-shrink-1 lg:hidden"
@@ -237,7 +329,8 @@
       </button>
 
       <button
-        class="flex items-center w-full lg:gap-2 mt-auto mb-6 rounded-full py-2 lg:px-4 hover:bg-white hover:bg-opacity-10"
+        onclick=""
+        class="flex items-center w-full lg:gap-2 mt-auto mb-6 rounded-full py-2 lg:px-4 hover:bg-white hover:bg-opacity-10 cursor-default"
       >
         <span class="flex w-[44px]">
           <img
@@ -246,19 +339,6 @@
             class="rounded-full w-[44px]"
           />
         </span>
-        <!--    <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="w-10 h-10 rounded-full bg-white pt-2"
-          >
-            <path
-              class="fill-twittergray-500"
-              fill-rule="evenodd"
-              d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z"
-              clip-rule="evenodd"
-            />
-          </svg> -->
         <span class="hidden lg:grid">
           <span class="text-base font-bold hidden lg:flex">
             {{logged_user['user_full_name']}}
@@ -282,27 +362,6 @@
           />
         </svg>
       </button>
-      % else:
-      <a
-        class="w-full flex items-center justify-center lg:gap-4 mt-auto bg-twitterblue font-bold mb-6 rounded-full py-2 lg:px-4 hover:bg-opacity-90"
-        href="/login"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="currentColor"
-          class="w-6 h-6"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
-          />
-        </svg>
-        <span class="hidden lg:block">Login</span>
-      </a>
       % end
     </div>
   </div>

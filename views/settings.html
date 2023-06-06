@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  % include('comp-head', title="Your account")
+  <body
+    class="w-full h-full flex justify-center text-twittergray-400 bg-black overflow-hidden overflow-y-scroll"
+  >
+    <div class="flex max-w-layout flex-grow">
+      <div
+        class="hidden sm:block max-w-feed sm:w-2/12 lg:w-3/12 xl:w-[30%] xxl:w-4/12 h-screen pt-4 sm:pr-2 lg:pr-6 xxl:pr-12"
+      ></div>
+      % include('comp-nav-mobile', logged_user=logged_user)
+      <!-- left/nav -->
+      % include('comp-nav', logged_user=logged_user, page="settings")
+
+      <!-- center-right -->
+      <div
+        class="flex flex-grow w-12/12 sm:w-10/12 lg:w-9/12 xl:w-[70%] xxl:w-8/12 md:gap-6 lg:gap-8"
+      >
+        <div
+          class="flex flex-col flex-grow max-w-[800px] sm:border-x sm:border-twitterborder"
+        >
+          Delete account here Log out here
+        </div>
+
+        <!-- right/widget -->
+        <div
+          class="relative hidden md:flex flex-col pb-1 mr-6 min-w-widget max-w-widget min-[1200px]:w-widgetxl min-[1200px]:max-w-widgetxl lg:max-w-widget min-[1320px]:min-w-widgetxl"
+        >
+          <div class="sticky top-0">
+            <!-- footer -->
+            % include('comp-footer')
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/js/app.js"></script>
+  </body>
+</html>
