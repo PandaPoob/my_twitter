@@ -159,7 +159,7 @@ function removeImage(index) {
 function displayOutputImages(images) {
   const output = document.querySelector("output");
 
-  //Clear all layout on output
+  //Clear layout on output
   output.className = "";
 
   //Set style on image amount
