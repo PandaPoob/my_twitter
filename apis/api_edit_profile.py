@@ -12,6 +12,7 @@ def _():
     try:
         x.disable_cache()
 
+        folder_path = ""
         #Get cookie user
         logged_user = x.request_cookie()
         #Decode cookie
@@ -36,7 +37,6 @@ def _():
         user_img_cover = request.files.get("user_img_cover")
         cover_filename = user_img_cover.filename
 
-        folder_path = ""
 
         if avatar_filename != "empty" or cover_filename != "empty":
             #Create temp folder
