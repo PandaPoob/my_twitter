@@ -31,13 +31,18 @@ def _():
 
         #Get avatar
         user_img_avatar = request.files.get("user_img_avatar")
-        
+        avatar_filename = None
+        if user_img_avatar is not None:
+            avatar_filename = user_img_avatar.filename
         
         #Get cover
         user_img_cover = request.files.get("user_img_cover")
+        cover_filename = None
+        if user_img_cover is not None:
+            cover_filename = user_img_cover.filename
         
 
-        if user_img_avatar.filename != "empty" or user_img_cover.filename != "empty":
+        if avatar_filename is not None or cover_filename is not None:
             #Create temp folder
             folder_name = logged_user["user_id"]
             directory_path = x.ROOT+"/images/temp_imgs/"
@@ -45,7 +50,7 @@ def _():
             os.makedirs(folder_path)
             
         #Avatar image
-        if user_img_avatar.filename != "empty":
+        if avatar_filename is not None:
             avatar_filename = user_img_avatar.filename
             #Validate type on ext
             
@@ -77,7 +82,7 @@ def _():
             update_params.append(avatar_image_url)
 
         #Cover image
-        if user_img_cover.filename != "empty":
+        if cover_filename is not None:
             cover_filename = user_img_cover.filename
             #Validate type on ext
             x.validate_image_type(user_img_cover)
