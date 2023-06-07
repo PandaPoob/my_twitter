@@ -188,6 +188,7 @@ async function handleSubmitTweet() {
   } else {
     const data = await resp.json();
     frm.reset();
+    document.querySelector("output").innerHTML = "";
     document.getElementById("submit_tweet_btn").disabled = true;
     renderTweet(data);
   }

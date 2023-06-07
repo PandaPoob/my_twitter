@@ -15,6 +15,8 @@ SELECT * FROM tweets WHERE tweet_user_fk = "b3094c2f1c144817b7cc0b718fc3c644";
 --Delete all tweets images
 DELETE FROM tweet_images WHERE tweet_image_tweet_fk = "be7e9821630b425cae04a45138161d61"; 
 
+DELETE FROM tweet_images WHERE tweet_image_url = "e2c697b11a284f82987357c1a7cd1485.jpg"; 
+
 DELETE FROM users WHERE user_name = "freja";
 
 --Update user
