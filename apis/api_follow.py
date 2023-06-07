@@ -1,7 +1,6 @@
 from bottle import post, request, response
 import x
 import time
-import utils.formatNumber
 
 @post("/api-follow")
 def _():
@@ -47,10 +46,6 @@ def _():
 
         db.execute(f"INSERT INTO following VALUES({values})", follow)
         
-        #newfollowercount = db.execute("SELECT user_total_followers FROM users WHERE user_id=?", (user_followe_id,)).fetchone()
-        #if newfollowercount:
-         #   newfollowercount = utils.formatNumber.human_format(newfollowercount["user_total_followers"])
-    
         db.commit()                  
         return {"info": f"Succesfully followed"}
     except Exception as ex:

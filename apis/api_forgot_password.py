@@ -1,8 +1,7 @@
-from bottle import post, request, response
+from bottle import post, response
 import x
 import utils.generateResetToken as g
 import uuid
-import time
 import bcrypt
 import utils.sendEmail as s
 

@@ -7,13 +7,13 @@ DELETE FROM tweets WHERE tweet_id = "e5cef902955441d1b897aa55f6632a77";
 DELETE FROM users WHERE user_id = "1d1b0b166b3e4d75a3f6477f072ecc22"; 
 
 --Delete all user's tweets
-DELETE FROM tweets WHERE tweet_user_fk = "1d1b0b166b3e4d75a3f6477f072ecc22"; 
+DELETE FROM tweets WHERE tweet_user_fk = "b3094c2f1c144817b7cc0b718fc3c644"; 
 
 --Get tweet id to delete images
 SELECT * FROM tweets WHERE tweet_user_fk = "b3094c2f1c144817b7cc0b718fc3c644";
 
 --Delete all tweets images
-DELETE FROM tweet_images WHERE tweet_image_tweet_fk = "b4e0d6b9d87340668e5407ac3dd48836"; 
+DELETE FROM tweet_images WHERE tweet_image_tweet_fk = "be7e9821630b425cae04a45138161d61"; 
 
 DELETE FROM users WHERE user_name = "freja";
 

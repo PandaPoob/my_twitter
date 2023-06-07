@@ -1,6 +1,5 @@
 from bottle import post, request, response
 import x
-import utils.formatNumber
 
 @post("/api-unfollow")
 def _():
@@ -34,10 +33,6 @@ def _():
         
         if not deleted_rows: raise Exception(400, "Unfollow successful, users not found")
 
-        #newfollowercount = db.execute("SELECT user_total_followers FROM users WHERE user_id=?", (user_followe_id,)).fetchone()
-        #if newfollowercount:
-        #    newfollowercount = utils.formatNumber.human_format(newfollowercount["user_total_followers"])
-    
         db.commit()
        
         return {"info": f"Succesfully unfollowed"}

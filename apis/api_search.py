@@ -1,5 +1,4 @@
 from bottle import post, response, request
-import json
 import x
 
 @post('/api-search')
@@ -28,5 +27,4 @@ def _():
             response.status = 500
             return {"info":str(ex)}
     finally:
-        pass
         if 'db' in locals(): db.close()

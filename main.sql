@@ -95,9 +95,9 @@ WHERE users.user_account_status = "active";
 
 --This view is to get the user, tweets and images--
 DROP VIEW IF EXISTS [users_and_tweets];
-CREATE VIEW users_and_tweets
-AS
-SELECT * FROM tweets
+CREATE VIEW users_and_tweets AS
+SELECT tweets.*, users.user_name, users.user_full_name, users.user_twitter_status, users.user_img_avatar
+FROM tweets
 INNER JOIN users ON users.user_id = tweets.tweet_user_fk;
 
 --This view is for follow suggestions so we do not get unnecessary info--

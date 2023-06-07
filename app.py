@@ -52,6 +52,7 @@ import apis.api_edit_profile
 import apis.api_search
 import apis.api_follow
 import apis.api_unfollow
+import apis.api_pagination_tweets
 
 
 #import delete_later.api_send_sms
@@ -73,7 +74,6 @@ import views.index
 import views.profile
 import views.login
 import views.signup
-import views.test_follow
 import views.verify_user
 import views.tweet
 import views.forgot_password

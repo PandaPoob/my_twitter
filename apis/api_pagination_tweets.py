@@ -1,22 +1,36 @@
-from bottle import get, template
-import time
-import calendar
+from bottle import get, request, response
 import x
 import utils.formatNumber
+import time
+import calendar
 
-@get("/")
+@get('/api-pagination-tweets')
 def _():
     try:
-        x.disable_cache()
-        #Get cookie if exists
-        logged_user = x.request_cookie()
+        page = request.query.page
 
+        user_name = request.query.user
+
+        print(user_name)
+        #Validation
+   
+        per_page = 10
+        offset = (int(page) - 1) * per_page
+
+        print(offset, per_page)
+       
         #Open database
         db = x.db()
+        if user_name:
+            #Get user
+            user = db.execute("SELECT user_id FROM users WHERE user_name=? COLLATE NOCASE", (user_name,)).fetchone()
 
-        #Fetch 10 latest tweets
-        tweets = db.execute("SELECT * FROM users_and_tweets ORDER BY users_and_tweets.tweet_created_at DESC LIMIT 0, 10").fetchall()
-      
+            #Profile tweets
+            tweets = db.execute("SELECT * FROM users_and_tweets WHERE tweet_user_fk=? ORDER BY users_and_tweets.tweet_created_at DESC LIMIT ?, ?", (user["user_id"], offset, per_page)).fetchall()
+        else:    
+            #Index tweets
+            tweets = db.execute("SELECT * FROM users_and_tweets ORDER BY users_and_tweets.tweet_created_at DESC LIMIT ?, ?", (offset, per_page)).fetchall()
+        
         #Fetch images of tweets 
         for i in range(len(tweets)):
             if tweets[i]["tweet_field_images"] > 0:
@@ -24,28 +38,6 @@ def _():
                 #Declare new key and add image list
                 tweets[i]['tweet_images'] = tweet_images
         
-        #Fetch trends
-        trends = db.execute("SELECT * FROM trends").fetchall()
-
-        #If cookie exists then decode
-        if logged_user:
-            logged_user = x.decode_cookie(logged_user)
-            username = logged_user["user_name"]
-            user_id = logged_user["user_id"]
-
-            #Get users that are not the logged in user and are not already followed
-            fsugg = db.execute("""
-                SELECT * FROM follower_suggestions
-                WHERE user_name != ? 
-                AND user_id NOT IN (
-                SELECT followee_fk
-                FROM following
-                WHERE follower_fk = ?
-                )""", (username, user_id)).fetchall()
-            
-        else:
-            fsugg = ""
-           
         #Format tweet numbers
         for i in range(len(tweets)):
             if tweets[i]['tweet_total_replies']:
@@ -65,15 +57,16 @@ def _():
                 day = time.strftime('%#d', time.localtime(tweets[i]['tweet_created_at']))
                 tweets[i]['tweet_created_at'] = f"{calendar.month_abbr[int(month)]} {day}"
         
-        #Format trends numbers
-        for i in range(len(trends)):
-            if trends[i]['trend_total_tweets']:
-                trends[i]['trend_total_tweets'] = utils.formatNumber.human_format(trends[i]['trend_total_tweets'])
-      
-        return template("index", max_tweet=x.TWEET_MAX_LEN, max_img=x.TWEET_MAX_IMG_SIZE, max_imgs=x.TWEET_MAX_IMG_NO, tweets=tweets, trends=trends, fsugg=fsugg, logged_user=logged_user)
-    except Exception as ex:
-        print("error", ex)
-        return "error"
 
+        #return tweets
+        return {"info":"ok", "tweets": tweets}
+    except Exception as ex:
+        print(ex)
+        try:
+            response.status = ex.args[0]
+            return {"info":ex.args[1]}
+        except:
+            response.status = 500
+            return {"info":str(ex)}
     finally:
-        if "db" in locals(): db.close()
+        if 'db' in locals(): db.close()
