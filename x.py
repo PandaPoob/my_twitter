@@ -92,7 +92,7 @@ def delete_img_folder(dir):
 
 def generate_image(source_img_path, new_img_path):
       new_img_name = f"{str(uuid.uuid4().hex)}.jpg"
-      new_img_path = os.getcwd()+new_img_path+new_img_name
+      new_img_path = ROOT+new_img_path+new_img_name
       shutil.copy(source_img_path, new_img_path)
       return new_img_name
 

@@ -37,14 +37,14 @@ def _():
 
         #API KEY
         user_api_key = str(uuid.uuid4().hex)
-    
+
         #Prepare and generate avatar img
-        avatar_path = os.getcwd()+f"/images/placeholders/avatar_default.jpg"
+        avatar_path = x.ROOT+f"/images/placeholders/avatar_default.jpg"
         avatar_new_path = "/images/avatar_imgs/"
         avatar_img_id = x.generate_image(avatar_path, avatar_new_path)
-        
+
         #Prepare and generate cover img
-        cover_path = os.getcwd()+f"/images/placeholders/cover_default.jpg"
+        cover_path = x.ROOT+f"/images/placeholders/cover_default.jpg"
         cover_new_path = "/images/cover_imgs/"
         cover_img_id = x.generate_image(cover_path, cover_new_path)
         
@@ -79,7 +79,7 @@ def _():
         total_rows_inserted = db.execute(f"INSERT INTO users VALUES({values})", user).rowcount        
         if total_rows_inserted != 1: raise Exception(400, "Please, try again")
 
-        db.commit()
+        #db.commit()
 
         
         # Creating the plain-text and HTML version of email
@@ -174,10 +174,10 @@ def _():
         print(ex)
         #Delete new imgs
         if avatar_img_id:
-            avatar_img = os.getcwd()+f"/images/avatar_imgs/{avatar_img_id}"
+            avatar_img = x.ROOT+f"/images/avatar_imgs/{avatar_img_id}"
             os.remove(avatar_img, dir_fd = None)
         if cover_img_id:
-            cover_img = os.getcwd()+f"/images/cover_imgs/{cover_img_id}"
+            cover_img = x.ROOT+f"/images/cover_imgs/{cover_img_id}"
             os.remove(cover_img, dir_fd = None)
         
         try:
