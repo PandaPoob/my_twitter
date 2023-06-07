@@ -50,10 +50,11 @@ async function fetchTweets() {
       );
       const data = await res.json();
 
-      displayTweets(data.tweets);
-
+      if (data.tweets.length !== 0) {
+        displayTweets(data.tweets);
+      }
       //If the number of returned tweets is less than 10
-      if (data.tweets.length < 10) {
+      else if (data.tweets.length < 10) {
         //No more tweets to fetch
         moreTweets = false;
         //console.log("All tweets fetched");

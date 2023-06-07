@@ -194,5 +194,6 @@ def _():
             response.status = 500
             return {"info":str(ex)}
     finally:
-        x.delete_img_folder(folder_path)
+        if folder_path != "":
+            x.delete_img_folder(folder_path)
         if 'db' in locals(): db.close()

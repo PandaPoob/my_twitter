@@ -10,15 +10,10 @@ def _():
         page = request.query.page
 
         user_name = request.query.user
-
-        print(user_name)
-        #Validation
    
         per_page = 10
         offset = (int(page) - 1) * per_page
 
-        print(offset, per_page)
-       
         #Open database
         db = x.db()
         if user_name:
