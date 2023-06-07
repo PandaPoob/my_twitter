@@ -79,7 +79,7 @@ def _():
         total_rows_inserted = db.execute(f"INSERT INTO users VALUES({values})", user).rowcount        
         if total_rows_inserted != 1: raise Exception(400, "Please, try again")
 
-        #db.commit()
+        db.commit()
 
         
         # Creating the plain-text and HTML version of email
