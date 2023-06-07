@@ -151,6 +151,7 @@ async function handleSubmitEditProfile() {
   if (!resp.ok) {
     const data = await resp.json();
     //Reset button state
+    console.log(data, resp);
     document.getElementById("form_default").style.display = "block";
     document.getElementById("form_loading").style.display = "none";
 
