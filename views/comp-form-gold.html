@@ -1,0 +1,105 @@
+<div>
+  <div
+    id="gold_step_2"
+    class="hidden items-center flex-col bg-black p-4 rounded-md mx-14 mt-10"
+  >
+    <form method="POST" onsubmit="checkSmsForm(); return false" id="send_sms">
+      <div class="relative flex flex-col justify-start min-h-[100px]">
+        <label for="user_phonenumber" class="text-md mt-2 mb-1"
+          >Phone number</label
+        >
+        <input
+          id="user_phonenumber"
+          class="h-12 text-twittergray-900 text-lg rounded-sm border-2 px-2 border-white focus:outline-none focus:border-twitterblue"
+          name="user_phonenumber"
+          placeholder="00 00 00 00"
+          type="text"
+          maxlength="{{phone_val['max']}}"
+          min-val="{{phone_val['min']}}"
+          onblur="validateNumber()"
+        />
+        <p
+          id="user_phonenumber_error_msg"
+          class="hidden text-red-500 text-sm mt-1"
+        >
+          Not a valid phonenumber
+        </p>
+      </div>
+    </form>
+    <button
+      class="flex justify-center items-center bg-white text-black rounded-full font-bold px-3 py-2 hover:bg-opacity-[90%] mx-auto mt-2"
+      type="submit"
+      form="send_sms"
+    >
+      <span id="form_default">Send sms</span>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        id="form_loading"
+        class="animate-spin hidden"
+      >
+        <path
+          fill="currentColor"
+          d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"
+          opacity=".25"
+        />
+        <path
+          fill="currentColor"
+          d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z"
+        ></path>
+      </svg>
+    </button>
+  </div>
+
+  <div
+    id="gold_step_3"
+    class="hidden items-center flex-col bg-black p-4 rounded-md mx-14 mt-10"
+  >
+    <form
+      method="POST"
+      onsubmit="handleSubmitVerification(); return false"
+      id="verify_number"
+    >
+      <input id="user_phonenumber_2" name="user_phonenumber" type="hidden" />
+
+      <div class="relative flex flex-col justify-start min-h-[100px]">
+        <label for="phone_user_api_key" class="text-md mt-2 mb-1"
+          >Verification code</label
+        >
+        <input
+          id="phone_user_api_key"
+          class="h-12 text-twittergray-900 text-lg rounded-sm border-2 px-2 border-white focus:outline-none focus:border-twitterblue"
+          name="phone_user_api_key"
+          type="text"
+        />
+      </div>
+    </form>
+    <button
+      class="flex justify-center items-center bg-white text-black rounded-full font-bold px-3 py-2 hover:bg-opacity-[90%] mx-auto mt-2"
+      type="submit"
+      form="verify_number"
+    >
+      <span id="form_default">Verify</span>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        id="form_loading"
+        class="animate-spin hidden"
+      >
+        <path
+          fill="currentColor"
+          d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"
+          opacity=".25"
+        />
+        <path
+          fill="currentColor"
+          d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z"
+        ></path>
+      </svg>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  % include('comp-head', title="Twitter Blue")
+  <body
+    class="w-full h-full flex justify-center text-twittergray-400 bg-black overflow-hidden overflow-y-scroll"
+  >
+    <div class="flex max-w-layout flex-grow">
+      <div
+        class="hidden sm:block max-w-feed sm:w-2/12 lg:w-3/12 xl:w-[30%] xxl:w-4/12 h-screen pt-4 sm:pr-2 lg:pr-6 xxl:pr-12"
+      ></div>
+      % include('comp-nav-mobile', logged_user=logged_user)
+      <!-- left/nav -->
+      % include('comp-nav', logged_user=logged_user, page="verified")
+
+      <!-- center-right -->
+      <div
+        class="flex flex-grow w-12/12 sm:w-10/12 lg:w-9/12 xl:w-[70%] xxl:w-8/12 md:gap-6 lg:gap-8"
+      >
+        <div
+          class="flex flex-col flex-grow max-w-[800px] sm:border-x sm:border-twitterborder"
+        >
+          %if logged_user["user_twitter_status"] == "basic":
+          <div>
+            <div class="border-b border-twitterborder">
+              <h2 class="text-xxl font-bold text-center py-2">Twitter Gold</h2>
+              <div
+                class="flex flex-col items-center justify-start gap-8 bg-[url('/images/placeholders/twitter_gold.png')] bg-bottom bg-cover h-[30vh] w-full"
+              >
+                <div id="gold_step_1">
+                  <div
+                    class="flex items-center bg-black p-4 rounded-md mx-14 mt-10"
+                  >
+                    <p class="text-lg font-bold leading-6 mr-6">
+                      You can get Twitter gold by verifying your account with
+                      your phone number! This will tell us you are truly
+                      committed and you will recieve the golden checkmark so
+                      everyone can see!
+                    </p>
+                    <img
+                      class="max-w-[15%]"
+                      src="/images/placeholders/gold_checkmark.png"
+                      alt="blue checkmark"
+                    />
+                  </div>
+
+                  <button
+                    class="flex justify-center items-center bg-white text-black rounded-full font-bold p-3 hover:bg-opacity-[90%] mx-auto mt-4"
+                    type="button"
+                    onclick="displayStep_2()"
+                  >
+                    Apply now!
+                  </button>
+                </div>
+                <!-- prettier-ignore -->
+                % include('comp-form-gold', logged_user=logged_user, phone_val=phone_val)
+              </div>
+            </div>
+            <div class="border-b border-twitterborder">
+              <h2 class="text-xxl font-bold text-center py-2">Twitter Blue</h2>
+              <div
+                class="flex flex-col items-center justify-start gap-8 bg-[url('/images/placeholders/twitter_blue.png')] bg-bottom bg-cover h-[30vh] w-full"
+              >
+                <div
+                  class="flex items-center bg-black p-4 rounded-md mx-14 mt-10"
+                >
+                  <p class="text-lg font-bold leading-6 mr-6">
+                    You can get Twitter blue by obtaining three followers. You
+                    will recieve the blue checkmark so everyone can see!
+                  </p>
+                  <img
+                    class="max-w-[15%]"
+                    src="/images/placeholders/blue_checkmark.png"
+                    alt="blue checkmark"
+                  />
+                </div>
+
+                <div
+                  class="flex justify-center bg-black p-4 rounded-md mx-14 text-center"
+                >
+                  <p
+                    class="flex items-baseline gap-1 text-lg font-bold text-center"
+                  >
+                    You still need
+                    <span class="text-xxl">
+                      {{3 - int(logged_user["user_total_followers"])}}
+                    </span>
+
+                    follower(s)
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          %elif logged_user["user_twitter_status"] == "gold":
+          <div>
+            <h2 class="text-xxl font-bold text-center py-2">Twitter Gold</h2>
+            <div
+              class="flex flex-col items-center justify-start gap-8 bg-[url('/images/placeholders/twitter_gold.png')] bg-bottom bg-cover h-[30vh] w-full"
+            >
+              <div
+                class="flex items-center bg-black p-4 rounded-md mx-14 mt-10"
+              >
+                <p class="text-lg font-bold leading-6 mr-6">
+                  Congratulations! You are one of our top valued members!
+                </p>
+                <img
+                  class="max-w-[15%]"
+                  src="/images/placeholders/gold_checkmark.png"
+                  alt="blue checkmark"
+                />
+              </div>
+            </div>
+          </div>
+          %elif logged_user["user_twitter_status"] == "blue":
+          <div>
+            <div class="border-b border-twitterborder">
+              <h2 class="text-xxl font-bold text-center py-2">Twitter Gold</h2>
+              <div
+                class="flex flex-col items-center justify-start gap-8 bg-[url('/images/placeholders/twitter_gold.png')] bg-bottom bg-cover h-[30vh] w-full"
+              >
+                <div
+                  class="flex items-center bg-black p-4 rounded-md mx-14 mt-10"
+                >
+                  <p class="text-lg font-bold leading-6 mr-6">
+                    You can get Twitter gold by verifying your account with your
+                    phone number! This will tell us you are truly committed and
+                    you will recieve the golden checkmark so everyone can see!
+                  </p>
+                  <img
+                    class="max-w-[15%]"
+                    src="/images/placeholders/gold_checkmark.png"
+                    alt="blue checkmark"
+                  />
+                </div>
+                <button
+                  class="flex justify-center items-center bg-white text-black rounded-full font-bold p-3 hover:bg-opacity-[90%] mx-auto"
+                  type="button"
+                  onclick="displayStep_2()"
+                >
+                  Apply now!
+                </button>
+              </div>
+              <!-- prettier-ignore -->
+              % include('comp-form-gold', logged_user=logged_user, phone_val=phone_val)
+            </div>
+            <div class="border-b border-twitterborder">
+              <h2 class="text-xxl font-bold text-center py-2">Twitter Blue</h2>
+              <div
+                class="flex flex-col items-center justify-start gap-8 bg-[url('/images/placeholders/twitter_blue.png')] bg-bottom bg-cover h-[30vh] w-full"
+              >
+                <div
+                  class="flex items-center bg-black p-4 rounded-md mx-14 mt-10"
+                >
+                  <p class="text-lg font-bold leading-6 mr-6">
+                    Congratulations! You already have twitter blue!
+                  </p>
+                  <img
+                    class="max-w-[15%]"
+                    src="/images/placeholders/blue_checkmark.png"
+                    alt="blue checkmark"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          %end
+        </div>
+
+        <!-- right/widget -->
+        <div
+          class="relative hidden md:flex flex-col pb-1 mr-6 min-w-widget max-w-widget min-[1200px]:w-widgetxl min-[1200px]:max-w-widgetxl lg:max-w-widget min-[1320px]:min-w-widgetxl"
+        >
+          <div class="sticky top-2">
+            <div
+              class="w-full grid gap-4 bg-black border border-twitterborder p-4 mr-4 rounded-xl"
+            >
+              <div>
+                <div class="flex gap-1">
+                  <h2 class="text-xxl font-bold">Twitter Gold</h2>
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    class="text-twittergold"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="m8.6 22.5l-1.9-3.2l-3.6-.8l.35-3.7L1 12l2.45-2.8l-.35-3.7l3.6-.8l1.9-3.2L12 2.95l3.4-1.45l1.9 3.2l3.6.8l-.35 3.7L23 12l-2.45 2.8l.35 3.7l-3.6.8l-1.9 3.2l-3.4-1.45Zm2.35-6.95L16.6 9.9l-1.4-1.45l-4.25 4.25l-2.15-2.1L7.4 12Z"
+                    />
+                  </svg>
+                </div>
+                <p class="text-sm text-twittergray-500 mt-2">
+                  The gold icon is to represent the top valued members of this
+                  platform. It is for users who have verified their phone
+                  number.
+                </p>
+              </div>
+
+              <div>
+                <div class="flex gap-1">
+                  <h2 class="text-xl font-bold">Twitter Blue</h2>
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    class="text-twitterblue"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="m8.6 22.5l-1.9-3.2l-3.6-.8l.35-3.7L1 12l2.45-2.8l-.35-3.7l3.6-.8l1.9-3.2L12 2.95l3.4-1.45l1.9 3.2l3.6.8l-.35 3.7L23 12l-2.45 2.8l.35 3.7l-3.6.8l-1.9 3.2l-3.4-1.45Zm2.35-6.95L16.6 9.9l-1.4-1.45l-4.25 4.25l-2.15-2.1L7.4 12Z"
+                    />
+                  </svg>
+                </div>
+                <p class="text-sm text-twittergray-500 mt-2">
+                  The blue icon is to represent users who are the most engaged
+                  in our community. It is for users who have 3 or more followers
+                </p>
+              </div>
+            </div>
+            <!-- footer -->
+            % include('comp-footer')
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/verified.js"></script>
+  </body>
+</html>

@@ -53,6 +53,8 @@ import apis.api_search
 import apis.api_follow
 import apis.api_unfollow
 import apis.api_pagination_tweets
+import apis.api_sms_gateway
+import apis.api_verify_phone
 
 
 #import delete_later.api_send_sms
@@ -81,6 +83,7 @@ import views.reset_password
 import views.search
 import views.explore
 import views.settings
+import views.verified
 #import delete_later.test_sms
 
 ################################################

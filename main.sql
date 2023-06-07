@@ -113,16 +113,17 @@ LIMIT 5;
 --TRIGGERS--
 SELECT name FROM sqlite_master WHERE type = "trigger";
 
---increase tweet count if user tweets 
+
+-------------------------------------TWEET TRIGGERS-------------------------------------
 DROP TRIGGER IF EXISTS increment_user_total_tweets;
 CREATE TRIGGER increment_user_total_tweets AFTER INSERT ON tweets
 BEGIN 
     UPDATE users 
     SET user_total_tweets = user_total_tweets + 1
     WHERE user_id = NEW.tweet_user_fk;
-END;
+END; 
 
---decrease if tweet count on user if tweet is deleted
+
 DROP TRIGGER IF EXISTS decrement_user_total_tweets;
 CREATE TRIGGER decrement_user_total_tweets AFTER DELETE ON tweets
 BEGIN 
@@ -131,25 +132,36 @@ BEGIN
     WHERE user_id = OLD.tweet_user_fk;
 END; 
 
---increase follower count if user is followed
+-------------------------------------FOLLOWERS TRIGGERS-------------------------------------
 DROP TRIGGER IF EXISTS increment_user_total_followers;
 CREATE TRIGGER increment_user_total_followers AFTER INSERT ON following
-BEGIN 
-    UPDATE users
-    SET user_total_followers = user_total_followers + 1
-    WHERE user_id = NEW.followee_fk;
+BEGIN
+  UPDATE users
+  SET user_total_followers = user_total_followers + 1
+  WHERE user_id = NEW.followee_fk;
+
+  UPDATE users
+    SET user_twitter_status = 'blue'
+    WHERE user_id = NEW.followee_fk
+      AND user_total_followers >= 3
+      AND user_twitter_status = 'basic';
 END;
 
---decrease follower count if user is unfollowed
 DROP TRIGGER IF EXISTS decrement_user_total_followers;
 CREATE TRIGGER decrement_user_total_followers AFTER DELETE ON following
 BEGIN 
     UPDATE users
     SET user_total_followers = user_total_followers - 1
     WHERE user_id = OLD.followee_fk;
+
+    UPDATE users
+    SET user_twitter_status = 'basic'
+    WHERE user_id = OLD.followee_fk
+      AND user_total_followers < 3
+      AND user_twitter_status = 'blue';
 END;
 
---increase followee count if user is followed
+-------------------------------------FOLLOWING TRIGGERS-------------------------------------
 DROP TRIGGER IF EXISTS increment_user_total_following;
 CREATE TRIGGER increment_user_total_following AFTER INSERT ON following
 BEGIN 
@@ -158,7 +170,6 @@ BEGIN
     WHERE user_id = NEW.follower_fk;
 END;
 
---decrease followee count if user is unfollowed
 DROP TRIGGER IF EXISTS decrement_user_total_following;
 CREATE TRIGGER decrement_user_total_following AFTER DELETE ON following
 BEGIN 

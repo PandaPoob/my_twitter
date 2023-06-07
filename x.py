@@ -8,7 +8,10 @@ import os, glob
 import shutil
 import uuid
 
-#ROOT VARIABLE
+#SERVER API KEY#
+KEY = "c55246b04d548c347880744e51ac84e4"
+
+#ROOT VARIABLE#
 ROOT = str(pathlib.Path(__file__).parent.resolve())
 
 #COOKIE VARIABLE#
@@ -264,3 +267,20 @@ USER_IMG_MAX_SIZE =  2000000
 def validate_profile_image_size(filesize):
    imgsizeerror = f"Profile image can have a max size {USER_IMG_MAX_SIZE} bytes"
    if filesize > TWEET_MAX_IMG_SIZE: raise Exception(400, imgsizeerror)
+
+
+#USER PHONE NUMBER#
+USER_MAX_PHONE = 15
+USER_MIN_PHONE = 7
+#PHONE_REGEX ="r'^[0-9]\d*$'"
+
+def validate_phone_number():
+    error = f"Phone number must be between {USER_MIN_PHONE} and {USER_MAX_PHONE}"
+    validerror = "Not a valid phone number"
+    user_phonenumber = request.forms.get("user_phonenumber", "")
+    user_phonenumber = user_phonenumber.strip()
+    if len(user_phonenumber) < USER_MIN_PHONE: raise Exception(400, error)
+    if len(user_phonenumber) > USER_MAX_PHONE: raise Exception(400, error)
+    #if not re.match(PHONE_REGEX, user_phonenumber): raise Exception(400, validerror)
+    return user_phonenumber
+   

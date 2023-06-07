@@ -34,12 +34,16 @@ def _():
         avatar_filename = None
         if user_img_avatar is not None:
             avatar_filename = user_img_avatar.filename
+            if avatar_filename == "empty":
+                avatar_filename = None
         
         #Get cover
         user_img_cover = request.files.get("user_img_cover")
         cover_filename = None
         if user_img_cover is not None:
             cover_filename = user_img_cover.filename
+            if cover_filename == "empty":
+                cover_filename = None
         
 
         if avatar_filename is not None or cover_filename is not None:
@@ -48,7 +52,7 @@ def _():
             directory_path = x.ROOT+"/images/temp_imgs/"
             folder_path = os.path.join(directory_path, folder_name)
             os.makedirs(folder_path)
-            
+
         #Avatar image
         if avatar_filename is not None:
             avatar_filename = user_img_avatar.filename

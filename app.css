@@ -602,6 +602,10 @@ video {
   top: 50%;
 }
 
+.top-2 {
+  top: 0.5rem;
+}
+
 .z-0 {
   z-index: 0;
 }
@@ -670,6 +674,21 @@ video {
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.mx-8 {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.mx-14 {
+  margin-left: 3.5rem;
+  margin-right: 3.5rem;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .-ml-2 {
@@ -752,6 +771,10 @@ video {
   margin-top: auto;
 }
 
+.mt-10 {
+  margin-top: 2.5rem;
+}
+
 .block {
   display: block;
 }
@@ -810,6 +833,22 @@ video {
 
 .h-screen {
   height: 100vh;
+}
+
+.h-\[50vh\] {
+  height: 50vh;
+}
+
+.h-\[20vh\] {
+  height: 20vh;
+}
+
+.h-\[40vh\] {
+  height: 40vh;
+}
+
+.h-\[30vh\] {
+  height: 30vh;
 }
 
 .min-h-\[100px\] {
@@ -936,6 +975,14 @@ video {
   max-width: 290px;
 }
 
+.max-w-\[10\%\] {
+  max-width: 10%;
+}
+
+.max-w-\[15\%\] {
+  max-width: 15%;
+}
+
 .flex-shrink {
   flex-shrink: 1;
 }
@@ -1014,6 +1061,10 @@ video {
 
 .items-center {
   align-items: center;
+}
+
+.items-baseline {
+  align-items: baseline;
 }
 
 .justify-start {
@@ -1216,6 +1267,30 @@ video {
 
 .bg-opacity-\[75\%\] {
   --tw-bg-opacity: 75%;
+}
+
+.bg-\[url\(\'\/images\/placeholders\/twitter_blue\'\)\] {
+  background-image: url('/images/placeholders/twitter_blue');
+}
+
+.bg-\[url\(\'\/images\/placeholders\/twitter_blue\.png\'\)\] {
+  background-image: url('/images/placeholders/twitter_blue.png');
+}
+
+.bg-\[url\(\'\/images\/placeholders\/twitter_gold\.png\'\)\] {
+  background-image: url('/images/placeholders/twitter_gold.png');
+}
+
+.bg-cover {
+  background-size: cover;
+}
+
+.bg-center {
+  background-position: center;
+}
+
+.bg-bottom {
+  background-position: bottom;
 }
 
 .fill-sky-500 {
@@ -1473,6 +1548,18 @@ video {
   text-transform: lowercase;
 }
 
+.leading-3 {
+  line-height: .75rem;
+}
+
+.leading-8 {
+  line-height: 2rem;
+}
+
+.leading-6 {
+  line-height: 1.5rem;
+}
+
 .text-black {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
@@ -1521,6 +1608,11 @@ video {
 .text-zinc-500 {
   --tw-text-opacity: 1;
   color: rgb(113 113 122 / var(--tw-text-opacity));
+}
+
+.text-twittergold {
+  --tw-text-opacity: 1;
+  color: rgb(226 183 25 / var(--tw-text-opacity));
 }
 
 .underline {
@@ -1636,6 +1728,10 @@ video {
 
 .hover\:bg-opacity-\[94\%\]:hover {
   --tw-bg-opacity: 94%;
+}
+
+.hover\:bg-opacity-5:hover {
+  --tw-bg-opacity: 0.05;
 }
 
 .hover\:text-green-500:hover {
@@ -2013,6 +2109,10 @@ video {
 
   .xl\:w-\[70\%\] {
     width: 70%;
+  }
+
+  .xl\:w-\[60\%\] {
+    width: 60%;
   }
 
   .xl\:py-1 {

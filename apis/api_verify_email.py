@@ -18,20 +18,13 @@ def _():
 
         #The api key does not exists, it is either wrong or has been changed/updated
         if not user: raise Exception(400, "An error occurred")
-        
-        #User id
-        user_id = user["user_id"]
-        
-        #Update account status to active
-        db.execute(f"UPDATE users SET user_account_status=? WHERE user_api_key=?", (x.ACC_STATUS_ACTIVE, user_api_key,))
 
-        #New api key
+        #New values
         new_api_key = str(uuid.uuid4().hex)
-
         updated_at = int(time.time())
-        #Assign new api key
-        db.execute(f"UPDATE users SET user_api_key=? WHERE user_id=?", (new_api_key, user_id))
-        db.execute(f"UPDATE users SET user_updated_at=? WHERE user_id=?", (updated_at, user_id))
+
+        #Update user
+        db.execute(f"UPDATE users SET user_account_status=?, user_api_key=?, user_updated_at=? WHERE user_api_key=?", (x.ACC_STATUS_ACTIVE, new_api_key, updated_at, user_api_key,))
 
         #Commit
         db.commit()

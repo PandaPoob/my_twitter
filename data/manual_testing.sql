@@ -21,13 +21,13 @@ DELETE FROM users WHERE user_name = "freja";
 
 --Update user
 UPDATE users
-SET user_account_status = "inactive"
-WHERE user_name = "freja";
+SET user_twitter_status = "basic", user_phonenumber = ""
+WHERE user_name = "my_name_cleo";
 
 --Update user
 UPDATE users
-SET user_total_following = 0, user_total_followers = 0
-WHERE user_name = "freja_bae";
+SET user_total_followers = 2
+WHERE user_name = "my_name_cleo";
 
 --following
 DELETE FROM following WHERE follower_fk = ""; 
