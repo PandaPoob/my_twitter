@@ -63,8 +63,8 @@ import apis.api_pagination_tweets
 @get("/logout")
 def _():
   x.disable_cache()
-
-  response.delete_cookie("user")
+  result = x.getDomain()
+  response.delete_cookie("user", path='/', domain=result[1])
   response.status = 303
   response.set_header("Location", "/login")
   return
