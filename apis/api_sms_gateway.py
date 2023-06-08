@@ -7,16 +7,15 @@ import string
 @post("/api-sms-gateway")
 def _():
     try:
-        #logged_user = x.request_cookie()
+        logged_user = x.request_cookie()
 
-        #if not logged_user:
-         #   raise Exception(400, "Log in to verify")
+        if not logged_user:
+           raise Exception(400, "Log in to verify")
         
         #Decode cookie
-        #logged_user = x.decode_cookie(logged_user)
+        logged_user = x.decode_cookie(logged_user)
         
-        #user_id = logged_user["user_id"]
-        user_id = "b3094c2f1c144817b7cc0b718fc3c644"
+        user_id = logged_user["user_id"]
 
         #Open database
         db = x.db()

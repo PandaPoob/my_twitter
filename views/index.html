@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   % include('comp-head', title='Home')
+  <!-- prettier-ignore -->
   <body
+    %if not logged_user:
+    class="w-full h-full flex justify-center text-twittergray-400 bg-black overflow-hidden overflow-y-scroll pb-16 md:pb-[72px]"
+    %else:
     class="w-full h-full flex justify-center text-twittergray-400 bg-black overflow-hidden overflow-y-scroll"
+    %end
   >
     <div class="flex max-w-layout flex-grow">
       <div

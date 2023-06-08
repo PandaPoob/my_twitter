@@ -64,6 +64,14 @@ create TABLE tweet_images(
   PRIMARY KEY(tweet_image_id)
 ) WITHOUT ROWID;
 
+--LIKED BY--
+DROP TABLE IF EXISTS liked_by;
+create TABLE liked_by(
+  liked_by_tweet_fk       VARCHAR(35) UNIQUE NOT NULL,
+  liked_by_user_fk        VARCHAR(35) UNIQUE NOT NULL,
+  liked_by_created_at     INT NOT NULL,
+  PRIMARY KEY(liked_by_tweet_fk, liked_by_user_fk)
+) WITHOUT ROWID;
 
 --TRENDS--
 DROP TABLE IF EXISTS trends;
@@ -96,7 +104,7 @@ WHERE users.user_account_status = "active";
 --This view is to get the user, tweets and images--
 DROP VIEW IF EXISTS [users_and_tweets];
 CREATE VIEW users_and_tweets AS
-SELECT tweets.*, users.user_name, users.user_full_name, users.user_twitter_status, users.user_img_avatar
+SELECT tweets.*, users.user_name, users.user_full_name, users.user_twitter_status, users.user_img_avatar, users.user_bio_text
 FROM tweets
 INNER JOIN users ON users.user_id = tweets.tweet_user_fk;
 
