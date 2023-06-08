@@ -4,6 +4,9 @@
   <body
     class="w-full h-full flex justify-center text-twittergray-400 bg-black overflow-hidden overflow-y-scroll"
   >
+    <!-- toast error msg -->
+    % include('comp-toaster-top')
+    <!-- end toast error msg -->
     <div class="flex max-w-layout flex-grow">
       <div
         class="hidden sm:block max-w-feed sm:w-2/12 lg:w-3/12 xl:w-[30%] xxl:w-4/12 h-screen pt-4 sm:pr-2 lg:pr-6 xxl:pr-12"
@@ -19,7 +22,121 @@
         <div
           class="flex flex-col flex-grow max-w-[800px] sm:border-x sm:border-twitterborder"
         >
-          Delete account here Log out here
+          <h2 class="font-bold text-xl p-3 border-b border-twitterborder">
+            Settings
+          </h2>
+          <!-- Step 1 Delete -->
+          <button
+            id="delete_step_1"
+            onclick="displayDelete_2()"
+            class="hover:bg-white hover:bg-opacity-5 p-4"
+          >
+            <span class="flex items-center gap-4">
+              <svg
+                viewBox="0 0 24 24"
+                class="w-7 h-7 fill-twittergray-500"
+                class="r-1bwzh9t r-4qtqp9 r-yyyyoo r-1xvli5t r-dnmrzs r-bnwqim r-1plcrui r-lrvibr"
+              >
+                <g>
+                  <path
+                    d="M21.398 6.52c-.887-1.79-2.647-2.91-4.601-3.01-1.65-.09-3.367.56-4.796 2.01-1.43-1.45-3.147-2.1-4.798-2.01-1.954.1-3.714 1.22-4.601 3.01-.896 1.81-.846 4.17.514 6.67 1.353 2.48 4.003 5.12 8.382 7.67l.504.3.503-.3c4.378-2.55 7.028-5.19 8.379-7.67 1.36-2.5 1.41-4.86.514-6.67zm-2.27 5.71c-1.074 1.97-3.256 4.27-7.126 6.61-3.872-2.34-6.055-4.64-7.129-6.61-1.112-2.04-1.031-3.7-.479-4.82.561-1.13 1.667-1.84 2.91-1.91 1.077-.05 2.338.38 3.452 1.61L8.588 10.3l4.009 2.5-1.428 2.15 1.665 1.1 2.569-3.85-3.991-2.5 1.405-2.06c1.21-1.63 2.662-2.2 3.88-2.14 1.242.07 2.347.78 2.908 1.91.553 1.12.634 2.78-.477 4.82z"
+                  ></path>
+                </g>
+              </svg>
+              <span class="grid justify-items-start">
+                <span>Delete your account</span>
+                <span class="text-twittergray-500 text-md"
+                  >Find out how you delete your account</span
+                >
+              </span>
+              <svg
+                viewBox="0 0 24 24"
+                class="w-5 h-5 fill-twittergray-500 ml-auto"
+                class="r-1bwzh9t r-4qtqp9 r-yyyyoo r-1q142lx r-1xvli5t r-dnmrzs r-f727ji r-bnwqim r-1plcrui r-lrvibr"
+              >
+                <g>
+                  <path
+                    d="M14.586 12L7.543 4.96l1.414-1.42L17.414 12l-8.457 8.46-1.414-1.42L14.586 12z"
+                  ></path>
+                </g>
+              </svg>
+            </span>
+          </button>
+          <!-- Step 2 Delete -->
+          <div id="delete_step_2" class="hidden">
+            <h2 class="font-bold text-xl px-3 pt-3">
+              If you delete your account
+            </h2>
+            <p class="text-twittergray-500 px-3 mb-4">
+              If you delete your account all your information, tweets and more
+              will all be lost!
+            </p>
+            <button
+              onclick="displayDelete_3()"
+              class="w-full px-3 py-5 text-twitterRed border-t border-twitterborder hover:bg-twitterRed hover:bg-opacity-10"
+            >
+              Delete account
+            </button>
+          </div>
+
+          <!-- Step 3 Delete -->
+          <div id="delete_step_3" class="hidden px-3 pt-3">
+            <h2 class="font-bold text-xl">Confirm your password</h2>
+
+            <form
+              class="flex flex-col mb-4"
+              method="POST"
+              onsubmit="checkDeleteForm(); return false"
+            >
+              <div class="flex flex-col justify-start min-h-[100px]">
+                <label for="user_password" class="text-md mt-2 mb-1"
+                  >Password</label
+                >
+                <input
+                  id="user_password"
+                  class="h-12 text-twittergray-900 rounded-sm border-2 px-2 border-white focus:outline-none focus:border-twitterblue"
+                  name="user_password"
+                  placeholder="Password"
+                  type="password"
+                  maxlength="{{pass_val['max']}}"
+                  min-val="{{pass_val['min']}}"
+                  onblur="validatePassword()"
+                />
+                <p
+                  id="user_password_error_msg"
+                  class="hidden text-red-500 text-sm mt-1"
+                >
+                  Password must be 8-50 characters, contain one upper- and
+                  lowercase letter and one number
+                </p>
+              </div>
+
+              <button
+                class="flex justify-center items-center bg-twitterRed rounded-full text-lg font-bold py-3 mt-2 hover:bg-opacity-[90%] h-12"
+                type="submit"
+              >
+                <span id="form_default">Delete</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  id="form_loading"
+                  class="animate-spin hidden"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"
+                    opacity=".25"
+                  />
+                  <path
+                    fill="currentColor"
+                    d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z"
+                  ></path>
+                </svg>
+              </button>
+            </form>
+          </div>
         </div>
 
         <!-- right/widget -->
@@ -34,6 +151,8 @@
       </div>
     </div>
 
-    <script src="/js/app.js"></script>
+    <script src="/js/settings.js"></script>
+    <script src="/js/vali_passwords.js"></script>
+    <script src="/js/toaster_top.js"></script>
   </body>
 </html>

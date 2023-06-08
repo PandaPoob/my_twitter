@@ -30,10 +30,10 @@ function validateTextTweetInput() {
   if (tweet_text.length > max_length) {
     tweet_btn.disabled = true;
     //If there is text enabled
-  } else if (tweet_text.length !== 0) {
+  } else if (tweet_text.trim().length !== 0) {
     tweet_btn.disabled = false;
     //If there is not text or images disabled
-  } else if (tweet_text.length == 0 && storedTweetImages.length == 0) {
+  } else if (tweet_text.trim().length == 0 && storedTweetImages.length == 0) {
     tweet_btn.disabled = true;
   }
 
@@ -114,7 +114,7 @@ function prepareOutput() {
   );
 
   if (
-    (storedTweetImages.length == 0 && tweet_text.length == 0) ||
+    (storedTweetImages.length == 0 && tweet_text.trim().length == 0) ||
     tweet_text.length > max_length
   ) {
     document.getElementById("submit_tweet_btn").disabled = true;
@@ -189,6 +189,7 @@ async function handleSubmitTweet() {
     const data = await resp.json();
     frm.reset();
     document.querySelector("output").innerHTML = "";
+    document.querySelector("output").className = "";
     document.getElementById("submit_tweet_btn").disabled = true;
     renderTweet(data);
   }
@@ -432,24 +433,24 @@ function getImageLayout(image_amount, images) {
             />
           </div>`;
       case 4:
-        return `<div class="mt-4 grid grid-cols-2 grid-rows-2 gap-0.5">
+        return `<div class="mt-4 grid grid-cols-2 grid-rows-2 gap-0.5 aspect-square">
             <img
-              class="rounded-xl w-full h-full object-cover"
+              class="rounded-xl w-full h-full object-cover max-h-52"
               alt="tweet image 1"
               src="/images/tweet_imgs/${images[0]}"
             />
             <img
-              class="rounded-xl w-full h-full object-cover"
+              class="rounded-xl w-full h-full object-cover max-h-52"
               alt="tweet image 2"
               src="/images/tweet_imgs/${images[1]}"
             />
             <img
-              class="rounded-xl w-full h-full object-cover"
+              class="rounded-xl w-full h-full object-cover max-h-52"
               alt="tweet image 3"
               src="/images/tweet_imgs/${images[2]}"
             />
               <img
-              class="rounded-xl w-full h-full object-cover"
+              class="rounded-xl w-full h-full object-cover max-h-52"
               alt="tweet image 4"
               src="/images/tweet_imgs/${images[3]}"
             />

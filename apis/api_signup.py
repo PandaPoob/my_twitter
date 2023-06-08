@@ -28,11 +28,11 @@ def _():
         db = x.db()
 
         #Check that email is not already in use
-        check_email = db.execute("SELECT user_email FROM users WHERE user_email=?", (user_email,)).fetchone()
+        check_email = db.execute("SELECT user_email FROM users WHERE user_email=? AND user_account_status != ?", (user_email, x.ACC_STATUS_DELETED)).fetchone()
         if check_email: raise Exception(400, "Email is already in use")
         
         #Check that user name is not taken
-        check_username = db.execute("SELECT user_name FROM users WHERE user_name=?", (user_name,)).fetchone()
+        check_username = db.execute("SELECT user_name FROM users WHERE user_name=? AND user_account_status != ?", (user_name, x.ACC_STATUS_DELETED)).fetchone()
         if check_username: raise Exception(400, "Username is already taken")
 
         #API KEY

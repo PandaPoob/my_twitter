@@ -15,4 +15,10 @@ def _():
     if logged_user:
         logged_user = x.decode_cookie(logged_user)
 
-    return template("settings", logged_user=logged_user)
+    #Validation variables
+    pass_val = {
+            "max": x.PASSWORD_MAX_LEN,
+            "min": x.PASSWORD_MIN_LEN,
+    }
+
+    return template("settings", logged_user=logged_user, pass_val=pass_val)

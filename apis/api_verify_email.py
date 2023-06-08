@@ -19,6 +19,9 @@ def _():
         #The api key does not exists, it is either wrong or has been changed/updated
         if not user: raise Exception(400, "An error occurred")
 
+        #Check if user is not verified
+        if user["user_account_status"] != x.ACC_STATUS_INACTIVE: raise Exception(400, "This account's status is not inactive")
+
         #New values
         new_api_key = str(uuid.uuid4().hex)
         updated_at = int(time.time())

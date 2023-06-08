@@ -20,12 +20,15 @@ def _():
 
         #Check if user exists
         if not user: raise Exception(400, "Invalid credentials")
+
+        if user["user_account_status"] == x.ACC_STATUS_DELETED: raise Exception(400, "Invalid credentials")
+
         #Check if password is correct
         if not bcrypt.checkpw(user_password.encode("utf-8"), user["user_password"]):
             raise Exception(400, "Invalid credentials")
         
         #User needs to verify
-        if user["user_account_status"] == "inactive": raise Exception(401, "Account has not been verified")
+        if user["user_account_status"] == x.ACC_STATUS_INACTIVE: raise Exception(401, "Account has not been verified")
 
         #Removing pw from cookie
         user.pop("user_password")

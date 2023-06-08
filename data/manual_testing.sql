@@ -12,6 +12,11 @@ DELETE FROM tweets WHERE tweet_user_fk = "b3094c2f1c144817b7cc0b718fc3c644";
 --Get tweet id to delete images
 SELECT * FROM tweets WHERE tweet_user_fk = "b3094c2f1c144817b7cc0b718fc3c644";
 
+SELECT tweet_images.tweet_image_url 
+FROM tweet_images 
+INNER JOIN tweets ON tweet_images.tweet_image_tweet_fk = tweets.tweet_id 
+WHERE tweets.tweet_user_fk = "b3094c2f1c144817b7cc0b718fc3c644";
+
 --Delete all tweets images
 DELETE FROM tweet_images WHERE tweet_image_tweet_fk = "be7e9821630b425cae04a45138161d61"; 
 
@@ -21,7 +26,7 @@ DELETE FROM users WHERE user_name = "freja";
 
 --Update user
 UPDATE users
-SET user_twitter_status = "basic", user_phonenumber = ""
+SET user_account_status = "active"
 WHERE user_name = "my_name_cleo";
 
 --Update user
