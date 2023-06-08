@@ -402,7 +402,7 @@ function getImageLayout(image_amount, images) {
             />
           </div>`;
       case 2:
-        return `<div class="mt-4 flex gap-0.5">
+        return `<div class="mt-4 grid grid-cols-2 gap-0.5">
             <img
               class="rounded-xl w-full h-full object-cover"
               alt="tweet image 1"
