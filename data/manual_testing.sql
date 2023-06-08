@@ -31,8 +31,8 @@ WHERE user_name = "my_name_cleo";
 
 --Update user
 UPDATE users
-SET user_total_followers = 2
-WHERE user_name = "my_name_cleo";
+SET user_password = "Pw12345678"
+WHERE user_name = "cat_auras";
 
 --following
 DELETE FROM following WHERE follower_fk = ""; 
