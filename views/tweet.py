@@ -40,8 +40,6 @@ def _(username, slug):
         if tweet['tweet_total_retweets']:
             tweet['tweet_total_retweets'] = utils.formatNumber.human_format(tweet['tweet_total_retweets'])
         
-        if tweet['tweet_total_views']:
-            tweet['tweet_total_views'] = utils.formatNumber.human_format(tweet['tweet_total_views'])
 
         #Convert epoch into datetime obj
         dt = datetime.fromtimestamp(tweet['tweet_created_at'])

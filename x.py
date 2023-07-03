@@ -104,7 +104,7 @@ def generate_image(source_img_path, new_img_path):
 
 #TWEET TEXT MAX IS 8 CHAR
 #@TODO change max len to 280
-TWEET_MAX_LEN = 20
+TWEET_MAX_LEN = 50
 #MAX TWEET IMG SIZE IS 5MB
 TWEET_MAX_IMG_SIZE = 5000000
 #MAX IMAGES IN TWEET

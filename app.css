@@ -606,6 +606,10 @@ video {
   top: 50%;
 }
 
+.top-10 {
+  top: 2.5rem;
+}
+
 .z-0 {
   z-index: 0;
 }
@@ -1046,18 +1050,6 @@ video {
 
 .grid-rows-\[100px_minmax\(100px\2c 100px\)\] {
   grid-template-rows: 100px minmax(100px,100px);
-}
-
-.grid-rows-\[200px_minmax\(900px\2c _1fr\)_100px\] {
-  grid-template-rows: 200px minmax(900px, 1fr) 100px;
-}
-
-.grid-rows-\[200px\] {
-  grid-template-rows: 200px;
-}
-
-.grid-rows-\[240px\] {
-  grid-template-rows: 240px;
 }
 
 .flex-col {

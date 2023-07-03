@@ -1,5 +1,5 @@
 --  FOREIGN KEY(tweet_user_fk) REFERENCES users(user_id)
-
+--PRAGMA foreign_keys = ON;
 --USERS--
 DROP TABLE IF EXISTS users;
 
@@ -32,7 +32,7 @@ CREATE TABLE users(
 
 CREATE INDEX idx_users_user_first_name ON users(user_full_name);
 
-
+PRAGMA foreign_keys = ON;
 --TWEETS--
 DROP TABLE IF EXISTS tweets;
 CREATE TABLE tweets(
@@ -46,7 +46,6 @@ CREATE TABLE tweets(
   tweet_total_replies     INT DEFAULT 0,
   tweet_total_likes       INT DEFAULT 0,
   tweet_total_retweets    INT DEFAULT 0,
-  tweet_total_views       INT DEFAULT 0,
   tweet_parent_id         VARCHAR(35),
   tweet_type              VARCHAR(7) DEFAULT "default",
   PRIMARY KEY(tweet_id)
@@ -61,7 +60,8 @@ create TABLE tweet_images(
   tweet_image_url         VARCHAR(40) UNIQUE NOT NULL,
   tweet_image_order       INT DEFAULT 0,
   tweet_image_created_at  INT NOT NULL,
-  PRIMARY KEY(tweet_image_id)
+  PRIMARY KEY(tweet_image_id),
+  FOREIGN KEY(tweet_image_tweet_fk) REFERENCES tweets(tweet_id)
 ) WITHOUT ROWID;
 
 --LIKED BY--
@@ -99,7 +99,6 @@ CREATE VIEW active_users
 AS
 SELECT * FROM users
 WHERE users.user_account_status = "active";
-
 
 --This view is to get the user, tweets and images--
 DROP VIEW IF EXISTS [users_and_tweets];

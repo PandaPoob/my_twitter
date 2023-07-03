@@ -43,10 +43,7 @@ def _():
             
             if tweets[i]['tweet_total_retweets']:
                 tweets[i]['tweet_total_retweets'] = utils.formatNumber.human_format(tweets[i]['tweet_total_retweets'])
-            
-            if tweets[i]['tweet_total_views']:
-                tweets[i]['tweet_total_views'] = utils.formatNumber.human_format(tweets[i]['tweet_total_views'])
-           
+              
             if tweets[i]['tweet_created_at']:
                 month = time.strftime('%#m', time.localtime(tweets[i]['tweet_created_at']))
                 day = time.strftime('%#d', time.localtime(tweets[i]['tweet_created_at']))

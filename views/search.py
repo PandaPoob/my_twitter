@@ -3,6 +3,7 @@ import x
 import time
 import utils.formatNumber
 import calendar
+import utils.getPrettyTweet as pt
 
 @get("/search")
 def _():
@@ -64,35 +65,22 @@ def _():
     LIMIT 3
     """, (user_id, exequery, exequery, exequery, exequery)).fetchall()
 
+
         #Fetch tweets
-        tweets = db.execute("SELECT * FROM users_and_tweets WHERE tweet_field_text LIKE '%' || ? || '%' ORDER BY tweet_field_text LIKE ? DESC LIMIT 10", (query, query)).fetchall()
-      
-        #Fetch images of tweets 
-        for i in range(len(tweets)):
-            if tweets[i]["tweet_field_images"] > 0:
-                tweet_images = db.execute("SELECT * FROM tweet_images WHERE tweet_images.tweet_image_tweet_fk=? ORDER BY tweet_images.tweet_image_order ASC", (tweets[i]["tweet_id"],)).fetchall()
-                #Declare new key and add image list
-                tweets[i]['tweet_images'] = tweet_images
-        
-        #Format tweet numbers
-        for i in range(len(tweets)):
-            if tweets[i]['tweet_total_replies']:
-                tweets[i]['tweet_total_replies'] = utils.formatNumber.human_format(tweets[i]['tweet_total_replies'])
-        
-            if tweets[i]['tweet_total_likes']:
-                tweets[i]['tweet_total_likes'] = utils.formatNumber.human_format(tweets[i]['tweet_total_likes'])
-            
-            if tweets[i]['tweet_total_retweets']:
-                tweets[i]['tweet_total_retweets'] = utils.formatNumber.human_format(tweets[i]['tweet_total_retweets'])
-            
-            if tweets[i]['tweet_total_views']:
-                tweets[i]['tweet_total_views'] = utils.formatNumber.human_format(tweets[i]['tweet_total_views'])
-           
-            if tweets[i]['tweet_created_at']:
-                month = time.strftime('%#m', time.localtime(tweets[i]['tweet_created_at']))
-                day = time.strftime('%#d', time.localtime(tweets[i]['tweet_created_at']))
-                tweets[i]['tweet_created_at'] = f"{calendar.month_abbr[int(month)]} {day}"
-        
+        tweets = db.execute("""
+        SELECT t.*, GROUP_CONCAT(ti.tweet_image_url) AS tweet_images, GROUP_CONCAT(ti.tweet_image_order) AS image_orders
+        FROM users_and_tweets AS t
+        LEFT JOIN tweet_images AS ti ON t.tweet_id = ti.tweet_image_tweet_fk
+        WHERE tweet_field_text LIKE '%' || ? || '%'
+        GROUP BY t.tweet_id
+        ORDER BY tweet_field_text LIKE ? DESC
+        LIMIT 0, 10
+        """, (query, query)
+        ).fetchall()
+
+        #Format tweets
+        tweets = pt.get_pretty_tweet(tweets)  
+
         #Format trends numbers
         for i in range(len(trends)):
             if trends[i]['trend_total_tweets']:

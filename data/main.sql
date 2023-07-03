@@ -34,7 +34,6 @@ INSERT INTO tweets VALUES(
 "65786",
 "237100",
 "16400",
-"46900000",
 "",
 "default"
 );
@@ -50,7 +49,6 @@ especially content moderation",
 "10000",
 "85700",
 "8082",
-"29700000",
 "",
 "default");
 INSERT INTO tweets VALUES(
@@ -64,7 +62,6 @@ INSERT INTO tweets VALUES(
 "4125",
 "63000",
 "4301",
-"31300000",
 "",
 "default");
 INSERT INTO tweets VALUES(
@@ -78,7 +75,6 @@ INSERT INTO tweets VALUES(
 "14600",
 "461400",
 "31500",
-"58200000",
 "",
 "default");
 INSERT INTO tweets VALUES(
@@ -92,7 +88,6 @@ INSERT INTO tweets VALUES(
 "17300",
 "462500",
 "36800",
-"65600000",
 "",
 "default");
 INSERT INTO tweets VALUES(
@@ -106,7 +101,6 @@ INSERT INTO tweets VALUES(
 "10800",
 "173700",
 "17800",
-"45900000",
 "",
 "default");
 INSERT INTO tweets VALUES(
@@ -120,7 +114,6 @@ INSERT INTO tweets VALUES(
 "5991",
 "120600",
 "8351",
-"36400000",
 "",
 "default");
 INSERT INTO tweets VALUES(
@@ -136,7 +129,6 @@ In coming months, we will offer the ability to adjust the algorithm to closer ma
 "10400",
 "161800",
 "11500",
-"36600000",
 "",
 "default");
 INSERT INTO tweets VALUES(
@@ -150,7 +142,6 @@ INSERT INTO tweets VALUES(
 "21300",
 "297300",
 "29600",
-"49100000",
 "",
 "default");
 INSERT INTO tweets VALUES(
@@ -168,7 +159,6 @@ This will improve contextual relevance dramatically.",
 "7720",
 "126700",
 "8218",
-"67000000",
 "",
 "default");
 INSERT INTO tweets VALUES(
@@ -182,7 +172,6 @@ INSERT INTO tweets VALUES(
 "9747",
 "325300",
 "26900",
-"60700000",
 "",
 "default");
 INSERT INTO tweets VALUES(
@@ -196,7 +185,6 @@ INSERT INTO tweets VALUES(
 "14900",
 "614200",
 "40100",
-"80600000",
 "",
 "default");
 
@@ -212,7 +200,6 @@ INSERT INTO tweets VALUES(
 "603",
 "33300",
 "4497",
-"1000000",
 "",
 "default");
 INSERT INTO tweets VALUES(
@@ -226,7 +213,6 @@ INSERT INTO tweets VALUES(
 "703",
 "26900",
 "4100",
-"812400",
 "",
 "default");
 INSERT INTO tweets VALUES(
@@ -240,7 +226,6 @@ INSERT INTO tweets VALUES(
 "316",
 "62300",
 "12600",
-"13000000",
 "",
 "default");
 INSERT INTO tweets VALUES(
@@ -254,7 +239,6 @@ INSERT INTO tweets VALUES(
 "485",
 "47300",
 "8965",
-"13000000",
 "",
 "default");
 INSERT INTO tweets VALUES(
@@ -268,7 +252,6 @@ INSERT INTO tweets VALUES(
 "499",
 "63600",
 "15600",
-"12000000",
 "",
 "default");
 INSERT INTO tweets VALUES(
@@ -283,7 +266,6 @@ Detail page notice has been uploaded",
 "402",
 "51000",
 "9205",
-"17000000",
 "",
 "default");
 INSERT INTO tweets VALUES(
@@ -298,7 +280,6 @@ Thank you so much for these unforgettable memories. Love you all!❤️",
 "317",
 "78300",
 "16800",
-"15000000",
 "",
 "default");
 INSERT INTO tweets VALUES(
@@ -312,7 +293,6 @@ INSERT INTO tweets VALUES(
 "408",
 "56100",
 "14300",
-"970100",
 "",
 "default");
 
@@ -328,7 +308,6 @@ INSERT INTO tweets VALUES(
 "7730",
 "251600",
 "101800",
-"48000000",
 "",
 "default");
 INSERT INTO tweets VALUES(
@@ -342,7 +321,6 @@ INSERT INTO tweets VALUES(
 "2023",
 "152700",
 "55600",
-"48000000",
 "",
 "default");
 
@@ -359,7 +337,6 @@ INSERT INTO tweets VALUES(
 "72",
 "41100",
 "3652",
-"635400",
 "",
 "default");
 INSERT INTO tweets VALUES(
@@ -373,7 +350,6 @@ INSERT INTO tweets VALUES(
 "106",
 "50500",
 "7055",
-"11000000",
 "",
 "default");
 INSERT INTO tweets VALUES(
@@ -387,7 +363,6 @@ INSERT INTO tweets VALUES(
 "281",
 "135800",
 "18200",
-"38000000",
 "",
 "default");
 INSERT INTO tweets VALUES(
@@ -401,7 +376,6 @@ INSERT INTO tweets VALUES(
 "186",
 "133900",
 "15700",
-"36000000",
 "",
 "default");
 INSERT INTO tweets VALUES(
@@ -415,7 +389,6 @@ INSERT INTO tweets VALUES(
 "108",
 "136200",
 "13400",
-"36000000",
 "",
 "default");
 INSERT INTO tweets VALUES(
@@ -429,7 +402,6 @@ INSERT INTO tweets VALUES(
 "255",
 "173700",
 "22800",
-"54000000",
 "",
 "default");
 INSERT INTO tweets VALUES(
@@ -443,7 +415,6 @@ INSERT INTO tweets VALUES(
 "449",
 "283400",
 "44200",
-"89000000",
 "",
 "default");
 INSERT INTO tweets VALUES(
@@ -457,7 +428,6 @@ INSERT INTO tweets VALUES(
 "250",
 "133100",
 "14700",
-"35000000",
 "",
 "default");
 INSERT INTO tweets VALUES(
@@ -471,7 +441,6 @@ INSERT INTO tweets VALUES(
 "666",
 "365200",
 "61000",
-"11000000",
 "",
 "default");
 INSERT INTO tweets VALUES(
@@ -485,7 +454,6 @@ INSERT INTO tweets VALUES(
 "2516",
 "312100",
 "41300",
-"103000000",
 "",
 "default");
 INSERT INTO tweets VALUES(
@@ -499,10 +467,10 @@ INSERT INTO tweets VALUES(
 "154",
 "15300",
 "3640",
-"12000000",
 "",
 "default");
 
+PRAGMA foreign_keys = ON;
 --TWEETS IMAGES--
 INSERT INTO tweet_images VALUES(
 "eb7415d6efec4f6d8099cb6de949218c",

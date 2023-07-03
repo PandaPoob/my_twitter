@@ -1,7 +1,6 @@
 import math
 
 def human_format(num):
-    
     if num > 9999:
         magnitude = 0
         #while is loop (keeps repeating until condition is falsy)

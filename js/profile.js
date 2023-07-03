@@ -220,28 +220,6 @@ function displayTweets(tweets) {
 
           <button
             style="cursor:default;"
-            class="relative z-20 group hidden lg:flex items-center gap-1 hover:text-twitterblue"
-          >
-            <div
-              class="rounded-full p-2 group-hover:bg-twitterblue group-hover:bg-opacity-10"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  fill="currentColor"
-                  d="M3 22V8h4v14H3m7 0V2h4v20h-4m7 0v-8h4v8h-4Z"
-                />
-              </svg>
-            </div>
-         <span>${tweet.tweet_total_views}</span>
-          </button>
-
-          <button
-            style="cursor:default;"
             class="relative z-20 rounded-full p-2 hover:text-twitterblue hover:bg-twitterblue hover:bg-opacity-10"
           >
             <svg

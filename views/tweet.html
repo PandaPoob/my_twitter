@@ -87,7 +87,7 @@
                   <p class="text-lg mt-1 mb-2">{{tweet["tweet_field_text"]}}</p>
                   % end
                   <!-- tweet image display-->
-                  % if tweet["tweet_field_images"]:
+                  % if tweet["tweet_field_images"] != 0:
                   <div 
           %if tweet["tweet_field_images"] == 1:
           class="mt-4"
@@ -103,7 +103,7 @@
             <img
               class="rounded-xl w-full h-full object-cover"
               alt="{{tweet['user_full_name']}} tweet image"
-              src="/images/tweet_imgs/{{images['tweet_image_url']}}"
+              src="/images/tweet_imgs/{{images['url']}}"
             />
             % end
                   </div>
@@ -115,9 +115,7 @@
                 <p>
                     {{tweet["tweet_created_at"]}}
                 </p>
-                  %if tweet["tweet_total_views"]: 
-                  <p>  · <span class="font-bold text-white">{{tweet["tweet_total_views"]}}</span> Views</p>
-                  %end
+
               </div>
               <div class="flex items-center gap-6 border-y border-twitterborder py-4">
                   %if all(tweet[key] == 0 for key in ["tweet_total_replies", "tweet_total_retweets", "tweet_total_likes"]):                

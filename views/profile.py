@@ -1,8 +1,9 @@
-from bottle import get, template, request
+from bottle import get, template
 import time
 import calendar
 import x
 import utils.formatNumber
+import utils.getPrettyTweet as pt
 
 @get("/<username>")
 def _(username):
@@ -21,19 +22,20 @@ def _(username):
         #Profile id
         profile_id = profile["user_id"]
 
-        #Fetch tweets
-        tweets = db.execute("SELECT * FROM users_and_tweets WHERE tweet_user_fk=? ORDER BY users_and_tweets.tweet_created_at DESC LIMIT 0, 10", (profile_id,)).fetchall()
-        
-        #Fetch images of tweets 
-        # @todo perhaps make this general 
-        for i in range(len(tweets)):
-            tweet_images = db.execute("SELECT * FROM tweet_images WHERE tweet_images.tweet_image_tweet_fk=? ORDER BY tweet_images.tweet_image_order ASC", (tweets[i]["tweet_id"],)).fetchall()
-            
-            #Declare new key and add image list
-            tweets[i]['tweet_images'] = tweet_images
+        #Fetch 10 latest tweets
+        tweets = db.execute("""
+        SELECT t.*, GROUP_CONCAT(ti.tweet_image_url) AS tweet_images, GROUP_CONCAT(ti.tweet_image_order) AS image_orders
+        FROM users_and_tweets AS t
+        LEFT JOIN tweet_images AS ti ON t.tweet_id = ti.tweet_image_tweet_fk
+        WHERE tweet_user_fk=?
+        GROUP BY t.tweet_id
+        ORDER BY t.tweet_created_at DESC
+        LIMIT 0, 10
+        """, (profile_id,)
+        ).fetchall()
 
-        #Fetch trends
-        trends = db.execute("SELECT * FROM trends").fetchall()
+        #Format tweets
+        tweets = pt.get_pretty_tweet(tweets)  
         
         #If cookie exists then decode
         if logged_user:
@@ -67,28 +69,9 @@ def _(username):
         if profile['user_total_tweets']:
             profile["user_total_tweets"] = utils.formatNumber.human_format(profile['user_total_tweets'])
         
-        #Format the tweet numbers
-        #@todo maybe make this general func
-        if len(tweets) != 0:
-            for i in range(len(tweets)):
-                if tweets[i]['tweet_total_replies']:
-                    tweets[i]['tweet_total_replies'] = utils.formatNumber.human_format(tweets[i]['tweet_total_replies'])
-                
-                if tweets[i]['tweet_total_likes']:
-                    tweets[i]['tweet_total_likes'] = utils.formatNumber.human_format(tweets[i]['tweet_total_likes'])
-                
-                if tweets[i]['tweet_total_retweets']:
-                    tweets[i]['tweet_total_retweets'] = utils.formatNumber.human_format(tweets[i]['tweet_total_retweets'])
-                
-                if tweets[i]['tweet_total_views']:
-                    tweets[i]['tweet_total_views'] = utils.formatNumber.human_format(tweets[i]['tweet_total_views'])
+        #Fetch trends
+        trends = db.execute("SELECT * FROM trends").fetchall()
 
-                if tweets[i]['tweet_created_at']:
-                    month = time.strftime('%#m', time.localtime(tweets[i]['tweet_created_at']))
-                    day = time.strftime('%#d', time.localtime(tweets[i]['tweet_created_at']))
-                    tweets[i]['tweet_created_at'] = f"{calendar.month_abbr[int(month)]} {day}"
-                
-        
         #Format trends numbers
         for i in range(len(trends)):
             if trends[i]['trend_total_tweets']:

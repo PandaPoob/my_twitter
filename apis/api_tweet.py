@@ -87,7 +87,6 @@ def _():
                 "tweet_total_replies": 0,
                 "tweet_total_likes": 0,
                 "tweet_total_retweets": 0,
-                "tweet_total_views": 0,
                 "tweet_parent_id": "",
                 "tweet_type": x.TWEET_TYPE_DEFAULT,
             }
@@ -161,5 +160,6 @@ def _():
             if "db" in locals(): db.rollback()
     finally:
         #Clear temp images
+        print("folderpath", folder_path)
         x.delete_img_folder(folder_path)
         if "db" in locals(): db.close()
