@@ -574,12 +574,12 @@ video {
   top: 0px;
 }
 
-.top-12 {
-  top: 3rem;
+.top-10 {
+  top: 2.5rem;
 }
 
-.top-16 {
-  top: 4rem;
+.top-12 {
+  top: 3rem;
 }
 
 .top-2 {
@@ -604,10 +604,6 @@ video {
 
 .top-\[50\%\] {
   top: 50%;
-}
-
-.top-10 {
-  top: 2.5rem;
 }
 
 .z-0 {
@@ -1050,6 +1046,10 @@ video {
 
 .grid-rows-\[100px_minmax\(100px\2c 100px\)\] {
   grid-template-rows: 100px minmax(100px,100px);
+}
+
+.grid-rows-4 {
+  grid-template-rows: repeat(4, minmax(0, 1fr));
 }
 
 .flex-col {

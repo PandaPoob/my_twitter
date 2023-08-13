@@ -3,7 +3,7 @@ import calendar
 import utils.formatNumber as fn
 
 def get_pretty_tweet(tweets):
-
+    
     #Format images
     for tweet in tweets:
         if tweet["tweet_field_images"] != 0:
@@ -16,7 +16,7 @@ def get_pretty_tweet(tweets):
             #Update property with formatted array of objects
             tweet['tweet_images'] = image_objects
             del tweet['image_orders']
-
+    
     #Format numbers
     for i in range(len(tweets)):
         if tweets[i]['tweet_total_replies']:
@@ -33,5 +33,5 @@ def get_pretty_tweet(tweets):
             month = time.strftime('%#m', time.localtime(tweets[i]['tweet_created_at']))
             day = time.strftime('%#d', time.localtime(tweets[i]['tweet_created_at']))
             tweets[i]['tweet_created_at'] = f"{calendar.month_abbr[int(month)]} {day}"
-
+    
     return tweets

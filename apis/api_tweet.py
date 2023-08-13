@@ -97,7 +97,7 @@ def _():
 
             #Insert tweets into database
             db.execute(f"INSERT INTO tweets VALUES({values})", tweet)
-  
+
             saved_images = []
             #Check if there are images
             if image_amount >= 1:
@@ -160,6 +160,5 @@ def _():
             if "db" in locals(): db.rollback()
     finally:
         #Clear temp images
-        print("folderpath", folder_path)
         x.delete_img_folder(folder_path)
         if "db" in locals(): db.close()

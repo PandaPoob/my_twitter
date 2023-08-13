@@ -24,6 +24,8 @@ DELETE FROM tweet_images WHERE tweet_image_url = "e2c697b11a284f82987357c1a7cd14
 
 DELETE FROM users WHERE user_name = "freja";
 
+DELETE FROM tweets WHERE tweet_user_fk = "b3094c2f1c144817b7cc0b718fc3c644";
+
 --Update user
 UPDATE users
 SET user_account_status = "active"
