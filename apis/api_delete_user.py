@@ -1,9 +1,10 @@
-from bottle import post, request, response
+from bottle import post, response
 import x
 import bcrypt
 import time
 import os
 import utils.sendEmail as s
+import uuid
 
 @post("/api-delete-user")
 def _():
@@ -32,7 +33,7 @@ def _():
         
         updated_at = int(time.time())
         #Update user to deleted
-        db.execute(f"UPDATE users SET user_account_status=?, user_updated_at=? WHERE user_id=?", (x.ACC_STATUS_DELETED, updated_at, user["user_id"]))
+        db.execute(f"UPDATE users SET user_account_status=?, user_updated_at=?, user_name=?, user_email=? WHERE user_id=?", (x.ACC_STATUS_DELETED, updated_at, str(uuid.uuid4().hex), str(uuid.uuid4().hex), user["user_id"]))
 
         #@todo Delete on cascade
 

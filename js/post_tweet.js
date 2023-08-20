@@ -1,19 +1,24 @@
 let storedTweetImages = [];
 let circumference = "";
 const circle = document.getElementById("progress_circle");
+const number_text = document.getElementById("max_length_number");
+const tweet = document.getElementById("tweet_field_text");
+const max_length = parseInt(tweet.getAttribute("data-max"));
 
 window.onload = () => {
   //Set progress on circle val
+  setMaxLengthComp();
+};
+
+function setMaxLengthComp() {
   const radius = circle.r.baseVal.value;
   circumference = radius * 2 * Math.PI;
   circle.style.strokeDasharray = `${circumference} ${circumference}`;
   circle.style.strokeDashoffset = circumference;
-};
+}
 
 function validateTextTweetInput() {
-  const tweet = document.getElementById("tweet_field_text");
   const tweet_text = tweet.value;
-  const max_length = parseInt(tweet.getAttribute("data-max"));
 
   //Text component validation
   circle.style.stroke = "#1d9bf0";
@@ -39,7 +44,6 @@ function validateTextTweetInput() {
 
   //Get characters left and insert
   const char_left = max_length - tweet_text.length;
-  const number_text = document.getElementById("max_length_number");
 
   number_text.innerHTML = char_left;
 }
@@ -191,6 +195,10 @@ async function handleSubmitTweet() {
     document.querySelector("output").innerHTML = "";
     document.querySelector("output").className = "";
     document.getElementById("submit_tweet_btn").disabled = true;
+    setMaxLengthComp();
+    number_text.innerHTML = 50;
+
+    //setProgress(0);
     renderTweet(data);
   }
 }

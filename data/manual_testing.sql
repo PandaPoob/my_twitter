@@ -22,7 +22,7 @@ DELETE FROM tweet_images WHERE tweet_image_tweet_fk = "be7e9821630b425cae04a4513
 
 DELETE FROM tweet_images WHERE tweet_image_url = "e2c697b11a284f82987357c1a7cd1485.jpg"; 
 
-DELETE FROM users WHERE user_name = "freja";
+DELETE FROM users WHERE user_id = "fc462863f59f49518a5f722f44a73e65";
 
 DELETE FROM tweets WHERE tweet_user_fk = "b3094c2f1c144817b7cc0b718fc3c644";
 

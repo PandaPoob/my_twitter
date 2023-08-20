@@ -331,37 +331,40 @@
 
       <button
         onclick=""
-        class="flex items-center w-full lg:gap-2 mt-auto mb-6 rounded-full py-2 lg:px-4 hover:bg-white hover:bg-opacity-10 cursor-default"
+        class="grid grid-cols-4 gap-2 items-center w-full mt-auto mb-6 rounded-full py-2 lg:px-4 max-w-[220px] hover:bg-white hover:bg-opacity-10 cursor-default"
       >
-        <span class="flex w-[44px]">
-          <img
-            src="/images/avatar_imgs/{{logged_user['user_img_avatar']}}"
-            alt="{{logged_user['user_full_name']}} avatar image"
-            class="rounded-full w-[44px]"
-          />
-        </span>
-        <span class="hidden lg:grid">
+        <img
+          src="/images/avatar_imgs/{{logged_user['user_img_avatar']}}"
+          alt="{{logged_user['user_full_name']}} avatar image"
+          class="rounded-full col-span-1"
+        />
+
+        <span
+          class="hidden lg:grid col-span-2 text-ellipsis whitespace-nowrap overflow-hidden break-words max-w-[160px]"
+        >
           <span class="text-base font-bold hidden lg:flex">
             {{logged_user['user_full_name']}}
           </span>
-          <span class="text-base text-twittergray-500"
-            >@{{logged_user['user_name']}}</span
-          >
+          <span class="text-base text-twittergray-500 text-left"
+            >@{{logged_user['user_name']}}
+          </span>
         </span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="hidden lg:block w-6 h-6 text-white ml-4"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
-          />
-        </svg>
+        <span class="col-span-1">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="hidden lg:block w-6 h-6 text-white ml-4"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+            />
+          </svg>
+        </span>
       </button>
       % end
     </div>

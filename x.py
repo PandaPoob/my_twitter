@@ -124,7 +124,7 @@ def validate_image_type(tweet_image):
     error = f"only accept accept images with file ext jpg, jpeg, png"
     name, ext = os.path.splitext(tweet_image.filename)
     print(ext)
-    if ext not in ('.png','.jpg','.jpeg'): raise Exception(400, error)
+    if ext.lower() not in ('.png','.jpg','.jpeg'): raise Exception(400, error)
     return
 
 def validate_image_datatype(filetype):
