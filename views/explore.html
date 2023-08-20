@@ -117,15 +117,22 @@
           <div class="sticky top-0">
             <!-- follower suggestions -->
             % include('comp-follower-suggestions', fsugg=fsugg)
+            <!-- footer -->
+            % include('comp-footer')
+
           </div>
           %else:
           <!-- prettier-ignore -->
           <div class="mt-1.5">
             % include('comp-signup-cta')
+            <!-- footer -->
+            % include('comp-footer')
+
           </div>
           %end
-          <!-- footer -->
-          % include('comp-footer')
+       
+ 
+         
         </div>
       </div>
     </div>
