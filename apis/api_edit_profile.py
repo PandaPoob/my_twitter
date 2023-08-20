@@ -78,7 +78,7 @@ def _():
             cropped_img = p.resize_crop_avatar_image(path, x.USER_AVATAR_ASPECT)
 
             #Save new image
-            avatar_image_url = str(uuid.uuid4().hex+ext)
+            avatar_image_url = str(uuid.uuid4().hex+ext.lower())
             cropped_img.save(x.ROOT+f"/images/avatar_imgs/{avatar_image_url}")
 
             #Add new image to query
@@ -105,7 +105,7 @@ def _():
             x.validate_image_datatype(filetype)
             
             #Crop
-            path = f"{folder_path}/{new_cover_img_name+ext}"
+            path = f"{folder_path}/{new_cover_img_name+ext.lower()}"
             cropped_img = p.resize_crop_cover_image(path, x.USER_COVER_ASPECT)
 
             #Save new image
