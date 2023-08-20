@@ -4,7 +4,7 @@ import sqlite3
 import re
 import datetime
 import jwt
-import os, glob
+import os
 import shutil
 import uuid
 
